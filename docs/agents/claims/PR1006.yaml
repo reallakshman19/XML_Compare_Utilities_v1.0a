@@ -1,0 +1,84 @@
+schema: AgentClaim.v1
+pr_or_wip: PR1006
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer-1c-sif-qualification
+claim_state: ACTIVE
+claim_modes: [EXCLUSIVE, COORDINATED]
+files:
+  exact:
+    - docs/cii-writer1c-sif-field-qualification.md
+    - docs/cii-writer1c-sif-field-map.csv
+    - docs/cii-writer1c-sif-source-ledger.csv
+    - tests/qualification/cii-workspace-sif-semantic-census.py
+    - agents/PR1006_workreport.md
+    - agents/status/PR1006.yaml
+    - agents/claims/PR1006.yaml
+    - agents/MASTER_INDEX.md
+authority_domains:
+  - CII_SIF_TEE_PHYSICAL_BLOCK_CUSTODY
+  - CII_SIF_TEE_FIELD_SEMANTIC_QUALIFICATION
+  - CII_SIF_TEE_EDITION_MAPPING
+  - CII_SIF_TEE_CANONICAL_CENSUS
+  - CII_SIF_TEE_PHASE2B_SELECTED_FIELD_BOUNDARY
+coordination_notes:
+  - qualification-only; no production SIF Writer mutation is authorized in PR1006
+  - canonical TARGET1 advertises neutral version header 11.0000
+  - vendor-authored CAESAR II 2019 Version11 User's Guide mirror directly defines #$ SIF&TEES at page1187
+  - V11 neutral authority states FORTRAN (2X,6G13.6), two tees x 30 items, five rows per tee, and directly maps item3=ii and item4=io
+  - selected future Phase2B candidates are therefore r0f2,r0f3,r5f2,r5f3
+  - official Version12 neutral documentation independently corroborates the selected item3/item4 mapping
+  - later edition drift remains a mandatory runtime edition/shape guard
+  - writable=YES in the CSV means qualification-approved future candidate, not current product enablement
+  - current transfer-policy blockers remain in force until separate Phase2B implementation qualification
+protected_out_of_scope:
+  - converters/scripts/inputxml_to_cii2019.py
+  - converters/scripts/inputxml_to_cii2014.py
+  - converters/scripts/cii2019_section_rules.py
+  - converters/scripts/cii_syntax_check_2019.py
+  - parser/fixed-field.js
+  - tabs/cii-workspace/cii-workspace-auxiliary.js
+  - tabs/cii-workspace/cii-workspace-transfer-policy.js
+  - tabs/cii-workspace/cii-workspace-writer1c-sif.js
+  - .github/workflows/**
+  - SIF_TEE_WRITER_MUTATION
+  - SIF_TEE_RAW_PAYLOAD_COPY
+  - SIF_TEE_CREATE_DELETE
+  - SIF_TEE_POINTER_REINDEX
+  - CONTROL_CARDINALITY_MUTATION
+  - HANGER_MUTATION
+  - WRITER_2
+  - WRITER_3
+qualification_verdict: READY_FOR_CANONICAL_V11_SELECTED_SIF_FIELDS
+qualification_evidence:
+  canonical_target_version_header: 11.0000
+  version11_reference_shape: TWO_TEE_SLOTS_X_30_ITEMS_X_5_ROWS
+  version11_fixed_positions: 60
+  version11_direct_positions: 52
+  version11_unresolved_positions: 8
+  selected_phase2b_positions: [r0f2, r0f3, r5f2, r5f3]
+  selected_engineering_fields: [IN_PLANE_SIF_ii, OUT_PLANE_SIF_io]
+  currently_product_enabled_positions: 0
+  authority_source: VENDOR_AUTHORED_VERSION11_GUIDE_MIRROR_PAGE_1187
+  version12_selected_mapping_corroboration: PASS
+  exact_repository_census_execution: NOT_RUN
+edition_guard:
+  version11_rows_per_auxiliary: 10
+  version11_item15: TORSION_SIF_it
+  version11_item16: AXIAL_SIF_ia
+  version12_rows_per_auxiliary: 10
+  version12_item15: TORSION_SIF_it
+  version12_item16: AXIAL_SIF_ia
+  version14_15_rows_per_auxiliary: 14
+  version14_15_item15: AXIAL_SIF_ia
+  version14_15_item16: TORSION_SIF_it
+  rule: MUTATION_REQUIRES_EXACT_EDITION_AND_BLOCK_SHAPE_GATE
+remaining_phase2b_gates:
+  - positive_explicit_sif_transaction_fixture
+  - runtime_piping_code_context_custody
+  - exact_byte_span_and_preimage_custody
+  - shared_pointer_arbitration
+  - independently_derived_S_auth
+  - unauthorized_byte_pointer_cardinality_edition_falsifiers
+ready_for_review: true
+ready_for_review_reason: V11 selected positions are now directly source-qualified from the vendor-authored Version11 neutral-file appendix; no production authority is implied and all residual implementation gates remain explicit
+merge_authority: OWNER_ONLY

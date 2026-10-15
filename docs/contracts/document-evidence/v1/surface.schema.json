@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.xml-compare-utilities.local/document-evidence/v1/surface.schema.json",
+  "title": "Surface.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "surfaceId", "surfaceHash", "sourceHash", "kind",
+    "width", "height", "unit", "origin", "xAxis", "yAxis"
+  ],
+  "properties": {
+    "schema": { "const": "Surface.v1" },
+    "surfaceId": { "type": "string", "minLength": 1 },
+    "surfaceHash": { "$ref": "#/$defs/sha256" },
+    "sourceHash": { "$ref": "#/$defs/sha256" },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "pdf-source-page", "pdf-canonical-page", "document-region",
+        "rendered-raster", "ocr-preprocessed-raster", "docx-rendered-page",
+        "browser-view", "other"
+      ]
+    },
+    "width": { "type": "number", "exclusiveMinimum": 0 },
+    "height": { "type": "number", "exclusiveMinimum": 0 },
+    "unit": { "type": "string", "enum": ["pt", "px", "css-px"] },
+    "origin": { "type": "string", "enum": ["bottom-left", "top-left"] },
+    "xAxis": { "type": "string", "enum": ["right", "left"] },
+    "yAxis": { "type": "string", "enum": ["up", "down"] },
+    "pageNumber": { "type": "integer", "minimum": 1 },
+    "parentSurfaceId": { "type": "string", "minLength": 1 },
+    "providerProfileHash": { "$ref": "#/$defs/sha256" },
+    "renderProfileHash": { "$ref": "#/$defs/sha256" },
+    "metadata": { "type": "object" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

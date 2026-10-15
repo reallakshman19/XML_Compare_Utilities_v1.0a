@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Topology Checker Auto Fix Fixture</title>
+  <style>html,body,#fixture{height:100%;margin:0;background:#020617}</style>
+</head>
+<body>
+  <div id="fixture"></div>
+  <script type="module">
+    import { mountTopologyTraceValidatorWorkspace } from '../../tabs/topology-trace-validator/topology-trace-validator-tab.js';
+    import { buildComponentTopologyArtifacts } from '../../vendor/3d-converters/topology-browser-core.mjs';
+
+    const point = (x, y, z) => ({ x, y, z });
+    const pipe = (name, start, end) => ({ name, type: 'PIPE', attributes: {
+      TYPE: 'PIPE', NAME: name, OWNER: '/AUTOFIX/B1', APOS: point(start, 0, 0), LPOS: point(end, 0, 0),
+      ABORE: '50mm', LBORE: '50mm', WTHK: '3mm', ITEMTEMP1: '100', ITEMPRES1: '2', MTXX: 'A106 B', DTXR: 'PIPE',
+    } });
+    const source = [{ name: '/AUTOFIX/B1', type: 'BRANCH', attributes: {
+      TYPE: 'BRANCH', NAME: '/AUTOFIX/B1', OWNER: '/AUTOFIX', HPOS: point(0, 0, 0), TPOS: point(20, 0, 0),
+    }, children: [pipe('SHORT-PIPE', 0, 5), pipe('STRETCHABLE-PIPE', 5, 20)] }];
+    const built = await buildComponentTopologyArtifacts(JSON.stringify(source), {
+      sourceName: 'topology-checker-autofix-fixture.json', jobName: 'Checker Auto Fix Fixture',
+      toleranceMm: 0.1, supportProjectionToleranceMm: 50, enrichmentConfig: {},
+    });
+    const mounted = await mountTopologyTraceValidatorWorkspace(document.querySelector('#fixture'), {
+      source, canonical: built.canonicalTopology, ledger: built.traceLedger, inputXml: built.topologyInputXml,
+      scene: built.topologySvgScene, parsed: built.parsedInputXmlTopology, report: built.topologyParityReport,
+    });
+    window.__topologyValidatorHarness = mounted;
+    document.body.dataset.topologyValidatorReady = '1';
+  </script>
+</body>
+</html>

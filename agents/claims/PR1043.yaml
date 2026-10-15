@@ -1,0 +1,73 @@
+pr: 1043
+issue: 1042
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-delete-physical-w211
+base_main: f298aa10eba7d2125a9c0f6818e4727b6f4ef0c3
+claim_state: REVIEW_READY_FOCUSED_EXECUTION_PASS
+ready_for_review: true
+merge_authority: OWNER_ONLY
+merge_authorized: false
+
+claims:
+  - id: RESTRAINT_BLOCK_DELETE_PHYSICAL_WRITE
+    state: IMPLEMENTED_FOCUSED_EXECUTION_PASS
+    authority: CII_WRITER_2_RESTRAINT_BLOCK_DELETE_PHYSICAL_WRITE
+  - id: RESTRAINT_DELETE_INDEPENDENT_COMPLETE_POSTIMAGE_VALIDATION
+    state: IMPLEMENTED_FOCUSED_EXECUTION_PASS
+    authority: EXACT_COMPLETE_FINAL_BYTES_PLUS_INDEPENDENT_REINTAKE
+  - id: W2_10_RESTRAINT_CONTROL_COUNT_AUTHORITY
+    state: INHERITED_DEFECT_CORRECTED_AND_FOCUSED_EXECUTION_PASS
+    authority: CONTROL_ROW2_FIELD4_RESTRAINT_COUNT
+  - id: TARGET0_CRYPTOGRAPHIC_CUSTODY
+    state: IMPLEMENTED_FOCUSED_EXECUTION_PASS
+    authority: SHA256_ORIGINAL_TARGET0_BYTES
+  - id: POSTIMAGE_CRYPTOGRAPHIC_CUSTODY
+    state: IMPLEMENTED_FOCUSED_EXECUTION_PASS
+    authority: SHA256_WRITER2_POSTIMAGE_BYTES
+  - id: POSTIMAGE_REPRESENTATION_CUSTODY
+    state: IMPLEMENTED_FOCUSED_EXECUTION_PASS
+    authority: CII_PHYSICAL_POSTIMAGE_REINTAKE_EQUIVALENCE
+  - id: RESTRAINT_COMPOSITE_ADOPTION
+    state: NOT_IMPLEMENTED
+    authority: NONE
+  - id: RESTRAINT_PRODUCT_ADOPTION
+    state: NOT_IMPLEMENTED
+    authority: NONE
+  - id: RESTRAINT_BLOCK_CREATE
+    state: BLOCKED_UNCHANGED
+    authority: NONE
+
+rebase_truth:
+  main_moved: false
+  rebase_performed: false
+  reason: exact_base_already_current_main
+
+validation_truth:
+  execution_basis_head: 7f00a80e1ab5b87994829977f04eb6fcbcbe84bd
+  execution_environment: Node_v22.16.0_sparse_mirror
+  exact_loaded_git_blob_manifest: PASS_12_OF_12
+  corrected_w2_10_planner_D01_D18_H01_H05: PASS_NATIVE
+  w2_11_P01_P06_P19: PASS_NATIVE
+  w2_11_P07_P18_falsifiers: PASS_NATIVE
+  focused_exact_blob_native_execution: PASS
+  complete_git_checkout_runtime: NOT_RUN_ENVIRONMENT
+  complete_checkout_blocker: github.com_DNS_resolution_failure
+  current_head_pr_workflow_runs_on_execution_basis: NONE
+  repository_npm: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_APPLICABLE_UNCHANGED_ROUTE
+
+negative_assurance:
+  nonam_count_must_remain_unchanged: true
+  writer1b_changed: false
+  create_enabled: false
+  guid_generation_added: false
+  product_core_changed: false
+  composite_changed: false
+  writer3_changed: false
+  workflow_package_changed: false
+
+expected_final_changed_paths_without_master_index: 10
+expected_unexplained_paths: 0
+coordination_limitation: MASTER_INDEX_REQUIRES_SAFE_FULL_FILE_ACCESS
+next_claim_gate: OWNER_REVIEW_OR_OPTIONAL_COMPLETE_CHECKOUT_NPM_GATE; do not relabel repository_npm_NOT_RUN as PASS
+next_phase_gate: W2_12_REQUIRES_PR1043_MERGED_UNDER_SEPARATE_OWNER_AUTHORIZATION

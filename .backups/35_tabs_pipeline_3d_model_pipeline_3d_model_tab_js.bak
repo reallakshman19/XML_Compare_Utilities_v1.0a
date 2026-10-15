@@ -1,0 +1,804 @@
+import { buildCombinedCoordinateTable, parseTable1, table1ToTabText, groupPointsIntoSheets } from './pipeline-3d-model-geometry.js?v=20260711-collinear-1';
+import { buildCoordinateRows, coordinateRowsToTabText, buildInputXmlPipingModelXml } from './pipeline-3d-model-xml-builder.js?v=20260711-collinear-1';
+import { CONFIG_FIELDS, fieldLabel, loadConfigValues, saveConfigValues } from './pipeline-3d-model-config.js?v=20260711-collinear-1';
+import { SAMPLE_TABLE_1, SAMPLE_TABLE_2, SAMPLE_TABLE_3, SAMPLE_TABLE_1_MULTISHEET } from './pipeline-3d-model-samples.js?v=20260711-collinear-1';
+import { renderKeyPlanSvg } from './pipeline-3d-model-keyplan.js?v=20260711-collinear-1';
+import { recognizeImageWords } from './pipeline-3d-model-ocr.js?v=20260706-ocr-core-1';
+import { parseTable2OcrText, parseTable2OcrWords } from './pipeline-3d-model-ocr-table-parser.js?v=20260706-text-fallback-2';
+import { parseTableXOcr } from './pipeline-3d-model-ocr-tablex-parser.js?v=20260706-tablex-2';
+
+const ACTIVATE = 'click';
+const POPUP_TITLE_ID = 'pipeline-3d-model-title';
+const MODAL_STYLE_ID = 'pipeline-3d-model-modal-style';
+const TABLE2_OCR_MIN_CONFIDENCE = 45;
+const TABLE2_OCR_ATTEMPTS = Object.freeze([
+  { label: 'normal table text', rotationDeg: 0, layout: 'rows', scale: 3, normalizeImage: true },
+  { label: 'rotated table text clockwise', rotationDeg: 90, layout: 'columns', scale: 3, normalizeImage: true },
+  { label: 'rotated table text counterclockwise', rotationDeg: 270, layout: 'columns', scale: 3, normalizeImage: true },
+]);
+const TABLEX_OCR_ATTEMPTS = Object.freeze([
+  { label: 'info block text', rotationDeg: 0, scale: 3, normalizeImage: true },
+  { label: 'rotated info block clockwise', rotationDeg: 90, scale: 3, normalizeImage: true },
+  { label: 'rotated info block counterclockwise', rotationDeg: 270, scale: 3, normalizeImage: true },
+]);
+
+function h(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+}
+
+function ensureModalStyle(doc = globalThis.document) {
+  if (!doc || doc.getElementById(MODAL_STYLE_ID)) return;
+  const style = doc.createElement('style');
+  style.id = MODAL_STYLE_ID;
+  style.textContent = `
+.pipeline-3d-model-launcher{height:160px;width:220px;border:1px solid rgba(143,197,255,.25);border-radius:18px;background:linear-gradient(145deg,#10213a,#0b1220);color:#e8f2ff;cursor:pointer;box-shadow:0 12px 34px rgba(0,0,0,.28);display:grid!important;grid-template-columns:1fr;place-items:center;text-align:center;padding:16px;margin-top:18px;gap:4px;box-sizing:border-box}
+.pipeline-3d-model-launcher-icon{display:block;font-size:40px;line-height:1;margin:0 0 6px}.pipeline-3d-model-launcher b{font-size:15px;color:#e0f2fe}.pipeline-3d-model-launcher .psmap-help-text{color:#94a3b8;font-size:12px;line-height:1.35}
+.pipeline-3d-model-backdrop{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:22px;background:rgba(2,6,23,.78);box-sizing:border-box}
+.pipeline-3d-model-dialog{width:min(1240px,calc(100vw - 36px));height:min(860px,calc(100vh - 36px));display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden;border:1px solid rgba(125,211,252,.38)!important;border-radius:18px!important;background:#0f172a!important;color:#dbeafe;box-shadow:0 24px 80px rgba(0,0,0,.58)}
+.pipeline-3d-model-dialog>.psmap-card-head{position:sticky;top:0;z-index:2;align-items:flex-start;background:linear-gradient(90deg,rgba(8,47,73,.40),rgba(15,23,42,.90));border-bottom:1px solid rgba(148,163,184,.18)}
+.pipeline-3d-model-dialog>.psmap-card-body{min-height:0;overflow-y:auto;overflow-x:hidden;padding:14px}
+.p3d-close{position:absolute;top:14px;right:16px}
+.p3d-input-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px}
+.p3d-input-grid label,.p3d-input-panel{display:flex;flex-direction:column;gap:4px;font-size:12px;color:#94a3b8}
+.p3d-input-title{color:#94a3b8;font-size:12px}
+.p3d-input-grid textarea{min-height:160px;font-family:monospace;font-size:12px;background:#0b1220;color:#e2e8f0;border:1px solid rgba(148,163,184,.28);border-radius:8px;padding:6px}
+.p3d-input-panel.p3d-ocr-dragover textarea{border-color:#38bdf8;box-shadow:0 0 0 2px rgba(56,189,248,.20)}
+.p3d-ocr-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:2px}
+.p3d-ocr-toolbar button,.p3d-ocr-actions button{background:#334155;color:#e2e8f0;border:1px solid rgba(148,163,184,.32);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:12px}
+.p3d-ocr-toolbar button:hover,.p3d-ocr-actions button:hover{background:#475569}
+.p3d-ocr-status{color:#cbd5e1;font-size:11px;min-height:16px}
+.p3d-ocr-status[data-state="error"]{color:#fecaca}
+.p3d-ocr-status[data-state="ok"]{color:#bbf7d0}
+.p3d-tablex-shell{margin:0 0 14px}
+.p3d-tablex-shell textarea{width:100%;min-height:140px;box-sizing:border-box;font-family:monospace;font-size:12px;background:#0b1220;color:#e2e8f0;border:1px solid rgba(148,163,184,.28);border-radius:8px;padding:6px}
+.p3d-axis-grid{display:grid;grid-template-columns:repeat(2,minmax(120px,180px)) minmax(220px,1fr);gap:8px;align-items:end;margin:6px 0}
+.p3d-axis-grid label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:#94a3b8}
+.p3d-axis-grid input{background:#0b1220;color:#e2e8f0;border:1px solid rgba(148,163,184,.28);border-radius:8px;padding:6px}
+.p3d-ocr-review{margin:-4px 0 14px;background:#0b1220;border:1px solid rgba(148,163,184,.28);border-radius:8px;padding:10px;min-height:240px;max-height:min(620px,calc(100vh - 260px));overflow:auto}
+.p3d-ocr-review[hidden]{display:none}
+.p3d-ocr-banner{border-radius:8px;padding:8px 10px;margin-bottom:8px;font-size:12px;line-height:1.4}
+.p3d-ocr-info{background:rgba(14,165,233,.12);border:1px solid rgba(14,165,233,.30);color:#dbeafe}
+.p3d-ocr-warning{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.34);color:#fde68a}
+.p3d-ocr-error{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.38);color:#fecaca}
+.p3d-ocr-review table{width:100%;border-collapse:collapse;font-size:12px;min-width:720px}
+.p3d-ocr-review th,.p3d-ocr-review td{border-bottom:1px solid rgba(148,163,184,.18);padding:6px;text-align:left;vertical-align:middle}
+.p3d-ocr-review th{color:#bfdbfe;font-weight:600;background:rgba(15,23,42,.82)}
+.p3d-ocr-review input{width:100%;box-sizing:border-box;background:#020617;color:#e2e8f0;border:1px solid rgba(148,163,184,.35);border-radius:6px;padding:5px;font-family:monospace;font-size:12px}
+.p3d-ocr-token-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.p3d-ocr-token-grid code{display:block;white-space:pre-wrap;word-break:break-word;background:#020617;border:1px solid rgba(148,163,184,.25);border-radius:6px;padding:6px;color:#cbd5e1;min-height:140px;max-height:320px;overflow:auto}
+.p3d-ocr-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+.p3d-branch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.p3d-branch-grid label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:#94a3b8}
+.p3d-branch-grid input{background:#0b1220;color:#e2e8f0;border:1px solid rgba(148,163,184,.28);border-radius:8px;padding:6px}
+.p3d-actions{display:flex;gap:10px;margin-bottom:14px}
+.p3d-actions button{background:#1d4ed8;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font-size:13px}
+.p3d-actions button:hover{background:#2563eb}
+.p3d-output pre{background:#0b1220;border:1px solid rgba(148,163,184,.28);border-radius:8px;padding:10px;max-height:260px;overflow:auto;font-size:11px;white-space:pre}
+.p3d-output h4{margin:14px 0 6px;color:#e0f2fe}
+.p3d-output{overflow-x:hidden}
+[data-p3d="keyplan"] svg { cursor: grab; display: block; max-width: 100%; }
+[data-p3d="keyplan"] svg:active { cursor: grabbing; }
+.p3d-legend { display: flex; flex-wrap: wrap; gap: 6px 4px; padding: 8px 10px; background: #0b1220; border: 1px solid rgba(148,163,184,.28); border-top: none; border-radius: 0 0 8px 8px; margin-bottom: 4px; }
+.p3d-tooltip { position: fixed; background: #0b1220; border: 1px solid rgba(148,163,184,0.4); border-radius: 4px; padding: 4px 8px; font-size: 11px; font-family: monospace; color: #cbd5e1; pointer-events: none; z-index: 10000; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5); display: none; }
+`;
+  doc.head?.appendChild(style);
+}
+
+function renderLauncher() {
+  return `<button type="button" class="psmap-card psmap-tile pipeline-3d-model-launcher" data-p3d-open="1" title="Build a Coordinate-tab table and CII(2019) Custom Input XML from pipeline geometry tables">
+<span class="pipeline-3d-model-launcher-icon" aria-hidden="true">📐</span>
+<b>Pipeline 3D Model</b>
+<span class="psmap-help-text">Tables 1-3 → Coordinate tab → CII(2019) XML</span>
+</button>`;
+}
+
+function renderBranchForm() {
+  return `<div class="p3d-branch-grid">${CONFIG_FIELDS.map(
+    (field) => `<label>${h(fieldLabel(field))}<input data-p3d-field="${h(field.key)}" placeholder="${h(fieldLabel(field))}"></label>`,
+  ).join('')}</div>`;
+}
+
+function renderPopup() {
+  return `<div class="psmap-card-head"><b id="${POPUP_TITLE_ID}">Pipeline 3D Model</b>
+<button type="button" class="p3d-close" data-p3d-close="1" aria-label="Close Pipeline 3D Model">Close</button></div>
+<div class="psmap-card-body">
+<div class="psmap-help-text">Paste the 3 input tables below, fill in branch details, then Run.</div>
+<div class="p3d-input-grid">
+<label>Table 1 — Point / X / Y / Z / OriginGlobalX / OriginGlobalY / OriginGlobalZ / AngleDeg<textarea data-p3d="table1" placeholder="IP3-IP Start	0	0	0	301614.82	2038115	0	0"></textarea></label>
+<div class="p3d-input-panel" data-p3d="table2-panel">
+<label class="p3d-input-title" for="pipeline-3d-model-table2">Table 2 - Horizontal (m) vs Grade Elevation (m)</label>
+<textarea id="pipeline-3d-model-table2" data-p3d="table2" placeholder="0.0	231.32"></textarea>
+<div class="p3d-ocr-toolbar">
+<button type="button" data-p3d="table2-ocr-button">Import Table 2 Image</button>
+<input data-p3d="table2-ocr-file" type="file" accept="image/*" hidden>
+<span class="p3d-ocr-status" data-p3d="table2-ocr-status"></span>
+</div>
+</div>
+<label>Table 3 — Marker segment lengths / cumulative distances<textarea data-p3d="table3" placeholder="20.5, 34.3, 16.0, ..."></textarea></label>
+</div>
+<div class="p3d-ocr-review" data-p3d="table2-ocr-review" hidden></div>
+<div class="p3d-tablex-shell">
+<label class="p3d-input-title" for="pipeline-3d-model-tablex">Table X - OCR reference / markers / cover ranges</label>
+<textarea id="pipeline-3d-model-tablex" data-p3d="tablex" placeholder="Type	Label	Start (m)	End (m)	Horizontal (m)	Value	Raw OCR	Confidence"></textarea>
+<div class="p3d-axis-grid">
+<label>Axis start (m)<input data-p3d="tablex-axis-start" inputmode="decimal" value="0"></label>
+<label>Axis end (m)<input data-p3d="tablex-axis-end" inputmode="decimal" placeholder="optional"></label>
+<div class="p3d-ocr-toolbar">
+<button type="button" data-p3d="tablex-ocr-button">Import Table X Image</button>
+<input data-p3d="tablex-ocr-file" type="file" accept="image/*" hidden>
+<span class="p3d-ocr-status" data-p3d="tablex-ocr-status"></span>
+</div>
+</div>
+</div>
+<div class="p3d-ocr-review" data-p3d="tablex-ocr-review" hidden></div>
+<h4>Line / Branch Info</h4>
+${renderBranchForm()}
+<div class="p3d-actions">
+<button type="button" data-p3d="new">New (Load Sample)</button>
+<button type="button" data-p3d="new-multisheet">Load Multi-Sheet Table 1 Sample</button>
+<button type="button" data-p3d="run">Run</button>
+<button type="button" data-p3d="download-coordinate">Download Coordinate Tab (.tsv)</button>
+<button type="button" data-p3d="download-xml">Download XML</button>
+</div>
+<div class="p3d-output">
+<h4>Key Plan — Sheet Transform</h4>
+<div data-p3d="keyplan">Run to generate.</div>
+<div class="p3d-legend" data-p3d="keyplan-legend" hidden></div>
+<h4>Table 1 — Transformed (Global) Coordinates</h4>
+<pre data-p3d="table1-output">Run to generate.</pre>
+<h4>Coordinate Tab Output</h4>
+<pre data-p3d="coordinate-output">Run to generate.</pre>
+<h4>InputXML→CII(2019) PIPINGELEMENT XML</h4>
+<pre data-p3d="xml-output">Run to generate.</pre>
+</div>
+</div>`;
+}
+
+function readBranchInfo(get) {
+  const value = (key) => get(`field-${key}`)?.value?.trim() || '';
+  const info = { branchName: value('lineNo') || 'B1' };
+  CONFIG_FIELDS.forEach(field => {
+    info[field.key] = value(field.key);
+  });
+  return info;
+}
+
+function applyConfigValues(get, values) {
+  CONFIG_FIELDS.forEach((field) => {
+    const input = get(`field-${field.key}`);
+    if (input) input.value = values[field.key] ?? '';
+  });
+}
+
+function readConfigValues(get) {
+  const values = {};
+  CONFIG_FIELDS.forEach((field) => {
+    values[field.key] = get(`field-${field.key}`)?.value ?? '';
+  });
+  return values;
+}
+
+function wireConfigPersistence(dialog, get) {
+  CONFIG_FIELDS.forEach((field) => {
+    const input = get(`field-${field.key}`);
+    if (input) input.addEventListener('input', () => saveConfigValues(readConfigValues(get)));
+  });
+}
+
+function saveTextFile(filename, text, mime = 'text/plain') {
+  const blob = new Blob([text], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function findImageFileFromItems(items) {
+  for (const item of Array.from(items || [])) {
+    if (!item?.type?.startsWith('image/')) continue;
+    const file = typeof item.getAsFile === 'function' ? item.getAsFile() : null;
+    if (file) return file;
+  }
+  return null;
+}
+
+function findImageFileFromFiles(files) {
+  return Array.from(files || []).find((file) => file?.type?.startsWith('image/')) || null;
+}
+
+function hasImageTransfer(dataTransfer) {
+  if (!dataTransfer) return false;
+  if (findImageFileFromFiles(dataTransfer.files)) return true;
+  return Array.from(dataTransfer.items || []).some((item) => item?.type?.startsWith('image/'));
+}
+
+function setTable2OcrStatus(get, message, state) {
+  const status = get('table2-ocr-status');
+  if (!status) return;
+  status.textContent = message;
+  status.dataset.state = state;
+}
+
+function showTable2OcrPanel(get, html) {
+  const review = get('table2-ocr-review');
+  if (!review) return;
+  review.hidden = false;
+  review.innerHTML = html;
+}
+
+function hideTable2OcrPanel(get) {
+  const review = get('table2-ocr-review');
+  if (!review) return;
+  review.hidden = true;
+  review.innerHTML = '';
+}
+
+function formatOcrProgress(progress) {
+  const status = String(progress?.status || 'Recognizing');
+  const numericProgress = Number(progress?.progress);
+  if (!Number.isFinite(numericProgress)) return status;
+  return `${status} ${Math.round(numericProgress * 100)}%`;
+}
+
+function formatDecimal(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return '';
+  return String(Math.round(number * 1000) / 1000);
+}
+
+function table2RowsToText(rows) {
+  const lines = rows.map((row) => `${formatDecimal(row.horizontal)}\t${formatDecimal(row.elevation)}`);
+  return ['Horizontal (m)\tGrade Elevation (m)', ...lines].join('\n');
+}
+
+function renderWarningBanners(warnings) {
+  return (warnings || []).map((warning) => `<div class="p3d-ocr-banner p3d-ocr-warning">${h(warning.message || warning)}</div>`).join('');
+}
+
+function renderTokenBlock(title, tokens) {
+  const text = (tokens || []).join(' | ') || '(none)';
+  return `<div><b>${h(title)}</b><code>${h(text)}</code></div>`;
+}
+
+function formatAttemptFailure(attempt) {
+  const debug = attempt.debug || {};
+  const pieces = [attempt.message];
+  if (Number.isFinite(debug.rawWordCount) || Number.isFinite(debug.normalizedWordCount)) {
+    pieces.push(`raw words: ${debug.rawWordCount ?? '?'}, positioned words: ${debug.normalizedWordCount ?? '?'}`);
+  }
+  if (debug.text) pieces.push(`text: ${debug.text}`);
+  return pieces.join(' | ');
+}
+
+function renderTable2OcrError(get, error) {
+  const details = error?.details || {};
+  const warningHtml = renderWarningBanners(details.warnings || []);
+  const attemptHtml = Array.isArray(details.attempts) && details.attempts.length
+    ? `<div class="p3d-ocr-token-grid">${details.attempts.map((attempt) => renderTokenBlock(attempt.label, [formatAttemptFailure(attempt)])).join('')}</div>`
+    : '';
+  const tokenHtml = `<div class="p3d-ocr-token-grid">
+${renderTokenBlock('Raw elevation tokens', details.rawElevationTokens || details.recognizedTokens)}
+${renderTokenBlock('Raw station tokens', details.rawStationTokens)}
+</div>`;
+  const message = error instanceof Error ? error.message : 'Table 2 OCR import failed.';
+  showTable2OcrPanel(get, `${warningHtml}<div class="p3d-ocr-banner p3d-ocr-error">${h(message)}</div>${attemptHtml || tokenHtml}`);
+  setTable2OcrStatus(get, 'OCR import failed', 'error');
+}
+
+function renderTable2OcrReview(get, result) {
+  const rows = result.rows || [];
+  const body = rows.map((row, index) => `<tr data-p3d-ocr-row="${index}">
+<td>${h(row.rawStationText)}</td>
+<td><input data-p3d-ocr-field="horizontal" inputmode="decimal" value="${h(formatDecimal(row.horizontal))}"></td>
+<td>${h(row.rawElevationText)}</td>
+<td><input data-p3d-ocr-field="elevation" inputmode="decimal" value="${h(formatDecimal(row.elevation))}"></td>
+<td>${h(formatDecimal(row.confidence))}</td>
+</tr>`).join('');
+  const table = `<table>
+<thead><tr><th>Recognized Station Text</th><th>Parsed Horizontal</th><th>Recognized Elevation Text</th><th>Parsed Elevation</th><th>Confidence</th></tr></thead>
+<tbody>${body}</tbody>
+</table>`;
+  showTable2OcrPanel(get, `<div class="p3d-ocr-banner p3d-ocr-info">Review OCR values before applying. Tesseract.js loads from a CDN when OCR is used.</div>
+${renderWarningBanners(result.warnings)}
+${table}
+<div class="p3d-ocr-actions">
+<button type="button" data-p3d-ocr-action="discard">Discard</button>
+<button type="button" data-p3d-ocr-action="apply">Apply to Table 2</button>
+</div>`);
+  setTable2OcrStatus(get, `OCR found ${rows.length} row(s)`, 'ok');
+}
+
+function readReviewedTable2Rows(review) {
+  const rowElements = Array.from(review.querySelectorAll('[data-p3d-ocr-row]'));
+  return rowElements.map((rowElement, index) => {
+    const horizontalInput = rowElement.querySelector('[data-p3d-ocr-field="horizontal"]');
+    const elevationInput = rowElement.querySelector('[data-p3d-ocr-field="elevation"]');
+    const horizontal = Number(horizontalInput?.value?.trim());
+    const elevation = Number(elevationInput?.value?.trim());
+    if (!Number.isFinite(horizontal) || !Number.isFinite(elevation)) {
+      throw new Error(`OCR review row ${index + 1} must have numeric horizontal and elevation values.`);
+    }
+    return { horizontal, elevation };
+  });
+}
+
+function showTable2OcrValidationError(review, message) {
+  const existing = review.querySelector('[data-p3d-ocr-validation]');
+  if (existing) existing.remove();
+  review.insertAdjacentHTML('afterbegin', `<div class="p3d-ocr-banner p3d-ocr-error" data-p3d-ocr-validation="1">${h(message)}</div>`);
+}
+
+function applyReviewedTable2Rows(get, review) {
+  const rows = readReviewedTable2Rows(review);
+  get('table2').value = table2RowsToText(rows);
+  hideTable2OcrPanel(get);
+  setTable2OcrStatus(get, `Applied ${rows.length} row(s) to Table 2`, 'ok');
+}
+
+function setTableXOcrStatus(get, message, state) {
+  const status = get('tablex-ocr-status');
+  if (!status) return;
+  status.textContent = message;
+  status.dataset.state = state;
+}
+
+function showTableXOcrPanel(get, html) {
+  const review = get('tablex-ocr-review');
+  if (!review) return;
+  review.hidden = false;
+  review.innerHTML = html;
+}
+
+function hideTableXOcrPanel(get) {
+  const review = get('tablex-ocr-review');
+  if (!review) return;
+  review.hidden = true;
+  review.innerHTML = '';
+}
+
+function tableXRowsToText(rows) {
+  const header = ['Type', 'Label', 'Start (m)', 'End (m)', 'Horizontal (m)', 'Value', 'Raw OCR', 'Confidence'];
+  const lines = rows.map((row) => [
+    row.type,
+    row.label,
+    row.start,
+    row.end,
+    row.horizontal,
+    row.value,
+    row.rawText,
+    row.confidence,
+  ].map((value) => String(value ?? '').replace(/\t/g, ' ')).join('\t'));
+  return [header.join('\t'), ...lines].join('\n');
+}
+
+function renderTableXOcrReview(get, result) {
+  const rows = result.rows || [];
+  const body = rows.map((row, index) => `<tr data-p3d-tablex-row="${index}">
+<td><input data-p3d-tablex-field="type" value="${h(row.type)}"></td>
+<td><input data-p3d-tablex-field="label" value="${h(row.label)}"></td>
+<td><input data-p3d-tablex-field="start" inputmode="decimal" value="${h(row.start)}"></td>
+<td><input data-p3d-tablex-field="end" inputmode="decimal" value="${h(row.end)}"></td>
+<td><input data-p3d-tablex-field="horizontal" inputmode="decimal" value="${h(row.horizontal)}"></td>
+<td><input data-p3d-tablex-field="value" value="${h(row.value)}"></td>
+<td>${h(row.rawText)}</td>
+<td>${h(formatDecimal(row.confidence))}</td>
+</tr>`).join('');
+  const table = `<table>
+<thead><tr><th>Type</th><th>Label</th><th>Start</th><th>End</th><th>Horizontal</th><th>Value</th><th>Raw OCR</th><th>Confidence</th></tr></thead>
+<tbody>${body}</tbody>
+</table>`;
+  showTableXOcrPanel(get, `<div class="p3d-ocr-banner p3d-ocr-info">Table X is review-only OCR reference data. Cover and crossing rows are not exported to XML.</div>
+${renderWarningBanners(result.warnings)}
+${table}
+<div class="p3d-ocr-actions">
+<button type="button" data-p3d-tablex-action="discard">Discard</button>
+<button type="button" data-p3d-tablex-action="apply">Apply to Table X</button>
+</div>`);
+  setTableXOcrStatus(get, `OCR found ${rows.length} Table X row(s)`, 'ok');
+}
+
+function readReviewedTableXRows(review) {
+  return Array.from(review.querySelectorAll('[data-p3d-tablex-row]')).map((rowElement) => {
+    const value = (key) => rowElement.querySelector(`[data-p3d-tablex-field="${key}"]`)?.value?.trim() || '';
+    return {
+      type: value('type'),
+      label: value('label'),
+      start: value('start'),
+      end: value('end'),
+      horizontal: value('horizontal'),
+      value: value('value'),
+      rawText: rowElement.children[6]?.textContent?.trim() || '',
+      confidence: rowElement.children[7]?.textContent?.trim() || '',
+    };
+  });
+}
+
+function applyTableXConfigPrefill(get, rows) {
+  const wallRow = rows.find((row) => /wall/i.test(row.label));
+  const wallInput = get('field-wallThickness');
+  const wallValue = String(wallRow?.value || '').match(/\d+(?:\.\d+)?/)?.[0] || '';
+  if (wallInput && !wallInput.value && wallValue) wallInput.value = wallValue;
+
+  const materialRow = rows.find((row) => /size|material|coating|code/i.test(row.label));
+  const materialInput = get('field-materialCode');
+  if (materialInput && !materialInput.value && materialRow?.value) materialInput.value = materialRow.value;
+  saveConfigValues(readConfigValues(get));
+}
+
+function applyReviewedTableXRows(get, review) {
+  const rows = readReviewedTableXRows(review);
+  get('tablex').value = tableXRowsToText(rows);
+  applyTableXConfigPrefill(get, rows);
+  hideTableXOcrPanel(get);
+  setTableXOcrStatus(get, `Applied ${rows.length} row(s) to Table X`, 'ok');
+}
+
+async function importTable2ImageFromOcr(imageFile, get) {
+  showTable2OcrPanel(get, '<div class="p3d-ocr-banner p3d-ocr-info">Loading Tesseract.js from CDN for OCR.</div>');
+  setTable2OcrStatus(get, 'Loading OCR engine', '');
+  const failures = [];
+  try {
+    for (const attempt of TABLE2_OCR_ATTEMPTS) {
+      setTable2OcrStatus(get, `Trying ${attempt.label}`, '');
+      let ocrDebug = null;
+      try {
+        const words = await recognizeImageWords(imageFile, {
+          language: 'eng',
+          rotationDeg: attempt.rotationDeg,
+          scale: attempt.scale,
+          normalizeImage: attempt.normalizeImage,
+          onProgress: (progress) => setTable2OcrStatus(get, `${attempt.label}: ${formatOcrProgress(progress)}`, ''),
+        });
+        ocrDebug = words.ocrDebug || null;
+        let parsed;
+        try {
+          parsed = parseTable2OcrWords(words, { minConfidence: TABLE2_OCR_MIN_CONFIDENCE, layout: attempt.layout });
+        } catch (wordError) {
+          if (!ocrDebug?.text) throw wordError;
+          parsed = parseTable2OcrText(ocrDebug.text);
+        }
+        parsed.warnings = [
+          { code: 'ocr_table2_attempt_used', message: `Parsed using ${attempt.label}. Review all values before applying.` },
+          ...(parsed.warnings || []),
+        ];
+        renderTable2OcrReview(get, parsed);
+        return;
+      } catch (error) {
+        failures.push({
+          label: attempt.label,
+          message: error instanceof Error ? error.message : 'OCR attempt failed.',
+          code: error?.code || 'ocr_table2_attempt_failed',
+          debug: ocrDebug,
+        });
+      }
+    }
+    const error = new Error('Table 2 OCR failed for normal and rotated image orientations.');
+    error.details = { attempts: failures };
+    throw error;
+  } catch (error) {
+    renderTable2OcrError(get, error);
+  }
+}
+
+async function importTableXImageFromOcr(imageFile, get) {
+  showTableXOcrPanel(get, '<div class="p3d-ocr-banner p3d-ocr-info">Loading Tesseract.js from CDN for Table X OCR.</div>');
+  setTableXOcrStatus(get, 'Loading OCR engine', '');
+  const failures = [];
+  for (const attempt of TABLEX_OCR_ATTEMPTS) {
+    let ocrDebug = null;
+    try {
+      setTableXOcrStatus(get, `Trying ${attempt.label}`, '');
+      const words = await recognizeImageWords(imageFile, {
+        language: 'eng',
+        rotationDeg: attempt.rotationDeg,
+        scale: attempt.scale,
+        normalizeImage: attempt.normalizeImage,
+        onProgress: (progress) => setTableXOcrStatus(get, `${attempt.label}: ${formatOcrProgress(progress)}`, ''),
+      });
+      ocrDebug = words.ocrDebug || null;
+      const parsed = parseTableXOcr({
+        words,
+        text: ocrDebug?.text || '',
+        axisStart: get('tablex-axis-start')?.value || '0',
+        axisEnd: get('tablex-axis-end')?.value || '',
+      });
+      if (!parsed.rows.length) throw new Error('No known Table X row types were detected.');
+      parsed.warnings = [
+        { code: 'tablex_attempt_used', message: `Parsed using ${attempt.label}. Marker distances are approximate unless calibration and word boxes were available.` },
+        ...(parsed.warnings || []),
+      ];
+      renderTableXOcrReview(get, parsed);
+      return;
+    } catch (error) {
+      failures.push({
+        label: attempt.label,
+        message: error instanceof Error ? error.message : 'Table X OCR attempt failed.',
+        debug: ocrDebug,
+      });
+    }
+  }
+  const error = new Error('Table X OCR failed for normal and rotated image orientations.');
+  error.details = { attempts: failures };
+  const attemptHtml = `<div class="p3d-ocr-token-grid">${failures.map((attempt) => renderTokenBlock(attempt.label, [formatAttemptFailure(attempt)])).join('')}</div>`;
+  showTableXOcrPanel(get, `<div class="p3d-ocr-banner p3d-ocr-error">${h(error.message)}</div>${attemptHtml}`);
+  setTableXOcrStatus(get, 'OCR import failed', 'error');
+}
+
+function wireTable2OcrImport(dialog, get) {
+  const panel = get('table2-panel');
+  const fileInput = get('table2-ocr-file');
+  const button = get('table2-ocr-button');
+  const review = get('table2-ocr-review');
+  if (!panel || !fileInput || !button || !review) return;
+
+  button.addEventListener(ACTIVATE, () => fileInput.click());
+  fileInput.addEventListener('change', () => {
+    const imageFile = findImageFileFromFiles(fileInput.files);
+    fileInput.value = '';
+    if (imageFile) importTable2ImageFromOcr(imageFile, get);
+  });
+  panel.addEventListener('paste', (event) => {
+    const imageFile = findImageFileFromItems(event.clipboardData?.items);
+    if (!imageFile) return;
+    event.preventDefault();
+    importTable2ImageFromOcr(imageFile, get);
+  });
+  panel.addEventListener('dragover', (event) => {
+    if (!hasImageTransfer(event.dataTransfer)) return;
+    event.preventDefault();
+    panel.classList.add('p3d-ocr-dragover');
+  });
+  panel.addEventListener('dragleave', () => panel.classList.remove('p3d-ocr-dragover'));
+  panel.addEventListener('drop', (event) => {
+    const imageFile = findImageFileFromFiles(event.dataTransfer?.files);
+    if (!imageFile) return;
+    event.preventDefault();
+    panel.classList.remove('p3d-ocr-dragover');
+    importTable2ImageFromOcr(imageFile, get);
+  });
+  review.addEventListener(ACTIVATE, (event) => {
+    const actionButton = event.target instanceof Element ? event.target.closest('[data-p3d-ocr-action]') : null;
+    if (!actionButton) return;
+    if (actionButton.dataset.p3dOcrAction === 'discard') {
+      hideTable2OcrPanel(get);
+      setTable2OcrStatus(get, 'OCR review discarded', '');
+      return;
+    }
+    try {
+      applyReviewedTable2Rows(get, review);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'OCR review values could not be applied.';
+      showTable2OcrValidationError(review, message);
+      setTable2OcrStatus(get, 'Check OCR review values', 'error');
+    }
+  });
+  dialog.addEventListener('dragover', (event) => {
+    if (hasImageTransfer(event.dataTransfer)) event.preventDefault();
+  });
+}
+
+function wireTableXOcrImport(dialog, get) {
+  const tablex = get('tablex');
+  const fileInput = get('tablex-ocr-file');
+  const button = get('tablex-ocr-button');
+  const review = get('tablex-ocr-review');
+  if (!tablex || !fileInput || !button || !review) return;
+
+  button.addEventListener(ACTIVATE, () => fileInput.click());
+  fileInput.addEventListener('change', () => {
+    const imageFile = findImageFileFromFiles(fileInput.files);
+    fileInput.value = '';
+    if (imageFile) importTableXImageFromOcr(imageFile, get);
+  });
+  tablex.addEventListener('paste', (event) => {
+    const imageFile = findImageFileFromItems(event.clipboardData?.items);
+    if (!imageFile) return;
+    event.preventDefault();
+    importTableXImageFromOcr(imageFile, get);
+  });
+  tablex.addEventListener('dragover', (event) => {
+    if (!hasImageTransfer(event.dataTransfer)) return;
+    event.preventDefault();
+    tablex.classList.add('p3d-ocr-dragover');
+  });
+  tablex.addEventListener('dragleave', () => tablex.classList.remove('p3d-ocr-dragover'));
+  tablex.addEventListener('drop', (event) => {
+    const imageFile = findImageFileFromFiles(event.dataTransfer?.files);
+    if (!imageFile) return;
+    event.preventDefault();
+    tablex.classList.remove('p3d-ocr-dragover');
+    importTableXImageFromOcr(imageFile, get);
+  });
+  review.addEventListener(ACTIVATE, (event) => {
+    const actionButton = event.target instanceof Element ? event.target.closest('[data-p3d-tablex-action]') : null;
+    if (!actionButton) return;
+    if (actionButton.dataset.p3dTablexAction === 'discard') {
+      hideTableXOcrPanel(get);
+      setTableXOcrStatus(get, 'OCR review discarded', '');
+      return;
+    }
+    try {
+      applyReviewedTableXRows(get, review);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Table X review values could not be applied.';
+      showTable2OcrValidationError(review, message);
+      setTableXOcrStatus(get, 'Check Table X review values', 'error');
+    }
+  });
+}
+
+function runConversion(host, get, state) {
+  try {
+    const table1Text = get('table1').value;
+    const table2Text = get('table2').value;
+    const table3Text = get('table3').value;
+    const branchInfo = readBranchInfo(get);
+
+    if (!table1Text.trim()) {
+      host.querySelector('[data-p3d="keyplan"]').innerHTML = `<div style="color:#fca5a5;padding:20px;font-family:monospace;font-size:14px;background:#2a1111;border:1px solid #7f1d1d;border-radius:4px;">Error: Table 1 input is empty.<br><br>Please click "New (Load Sample)" to load sample data, or paste your own data into the text areas before clicking Run.</div>`;
+      return;
+    }
+
+    const table1Points = parseTable1(table1Text);
+    const table1OutputText = table1ToTabText(table1Points);
+    const sheets = groupPointsIntoSheets(table1Points);
+    const kp = renderKeyPlanSvg(table1Points, sheets);
+    // Support both old plain-string return (cache miss) and new {svgHtml,legendHtml}
+    const svgHtml = typeof kp === 'string' ? kp : kp.svgHtml;
+    const legendHtml = typeof kp === 'string' ? '' : kp.legendHtml;
+    const combined = buildCombinedCoordinateTable({ table1Text, table2Text, table3Text });
+    const coordinateRows = buildCoordinateRows(combined, branchInfo.branchName);
+    const coordinateText = coordinateRowsToTabText(coordinateRows);
+    const xmlText = buildInputXmlPipingModelXml(branchInfo, coordinateRows);
+
+    state.table1OutputText = table1OutputText;
+    state.coordinateText = coordinateText;
+    state.xmlText = xmlText;
+    host.querySelector('[data-p3d="keyplan"]').innerHTML = svgHtml;
+    const legendEl = host.querySelector('[data-p3d="keyplan-legend"]');
+    if (legendEl) { legendEl.innerHTML = legendHtml; legendEl.hidden = !legendHtml; }
+    host.querySelector('[data-p3d="table1-output"]').textContent = table1OutputText;
+    host.querySelector('[data-p3d="coordinate-output"]').textContent = coordinateText;
+    host.querySelector('[data-p3d="xml-output"]').textContent = xmlText;
+
+    const svg = host.querySelector('[data-p3d="keyplan"] svg');
+    const layer = host.querySelector('#p3d-pz-layer');
+    if (svg && layer) {
+      let isPanning = false, startPoint = { x: 0, y: 0 }, viewBox = svg.viewBox.baseVal;
+      let currentScale = 1;
+      svg.addEventListener('mousedown', (e) => {
+        isPanning = true;
+        startPoint = { x: e.clientX, y: e.clientY };
+      });
+      svg.addEventListener('mousemove', (e) => {
+        if (!isPanning) return;
+        const dx = (startPoint.x - e.clientX) * (viewBox.width / svg.clientWidth);
+        const dy = (startPoint.y - e.clientY) * (viewBox.height / svg.clientHeight);
+        viewBox.x += dx; viewBox.y += dy;
+        startPoint = { x: e.clientX, y: e.clientY };
+      });
+      svg.addEventListener('mouseup', () => isPanning = false);
+      svg.addEventListener('mouseleave', () => isPanning = false);
+      svg.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const zoom = Math.exp(e.deltaY * 0.001);
+        const mx = e.offsetX * (viewBox.width / svg.clientWidth) + viewBox.x;
+        const my = e.offsetY * (viewBox.height / svg.clientHeight) + viewBox.y;
+        viewBox.x = mx - (mx - viewBox.x) * zoom;
+        viewBox.y = my - (my - viewBox.y) * zoom;
+        viewBox.width *= zoom; viewBox.height *= zoom;
+        currentScale *= zoom;
+        layer.style.strokeWidth = `${1 / currentScale}`;
+      });
+      let tooltip = host.querySelector('.p3d-tooltip');
+      if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.className = 'p3d-tooltip';
+        host.appendChild(tooltip);
+      }
+      svg.addEventListener('mousemove', (e) => {
+        if (e.target.tagName === 'circle' && e.target.dataset.coord) {
+          tooltip.textContent = `[${e.target.dataset.coord}]`;
+          tooltip.style.left = `${e.pageX + 10}px`;
+          tooltip.style.top = `${e.pageY + 10}px`;
+          tooltip.style.display = 'block';
+        } else {
+          tooltip.style.display = 'none';
+        }
+      });
+      svg.addEventListener('mouseleave', () => tooltip.style.display = 'none');
+    }
+  } catch (err) {
+    const keyplanEl = host.querySelector('[data-p3d="keyplan"]');
+    if (keyplanEl) keyplanEl.innerHTML = `<div style="color:#fca5a5;padding:10px;font-family:monospace;font-size:12px;">Run error: ${h(String(err?.message || err))}</div>`;
+    // eslint-disable-next-line no-console
+    console.error('[Pipeline3D] runConversion error:', err);
+  }
+}
+
+function closePopup(modal, onClose) {
+  modal.remove();
+  onClose();
+}
+
+function mountPopup(root, onClose) {
+  ensureModalStyle();
+  const state = { coordinateText: '', xmlText: '' };
+  const modal = document.createElement('div');
+  modal.className = 'pipeline-3d-model-backdrop';
+  const dialog = document.createElement('section');
+  dialog.className = 'psmap-card pipeline-3d-model-dialog';
+  dialog.setAttribute('role', 'dialog');
+  dialog.setAttribute('aria-modal', 'true');
+  dialog.setAttribute('aria-labelledby', POPUP_TITLE_ID);
+  dialog.innerHTML = renderPopup();
+  modal.appendChild(dialog);
+  (document.body || root).appendChild(modal);
+
+  const get = (name) =>
+    name.startsWith('field-') ? dialog.querySelector(`[data-p3d-field="${name.slice(6)}"]`) : dialog.querySelector(`[data-p3d="${name}"]`);
+
+  dialog.querySelector('[data-p3d-close="1"]').addEventListener(ACTIVATE, () => closePopup(modal, onClose));
+  modal.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closePopup(modal, onClose);
+  });
+  modal.addEventListener(ACTIVATE, (event) => {
+    if (event.target === modal) closePopup(modal, onClose);
+  });
+
+  applyConfigValues(get, loadConfigValues());
+  wireConfigPersistence(dialog, get);
+  wireTable2OcrImport(dialog, get);
+  wireTableXOcrImport(dialog, get);
+
+  dialog.querySelector('[data-p3d="new"]').addEventListener(ACTIVATE, () => {
+    get('table1').value = SAMPLE_TABLE_1;
+    get('table2').value = SAMPLE_TABLE_2;
+    get('table3').value = SAMPLE_TABLE_3;
+  });
+  dialog.querySelector('[data-p3d="new-multisheet"]').addEventListener(ACTIVATE, () => {
+    get('table1').value = SAMPLE_TABLE_1_MULTISHEET;
+  });
+  dialog.querySelector('[data-p3d="run"]').addEventListener(ACTIVATE, () => {
+    saveConfigValues(readConfigValues(get));
+    runConversion(dialog, get, state);
+  });
+  dialog.querySelector('[data-p3d="download-coordinate"]').addEventListener(ACTIVATE, () => {
+    if (!state.coordinateText) return;
+    saveTextFile('pipeline-coordinate-tab.tsv', state.coordinateText, 'text/tab-separated-values');
+  });
+  dialog.querySelector('[data-p3d="download-xml"]').addEventListener(ACTIVATE, () => {
+    if (!state.xmlText) return;
+    saveTextFile('pipeline-3d-model.xml', state.xmlText, 'application/xml');
+  });
+
+  if (typeof dialog.focus === 'function') dialog.focus();
+  return modal;
+}
+
+export function installPipeline3dModelTile(container) {
+  ensureModalStyle(container?.ownerDocument || globalThis.document);
+  const utilitiesRoot = container.querySelector('.psnm-root') || container;
+  if (utilitiesRoot.querySelector('[data-pipeline-3d-model-launcher]')) return null;
+  const launcher = document.createElement('section');
+  launcher.setAttribute('data-pipeline-3d-model-launcher', '1');
+  launcher.innerHTML = renderLauncher();
+  utilitiesRoot.appendChild(launcher);
+  let popup = null;
+  launcher.querySelector('[data-p3d-open="1"]').addEventListener(ACTIVATE, () => {
+    if (popup) return;
+    popup = mountPopup(utilitiesRoot, () => {
+      popup = null;
+    });
+  });
+  return () => {
+    if (popup) popup.remove();
+    launcher.remove();
+  };
+}
+
+export const _test = Object.freeze({ renderPopup, renderLauncher, readBranchInfo, ensureModalStyle });

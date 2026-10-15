@@ -1,0 +1,1 @@
+The 1884 vs 1885 ZIP comparison is run entirely in GitHub Actions so binary archives are unpacked on the repository runner and evaluated by the exact merged typicality engine. Results are uploaded as a machine-readable JSON artifact.

@@ -1,0 +1,28 @@
+schema: AgentClaim.v1
+pr: 999
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-review-transfer-clarity
+active_authority: true
+criticality: ENGINEERING_CRITICAL_UI_PRESENTATION
+mission: clarify Compare Review engineering values and distinguish SOURCE candidate, current TARGET, and effective TARGET after qualified Writer apply
+claimed_paths:
+  - tabs/cii-workspace/cii-workspace-review-presentation.js
+  - tabs/cii-workspace/cii-workspace-shell.js
+  - tests/cii-workspace-review-presentation.test.js
+  - agents/PR999_workreport.md
+  - agents/status/PR999.yaml
+  - agents/claims/PR999.yaml
+  - agents/MASTER_INDEX.md
+protected_authority_not_claimed:
+  - Method A/B mathematics and discovery
+  - multi-base arbitration and correspondence
+  - engineering-delta calculation
+  - transfer-policy classification
+  - transfer-plan authority
+  - Writer 1A/1B readiness and mutation
+  - fixed-field parser
+  - protected converters
+  - workflows
+explicit_non_goal: per-delta APPLY/EXCLUDE transfer-scope authority
+coordination: SAFE_SUCCESSOR_TO_MERGED_PR998
+merge_authority: OWNER_ONLY

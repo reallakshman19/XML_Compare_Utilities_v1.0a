@@ -1,0 +1,25 @@
+{
+  "schema": "P3DBase039CacheLineageProof.v1",
+  "token": "20260722-p3d-base-039-1",
+  "fileTokenCounts": {
+    "index.html": 4,
+    "main-rhbg-fitguard.js": 1,
+    "core/app.js": 1,
+    "core/app-standalone-runtime.js": 1,
+    "tabs/psnm-utility-tab.js": 2,
+    "tabs/pipeline-3d-model/pipeline-3d-model-table-paste-addon.js": 2,
+    "tabs/pipeline-3d-model/pipeline-3d-model-profile-propagation-runtime.js": 2,
+    "tabs/pipeline-3d-model/pipeline-3d-model-elastic-bend-ui.js": 1,
+    "tabs/pipeline-3d-model/pipeline-3d-model-project-adapter.js": 5,
+    "tabs/pipeline-3d-model/pipeline-3d-model-profile-propagation.js": 4,
+    "tabs/pipeline-3d-model/pipeline-3d-model-xml-builder.js": 1
+  },
+  "nativeImportMapAliases": {
+    "pipeline-tab-adapter": true,
+    "pipeline-tab-config": true,
+    "property-sections": true
+  },
+  "allRequiredFilesTokenized": true,
+  "allAliasesPresent": true,
+  "visibleBuildMarker": "M27 P3D-BASE-039 parseable Pipeline baseline \u00b7 2026-07-22"
+}

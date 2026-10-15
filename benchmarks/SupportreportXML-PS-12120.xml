@@ -1,0 +1,1213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<exchange xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" units="m" filename="AML_2026Sep08-1441.nwd" filepath="C:\Users\XXXXX\OneDrive - XXXXX\Lakshman\XXXXXties\2A3_South\Pipeline\Civil Loads\REV-2">
+  <batchtest name="Report" internal_name="Report" units="m">
+    <clashtests>
+      <clashtest name="Test 1" test_type="clearance" status="ok" tolerance="0.002" merge_composites="1">
+        <linkage mode="none"/>
+        <left>
+          <clashselection selfintersect="0" primtypes="1">
+            <locator>lcop_selection_set_tree/PS?1SL</locator>
+          </clashselection>
+        </left>
+        <right>
+          <clashselection selfintersect="0" primtypes="1">
+            <locator>lcop_selection_set_tree/?1PS-12120</locator>
+          </clashselection>
+        </right>
+        <rules/>
+        <summary total="19" new="19" active="0" reviewed="0" approved="0" resolved="0">
+          <testtype>Clearance</testtype>
+          <teststatus>OK</teststatus>
+        </summary>
+        <clashresults>
+          <clashresult name="Clash1" guid="589a62b2-76fd-491e-a44c-e4329ec3dd65" status="new" distance="-0.010">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="616.122" y="-1112.824" z="101.180"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-P</node>
+                  <node>/ASIM-1885-4&quot;-P8810306-31441C4-PP-01</node>
+                  <node>/ASIM-1885-4&quot;-P8810306-31441C4-PP-01/B2</node>
+                  <node>/PS-12120.11</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.11</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>PANEL 5 of FRMWORK /PS-12120/MAIN</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 5 of FRMWORK /PS-12120/MAIN</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash2" guid="60e8fa73-d574-4419-8567-28d96f0cbaea" status="new" distance="-0.010">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="617.049" y="-1112.823" z="100.572"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-W</node>
+                  <node>/ASIM-1885-3&quot;-W8810186-31441C4-PP-01</node>
+                  <node>/ASIM-1885-3&quot;-W8810186-31441C4-PP-01/B4</node>
+                  <node>/PS-12120.15</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.15</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-6</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-6</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash3" guid="c7d79a17-777b-4145-a0e1-da1aef945e3a" status="new" distance="-0.009">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="614.197" y="-1112.539" z="101.555"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-W</node>
+                  <node>/ASIM-1885-4&quot;-W8810126-31441C4-01</node>
+                  <node>/ASIM-1885-4&quot;-W8810126-31441C4-01/B5</node>
+                  <node>/PS-12120.1</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.1</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>PANEL 3 of FRMWORK /PS-12120/MAIN</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 3 of FRMWORK /PS-12120/MAIN</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash4" guid="573accec-0630-4ed6-a967-01c661e62bb3" status="new" distance="-0.008">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="614.837" y="-1112.823" z="101.180"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-W</node>
+                  <node>/ASIM-1885-4&quot;-W8810126-31441C4-01</node>
+                  <node>/ASIM-1885-4&quot;-W8810126-31441C4-01/B4</node>
+                  <node>/PS-12120.13</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.13</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>PANEL 4 of FRMWORK /PS-12120/MAIN</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 4 of FRMWORK /PS-12120/MAIN</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash5" guid="2db702a1-0e3d-4bcf-bd55-d58ea51f031c" status="new" distance="-0.008">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="617.358" y="-1112.820" z="100.782"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-D</node>
+                  <node>/ASIM-1885-3&quot;-D8810383-11441T3-PP-01</node>
+                  <node>/ASIM-1885-3&quot;-D8810383-11441T3-PP-01/B4</node>
+                  <node>/PS-12120.16</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.16</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-3</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-3</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash6" guid="fc511fdd-0956-463a-a957-2df35e97792b" status="new" distance="-0.008">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="614.209" y="-1112.225" z="101.555"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-A</node>
+                  <node>/ASIM-1885-2&quot;-A8010745-13421-01</node>
+                  <node>/ASIM-1885-2&quot;-A8010745-13421-01/B2</node>
+                  <node>/PS-12120.2</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.2</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>PANEL 2 of FRMWORK /PS-12120/MAIN</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 2 of FRMWORK /PS-12120/MAIN</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash7" guid="e16d4377-5030-4187-bdf0-ee2a4824aa87" status="new" distance="-0.006">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="615.240" y="-1112.824" z="101.180"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-A</node>
+                  <node>/ASIM-1885-2&quot;-A8010126-13421-01</node>
+                  <node>/ASIM-1885-2&quot;-A8010126-13421-01/B1</node>
+                  <node>/PS-12120.9</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.9</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>PANEL 6 of FRMWORK /PS-12120/MAIN</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 6 of FRMWORK /PS-12120/MAIN</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash8" guid="045a3745-f989-4f72-9789-23ec1e3f3919" status="new" distance="-0.005">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="616.111" y="-1112.824" z="101.174"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-P</node>
+                  <node>/ASIM-1885-4&quot;-P8810306-31441C4-PP-01</node>
+                  <node>/ASIM-1885-4&quot;-P8810306-31441C4-PP-01/B2</node>
+                  <node>/PS-12120.11</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.11</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-2</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-2</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash9" guid="89f4f102-662f-4a59-9232-f10f7871c85a" status="new" distance="-0.005">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="615.638" y="-1112.824" z="101.174"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-P</node>
+                  <node>/ASIM-1885-8&quot;-P8810204-31441C4-PP-01</node>
+                  <node>/ASIM-1885-8&quot;-P8810204-31441C4-PP-01/B2</node>
+                  <node>/PS-12120/DATUM</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120/DATUM</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-2</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-2</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash10" guid="e0f4b3cb-45ea-46cc-b487-659a266b28ee" status="new" distance="-0.003">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="614.209" y="-1112.238" z="101.549"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-A</node>
+                  <node>/ASIM-1885-2&quot;-A8010745-13421-01</node>
+                  <node>/ASIM-1885-2&quot;-A8010745-13421-01/B2</node>
+                  <node>/PS-12120.2</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.2</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-7</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-7</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash11" guid="ca2ed695-e175-4aef-b382-d44605b5ccf3" status="new" distance="-0.003">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="615.253" y="-1112.824" z="101.174"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-A</node>
+                  <node>/ASIM-1885-2&quot;-A8010126-13421-01</node>
+                  <node>/ASIM-1885-2&quot;-A8010126-13421-01/B1</node>
+                  <node>/PS-12120.9</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.9</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-2</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-2</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash12" guid="a48f89a4-9b3b-4487-ac03-5dd4d515f47d" status="new" distance="-0.003">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="614.197" y="-1112.539" z="101.549"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-W</node>
+                  <node>/ASIM-1885-4&quot;-W8810126-31441C4-01</node>
+                  <node>/ASIM-1885-4&quot;-W8810126-31441C4-01/B5</node>
+                  <node>/PS-12120.1</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.1</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-7</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-7</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash13" guid="859118f6-8e6d-4c86-88ae-d748fd840e5b" status="new" distance="-0.003">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="614.848" y="-1112.823" z="101.174"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-W</node>
+                  <node>/ASIM-1885-4&quot;-W8810126-31441C4-01</node>
+                  <node>/ASIM-1885-4&quot;-W8810126-31441C4-01/B4</node>
+                  <node>/PS-12120.13</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.13</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-2</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-2</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash14" guid="d382f090-5d79-4a0c-b459-7a5b780fdd35" status="new" distance="-0.000">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="615.327" y="-1112.813" z="101.555"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-P</node>
+                  <node>/ASIM-1885-2&quot;-P8810365-31441C4-HT-01</node>
+                  <node>/ASIM-1885-2&quot;-P8810365-31441C4-HT-01/B5</node>
+                  <node>/PS-12120.20</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.20</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-8</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-8</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash15" guid="ba4fa35b-9dc3-48d0-b71c-45b8ff641270" status="new" distance="-0.000">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="615.327" y="-1113.113" z="101.555"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-P</node>
+                  <node>/ASIM-1885-2&quot;-P8810365-31441C4-HT-01</node>
+                  <node>/ASIM-1885-2&quot;-P8810365-31441C4-HT-01/B1</node>
+                  <node>/PS-12120.17</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.17</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-8</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-8</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash16" guid="b8465016-9d32-4364-8eac-193e6032dec1" status="new" distance="-0.000">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="614.300" y="-1112.871" z="101.549"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-P</node>
+                  <node>/ASIM-1885-2&quot;-P8810365-31441C4-HT-01</node>
+                  <node>/ASIM-1885-2&quot;-P8810365-31441C4-HT-01/B5</node>
+                  <node>/PS-12120.19</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.19</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-7</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-7</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash17" guid="8707f4a6-e99e-4447-b0f8-379d29043d62" status="new" distance="-0.000">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="614.300" y="-1113.171" z="101.549"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-P</node>
+                  <node>/ASIM-1885-2&quot;-P8810365-31441C4-HT-01</node>
+                  <node>/ASIM-1885-2&quot;-P8810365-31441C4-HT-01/B1</node>
+                  <node>/PS-12120.18</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.18</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-7</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-7</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash18" guid="517b7244-e0ec-41dc-b8a2-000402ec495d" status="new" distance="0.001">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="616.635" y="-1112.893" z="101.307"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-P</node>
+                  <node>/ASIM-1885-2&quot;-P8810365-31441C4-HT-01</node>
+                  <node>/ASIM-1885-2&quot;-P8810365-31441C4-HT-01/B5</node>
+                  <node>/PS-12120.8</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.8</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-5</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-5</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash19" guid="858a7ea8-4eeb-4f79-8bf9-3c59b527448d" status="new" distance="0.002">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="616.335" y="-1112.893" z="101.308"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="5" minute="30" second="50"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-PI</node>
+                  <node>/ASIM-1885-CU-PI-P</node>
+                  <node>/ASIM-1885-2&quot;-P8810333-31441C4-HT-01</node>
+                  <node>/ASIM-1885-2&quot;-P8810333-31441C4-HT-01/B7</node>
+                  <node>/PS-12120.7</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120.7</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1885-CU-SU</node>
+                  <node>/ASIM-1885-CU-SU-G</node>
+                  <node>/PS-12120</node>
+                  <node>/PS-12120/MAIN</node>
+                  <node>/PS-12120-BAR-5</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-12120-BAR-5</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+        </clashresults>
+      </clashtest>
+    </clashtests>
+    <selectionsets/>
+  </batchtest>
+</exchange>

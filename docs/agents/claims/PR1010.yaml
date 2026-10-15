@@ -1,0 +1,76 @@
+schema: AgentPrClaims.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr: 1010
+claims:
+  - id: PR1010-CLAIM-001
+    statement: Writer1C superset composition generates lower Writer1A/1B testimony and Writer1C testimony independently from the same untouched TARGET preimage before the actual write.
+    evidence: tabs/cii-workspace/cii-workspace-target-writer-composite.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1010-CLAIM-002
+    statement: Every lower physical claim must match the untouched original TARGET bytes at its exact absolute span, preventing hidden sequential-preimage dependencies from entering the final transaction.
+    evidence: tabs/cii-workspace/cii-workspace-target-writer-composite.js; tests/cii-workspace-writer-composite-plan.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1010-CLAIM-003
+    statement: Lower operations require explicit CII_WRITER_1A_* or CII_WRITER_1B_* policy authority and are retained as distinct Writer1A/Writer1B identities in readiness and physical mutation ledgers.
+    evidence: tabs/cii-workspace/cii-workspace-target-writer-composite.js; tests/cii-workspace-writer-composite-plan.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1010-CLAIM-004
+    statement: Cross-family same-span claims are blocked even for identical requested bytes, partial overlaps are blocked, and only same-family identical same-span claims may canonicalize.
+    evidence: tabs/cii-workspace/cii-workspace-target-writer-composite.js; tests/cii-workspace-writer-composite-plan.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1010-CLAIM-005
+    statement: The final target is patched exactly once from the original byte vector after claim arbitration; Writer1B output is not used as the Writer1C mutation preimage.
+    evidence: tabs/cii-workspace/cii-workspace-target-writer-composite.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1010-CLAIM-006
+    statement: Existing lower Writer1A/1B and Writer1C validators independently qualify their dry-run components against the original TARGET before final union validation.
+    evidence: tabs/cii-workspace/cii-workspace-core.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1010-CLAIM-007
+    statement: Final composite negative assurance independently reconstructs the authorized span union from validated component dry-runs and original TARGET custody; the composite writer's mutation ledger is testimony that must match this independent union exactly.
+    evidence: tabs/cii-workspace/cii-workspace-writer-composite-validation.js; tests/cii-workspace-writer-composite-validation.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1010-CLAIM-008
+    statement: Final actual byte changes must remain inside the independently reconstructed non-overlapping authorized union with exact authorized before/post images and stable byte/line-ending/section structure.
+    evidence: tabs/cii-workspace/cii-workspace-writer-composite-validation.js; tests/cii-workspace-writer-composite-validation.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1010-CLAIM-009
+    statement: A dedicated synthetic regression covers Writer1A P1, Writer1B P3 and Writer1C V11 ii in one transaction with one original preimage and one final byte-vector patch.
+    evidence: tests/cii-workspace-writer-composite-three-family.test.js
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: PR1010-CLAIM-010
+    statement: Standalone Writer1A and Writer1B implementation files are not modified; production default remains Writer1B and Writer1C remains explicit routing.
+    evidence: branch changed-file audit; tabs/cii-workspace/cii-workspace-core.js; tests/cii-workspace-writer1c-routing.test.js
+    status: PASS_SOURCE_SCOPE_AUDIT
+qualification_findings:
+  - id: PR1010-QF-001
+    finding: Existing standalone Writer1B internally chains Writer1A output before Writer1B-only mutation, so standalone Writer1B application cannot itself define the general mixed-transaction preimage authority.
+    disposition: RESOLVED_BY_SEPARATE_ONE_PREIMAGE_COMPOSITE_ORCHESTRATOR
+  - id: PR1010-QF-002
+    finding: Initial composite readiness omitted the legacy mutationCount field expected by downstream stage/audit consumers.
+    disposition: FIXED_COMPATIBILITY_FIELD_RESTORED
+  - id: PR1010-QF-003
+    finding: Initial same-span arbitration allowed identical claims from different writer families to canonicalize.
+    disposition: FIXED_CROSS_FAMILY_SAME_SPAN_ALWAYS_BLOCKS
+  - id: PR1010-QF-004
+    finding: Initial lower mutation ledger lumped Writer1A and Writer1B together instead of preserving policy authority identity.
+    disposition: FIXED_EXPLICIT_WRITER1A_WRITER1B_AUTHORITY_REQUIRED
+  - id: PR1010-QF-005
+    finding: Initial mixed regression covered Writer1B plus Writer1C but not all three writer families simultaneously.
+    disposition: COVERAGE_CLOSED_WITH_THREE_FAMILY_SYNTHETIC_TEST
+  - id: PR1010-QF-006
+    finding: Initial final composite validator used writerResult.mutations as the authorized span union, making Writer testimony the source of S_auth.
+    disposition: FIXED_VALIDATOR_NOW_RECONSTRUCTS_UNION_FROM_COMPONENT_DRY_RUNS_AND_REQUIRES_WRITER_LEDGER_EXACT_MATCH
+limitations:
+  - exact checkout is unavailable because github.com DNS resolution fails in the execution container
+  - latest independent-union tests are authored but not executed in a complete repository checkout
+  - inherited Writer1A/Writer1B/Writer1C regressions are not executed
+  - full npm test is not executed
+  - browser product flow is not executed
+prohibited_claims:
+  - do not claim latest-head full repository runtime PASS
+  - do not claim writerResult.mutations is authorization
+  - do not claim new field semantics
+  - do not claim Writer2 record or pointer authority
+  - do not claim cross-family same-span canonicalization
+  - do not claim sequential writer chaining as composite authority

@@ -1,0 +1,41 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR988
+mission: CII Transfer Preview qualification
+workstream: cii-transfer-preview-qualification
+branch: agent/cii-transfer-preview-qualification
+stacked_base_pr: PR987
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+execution_mode: AUTO
+auto_state: BLOCKED
+phase_progression: AUTO
+merge_authority: OWNER_GRANTED_IF_ALL_APPROVED_PHASES_COMPLETE_AND_QUALIFIED
+agent_state: IMPLEMENTATION_COMPLETE_VALIDATION_PARTIAL
+pr_recovery_state: STACKED_DRAFT_HANDOVER_READY
+handover_readiness: READY
+report_path: agents/PR988_workreport.md
+scope_authority: READ_ONLY_TRANSFER_PREVIEW_QUALIFICATION
+validation_state: FOCUSED_EXACT_PASS_REAL_BENCHMARK_NOT_RUN
+acceptance_matrix:
+  action_classification: IMPLEMENTED_FOCUSED_PASS
+  action_status_separation: IMPLEMENTED_FOCUSED_PASS
+  reviewed_locked_gate: INHERITED_EXACT_PASS
+  stale_review_gate: IMPLEMENTED_FOCUSED_PASS
+  protected_geometry_od_wall: IMPLEMENTED_FOCUSED_PASS
+  restraint_preview: IMPLEMENTED_FOCUSED_PASS
+  hanger_preview: IMPLEMENTED_CREATE_ACTION_BLOCKED_PAYLOAD
+  sif_tee_preview: IMPLEMENTED_COPY_ACTION_BLOCKED_WRITER
+  rigid_weight_preview: IMPLEMENTED_KEEP_OR_COPY
+  process_preview: COPY_ACTION_BLOCKED_PARTIAL_AUTHORITY
+  tab3_action_ui: SOURCE_INSPECTION_PASS_RUNTIME_NOT_RUN
+  target1_transfer_benchmark: COMMITTED_NOT_RUN
+  target2_transfer_benchmark: COMMITTED_NOT_RUN
+  target_mutation: BLOCKED_NOT_IMPLEMENTED
+focused_validation:
+  transfer_policy_exact_blob: PASS_LOCAL_NODE
+  inherited_transfer_preview: PASS_LOCAL_NODE
+  inherited_transfer_review: PASS_LOCAL_NODE
+  ui_apply_controls_disabled: PASS_SOURCE_INSPECTION
+hard_stop: FULL_REAL_BENCHMARK_RUNTIME_UNAVAILABLE
+exact_next_action: run PR987 real benchmark qualification and end-to-end correspondence tests plus PR988 benchmark transfer-preview test in a complete checkout at frozen policy; only after all pass may target mutation qualification begin or final merge be considered

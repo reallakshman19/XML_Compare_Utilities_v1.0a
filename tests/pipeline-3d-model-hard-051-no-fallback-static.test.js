@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+
+const propagation = fs.readFileSync(new URL('../tabs/pipeline-3d-model/pipeline-3d-model-profile-propagation.js', import.meta.url), 'utf8');
+const orchestrator = fs.readFileSync(new URL('../tabs/pipeline-3d-model/pipeline-3d-model-core-orchestrator.js', import.meta.url), 'utf8');
+const runtime = fs.readFileSync(new URL('../tabs/pipeline-3d-model/pipeline-3d-model-core-runtime.js', import.meta.url), 'utf8');
+const propagationRuntime = fs.readFileSync(new URL('../tabs/pipeline-3d-model/pipeline-3d-model-profile-propagation-runtime.js', import.meta.url), 'utf8');
+assert.doesNotMatch(propagation, /getPipelineEngineeringProfile\('normal-metallic'\)/);
+assert.doesNotMatch(propagation, /settings:\s*\{\s*designBasis:\s*'default-metallic'/);
+assert.match(propagation, /return null;\s*\n}/);
+assert.match(propagation, /profileFallbackApplied:\s*false/);
+assert.doesNotMatch(orchestrator, /\|\|\s*plan\.greVendorSeries\[0]/);
+assert.match(orchestrator, /greVendorNominalBoreMm === section\.greVendorNominalBoreMm/);
+assert.match(orchestrator, /profileResolutionReason:\s*'CANONICAL_SECTION_OWNERSHIP'/);
+assert.match(runtime, /buildGeometryRoute/);
+assert.match(runtime, /resolvePipelineSectionAwareBends/);
+assert.match(runtime, /resolveSectionAwareBends/);
+assert.match(propagationRuntime, /canonicalAnalysisSectionPlan/);
+assert.match(propagation, /sectionPropertyAssignmentPlan/);
+assert.match(propagation, /sectionProfileRoutingPlan/);
+assert.match(propagation, /inputXmlProfileAuthorityPlan/);
+console.log('pipeline-3d-model P3D-HARD-051 no-fallback and runtime static: PASS');

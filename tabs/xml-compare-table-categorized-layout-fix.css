@@ -1,0 +1,83 @@
+/* Mission 077: stabilize Table to Categorized XML popup sizing and internal scrolling. */
+
+.table-categorized-xml-backdrop {
+  align-items: stretch;
+  justify-items: center;
+}
+
+.table-categorized-xml-dialog {
+  width: min(1220px, calc(100vw - 28px)) !important;
+  height: min(840px, calc(100vh - 28px)) !important;
+  max-height: calc(100vh - 28px) !important;
+  display: grid !important;
+  grid-template-rows: auto auto minmax(0, 1fr) !important;
+  overflow: hidden !important;
+}
+
+.table-categorized-xml-dialog.is-fullscreen,
+.table-categorized-xml-dialog:has([data-table-categorized-fullscreen-icon]:checked) {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+}
+
+.table-categorized-xml-body {
+  min-height: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.table-categorized-shell-split {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+.table-categorized-shell-main,
+.table-categorized-shell-side {
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}
+
+.table-categorized-structure-workspace,
+.table-categorized-structure-workspace.is-scrollable {
+  min-height: 260px !important;
+  max-height: calc(100vh - 360px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding-right: 8px;
+  scrollbar-gutter: stable;
+}
+
+.table-categorized-recipe-tree {
+  max-height: calc(100vh - 430px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding-right: 8px;
+  scrollbar-gutter: stable;
+}
+
+.table-categorized-live-preview {
+  max-height: calc(100vh - 420px) !important;
+  overflow: auto !important;
+}
+
+@media (max-height: 720px) {
+  .table-categorized-structure-workspace,
+  .table-categorized-structure-workspace.is-scrollable {
+    max-height: 310px !important;
+  }
+
+  .table-categorized-recipe-tree {
+    max-height: 240px !important;
+  }
+}
+
+.xml-compare-connector-lane {
+  overflow-y: auto !important;
+}

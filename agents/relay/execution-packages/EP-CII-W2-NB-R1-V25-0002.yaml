@@ -1,0 +1,142 @@
+schema_version: relay-v2.5
+identity:
+  ep_id: EP-CII-W2-NB-R1-V25-0002
+  title: Retained qualification and delivery reconciliation for CII Writer2 NodeName revision
+  issue: github:reallaksh19/XML_Compare_Utilities#1224
+  branch: revision/cii-writer2-nodename-byte-r1-1224-v25-migration
+  base_ref: 3199e4689802f26daf9560f94bc75e2f531b04dd
+  execution_state: ACTIVE
+  execution_mode: SERIAL
+git_basis:
+  repository: reallaksh19/XML_Compare_Utilities
+  expected_branch: revision/cii-writer2-nodename-byte-r1-1224-v25-migration
+  implementation_head: 97a8c9cb17edbeb59a607f49a09619462e344e32
+  checkpoint_head: 3199e4689802f26daf9560f94bc75e2f531b04dd
+  main_basis: 3ee90ca25368f69d42f44cbe967d5bbc81972f77
+roadmap_source:
+  roadmap_id: ROADMAP-XMLCU-V25-1224
+  roadmap_revision: RM-0002
+  objective: OBJ-CII-W2-NB-R1-1224
+  phase: PH-IMPLEMENTATION
+  work_package: WP-RET-001
+outcome:
+  objective: >-
+    Obtain executable retained evidence for the owner-directed #1224 implementation, reconcile independent byte-preservation evidence,
+    and prepare draft PR 1228 for owner review without performing further product mutation under this package.
+  done_when:
+    - Source-subgraph focused test executes and passes.
+    - Retained Auto Anchor mixed Writer1C/Writer2 benchmark executes and passes.
+    - PB-0003 lower-bound NodeName benchmark executes and passes.
+    - Browser retained benchmark executes when Playwright environment is available, or its absence is explicitly recorded as environment-blocked.
+    - PR 1228 and relay state reflect exact evidence; merge remains owner-only.
+context_capsule:
+  checkpoint: agents/relay/checkpoints/CP-CII-W2-NB-R1-V25-0001.yaml
+  pull_request: https://github.com/reallaksh19/XML_Compare_Utilities/pull/1228
+  known_semantic_oracle: 35 REPLACE + 1 CREATE + 0 DELETE
+  infrastructure_observation: GitHub Actions runs 35266182142 and 35266754547 failed before runner assignment with zero steps.
+repository_discovery:
+  required_reads:
+    - agents/relay/checkpoints/CP-CII-W2-NB-R1-V25-0001.yaml
+    - tests/cii-workspace-source-subgraph-propagation.test.js
+    - tests/cii-workspace-multisource-retained-auto-anchor-benchmark.test.js
+    - tests/cii-workspace-multisource-pb0003-benchmark.test.js
+    - tests/cii-workspace-multisource-byte-closure-oracle.js
+    - tabs/cii-workspace/cii-workspace-multisource-mixed-apply.js
+    - tabs/cii-workspace/cii-workspace-writer-version-bridge.js
+inputs:
+  - id: INPUT-01
+    authority: RETAINED_REPOSITORY_FIXTURES
+    paths: [Benchmark/S1.CII, Benchmark/S2.CII, Benchmark/S3.CII, Benchmark/T.CII, Benchmark/TEXPECTED-PARTIALLLYDONE.CII]
+  - id: INPUT-02
+    authority: OWNER_ISSUE
+    ref: github:reallaksh19/XML_Compare_Utilities#1224
+  - id: INPUT-03
+    authority: IMPLEMENTATION_CHECKPOINT
+    path: agents/relay/checkpoints/CP-CII-W2-NB-R1-V25-0001.yaml
+benchmarks:
+  - id: BENCH-01
+    command: node tests/cii-workspace-multisource-retained-auto-anchor-benchmark.test.js
+    status: NOT_RUN_ENVIRONMENT
+  - id: BENCH-02
+    command: node tests/cii-workspace-multisource-pb0003-benchmark.test.js
+    status: NOT_RUN_ENVIRONMENT
+  - id: BENCH-03
+    command: node tests/cii-workspace-source-subgraph-propagation.test.js
+    status: NOT_RUN_ENVIRONMENT
+scope:
+  allowed_writes:
+    - agents/relay/**
+    - pull-request metadata/comments for PR 1228
+  allowed_reads:
+    - tabs/cii-workspace/**
+    - tests/**
+    - Benchmark/**
+    - parser/**
+  protected:
+    - Production files are read-only in this EP.
+    - Retained benchmark inputs are immutable.
+    - Workflow files are immutable.
+    - Writer1C existing-row authority and Writer2 CREATE/DELETE authority split is immutable.
+  prohibited:
+    - Further product-code mutation.
+    - Retained fixture mutation.
+    - Workflow mutation to bypass unavailable runners.
+    - Merge of PR 1228 by the agent.
+anti_drift:
+  do_not:
+    - Do not interpret runner_id=0 / steps=[] as a test failure.
+    - Do not mark retained acceptance PASS without executed commands.
+    - Do not broaden byte-oracle authority to hide unrelated differences.
+    - Do not retroactively claim EP-0001 qualification was satisfied.
+implementation_plan:
+  - id: STEP-01
+    objective: Execute focused source-subgraph test in a byte-faithful checkout or functioning runner.
+    acceptance: [AC-01]
+  - id: STEP-02
+    objective: Execute retained Auto Anchor mixed-write and PB-0003 benchmarks.
+    acceptance: [AC-02, AC-03]
+  - id: STEP-03
+    objective: Reconcile PR/relay evidence and prepare owner review state.
+    acceptance: [AC-04]
+qualification_boundary:
+  required: true
+  status: UNSATISFIED_PREIMPLEMENTATION_DEVIATION_RECORDED
+  basis:
+    - EP-CII-W2-NB-R1-V25-0001 required independent qualification before production mutation.
+    - Product mutation occurred under explicit owner direction without fabricating missing DISC/QUAL/TC evidence.
+  effect: This EP grants no further product-write authority.
+quality:
+  applicable:
+    - {blueprint: testing, reason: Retained executable evidence is the current frontier.}
+    - {blueprint: engineering-numerics, reason: Fixed-column byte/count/pointer invariants require exact validation.}
+    - {blueprint: code-review, reason: Draft PR must remain fail-closed under missing execution evidence.}
+    - {blueprint: github-delivery, reason: PR 1228 is open and owner-only merge must be preserved.}
+  not_applicable:
+    - {blueprint: coding, reason: Production mutation is prohibited in this EP.}
+    - {blueprint: ui-ux, reason: No new UI design work is in scope.}
+    - {blueprint: accessibility, reason: No accessibility surface is changed in this EP.}
+    - {blueprint: performance, reason: No performance qualification is required for this bounded fix.}
+    - {blueprint: migration, reason: Relay migration is complete.}
+    - {blueprint: software-design, reason: Architecture implementation is already checkpointed; this EP validates it.}
+acceptance:
+  - {id: AC-01, description: Source-subgraph positive and missing-support/ambiguity negative falsifiers execute PASS.}
+  - {id: AC-02, description: Retained mixed benchmark executes PASS with 35 REPLACE + 1 CREATE + 0 DELETE and exact raw-name emission.}
+  - {id: AC-03, description: Independent byte closure executes PASS with no unrelated pointer, NodeName padding, section, or line-ending drift.}
+  - {id: AC-04, description: PR 1228 remains mergeable, evidence-complete for executed checks, and owner-only for merge.}
+validation:
+  - {id: TEST-01, command: node tests/cii-workspace-source-subgraph-propagation.test.js, class: MUST_PASS}
+  - {id: TEST-02, command: node tests/cii-workspace-multisource-retained-auto-anchor-benchmark.test.js, class: MUST_PASS}
+  - {id: TEST-03, command: node tests/cii-workspace-multisource-pb0003-benchmark.test.js, class: MUST_PASS}
+  - {id: TEST-04, command: browser retained benchmark, class: SHOULD_PASS_WHEN_ENVIRONMENT_AVAILABLE}
+failure_and_stop_conditions:
+  hard_stop_categories: [EXECUTABLE_TEST_FAILURE, RETAINED_FIXTURE_MISMATCH, BYTE_CLOSURE_FAILURE, MAIN_DRIFT_COLLISION, OWNER_DECISION_REQUIRED]
+  on_test_failure: Stop product mutation under this EP; record the exact failure and create a bounded repair successor package before changing production code.
+report_contract:
+  sections: [Executive state, Tests and evidence, Byte closure, PR state, Known limitations, Exact next action]
+checkpoint_contract:
+  required: true
+successor_relay:
+  required: true
+  next_if_pass: Prepare PR 1228 for owner review and update roadmap/progress.
+  next_if_environment_blocked: Keep PR draft and preserve NOT_RUN_ENVIRONMENT with exact runner evidence.
+  next_if_test_fails: Create a failure-specific repair EP; do not mutate production under EP-0002.

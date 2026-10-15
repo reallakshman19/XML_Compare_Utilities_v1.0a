@@ -1,0 +1,40 @@
+pr: 1023
+claims:
+  - id: QF-1023-001
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+    statement: BM_CII_SOURCE.CII is one real CAESAR V11 TARGET0 containing all three physical families required for Writer2 tri-family qualification: NONAM=4, SIF=9, NOHGRS=1.
+    evidence:
+      - Benchmark/CIICompare/BM_CII_SOURCE.CII
+  - id: QF-1023-002
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+    statement: The qualification dynamically selects a zero-pointer exact-custodied NODENAME endpoint and one existing V11 SIF pointer with every physical owner selected, then deletes the real hanger at node 205.
+    evidence:
+      - tests/cii-workspace-writer2-trifamily-real-benchmark-roundtrip.test.js
+  - id: QF-1023-003
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+    statement: Public applyCiiWorkspaceTargetWriter2 bytes must exactly equal applyCiiWriter2CompositeWithHangerDeleteAll bytes for the same untouched TARGET0 and canonical bound scope.
+    evidence:
+      - tests/cii-workspace-writer2-trifamily-real-benchmark-roundtrip.test.js
+  - id: QF-1023-004
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+    statement: Independent tri-family validation must reconstruct and match the complete postimage and reject one unrelated-byte tamper even when the file can be re-intaken.
+    evidence:
+      - tests/cii-workspace-writer2-trifamily-real-benchmark-roundtrip.test.js
+      - tabs/cii-workspace/cii-workspace-writer2-composite-hanger-validation.js
+  - id: QF-1023-005
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+    statement: The real HANGER transaction reduces BM_CII_SOURCE MISCEL_1 from 23 rows to 11 rows, retains zero hangers, and does not require H>1 retained-tail ordering authority.
+    evidence:
+      - tests/cii-workspace-writer2-trifamily-real-benchmark-roundtrip.test.js
+      - tests/cii-workspace-writer2-hanger-delete-plan.test.js
+  - id: QF-1023-006
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+    statement: Stale preview replay, forged writer mutation testimony, and duplicate parent-scope APPLY IDs fail closed.
+    evidence:
+      - tests/cii-workspace-writer2-trifamily-real-benchmark-roundtrip.test.js
+  - id: BOUND-1023-001
+    status: PRESERVED
+    statement: PR1023 adds no Writer2 mutation authority and changes no production source.
+  - id: BOUND-1023-002
+    status: PRESERVED
+    statement: SIF CREATE, HANGER CREATE, and H>1 partial HANGER DELETE remain blocked by their established source-authority gates.

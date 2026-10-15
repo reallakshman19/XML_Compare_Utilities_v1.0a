@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.xml-compare-utilities.local/document-evidence/v1/table-extraction.schema.json",
+  "title": "DocumentEvidenceTableExtraction.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "sourceHash", "source", "pages", "tables", "diagnostics", "options"],
+  "properties": {
+    "schema": {"const": "DocumentEvidenceTableExtraction.v1"},
+    "sourceHash": {"type": "string", "minLength": 1},
+    "source": {"$ref": "source.schema.json"},
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "integer", "minimum": 1}
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["candidate", "observations", "tablePass", "cellDecisions"],
+        "properties": {
+          "candidate": {"type": "object"},
+          "observations": {"type": "array", "items": {"$ref": "observation.schema.json"}},
+          "tablePass": {"$ref": "table-pass.schema.json"},
+          "cellDecisions": {"type": "array", "items": {"$ref": "decision.schema.json"}}
+        }
+      }
+    },
+    "diagnostics": {"type": "array"},
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ocr", "ocrLanguage"],
+      "properties": {
+        "ocr": {"type": "string", "enum": ["never", "always"]},
+        "ocrLanguage": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

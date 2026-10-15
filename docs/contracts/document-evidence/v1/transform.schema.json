@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.xml-compare-utilities.local/document-evidence/v1/transform.schema.json",
+  "title": "SurfaceTransform.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "transformId", "transformHash", "sourceSurfaceId", "targetSurfaceId", "sourceSurfaceHash", "targetSurfaceHash", "operation", "forwardMatrix", "inverseMatrix", "numericValidation"],
+  "properties": {
+    "schema": {"const": "SurfaceTransform.v1"},
+    "transformId": {"type": "string", "minLength": 1},
+    "transformHash": {"$ref": "#/$defs/sha256"},
+    "sourceSurfaceId": {"type": "string", "minLength": 1},
+    "targetSurfaceId": {"type": "string", "minLength": 1},
+    "sourceSurfaceHash": {"$ref": "#/$defs/sha256"},
+    "targetSurfaceHash": {"$ref": "#/$defs/sha256"},
+    "operation": {"type": "string", "enum": ["pdf-cropbox-normalization", "pdf-page-rotation", "region-crop", "render-scale", "rotation", "deskew", "padding", "resampling", "browser-projection", "composed", "other"]},
+    "parameters": {"type": "object"},
+    "forwardMatrix": {"$ref": "#/$defs/matrix3"},
+    "inverseMatrix": {"$ref": "#/$defs/matrix3"},
+    "pixelConvention": {"type": "string", "enum": ["continuous-pixel-edges", "pixel-centers", "not-applicable"]},
+    "numericValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["invertible", "continuousRoundTripMaxError", "continuousRoundTripUnit"],
+      "properties": {
+        "invertible": {"const": true},
+        "conditionNumber": {"type": "number", "exclusiveMinimum": 0},
+        "continuousRoundTripMaxError": {"type": "number", "minimum": 0},
+        "continuousRoundTripUnit": {"type": "string", "enum": ["pt", "px", "css-px"]},
+        "providerQuantizationErrorPx": {"type": "number", "minimum": 0},
+        "quantizedBackProjectionMaxError": {"type": "number", "minimum": 0},
+        "quantizedBackProjectionUnit": {"type": "string", "enum": ["pt", "px", "css-px"]}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "matrix3": {"description": "Row-major 3x3 homogeneous matrix applied to column vectors [x,y,1]^T.", "type": "array", "minItems": 9, "maxItems": 9, "items": {"type": "number"}}
+  }
+}

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pipeline CAD Floating Preview Fixture</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:#020617;color:#e2e8f0;font-family:system-ui,sans-serif}
+    .workspace{min-height:100vh;padding:18px;background:linear-gradient(135deg,#020617,#0f172a)}
+    .workspace-card{width:320px;padding:16px;border:1px solid #334155;border-radius:10px;background:#0f172a}
+    button{border:1px solid #475569;border-radius:5px;background:#1e293b;color:#e2e8f0;padding:7px 11px;cursor:pointer}
+    .underlay{position:fixed;left:18px;bottom:18px;z-index:20}
+    .competitor{position:fixed;inset:70px 70px auto auto;width:280px;height:120px;z-index:1000000;pointer-events:none;border:2px solid #ef4444;background:rgba(127,29,29,.45);padding:12px}
+    .p3d-x-modal{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;padding:24px;background:rgba(2,6,23,.92)}
+    .p3d-x-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding:12px 16px;border-bottom:1px solid #334155}
+    .p3d-x-modal-head>div{display:flex;align-items:center;gap:12px;min-width:0}
+    .p3d-x-modal-head h3{margin:0;font-size:18px;color:#e0f2fe;white-space:nowrap}
+    .p3d-x-tabs{display:flex;gap:8px;margin-bottom:12px}
+    .p3d-x-tab{padding:6px 14px}
+    .p3d-x-tab[data-active="true"]{background:#38bdf8;color:#0f172a}
+    .p3d-x-content{display:none;min-height:0;overflow:hidden}
+    .p3d-x-content[data-active="true"]{display:block}
+    .preview{height:100%;display:grid;place-items:center;background:repeating-linear-gradient(0deg,#07111f,#07111f 23px,#0f2438 24px);color:#bae6fd;font:700 18px ui-monospace,monospace}
+  </style>
+</head>
+<body>
+  <main class="workspace pipeline-3d-model-dialog">
+    <section class="workspace-card">
+      <h1>Pipeline 3D Model Workspace</h1>
+      <p>The preview window must not block this workspace outside its own bounds.</p>
+      <button id="open-preview" type="button">Preview Table 2X &amp; 3X</button>
+    </section>
+    <button id="underlying-action" class="underlay" type="button">Underlying action: <span id="underlying-count">0</span></button>
+    <div class="competitor" id="competing-overlay">Competing overlay z-index 1,000,000</div>
+
+    <section class="p3d-x-modal" data-p3d-split="x-modal">
+      <div class="p3d-x-modal-head">
+        <div>
+          <h3>Table 2X &amp; 3X Previews</h3>
+          <button type="button" data-p3d-split="x-reload">Reload Graph</button>
+        </div>
+        <button type="button" data-p3d-split="x-close" aria-label="Close Preview">Close</button>
+      </div>
+      <div class="p3d-x-tabs">
+        <button type="button" class="p3d-x-tab" data-x-tab="table2x" data-active="true">Table 2X</button>
+        <button type="button" class="p3d-x-tab" data-x-tab="table3x">Table 3X</button>
+      </div>
+      <div class="p3d-x-content" data-x-content="table2x" data-active="true">
+        <div class="preview" data-p3d-split="table2x-preview">TABLE 2X PREVIEW</div>
+      </div>
+      <div class="p3d-x-content" data-x-content="table3x">
+        <div class="preview" data-p3d-split="table3x-preview">TABLE 3X PREVIEW</div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module">
+    await import('../../tabs/pipeline-3d-model/pipeline-3d-model-cad-floating-preview.js?v=20260713-floating-preview-1');
+    await import('../../tabs/pipeline-3d-model/pipeline-3d-model-cad-floating-preview-hardening.js?v=20260713-floating-preview-hardening-1');
+    const panel=document.querySelector('[data-p3d-split="x-modal"]');
+    document.querySelector('#open-preview').addEventListener('click',()=>{panel.style.display='flex'});
+    panel.querySelector('[data-p3d-split="x-close"]').addEventListener('click',()=>{panel.style.display='none'});
+    const tabs=[...panel.querySelectorAll('[data-x-tab]')];
+    tabs.forEach((tab)=>tab.addEventListener('click',()=>{
+      tabs.forEach((entry)=>entry.dataset.active='false');
+      panel.querySelectorAll('[data-x-content]').forEach((entry)=>entry.dataset.active='false');
+      tab.dataset.active='true';
+      panel.querySelector(`[data-x-content="${tab.dataset.xTab}"]`).dataset.active='true';
+    }));
+    let count=0;
+    document.querySelector('#underlying-action').addEventListener('click',()=>{
+      count+=1;
+      document.querySelector('#underlying-count').textContent=String(count);
+    });
+    window.__floatingPreviewState=()=>{
+      const rect=panel.getBoundingClientRect();
+      const style=getComputedStyle(panel);
+      return {
+        visible:style.display!=='none',
+        position:style.position,
+        zIndex:Number(style.zIndex),
+        resize:style.resize,
+        left:rect.left,
+        top:rect.top,
+        width:rect.width,
+        height:rect.height,
+        storage:JSON.parse(localStorage.getItem('pipeline3dCadFloatingPreviewV1')||'null'),
+        underlyingCount:Number(document.querySelector('#underlying-count').textContent),
+      };
+    };
+    document.body.dataset.floatingPreviewReady='1';
+  </script>
+</body>
+</html>

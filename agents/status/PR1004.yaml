@@ -1,0 +1,70 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1004
+mission: Writer 1C Phase-1 existing-row NODENAME mutation with original-byte custody and independent anti-drift qualification
+workstream: CII_WORKSPACE_WRITER_1C
+branch: agent/cii-writer-1c
+report_basis_head: 67b3ee80aaba3237e4aa852816bdb2d4d7078a4e
+main_head_last_checked: 77fecdcaf5cfffaa673b71aa208622641d79816c
+base_pr: 1002
+base_branch: main
+base_head: 77fecdcaf5cfffaa673b71aa208622641d79816c
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+agent_state: CLOSING
+pr_recovery_state: HEALTHY_IMPLEMENTATION_COMPLETE_ENGINEERING_PATH_QUALIFIED_OWNER_VALIDATION_EXCEPTION_ACCEPTED_READY_FOR_MERGE
+handover_readiness: READY
+report_path: agents/PR1004_workreport.md
+appendix_a_status: CURRENT
+grounding_epoch: GE-011_OWNER_MERGE_AUTHORIZED
+execution_mode: AUTO
+auto_state: OWNER_AUTHORIZED_MERGE
+owner_authorization:
+  status: ACCEPTED
+  source: conversation
+  instruction: merge
+  interpretation: owner accepts documented repository-wide npm-test NOT_RUN residual and authorizes PR1002 then PR1004 merge after local Writer1C validation and clean stack reconciliation
+current_stage: PHASE1_READY_FOR_MERGE_WITH_DOCUMENTED_VALIDATION_EXCEPTION
+blocker: null
+highest_risk: repository-wide regression interaction was not observed because complete exact checkout could not be materialized; this residual was explicitly accepted by owner for merge
+coordination_state: PR1002_SQUASH_MERGED_TO_MAIN; PR1004_RETARGETED_TO_MAIN; SQUASH_HISTORY_RECONCILED_WITH_TWO_PARENT_COMMIT; PR1004_DIFF_RETURNED_TO_20_FILES
+stack_reconciliation:
+  pr1002_original_head: 98ccbe61c17ff41da8c114f3eca27fa64e9015a0
+  pr1002_squash_merge: 77fecdcaf5cfffaa673b71aa208622641d79816c
+  pr1002_tree_identity: 24121483bbc7a63882bf45a2eff39f3c7fac92df
+  pr1004_post_squash_reconciliation: 67b3ee80aaba3237e4aa852816bdb2d4d7078a4e
+  pr1004_changed_files: 20
+  unexplained_files: 0
+  mergeable: true
+  history_rewrite: false
+validation:
+  pr1002_authority_normalization: {status: PASS, observation: REMOTE_SOURCE_UPDATE}
+  exact_target1_object_identity: {status: PASS, observation: LOCAL_EXECUTION, byte_length: 64462, git_blob_sha: 1a1cb9ac27e9c347cfcd3e4a8766ebad0e4b7853}
+  production_neutral_intake_target1: {status: PASS, observation: LOCAL_EXECUTION, elements: 40, nodes: 40, nodename_conflicts: 0, auxiliary_conflicts: 0, physical_custody: QUALIFIED, hanger_status: QUALIFIED, line_endings: CRLF}
+  production_core_writer1c_roundtrip: {status: PASS, observation: LOCAL_EXECUTION, selected_node: 20030, physical_span_count: 1, mutation_count: 1, changed_byte_count: 8, expected_semantic_delta_count: 1, unexpected_semantic_delta_count: 0, output_byte_length_unchanged: true}
+  unauthorized_byte_falsifier: {status: PASS, observation: LOCAL_EXECUTION, actual: parseable unrelated drift rejected UNAUTHORIZED_BYTE_CHANGE}
+  stale_target_falsifier: {status: PASS, observation: LOCAL_EXECUTION, actual: one-byte stale target rejected before mutation}
+  shared_redundant_ownership: {status: PASS, observation: LOCAL_EXECUTION, actual: 2 physical spans for 1 semantic node; 1 expected semantic delta; 0 unexpected; 0 conflicts}
+  focused_regression_plus_oracle: {status: PASS, observation: LOCAL_EXECUTION, result: fresh local Writer1C byte-custody test + planner/patcher/validator test + independent Python oracle PASS; earlier focused 9-JS-plus-oracle gate also PASS, limitation: not complete repository checkout}
+  writer1a_writer1b_non_regression: {status: PASS, observation: LOCAL_EXECUTION}
+  chromium_product_path: {status: PASS, observation: LOCAL_EXECUTION, runtime: /usr/bin/chromium via Python Playwright headless}
+  repository_wide_suite:
+    status: NOT_RUN
+    observation: NOT_OBSERVED
+    command: npm test
+    reason: complete exact repository checkout could not be transported into execution runtime
+    owner_validation_exception: ACCEPTED_FOR_MERGE
+  github_status_checks: {status: NOT_RUN, observation: REMOTE_EXECUTION_STATE, actual: NONE_PRESENT}
+  github_pr_workflow_runs: {status: NOT_RUN, observation: REMOTE_EXECUTION_STATE, actual: NONE_PRESENT}
+baseline_debt:
+  - tests/cii-workspace-intake.test.js expects an older parserAuthority string than live main already returns; if later observed in npm test, classify PREEXISTING unless contrary evidence exists
+product_default_writer: 1B
+writer1c_selection: EXPLICIT_ONLY
+sif_tee_field2_writer1c: BLOCKED_SEMANTICS_UNQUALIFIED
+phase2_allowed: false
+phase2_block_reason: Phase2 requires separate source-qualified SIF/TEE engineering field semantics; merge authorization for Phase1 does not authorize raw field2 mutation
+merge_authority: OWNER_AUTHORIZED
+ready_for_review: true
+ready_for_merge: true
+exact_next_action: mark PR1004 ready for review, verify 20-file diff and mergeability at final head, then squash-merge PR1004; preserve repository-wide npm test as NOT_RUN in final record
+last_updated: 2026-08-20T13:10:00+04:00

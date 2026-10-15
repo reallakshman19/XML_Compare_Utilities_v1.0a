@@ -1,0 +1,44 @@
+schema: AgentClaim.v1
+pr_or_wip: PR982
+claim_state: ACTIVE_IMPLEMENTATION_COMPLETE_VALIDATION_PARTIAL
+files:
+  exact:
+    - parser/fixed-field.js
+    - parser/sections/elements.js
+    - tests/cii-fixed-field-parser.test.js
+    - agents/PR982_workreport.md
+    - agents/status/PR982.yaml
+    - agents/claims/PR982.yaml
+  prefixes: []
+authority_domains:
+  - CII_NEUTRAL_FIXED_FIELD_DECODING
+  - CII_ELEMENT_GEOMETRY_PARSE
+claim_modes:
+  - EXCLUSIVE
+owner_authorization:
+  source: active_chat
+  scope: START_CODING_THEN_PROCEED_UNDER_ENGINEERING_PR_DELIVERY
+shared_read_authorities:
+  - parser/caesar-parser.js
+  - parser/validator.js
+  - tabs/cii-workspace/cii-workspace-intake.js
+  - Benchmark/CIICompare/
+observe_only_references:
+  - reallaksh19/3D_Converters/converters/scripts/inputxml_to_cii2019.py
+forbidden_existing_file_edits:
+  - converters/**
+  - tabs/revision-compare/**
+  - tabs/model-converters/**
+  - xml-compare/**
+implementation_claims:
+  - canonical six-field CAESAR II rows decode by [15,13,13,13,13,13]
+  - adjacent negative scientific fields cannot shift geometry columns
+  - Fortran D/d exponents are accepted
+  - canonical parse failure is not silently converted into OD zero
+validation_state: FOCUSED_SOURCE_INSPECTION_AND_INDEPENDENT_ROW_REPRODUCTION
+validated_implementation_head: 311a35851a78d135d00e52d7bd2642f51beb6260
+remaining_validation_gates:
+  - execute tests/cii-fixed-field-parser.test.js in a complete checkout or remote runner
+  - broader parser regression suite
+known_limits:
+  - legacy shorter/non-canonical numeric rows still use compatibility whitespace fallback

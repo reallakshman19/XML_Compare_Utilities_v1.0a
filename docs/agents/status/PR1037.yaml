@@ -1,0 +1,68 @@
+pr: 1037
+issue: 1034
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-hanger-create-qualification
+base_main: e5d3420f78794e465b4b8c7f858c3fc53baf3039
+qualification_content_head: b0d2f29b4f59fc929af2adefd5091b963d89020f
+agent_state: REVIEW_READY_WITH_NOT_READY_ENGINEERING_VERDICT
+current_stage: W2_5_HANGER_CREATE_QUALIFICATION_COMPLETE_NOT_READY
+handover_readiness: READY
+scope_authority: ISSUE_1034_QUALIFICATION_ONLY
+merge_authority: OWNER_ONLY
+merge_authorized: false
+production_hanger_create: BLOCKED
+production_blocker: WRITER_2_HANGER_CREATE_PAYLOAD_SEMANTICS_NOT_QUALIFIED
+record_binding_semantic_authority: NONE_POSITIONAL_PHYSICAL_CUSTODY_ONLY
+final_verdict: NOT_READY_FOR_WRITER2_HANGER_CREATE_IMPLEMENTATION
+
+qualified:
+  v11_field_dictionary: PASS_VENDOR_AUTHORED_EXACT_VERSION_MIRROR
+  v11_physical_formats: PASS_VENDOR_AUTHORED_EXACT_VERSION_MIRROR
+  v11_guid_software_assigned_display_only: PASS_VENDOR_AUTHORED_EXACT_VERSION_MIRROR
+  v12_official_corroboration: PASS_OFFICIAL_HEXAGON_CORROBORATION
+  repository_converter_mapping: PASS_SOURCE_INSPECTION
+  repository_fallback_conflict: PASS_SOURCE_INSPECTION
+  merged_positional_delete_authority: PASS_MERGED_AUTHORITY_INSPECTION
+  hanger_row_arithmetic: PASS_SOURCE_INSPECTION
+  repository_hanger_census_metadata: PASS_SOURCE_INSPECTION
+  h1_raw_payload_observation: PASS_REMOTE_SOURCE_INSPECTION
+
+blockers:
+  - GUID_SOFTWARE_ASSIGNED_CREATE_RULE_UNRESOLVED
+  - FIRST_HANGER_HEADER_DEFAULTS_UNRESOLVED
+  - REPOSITORY_FALLBACK_DEFAULT_CONFLICT
+  - NEW_HANGER_RECORD_INSERTION_POLICY_UNRESOLVED
+  - OMITTED_PER_HANGER_DEFAULTS_NOT_COMPLETE
+  - REAL_NATIVE_CREATE_TRANSITION_NOT_AVAILABLE
+
+source_availability:
+  real_repository_h_gt_1: NOT_AVAILABLE
+  native_h0_to_h1_create_pair: NOT_AVAILABLE
+  native_h1_to_h2_create_pair: NOT_AVAILABLE
+  guid_neutral_create_assignment_rule: UNRESOLVED
+
+runtime:
+  qualification_sentinel: NOT_RUN_ENVIRONMENT
+  exact_current_head_node: NOT_RUN_ENVIRONMENT
+  full_repository_test: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_APPLICABLE_NO_PRODUCTION_ROUTE_CHANGE
+
+final_reconciliation:
+  intended_paths: 9
+  actual_paths: 9
+  unexplained_paths: 0
+  production_paths: 0
+  merge_base: e5d3420f78794e465b4b8c7f858c3fc53baf3039
+  behind_main_at_reconciliation: 0
+
+temporary_setup:
+  path: agents/WIP_writer2_hanger_create_qualification.md
+  disposition: DELETED_FINAL_DIFF_ABSENT
+
+connector_bookkeeping:
+  accidental_placeholder_issues:
+    - 1035
+    - 1036
+  disposition: CLOSED_NOT_PLANNED_NO_ENGINEERING_AUTHORITY
+
+next_action: ACQUIRE_SOURCE_NATIVE_CREATE_AUTHORITY_DO_NOT_START_W2_6

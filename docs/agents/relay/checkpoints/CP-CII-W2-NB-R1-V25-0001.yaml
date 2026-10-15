@@ -1,0 +1,70 @@
+schema_version: relay-v2.5
+checkpoint:
+  id: CP-CII-W2-NB-R1-V25-0001
+  issue: github:reallaksh19/XML_Compare_Utilities#1224
+  roadmap_revision_observed: RM-0002
+  branch: revision/cii-writer2-nodename-byte-r1-1224-v25-migration
+  product_head: 97a8c9cb17edbeb59a607f49a09619462e344e32
+  pull_request: 1228
+  pull_request_state: DRAFT_MERGEABLE
+  merge_authority: OWNER_ONLY
+state:
+  implementation: APPLIED_UNEXECUTED
+  retained_validation: NOT_RUN_ENVIRONMENT
+  independent_qualification: NOT_SATISFIED
+  product_merge: NOT_AUTHORIZED_BY_THIS_CHECKPOINT
+implementation_summary:
+  - SOURCE correspondence now permits complete injective mapping into a subset of a larger TARGET frontier while preserving missing-source-support and ambiguity fail-closed behavior.
+  - Multisource preview recovers reviewed same-cardinality NodeName REPLACE as Writer1C COPY authority without broadening direct Writer2 overwrite authority.
+  - Mixed apply performs Writer1C exact-span replacement, re-intake, then Writer2 CREATE/DELETE relocation; V14 structural delta is projected onto the replacement postimage.
+  - Retained expected semantics are represented as 35 REPLACE plus 1 CREATE and 0 DELETE.
+  - Independent retained byte oracle now limits writable bytes to expected NodeName fields plus independently derived CONTROL.NONAM and affected ELEMENT pointer spans; unrelated NodeName bytes and line endings remain exact.
+material_files:
+  production:
+    - tabs/cii-workspace/cii-workspace-match-methods.js
+    - tabs/cii-workspace/cii-workspace-propagation.js
+    - tabs/cii-workspace/cii-workspace-multisource-preview.js
+    - tabs/cii-workspace/cii-workspace-multisource-bm001-correspondence.js
+    - tabs/cii-workspace/cii-workspace-multisource-scope.js
+    - tabs/cii-workspace/cii-workspace-multisource-writer2-readiness.js
+    - tabs/cii-workspace/cii-workspace-multisource-mixed-apply.js
+    - tabs/cii-workspace/cii-workspace-writer-version-bridge.js
+  verification:
+    - tests/cii-workspace-source-subgraph-propagation.test.js
+    - tests/cii-workspace-multisource-retained-auto-anchor-benchmark.test.js
+    - tests/cii-workspace-multisource-partial-texpected-oracle.js
+    - tests/cii-workspace-multisource-byte-closure-oracle.js
+    - tests/browser/cii-writer2-multisource-retained-benchmark.spec.mjs
+validation_attempts:
+  - run_id: 35266182142
+    head: 17d6ffdde38b6437e83f27f371e9c15bfe4d852f
+    workflow: CII Writer2 R1 Benchmark
+    conclusion: FAILURE
+    classification: NOT_RUN_ENVIRONMENT
+    runner_id: 0
+    steps_executed: 0
+  - run_id: 35266754547
+    head: 97a8c9cb17edbeb59a607f49a09619462e344e32
+    workflow: CII Writer2 R1 Benchmark
+    conclusion: FAILURE
+    classification: NOT_RUN_ENVIRONMENT
+    runner_id: 0
+    steps_executed: 0
+validation_commands_pending:
+  - node tests/cii-workspace-source-subgraph-propagation.test.js
+  - node tests/cii-workspace-multisource-retained-auto-anchor-benchmark.test.js
+  - node tests/cii-workspace-multisource-pb0003-benchmark.test.js
+  - browser retained benchmark when Playwright environment is available
+governance_deviation:
+  recorded: true
+  statement: >-
+    EP-CII-W2-NB-R1-V25-0001 was architecture/read-only and required independent DISC/QUAL/TC before product mutation.
+    The owner subsequently instructed the active session to fix and proceed, and product mutation was performed without fabricating
+    the missing independent certification. This checkpoint preserves that deviation explicitly; it does not retroactively certify it.
+quality_findings:
+  - Executable retained validation remains absent because GitHub Actions failed before runner assignment.
+  - Delete relocation remains production-supported by existing Writer2 authority, but the new retained byte-closure oracle intentionally fails closed for DELETE and certifies the retained known-positive path where deleteCount is zero.
+  - PR 1228 is mergeable but remains draft pending executable validation or explicit owner acceptance of the environment-blocked evidence state.
+next_action: >-
+  Execute the three pending Node commands in a byte-faithful checkout or functioning GitHub runner. If they pass, run the retained browser benchmark,
+  update relay progress/evidence, and prepare PR 1228 for owner review. If a command fails, patch only the concrete failing boundary and re-run.

@@ -1,0 +1,13 @@
+{
+  "schema":"DocumentEvidenceTransformVectors.v1",
+  "vectors":[{
+    "id":"cropbox-rotate90-region-render2x",
+    "forwardPdfToRaster":[0,2,-50,2,0,-40,0,0,1],
+    "inverseRasterToPdf":[0,0.5,20,0.5,0,25,0,0,1],
+    "pdfPoint":[50,45],
+    "expectedRasterPoint":[40,60],
+    "expectedInversePdfPoint":[50,45]
+  }],
+  "continuousDocumentRoundTripMaxPt":0.01,
+  "floatingRasterRoundTripMaxPx":0.25
+}

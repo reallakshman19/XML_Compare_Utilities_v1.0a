@@ -1,0 +1,45 @@
+schema_version: relay-v2.5-migration-reconciliation
+status: RECONCILED
+source_inventory: agents/relay/handover/HANDOVER.md
+owner_intent:
+  authoritative_sources:
+    - github:reallaksh19/XML_Compare_Utilities#1224
+    - https://github.com/reallaksh19/XML_Compare_Utilities/issues/1224#issuecomment-5712756544
+  unresolved_questions: []
+roadmap_mapping:
+  objectives: [OBJ-CII-W2-NB-R1-1224]
+  phases: [PH-V25-MIGRATION, PH-ARCHITECTURE, PH-IMPLEMENTATION, PH-DELIVERY]
+  work_packages: [WP-V25-MIGRATION-001, WP-ARCH-001, WP-ORACLE-001, WP-IMPL-001, WP-RET-001, WP-DELIVERY-001]
+current_position:
+  objective: OBJ-CII-W2-NB-R1-1224
+  phase: PH-ARCHITECTURE
+  work_package: WP-ARCH-001
+durable_inputs:
+  - issue 1224 product requirements
+  - legacy V2 chain CII-W2-NODENAME-BYTE-R1-1224 as historical evidence only
+  - production source at main 3ee90ca25368f69d42f44cbe967d5bbc81972f77
+benchmarks:
+  - tests/cii-workspace-multisource-retained-auto-anchor-benchmark.test.js
+  - tests/cii-workspace-multisource-pb0003-benchmark.test.js
+history_to_preserve:
+  checkpoints: [EP-CII-W2-NB-R1-0012]
+  evidence: [BM-CII-W2-NB-R1-LOCAL-0001, BM-CII-W2-NB-R1-LOCAL-0002, BM-CII-W2-NB-R1-LOCAL-0003, BM-CII-W2-NB-R1-EXEC-0001]
+  decisions:
+    - Legacy V2 endpoints are not V2.5 execution authority.
+    - Retained benchmark attempts that never acquired a runner remain NOT_RUN_ENVIRONMENT.
+unresolved_work:
+  - qualify source-subgraph propagation contract
+  - qualify raw-plan preservation and mixed Writer1C/Writer2 orchestration
+  - build independent byte-preservation oracle
+  - implement production repair
+  - execute retained mixed end-to-end validation
+first_v25_ep:
+  create_only_after:
+    - owner intent reconciled
+    - current roadmap revision established
+    - executable frontier computed
+    - scope and acceptance made self-contained
+    - cold-start inputs complete
+  ep_id: EP-CII-W2-NB-R1-V25-0001
+notes:
+  - The V2 migration is complete as custody reconstruction; it does not assert the product fix or retained benchmark passed.

@@ -1,0 +1,43 @@
+{
+  "schema": "xml-compare-transfer-proof-plan/v1",
+  "description": "Real-sample node transfer proof using engineering-style categorized XML identities.",
+  "scope": "node",
+  "policy": "replace",
+  "selectedBlocks": ["NodeNameBlock", "SupportBlock"],
+  "sourceRecords": [
+    {
+      "uid": "SRC-L100-E10-N10-FROM",
+      "lineNo": "L-100",
+      "elementKey": "E-L100-10-20",
+      "nodeNumber": "10",
+      "role": "FROM",
+      "position": { "x": 0, "y": 0, "z": 0 },
+      "coordinateFrameStatus": { "comparableForDelta": true }
+    }
+  ],
+  "targetRecords": [
+    {
+      "uid": "TGT-L200-E110-N110-FROM",
+      "lineNo": "L-200",
+      "elementKey": "E-L200-110-120",
+      "nodeNumber": "110",
+      "role": "FROM",
+      "position": { "x": 0, "y": 0, "z": 0 },
+      "coordinateFrameStatus": { "comparableForDelta": true }
+    }
+  ],
+  "candidate": {
+    "sourceUid": "SRC-L100-E10-N10-FROM",
+    "targetUid": "TGT-L200-E110-N110-FROM",
+    "basis": ["sample-proof", "line-element-node-role"],
+    "score": 0.99,
+    "identityConfidence": 0.99
+  },
+  "expected": {
+    "sourceHashStable": true,
+    "targetOnlyOutput": true,
+    "updatedCount": 1,
+    "skippedCount": 0,
+    "blockedCount": 0
+  }
+}

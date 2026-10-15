@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import { buildPipelineIdentityLedgerText, resolvePipelineIdentityContext } from '../tabs/pipeline-3d-model/pipeline-3d-model-identity.js';
+import { buildCoordinateRows, buildInputXmlPipingModelXml, coordinateRowsToTabText } from '../tabs/pipeline-3d-model/pipeline-3d-model-xml-builder.js';
+
+const missing = resolvePipelineIdentityContext({ lineNo: 'PL-100' });
+assert.equal(missing.branchName, '');
+assert.equal(missing.lineNo, 'PL-100');
+assert.equal(missing.branchFallbackApplied, false);
+assert.equal(missing.branchResolutionReason, 'BRANCH_NOT_SPECIFIED');
+const explicit = resolvePipelineIdentityContext({ branchName: 'BR-07', lineNo: 'PL-100' });
+assert.equal(explicit.branchName, 'BR-07'); assert.equal(explicit.lineNo, 'PL-100');
+assert.equal(explicit.branchFallbackApplied, false);
+const points = [{ x: 0, y: 0, z: 0, label: 'NODE-A', source: 'table1' },
+  { x: 1, y: 0, z: 0, label: 'NODE-B', sources: ['table3'] }];
+const rows = buildCoordinateRows(points, explicit);
+assert.deepEqual(rows.map((row) => row.branchName), ['BR-07', 'BR-07']);
+assert.deepEqual(rows.map((row) => row.lineNo), ['PL-100', 'PL-100']);
+assert.deepEqual(rows.map((row) => row.nodeName), ['NODE-A', 'NODE-B']);
+assert.deepEqual(rows.map((row) => row.nodeNameSource), ['table1', 'table3']);
+const legacyRows = buildCoordinateRows(points, 'LEGACY-BRANCH');
+assert.equal(legacyRows[0].branchName, 'LEGACY-BRANCH'); assert.equal(legacyRows[0].lineNo, '');
+const coordinateText = coordinateRowsToTabText(rows);
+assert.match(coordinateText, /^BranchName\tLineNo\tNodeNumber/);
+assert.match(coordinateText, /BR-07\tPL-100\t100/); assert.match(coordinateText, /NODE-A\ttable1/);
+const ledger = buildPipelineIdentityLedgerText(explicit, rows);
+assert.equal(ledger, buildPipelineIdentityLedgerText(explicit, rows));
+assert.match(ledger, /PipelineIdentityContext\.v1\tBR-07\tPL-100/); assert.match(ledger, /NODE-B\ttable3/);
+const xml = buildInputXmlPipingModelXml({ branchName: 'BR-07', lineNo: 'PL-100', boreMm: 100, wallThickness: 8 }, rows);
+assert.match(xml, /LINE="PL-100"/); assert.match(xml, /FROM_NAME="NODE-A"/);
+assert.match(xml, /TO_NAME="NODE-B"/); assert.doesNotMatch(xml, /LINE="BR-07"/);
+console.log('Pipeline local identity projection tests passed.');

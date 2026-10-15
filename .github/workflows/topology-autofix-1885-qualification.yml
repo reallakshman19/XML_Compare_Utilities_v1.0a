@@ -1,0 +1,75 @@
+name: Topology 1885 Qualification
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/topology-autofix-1885-qualification.yml'
+      - 'Benchmark/ATTRIBUTE_managed_stage_1885_Steam.json'
+      - 'tabs/topology-trace-validator/**'
+      - 'workbench3d/core/staged-json-core.js'
+      - 'vendor/3d-converters/**'
+      - 'tests/topology-checker-report-binding.test.mjs'
+      - 'tests/topology-staged-export-identity.test.mjs'
+      - 'tests/browser/topology-autofix-1885-qualification.spec.mjs'
+      - 'tests/browser/topology-staged-export-1885-qualification.spec.mjs'
+      - 'tests/browser/topology-checker-autofix-1885-fixture.html'
+      - 'playwright.topology-validator.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    name: TTV-C05/C06 exact benchmark
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify pinned topology browser core
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          const manifest = JSON.parse(fs.readFileSync('vendor/3d-converters/topology-browser-core.manifest.json', 'utf8'));
+          const expectedCommit = '2f0df7dc80d76834c9b1d507cd09ca332b45e431';
+          if (manifest.sourceCommit !== expectedCommit) throw new Error(`Unexpected sourceCommit ${manifest.sourceCommit}`);
+          const digest = `sha256:${crypto.createHash('sha256').update(fs.readFileSync('vendor/3d-converters/topology-browser-core.mjs')).digest('hex')}`;
+          if (manifest.bundleSha256 !== digest) throw new Error(`Bundle digest mismatch ${manifest.bundleSha256} != ${digest}`);
+          console.log(JSON.stringify({ sourceCommit: manifest.sourceCommit, bundleSha256: digest }));
+          NODE
+
+      - name: Verify checker report authority binding
+        run: node tests/topology-checker-report-binding.test.mjs
+
+      - name: Verify staged coordinate identity
+        run: node tests/topology-staged-export-identity.test.mjs
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run exact autofix and staged export qualifications
+        run: npx playwright test tests/browser/topology-autofix-1885-qualification.spec.mjs tests/browser/topology-staged-export-1885-qualification.spec.mjs --config=playwright.topology-validator.config.mjs
+
+      - name: Upload qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: topology-1885-qualification-evidence
+          path: qualification-evidence/topology-1885
+          if-no-files-found: error
+          retention-days: 14

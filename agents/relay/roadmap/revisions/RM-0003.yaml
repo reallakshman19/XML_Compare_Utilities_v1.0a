@@ -1,0 +1,30 @@
+schema_version: relay-v2.5
+revision:
+  id: RM-0003
+  from_revision: RM-0002
+  to_revision: RM-0003
+  classification: EXECUTION_DERIVED_RECONCILIATION
+  trigger:
+    type: IMPLEMENTATION_CHECKPOINT
+    ref: agents/relay/checkpoints/CP-CII-W2-NB-R1-V25-0001.yaml
+changes:
+  added: [EP-CII-W2-NB-R1-V25-0002]
+  removed: []
+  changed: [PH-ARCHITECTURE, WP-ARCH-001, WP-ORACLE-001, PH-IMPLEMENTATION, WP-IMPL-001, WP-RET-001, PH-DELIVERY, WP-DELIVERY-001]
+  unaffected: [PH-V25-MIGRATION, WP-V25-MIGRATION-001]
+invalidated_execution_packages:
+  - id: EP-CII-W2-NB-R1-V25-0001
+    reason: Owner-directed product implementation advanced beyond the read-only architecture package without satisfying its independent preimplementation qualification gate.
+issue_graph_reconciled: true
+progress_basis_change:
+  old_basis: PB-0002
+  new_basis: PB-0003
+  old_total_weight: 100
+  new_total_weight: 100
+frontier_after: [WP-RET-001]
+notes:
+  - This revision records repository truth; it does not retroactively certify the governance deviation recorded in CP-CII-W2-NB-R1-V25-0001.
+  - Source-subgraph architecture, mixed Writer1C/Writer2 orchestration, and the independent retained no-delete byte-closure oracle are implemented in draft PR 1228.
+  - Formal independent qualification remains unsatisfied and is retained as a quality/authority finding, not hidden by roadmap completion status.
+  - The current serial execution frontier is retained executable validation under EP-CII-W2-NB-R1-V25-0002; production files are read-only there.
+  - GitHub Actions attempts 35266182142 and 35266754547 executed zero steps because no runner was assigned, so retained tests remain NOT_RUN_ENVIRONMENT.

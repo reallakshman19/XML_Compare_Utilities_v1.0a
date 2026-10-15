@@ -1,0 +1,52 @@
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './tests/browser',
+  // Keep every individually blocking Revision Compare mission in the complete Chromium run.
+  testMatch: [
+    'revision-compare-rc001.spec.mjs',
+    'revision-compare-rc002.spec.mjs',
+    'revision-compare-rc003.spec.mjs',
+    'revision-compare-rc004.spec.mjs',
+    'revision-compare-layout.spec.mjs',
+    'revision-compare-svg-preview.spec.mjs',
+    'revision-compare-webgl-scene-status.spec.mjs',
+    'revision-compare-property-evidence.spec.mjs',
+    'revision-compare-property-lifecycle.spec.mjs',
+    'revision-compare-svg-first-policy.spec.mjs',
+    'revision-compare-svg-keyboard.spec.mjs',
+    'revision-compare-evidence-package.spec.mjs',
+    'revision-compare-sign-off.spec.mjs',
+    'revision-compare-trust-receipt.spec.mjs',
+    'revision-compare-transfer.spec.mjs',
+    'revision-compare-transfer-productivity.spec.mjs',
+    'revision-compare-transfer-completion.spec.mjs',
+    'revision-compare-transfer-archive.spec.mjs',
+    'revision-compare-transfer-archive-native.spec.mjs',
+    'revision-compare-transfer-handover-inspection.spec.mjs',
+  ],
+  timeout: 110_000,
+  expect: { timeout: 15_000 },
+  fullyParallel: false,
+  workers: 1,
+  retries: 0,
+  outputDir: 'test-results/revision-compare',
+  reporter: [
+    ['list'],
+    ['json', { outputFile: 'artifacts/revision-compare-results.json' }],
+  ],
+  use: {
+    baseURL: 'http://127.0.0.1:4178',
+    browserName: 'chromium',
+    viewport: { width: 1440, height: 1000 },
+    colorScheme: 'dark',
+    screenshot: 'only-on-failure',
+    trace: 'retain-on-failure',
+  },
+  webServer: {
+    command: 'python3 -m http.server 4178 --bind 127.0.0.1',
+    url: 'http://127.0.0.1:4178/tests/browser/revision-compare-rc001.html',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120_000,
+  },
+});

@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+const runtime = readFileSync(new URL('../tabs/pipeline-3d-model/pipeline-3d-model-profile-propagation-runtime.js', import.meta.url), 'utf8');
+assert.match(runtime, /createPipelineRawReadinessSession/);
+assert.match(runtime, /rawReadinessSession:\s*createPipelineRawReadinessSession\(scanPipelineRawTableReadiness\)/);
+assert.match(runtime, /buildInput\(dialog, instance\)/);
+assert.match(runtime, /resolveProfileRawInput\(dialog, instance\?\.rawReadinessSession\)/);
+assert.match(runtime, /instance\.rawReadinessSession\.reset\(\)/);
+const onInput = runtime.slice(runtime.indexOf('function onInput'), runtime.indexOf('function onClick'));
+assert.doesNotMatch(onInput, /rawReadinessSession\.reset/);
+console.log('raw readiness runtime integration: PASS');

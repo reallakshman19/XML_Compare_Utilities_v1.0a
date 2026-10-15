@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { createPipelineRawReadinessSession, isPipelineCanonicalRawProfile } from '../tabs/pipeline-3d-model/pipeline-3d-model-raw-readiness-session.js';
+const scan = (value) => Object.freeze({ hasContent: Boolean(value), hasDataRow: /\d/.test(value) });
+const session = createPipelineRawReadinessSession(scan);
+const source = { table2a: 'H\n1', table3a: 'H\n2', table3b: '', table3c: '' };
+const first = session.resolve(source);
+assert.equal(isPipelineCanonicalRawProfile(first.raw), true);
+assert.equal(Object.isFrozen(first.raw), true);
+assert.notEqual(first.raw, source);
+assert.equal(session.resolve({ ...source }).raw, first.raw);
+source.table2a = 'H\n9';
+assert.equal(first.raw.table2a, 'H\n1');
+const changed = session.resolve({ ...source });
+assert.notEqual(changed.raw, first.raw);
+assert.equal(changed.raw.table2a, 'H\n9');
+assert.throws(() => session.resolve({ table2a: 42 }), /must be text/);
+console.log('canonical raw profile: PASS');

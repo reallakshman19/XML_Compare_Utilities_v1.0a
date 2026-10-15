@@ -1,0 +1,28 @@
+{
+  "schema": "inputxml-managed-stage/v1",
+  "unit": "mm",
+  "verticalAxis": "Z",
+  "coordinateFrame": "PLANT",
+  "branches": [
+    {
+      "name": "/COMMON-500",
+      "attributes": { "OWNER_SITE": "SITE-1", "OWNER": "AREA-C" },
+      "children": [
+        { "id": "PIPE-U-1", "type": "PIPE", "position": [0, 0, 0], "nominalSize": 100, "rating": 150 },
+        { "attributes": { "REFNO": "VALVE-P-1" }, "type": "VALV", "position": [100, 0, 0], "rating": 300 },
+        { "objectId": "PIPE-G-1", "type": "PIPE", "start": [200, 0, 0], "end": [330, 0, 0], "material": "CS" },
+        { "type": "SUPPORT", "nominalSize": 80, "supportType": "GUIDE", "position": [400, 0, 0] },
+        { "type": "SUPPORT", "nominalSize": 50, "supportType": "STOP", "position": [500, 0, 0] },
+        { "type": "SUPPORT", "nominalSize": 50, "supportType": "STOP", "position": [500, 0, 0] },
+        { "id": "NO-GEO-1", "type": "PIPE", "material": "SS" }
+      ]
+    },
+    {
+      "name": "/ADDED-700",
+      "attributes": { "OWNER_SITE": "SITE-1", "OWNER": "AREA-E" },
+      "children": [
+        { "id": "ADDED-1", "type": "SUPPORT", "position": [700, 0, 0] }
+      ]
+    }
+  ]
+}

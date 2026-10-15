@@ -1,0 +1,55 @@
+@import url('./topology-trace-validator.css?v=20260715-ttv-017-layout-fixes');
+@import url('./topology-svg-native-3d.css?v=20260717-ttv-native-svg-3d-1');
+
+.ttv-workspace { overflow: auto; }
+.ttv-trace-area { min-height: 100%; }
+.ttv-parity-area { border-top: 3px solid var(--psmap-accent, #3b82f6); background: var(--psmap-surface, #fff); }
+.ttv-parity-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--psmap-border, #d7dce3); }
+.ttv-parity-exports { display: flex; flex-wrap: wrap; gap: 5px; margin-left: auto; }
+.ttv-parity-summary { padding: 10px 12px; }
+.ttv-parity-cards { display: grid; grid-template-columns: repeat(10, minmax(105px, 1fr)); gap: 7px; }
+.ttv-parity-cards article { min-width: 0; padding: 8px; border: 1px solid var(--psmap-border, #d7dce3); border-radius: 6px; background: var(--psmap-surface-raised, #f8fafc); }
+.ttv-parity-cards span { display: block; color: var(--psmap-muted, #64748b); font-size: 11px; }
+.ttv-parity-cards strong { display: block; overflow: hidden; text-overflow: ellipsis; margin-top: 3px; font-size: 15px; }
+.ttv-parity-stale { margin-top: 8px; border: 1px solid #d97706; border-radius: 6px; padding: 7px 9px; }
+.ttv-parity-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 340px); min-height: 560px; border-top: 1px solid var(--psmap-border, #d7dce3); }
+.ttv-parity-center { position: relative; min-width: 0; background: var(--psmap-canvas, #f8fafc); }
+.ttv-parity-svg-host { width: 100%; height: 560px; overflow: hidden; }
+.ttv-parity-svg { width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
+.ttv-parity-inspector-host { overflow: auto; padding: 10px; border-left: 1px solid var(--psmap-border, #d7dce3); }
+.ttv-parity-inspector pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 240px; overflow: auto; }
+.ttv-parity-mismatches { max-height: 360px; overflow: auto; border-top: 1px solid var(--psmap-border, #d7dce3); }
+.ttv-parity-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.ttv-parity-table th { position: sticky; top: 0; z-index: 1; background: var(--psmap-surface-raised, #f8fafc); }
+.ttv-parity-table th, .ttv-parity-table td { padding: 6px; border: 1px solid var(--psmap-border, #d7dce3); text-align: left; vertical-align: top; }
+.ttv-parity-table tbody tr { cursor: pointer; }
+.ttv-parity-table tr.is-selected { outline: 2px solid #a855f7; outline-offset: -2px; }
+.ttv-parity-pass { padding: 18px; color: #166534; font-weight: 700; }
+.ttv-parity-svg [data-layer="grid"] line { stroke: #cbd5e1; stroke-width: .5; opacity: .35; vector-effect: non-scaling-stroke; }
+.ttv-parity-edge { fill: none; stroke: #2563eb; stroke-width: 2.2; vector-effect: non-scaling-stroke; }
+.ttv-parity-edge.is-unaffected { stroke: #94a3b8; stroke-width: 1.2; opacity: .45; }
+.ttv-parity-edge.is-selected { stroke: #16a34a; stroke-width: 5; }
+.ttv-parity-legal-connection { fill: none; stroke: #0f766e; stroke-width: 2; stroke-dasharray: 7 4; vector-effect: non-scaling-stroke; }
+.ttv-parity-input-edge { fill: none; stroke: #dc2626; stroke-width: 1.7; stroke-dasharray: 4 4; opacity: .35; vector-effect: non-scaling-stroke; pointer-events: none; }
+.ttv-parity-input-edge.is-selected { opacity: 1; stroke-width: 4; }
+.ttv-parity-node { fill: #fff; stroke: #1e293b; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.ttv-parity-support { fill: none; stroke: #7c3aed; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.ttv-parity-deferred { fill: #fef3c7; stroke: #d97706; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.ttv-parity-deferred text { fill: #92400e; font-size: 10px; font-weight: 700; }
+.ttv-parity-rigid { fill: #0f172a; opacity: .75; }
+.ttv-parity-junction circle { fill: #ecfeff; stroke: #0891b2; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.ttv-parity-boundary circle { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.ttv-parity-junction text, .ttv-parity-boundary text, .ttv-parity-point-feature text { text-anchor: middle; font-size: 9px; font-weight: 700; pointer-events: none; }
+.ttv-parity-point-feature circle { fill: #f8fafc; stroke: #475569; stroke-dasharray: 2 2; vector-effect: non-scaling-stroke; }
+.ttv-parity-residual { stroke: #f59e0b; stroke-width: 1.4; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.ttv-parity-label { fill: currentColor; font-size: 10px; paint-order: stroke; stroke: var(--psmap-surface, #fff); stroke-width: 3px; stroke-linejoin: round; }
+.ttv-parity-hit { fill: none; stroke: transparent; stroke-width: 14; vector-effect: non-scaling-stroke; cursor: pointer; }
+.ttv-parity-svg .is-selected { filter: drop-shadow(0 0 3px #a855f7); }
+.ttv-status[data-status="pass"] { color: #166534; }
+.ttv-status[data-status="fail"] { color: #b91c1c; }
+.ttv-status[data-status="stale"] { color: #b45309; }
+@media (max-width: 1250px) {
+  .ttv-parity-cards { grid-template-columns: repeat(5, minmax(110px, 1fr)); }
+  .ttv-parity-main { grid-template-columns: 1fr; }
+  .ttv-parity-inspector-host { border-left: 0; border-top: 1px solid var(--psmap-border, #d7dce3); max-height: 300px; }
+}

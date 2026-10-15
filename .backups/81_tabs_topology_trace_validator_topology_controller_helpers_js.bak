@@ -1,0 +1,79 @@
+import { cleanText, objectRecord, asArray, semanticHash } from './topology-validator-values.js';
+import { enrichInputXmlDocument } from '../xml-cii-2019-standalone/xml-cii-inputxml-enrichment.js';
+
+export function artifactHash(kind, artifact) {
+  if (kind === 'inputXml') return semanticHash(objectRecord(artifact).rawText);
+  return semanticHash(objectRecord(artifact).raw);
+}
+
+export function escapeHtml(value) {
+  return cleanText(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+}
+
+export function escapeAttribute(value) {
+  return escapeHtml(value);
+}
+
+export function shortText(value, length) {
+  const text = cleanText(value);
+  return text.length > length ? `${text.slice(0, length - 1)}…` : text;
+}
+
+export function emptyNavigation() {
+  return Object.freeze({ fit: () => {}, zoomIn: () => {}, zoomOut: () => {}, destroy: () => {} });
+}
+
+export function downloadEnrichedInputXml(artifacts) {
+  if (!artifacts.source || !artifacts.ledger || !artifacts.inputXml) {
+    throw new Error('Source JSON, Trace Ledger, and InputXML must be loaded to download enriched InputXML.');
+  }
+  const source = objectRecord(artifacts.source);
+  const components = asArray(source.components).map(objectRecord);
+  const ledger = objectRecord(artifacts.ledger);
+  const records = asArray(ledger.records).map(objectRecord);
+  
+  const lines = [];
+  const elementById = new Map(asArray(objectRecord(artifacts.inputXml).elements).map(row => [cleanText(objectRecord(row).id), objectRecord(row)]));
+  
+  for (const component of components) {
+    const enriched = objectRecord(component.enrichedAttributes);
+    if (!Object.keys(enriched).length) continue;
+    
+    const id = cleanText(component.sourceEntityId);
+    const matches = records.filter(r => cleanText(objectRecord(r).sourceEntityId) === id);
+    const inputXmlElementIds = [...new Set(matches.flatMap(r => asArray(objectRecord(r).inputXmlElementIds).map(cleanText)))];
+    
+    for (const eid of inputXmlElementIds) {
+      const element = elementById.get(eid);
+      if (!element) continue;
+      
+      lines.push(`ELEMENT ${cleanText(element.fromNode)}->${cleanText(element.toNode)}`);
+      if (enriched.pipingClass) lines.push(`<PipingClass>${enriched.pipingClass}</PipingClass>`);
+      if (enriched.rating) lines.push(`<Rating>${enriched.rating}</Rating>`);
+      if (enriched.designTemperatureC !== undefined) lines.push(`TEMP_EXP_C1=${enriched.designTemperatureC}`);
+      if (enriched.designPressureBarg !== undefined) lines.push(`PRESSURE_C1=${enriched.designPressureBarg}`);
+      if (enriched.dtxrPos) lines.push(`<DTXR_POS>${enriched.dtxrPos}</DTXR_POS>`);
+      if (enriched.dtxrPs) lines.push(`<DTXR_PS>${enriched.dtxrPs}</DTXR_PS>`);
+    }
+  }
+  const sideLoadText = lines.join('\n');
+  
+  const job = {
+    sourceText: String(objectRecord(artifacts.inputXml).rawText),
+    sourceName: 'TopologyValidator',
+    elementSideLoadText: sideLoadText,
+    supportConfigJson: '{}',
+    options: { inputXmlOutputMode: 'document' }
+  };
+  
+  const result = enrichInputXmlDocument(job);
+  if (!result.ok) throw new Error(result.error || 'Enrichment failed.');
+  
+  const blob = new Blob([result.enrichedText], { type: 'text/xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = result.enrichedName || 'TopologyValidator_enriched.input.xml';
+  a.click();
+  URL.revokeObjectURL(url);
+}

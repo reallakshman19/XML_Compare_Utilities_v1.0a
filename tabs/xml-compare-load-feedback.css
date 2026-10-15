@@ -1,0 +1,11 @@
+.xml-compare-tab{overflow:auto}
+.xml-compare-load-strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:10px 12px;border-bottom:1px solid rgba(148,163,184,.18);background:rgba(2,6,23,.22);flex:0 0 auto}
+.xml-compare-load-card{display:flex;flex-direction:column;gap:3px;min-width:0;padding:9px 11px;border:1px solid rgba(148,163,184,.16);border-radius:11px;background:rgba(15,23,42,.68)}
+.xml-compare-load-card b{color:#bfdbfe;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.xml-compare-load-card span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e2e8f0;font-size:12px;font-weight:700}
+.xml-compare-load-card small{color:#94a3b8;font-size:11px}
+.xml-compare-load-card.is-loaded{border-color:rgba(34,197,94,.38);background:rgba(20,83,45,.18)}
+.xml-compare-load-card.is-loaded b{color:#bbf7d0}
+.xml-compare-workspace-shell,.xml-compare-layout{flex:0 0 auto}
+.xml-compare-layout{min-height:360px}
+@media (max-width:1280px){.xml-compare-load-strip{grid-template-columns:1fr}}

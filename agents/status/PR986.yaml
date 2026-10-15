@@ -1,0 +1,41 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR986
+mission: CII Compare Review and engineering deltas
+workstream: cii-compare-review-deltas
+branch: agent/cii-compare-review-deltas
+stacked_base_pr: PR985
+stacked_base_head: 0f9dac7a512266c5a83a7d412f19d679c59136ec
+validated_implementation_head: 10f999c26368c08224e6efda0bc52e5bec96f39f
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+agent_state: IMPLEMENTATION_COMPLETE_VALIDATION_PARTIAL
+pr_recovery_state: STACKED_DRAFT_HANDOVER_READY
+handover_readiness: READY
+report_path: agents/PR986_workreport.md
+scope_authority: LOCKED_TO_COMPARE_REVIEW_AND_DELTAS
+validation_state: FOCUSED_EXACT_BLOB_VERIFIED_PASS_FULL_INTEGRATION_NOT_RUN
+acceptance_matrix:
+  identity_vs_change_separation: PASS_EXACT_FOCUSED_NODE
+  geometry_delta: PASS_EXACT_FOCUSED_NODE
+  od_wall_delta: PASS_EXACT_FOCUSED_NODE
+  node_name_delta: PASS_EXACT_FOCUSED_NODE
+  restraint_code_raw_delta: PASS_EXACT_FOCUSED_NODE
+  process_p1_t1_delta: SOURCE_COMPLETE_NOT_DIRECTLY_EXERCISED
+  rigid_mass_delta: SOURCE_COMPLETE_NOT_DIRECTLY_EXERCISED
+  unsupported_family_truthfulness: PASS_EXACT_FOCUSED_NODE
+  ambiguity_review_projection: PASS_EXACT_FOCUSED_NODE
+  csv_confidence_workflow_separation: PASS_EXACT_FOCUSED_NODE
+  executive_summary_model: SOURCE_COMPLETE_FOCUSED_MODEL_INSPECTION
+  correspondence_review_grid: SOURCE_COMPLETE_UI_NOT_RUNTIME_EXECUTED
+  evidence_inspector: SOURCE_COMPLETE_UI_NOT_RUNTIME_EXECUTED
+  delta_grid: SOURCE_COMPLETE_UI_NOT_RUNTIME_EXECUTED
+  shell_lifecycle_current_head: NOT_RUN
+  full_real_benchmark_flow: NOT_RUN
+  chromium_visual_validation: NOT_RUN
+  transfer_mutation_unchanged: SOURCE_DIFF_GUARD
+known_limits:
+  - target mutation intentionally remains blocked
+  - node-location engineering delta is parsed native-coordinate evidence and is not registration-normalized
+exact_next_action: keep draft; qualify registered-vs-raw geometry delta basis and remaining parser property families before expanding transfer authority
+last_updated: 2026-08-18T19:05:00+04:00

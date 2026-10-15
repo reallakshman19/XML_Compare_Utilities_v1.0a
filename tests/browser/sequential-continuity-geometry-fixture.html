@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Sequential continuity geometry fixture</title></head>
+<body>
+<div id="root"></div>
+<script type="module">
+  import { mountSequentialSketcherWorkspace } from '../../tabs/sequential-sketcher/sequential-sketcher-workspace.js';
+  import { mountSequentialContinuityController } from '../../tabs/sequential-sketcher/continuity/sequential-continuity-controller.js';
+
+  const point = (x, y, z = 0) => ({ x, y, z });
+  const source = [
+    {
+      name: '/A', type: 'BRANCH', bore: '100mm',
+      attributes: { NAME: '/A', HPOS: point(0, 0), TPOS: point(100, 0), TREF: '/B', HBOR: '100mm', TBOR: '100mm' },
+      children: [{ name: 'PIPE A', type: 'PIPE', attributes: { APOS: point(0, 0), LPOS: point(100, 0), LBORE: '100mm' } }],
+    },
+    {
+      name: '/B', type: 'BRANCH', bore: '100mm',
+      attributes: { NAME: '/B', HPOS: point(100, 0), TPOS: point(200, 0), HREF: '/A', HBOR: '100mm', TBOR: '100mm' },
+      children: [{ name: 'PIPE B', type: 'PIPE', attributes: { APOS: point(100, 0), LPOS: point(200, 0), LBORE: '100mm' } }],
+    },
+  ];
+  const root = document.querySelector('#root');
+  const workspace = mountSequentialSketcherWorkspace(root, {});
+  const continuity = mountSequentialContinuityController(root, workspace, {});
+  root.querySelector('[data-ssk-source]').value = JSON.stringify(source, null, 2);
+  window.fixture = { root, workspace, continuity, source };
+</script>
+</body>
+</html>

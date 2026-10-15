@@ -1,0 +1,9 @@
+schema_version: relay-v2.5-compatibility-pointer
+status: NON_AUTHORITATIVE
+superseded_by: agents/relay/roadmap/OVERALL_ROADMAP.yaml
+roadmap_id: ROADMAP-XMLCU-V25-1224
+roadmap_revision: RM-0003
+note: >-
+  This bootstrap-era roadmap copy is retained only for migration history. The canonical roadmap is
+  agents/relay/roadmap/OVERALL_ROADMAP.yaml and the current execution frontier is WP-RET-001 under
+  EP-CII-W2-NB-R1-V25-0002. Do not infer current authority or phase state from this compatibility path.

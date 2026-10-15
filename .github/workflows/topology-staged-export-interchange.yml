@@ -1,0 +1,23 @@
+name: Topology Staged Export Interchange
+
+on:
+  pull_request:
+    paths:
+      - 'tabs/topology-trace-validator/topology-staged-export.js'
+      - 'tests/topology-staged-export-interchange.test.mjs'
+      - '.github/workflows/topology-staged-export-interchange.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Verify exact staged interchange shape
+        run: node tests/topology-staged-export-interchange.test.mjs

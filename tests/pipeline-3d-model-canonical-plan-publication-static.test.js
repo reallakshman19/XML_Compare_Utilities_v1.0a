@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+const runtime = readFileSync(new URL('../tabs/pipeline-3d-model/pipeline-3d-model-profile-propagation-runtime.js', import.meta.url), 'utf8');
+assert.match(runtime, /createPipelineCanonicalPlanPublicationSession/);
+assert.match(runtime, /canonicalPlanSession:\s*createPipelineCanonicalPlanPublicationSession\(\)/);
+assert.match(runtime, /publishCanonicalPlan\(dialog, output, instance\)/);
+assert.match(runtime, /instance\.canonicalPlanSession\.publish/);
+assert.match(runtime, /instance\.canonicalPlanSession\.reset\(\)/);
+assert.doesNotMatch(runtime, /dispatchEvent\(new CustomEvent\('pipeline-canonical-analysis-section-plan'/);
+console.log('canonical plan publication runtime integration: PASS');

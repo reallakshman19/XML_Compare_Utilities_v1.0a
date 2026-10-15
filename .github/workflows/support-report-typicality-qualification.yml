@@ -1,0 +1,145 @@
+name: Support Report Typicality Qualification
+
+on:
+  pull_request:
+    paths:
+      - 'tabs/support-steel-relationship-builder/support-report-*.js'
+      - 'tabs/support-steel-relationship-builder/support-primary-*.js'
+      - 'tabs/ps-family-clash-audit/ps-family-psclash-xml-parser.js'
+      - 'tests/support-report-*.test.mjs'
+      - 'tests/support-report-typicality-disagreement-matrix.mjs'
+      - 'tests/support-primary-*.test.mjs'
+      - 'tests/browser/support-report-typicality.spec.mjs'
+      - 'tests/browser/support-steel-preview-staleness.spec.mjs'
+      - 'playwright.support-steel.config.mjs'
+      - 'benchmarks/*.xml'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/support-report-typicality-qualification.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-node-qualification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Run Support Report focused qualification
+        run: |
+          set -o pipefail
+          mkdir -p artifacts
+          node --test \
+            tests/support-primary-*.test.mjs \
+            tests/support-report-location-benchmarks.test.mjs \
+            tests/support-report-location-attribution.test.mjs \
+            tests/support-report-prev-name-semantics.test.mjs \
+            tests/support-report-datum-metadata.test.mjs \
+            tests/support-report-json-trace.test.mjs \
+            tests/support-report-json-trace-ui.test.mjs \
+            tests/support-report-pos-trace-remediation.test.mjs \
+            tests/support-report-trace-export.test.mjs \
+            tests/support-report-field-projection.test.mjs \
+            tests/support-report-field-projection-rca.test.mjs \
+            tests/support-report-typicality.test.mjs \
+            tests/support-report-typicality-location.test.mjs \
+            tests/support-report-typicality-sequence.test.mjs \
+            tests/support-report-typicality-calibration.test.mjs \
+            tests/support-report-typicality-projection.test.mjs \
+            tests/support-report-typicality-export.test.mjs \
+            tests/support-report-typicality-ui.test.mjs \
+            tests/support-report-typicality-safety.test.mjs \
+            tests/support-report-typicality-negative.test.mjs \
+            tests/support-report-axis-consensus.test.mjs \
+            tests/support-report-axis-typicality.test.mjs \
+            tests/support-report-typicality-disagreement-matrix.test.mjs \
+            tests/support-report-reference-relationship-integration.test.mjs \
+            tests/support-report-relationship-typicality.test.mjs \
+            tests/support-report-typicality-publication.test.mjs \
+            tests/support-report-zone-scope.test.mjs \
+            2>&1 | tee artifacts/focused-node-qualification.tap
+
+      - name: Upload focused Node evidence
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v7
+        with:
+          name: support-report-focused-node-evidence
+          path: artifacts/focused-node-qualification.tap
+          if-no-files-found: warn
+          retention-days: 14
+
+  browser-qualification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Support Steel browser qualification
+        run: npx playwright test --config=playwright.support-steel.config.mjs
+
+      - name: Print compact Playwright result
+        if: always()
+        run: |
+          if [ -f artifacts/support-steel-browser-results.json ]; then
+            node - <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('artifacts/support-steel-browser-results.json', 'utf8'));
+          const failures = [];
+          function walk(suite, parents = []) {
+            const path = [...parents, suite.title].filter(Boolean);
+            for (const spec of suite.specs || []) {
+              for (const test of spec.tests || []) {
+                for (const result of test.results || []) {
+                  if (result.status === 'passed' || result.status === 'skipped') continue;
+                  failures.push({
+                    title: [...path, spec.title].join(' > '),
+                    status: result.status,
+                    error: result.error?.message || result.errors?.map((e) => e.message).join('\n') || '',
+                  });
+                }
+              }
+            }
+            for (const child of suite.suites || []) walk(child, path);
+          }
+          for (const suite of data.suites || []) walk(suite);
+          console.log(JSON.stringify({ status: data.status, failures }, null, 2));
+          NODE
+          else
+            echo 'Playwright JSON result missing.'
+          fi
+
+      - name: Upload browser evidence
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v7
+        with:
+          name: support-report-typicality-browser-evidence
+          path: |
+            artifacts/support-steel-browser-results.json
+            playwright-report/support-steel
+            test-results/support-steel
+          if-no-files-found: warn
+          retention-days: 14

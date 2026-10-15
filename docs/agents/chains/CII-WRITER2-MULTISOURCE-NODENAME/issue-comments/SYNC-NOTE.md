@@ -1,0 +1,1 @@
+Issue projection source bodies are frozen in this directory before publication so repository custody does not depend on comment composition in chat. Publish CHAIN_ROOT once, ACTIVE as the sole mutable active comment, and EP-CII-W2-MS-0003 as immutable endpoint; then record returned comment IDs in ACTIVE.md.

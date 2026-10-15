@@ -1,0 +1,2633 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<exchange xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" units="m" filename="AML_2026Sep08-1441.nwd" filepath="C:\Users\XXXXX\XXXXX\XXXXXies\2A3_South\Pipeline\Civil Loads\REV-2">
+  <batchtest name="Report" internal_name="Report" units="m">
+    <clashtests>
+      <clashtest name="Test 1" test_type="clearance" status="ok" tolerance="0.002" merge_composites="1">
+        <linkage mode="none"/>
+        <left>
+          <clashselection selfintersect="0" primtypes="1">
+            <locator>lcop_selection_set_tree/?1PS-14168</locator>
+          </clashselection>
+        </left>
+        <right>
+          <clashselection selfintersect="0" primtypes="1">
+            <locator>lcop_selection_set_tree/PS?1SL_ALL</locator>
+          </clashselection>
+        </right>
+        <rules/>
+        <summary total="41" new="41" active="0" reviewed="0" approved="0" resolved="0">
+          <testtype>Clearance</testtype>
+          <teststatus>OK</teststatus>
+        </summary>
+        <clashresults>
+          <clashresult name="Clash1" guid="02d44a88-b957-4b44-ba20-77a9c688afd0" status="new" distance="-0.020">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="458.880" y="-1484.690" z="100.320"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash2" guid="0a9faf3a-2e49-47b5-87c0-21c77fd390fd" status="new" distance="-0.014">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="458.971" y="-1484.689" z="100.531"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 4 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 4 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash3" guid="f916f702-98e5-4975-b424-186d2f1ba09a" status="new" distance="-0.013">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.410" y="-1484.556" z="100.533"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 7 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 7 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash4" guid="878f2aa9-07fb-4f32-9f3e-c8c25c2826d5" status="new" distance="-0.010">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.008" y="-1484.622" z="101.150"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-W</node>
+                  <node>/ASIM-1836-4&quot;-W8810023-31441C4-01</node>
+                  <node>/ASIM-1836-4&quot;-W8810023-31441C4-01/B2</node>
+                  <node>/PS-14168.15</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.15</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash5" guid="c4f3a52d-1bcb-4e48-a29a-b83b06f3133f" status="new" distance="-0.010">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.058" y="-1484.624" z="101.150"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-P</node>
+                  <node>/ASIM-1836-4&quot;-P8810023-31441C4-PP-01</node>
+                  <node>/ASIM-1836-4&quot;-P8810023-31441C4-PP-01/B3</node>
+                  <node>/PS-14168.11</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.11</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash6" guid="34d92d16-ffcc-4905-abe6-19f8b1e3b791" status="new" distance="-0.010">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.658" y="-1484.624" z="101.150"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-P</node>
+                  <node>/ASIM-1836-8&quot;-P8810021-31441C4-PP-01</node>
+                  <node>/ASIM-1836-8&quot;-P8810021-31441C4-PP-01/B5</node>
+                  <node>/PS-14168/DATUM</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168/DATUM</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash7" guid="b9d8d99c-38b6-41d0-b1db-1b732a519610" status="new" distance="-0.010">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.378" y="-1484.690" z="101.007"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash8" guid="184a4bce-bdd6-449e-957b-af4a32865b52" status="new" distance="-0.009">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.295" y="-1484.623" z="101.156"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PANEL 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-A</node>
+                  <node>/ASIM-1836-2&quot;-A8010128-13421-01</node>
+                  <node>/ASIM-1836-2&quot;-A8010128-13421-01/B4</node>
+                  <node>/PS-14168.13</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.13</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash9" guid="a057f355-5f4c-4947-b947-b7def92714eb" status="new" distance="-0.004">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.308" y="-1484.622" z="101.150"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-A</node>
+                  <node>/ASIM-1836-2&quot;-A8010128-13421-01</node>
+                  <node>/ASIM-1836-2&quot;-A8010128-13421-01/B4</node>
+                  <node>/PS-14168.13</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.13</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash10" guid="dcd4c05c-4c93-4ff7-9ac7-2a0f015f44d8" status="new" distance="-0.003">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.463" y="-1484.616" z="101.386"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>TMPLATE 1 of PJOINT 1 of PNODE 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PANEL 1 of TMPLATE 1 of PJOINT 1 of PNODE 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 1 of TMPLATE 1 of PJOINT 1 of PNODE 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash11" guid="e2c8d8a4-1c52-4b63-a1db-d1804d5586a9" status="new" distance="-0.003">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.453" y="-1484.634" z="101.388"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>TMPLATE 1 of PJOINT 1 of PNODE 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PANEL 2 of TMPLATE 1 of PJOINT 1 of PNODE 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 2 of TMPLATE 1 of PJOINT 1 of PNODE 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash12" guid="9edabe41-4fc3-4c04-9b08-3204fe239e3f" status="new" distance="-0.002">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="458.953" y="-1484.618" z="101.134"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 4 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 4 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>TMPLATE 1 of PJOINT 1 of PNODE 4 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PANEL 1 of TMPLATE 1 of PJOINT 1 of PNODE 4 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 1 of TMPLATE 1 of PJOINT 1 of PNODE 4 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash13" guid="29caa52d-fc5f-4a81-8fac-345b012316cf" status="new" distance="-0.002">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="458.953" y="-1484.634" z="101.139"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 4 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 4 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>TMPLATE 1 of PJOINT 1 of PNODE 4 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PANEL 2 of TMPLATE 1 of PJOINT 1 of PNODE 4 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 2 of TMPLATE 1 of PJOINT 1 of PNODE 4 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash14" guid="3cdbac48-ff32-4b86-90f4-f7c13292363f" status="new" distance="-0.001">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.440" y="-1484.690" z="101.232"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PANEL 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash15" guid="ba93e021-6fdb-45b4-bece-f15cec52b378" status="new" distance="-0.000">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.538" y="-1484.599" z="101.150"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-P</node>
+                  <node>/ASIM-1836-8&quot;-P8810021-31441C4-PP-01</node>
+                  <node>/ASIM-1836-8&quot;-P8810021-31441C4-PP-01/B5</node>
+                  <node>/PS-14168.8</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.8</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash16" guid="cf02edeb-ab4f-4887-944e-5ff0401cf879" status="new" distance="-0.000">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.000" y="-1484.599" z="101.150"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-P</node>
+                  <node>/ASIM-1836-4&quot;-P8810023-31441C4-PP-01</node>
+                  <node>/ASIM-1836-4&quot;-P8810023-31441C4-PP-01/B3</node>
+                  <node>/PS-14168.9</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.9</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash17" guid="125524e5-a3bf-4c27-a1b7-7c5fb3aebcf7" status="new" distance="-0.0000179">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.713" y="-1484.641" z="101.256"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 6 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 6 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash18" guid="73670995-ebe0-498c-8e5b-a1c296748f7b" status="new" distance="-0.0000156">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.328" y="-1484.543" z="101.390"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-P</node>
+                  <node>/ASIM-1836-2&quot;-P8810140-31441C4-HT-01</node>
+                  <node>/ASIM-1836-2&quot;-P8810140-31441C4-HT-01/B1</node>
+                  <node>/PS-14168.2</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.2</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash19" guid="bf3b9f63-00f4-4d3e-84c5-f8a9f5f61292" status="new" distance="-0.0000156">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.638" y="-1484.703" z="101.390"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-P</node>
+                  <node>/ASIM-1836-2&quot;-P8810140-31441C4-HT-01</node>
+                  <node>/ASIM-1836-2&quot;-P8810140-31441C4-HT-01/B4</node>
+                  <node>/PS-14168.6</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.6</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash20" guid="210096fc-f2bf-401e-8413-240822ae3f28" status="new" distance="-0.00000336">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.378" y="-1484.690" z="100.320"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash21" guid="2cf70b22-db25-40d2-b645-4c4d0c86bee9" status="new" distance="-0.00000137">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="458.940" y="-1484.690" z="100.983"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PANEL 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash22" guid="cc743016-4253-4088-b053-0d12393305c9" status="new" distance="-0.000000192">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.558" y="-1484.703" z="101.247"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PANEL 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash23" guid="28c66ed1-6921-4284-bdae-24a21451b363" status="new" distance="-0.000000192">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.058" y="-1484.703" z="100.998"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PANEL 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash24" guid="3887d74e-545b-4874-b6e0-4f42295a6c06" status="new" distance="-0.00000000128">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.322" y="-1484.663" z="101.150"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PANEL 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PANEL 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash25" guid="b1ddc16c-e9c4-4a80-a659-00e87059bd42" status="new" distance="0.0000000294">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="458.783" y="-1484.673" z="101.007"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>TMPLATE 1 of PJOINT 1 of PNODE 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 1 of TMPLATE 1 of PJOINT 1 of PNODE 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 1 of TMPLATE 1 of PJOINT 1 of PNODE 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash26" guid="7d79163c-38d6-4626-8e56-7944ea651211" status="new" distance="0.00000316">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.932" y="-1484.543" z="100.998"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 7 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 7 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash27" guid="05b16408-eb23-40fe-9f8a-3e0f61f134a6" status="new" distance="0.00000316">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.257" y="-1484.626" z="100.998"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 4 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 4 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 3 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash28" guid="c6dcd48f-1345-438e-9c69-f8f026a2fc53" status="new" distance="0.00000458">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="458.768" y="-1484.813" z="100.300"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-01</node>
+                  <node>SUBEQUIPMENT 2 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                  <node>PYRAMID 1 of SUBEQUIPMENT 2 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PYRAMID 1 of SUBEQUIPMENT 2 of EQUIPMENT /FDN-PS-14168-P2A-01</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash29" guid="018c42e5-6e9f-480b-a258-a96e330d02f5" status="new" distance="0.00000458">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.268" y="-1484.813" z="100.300"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-02</node>
+                  <node>SUBEQUIPMENT 2 of EQUIPMENT /FDN-PS-14168-P2A-02</node>
+                  <node>PYRAMID 1 of SUBEQUIPMENT 2 of EQUIPMENT /FDN-PS-14168-P2A-02</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PYRAMID 1 of SUBEQUIPMENT 2 of EQUIPMENT /FDN-PS-14168-P2A-02</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash30" guid="3f439620-9653-46ea-9ab7-fe4a4617350e" status="new" distance="0.00000458">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="458.878" y="-1484.690" z="100.300"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-01</node>
+                  <node>SUBEQUIPMENT 2 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                  <node>PYRAMID 1 of SUBEQUIPMENT 2 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PYRAMID 1 of SUBEQUIPMENT 2 of EQUIPMENT /FDN-PS-14168-P2A-01</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash31" guid="7164e09b-45b2-4572-87da-41592cc3ffba" status="new" distance="0.000">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.633" y="-1484.543" z="101.400"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-P</node>
+                  <node>/ASIM-1836-2&quot;-P8810140-31441C4-HT-01</node>
+                  <node>/ASIM-1836-2&quot;-P8810140-31441C4-HT-01/B4</node>
+                  <node>/PS-14168.4</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.4</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash32" guid="e8f9dd72-3ea1-4da5-9f21-9da240bfdd97" status="new" distance="0.000">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.383" y="-1484.543" z="101.400"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-P</node>
+                  <node>/ASIM-1836-2&quot;-P8810140-31441C4-HT-01</node>
+                  <node>/ASIM-1836-2&quot;-P8810140-31441C4-HT-01/B1</node>
+                  <node>/PS-14168.1</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.1</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash33" guid="4621a479-c212-4c0f-a26a-afe28044ecd8" status="new" distance="0.000">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.413" y="-1484.573" z="101.400"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>Facet Group</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>GENSEC 5 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-PI</node>
+                  <node>/ASIM-1836-CU-PI-P</node>
+                  <node>/ASIM-1836-2&quot;-P8810140-31441C4-HT-01</node>
+                  <node>/ASIM-1836-2&quot;-P8810140-31441C4-HT-01/B1</node>
+                  <node>/PS-14168.17</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>/PS-14168.17</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash34" guid="bc06c9c0-8533-46a6-9b9f-f286289a029f" status="new" distance="0.001">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.088" y="-1484.479" z="100.300"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-01</node>
+                  <node>SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                  <node>CYLINDER 2 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>CYLINDER 2 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash35" guid="b0c7ce3b-50d8-4bef-b859-d1a03dd426f3" status="new" distance="0.001">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="459.088" y="-1484.767" z="100.320"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-01</node>
+                  <node>SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                  <node>CYLINDER 3 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>CYLINDER 3 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash36" guid="8f2c84ed-7edc-443f-a4eb-2f02b9017a14" status="new" distance="0.001">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.588" y="-1484.767" z="100.320"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-02</node>
+                  <node>SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</node>
+                  <node>CYLINDER 3 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>CYLINDER 3 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash37" guid="c3b26da0-504b-4d79-8bf9-9f01ad6a4e0a" status="new" distance="0.001">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.588" y="-1484.479" z="100.300"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-02</node>
+                  <node>SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</node>
+                  <node>CYLINDER 2 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>CYLINDER 2 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash38" guid="2a19deb6-4844-410a-a30a-8fd3eec55ea8" status="new" distance="0.001">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="458.808" y="-1484.767" z="100.320"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-01</node>
+                  <node>SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                  <node>CYLINDER 4 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>CYLINDER 4 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash39" guid="85e3b3bf-596b-4ca2-b465-10610d32a5bc" status="new" distance="0.001">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="458.808" y="-1484.479" z="100.320"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 1 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-01</node>
+                  <node>SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                  <node>CYLINDER 1 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>CYLINDER 1 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-01</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash40" guid="0e1d31e3-b9e9-47e7-b654-cb592ff0f75c" status="new" distance="0.001">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.308" y="-1484.767" z="100.320"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-02</node>
+                  <node>SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</node>
+                  <node>CYLINDER 4 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>CYLINDER 4 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash41" guid="5a357456-fdc0-4a06-a707-d53c6e642c0d" status="new" distance="0.001">
+            <description>Clearance</description>
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="460.308" y="-1484.479" z="100.320"/>
+            </clashpoint>
+            <createddate>
+              <date year="2026" month="9" day="10" hour="6" minute="12" second="22"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-P</node>
+                  <node>/PS-14168</node>
+                  <node>FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                  <node>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>PJOINT 1 of PNODE 2 of FRMWORK 1 of STRUCTURE /PS-14168</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink>
+                  <node>File</node>
+                  <node>AML_2026Sep08-1441.nwd</node>
+                  <node>/ASIM-1836-CU-SU</node>
+                  <node>/ASIM-1836-CU-SU-PSFD</node>
+                  <node>/FDN-PS-14168-P2A-02</node>
+                  <node>SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</node>
+                  <node>CYLINDER 1 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</node>
+                </pathlink>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>CYLINDER 1 of SUBEQUIPMENT 1 of EQUIPMENT /FDN-PS-14168-P2A-02</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS POS</name>
+                    <value></value>
+                  </smarttag>
+                  <smarttag>
+                    <name>PDMS DTXR</name>
+                    <value></value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+        </clashresults>
+      </clashtest>
+    </clashtests>
+    <selectionsets/>
+  </batchtest>
+</exchange>

@@ -1,0 +1,42 @@
+pr: 1012
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-nodename-physical-rewrite
+claims:
+  - id: WRITER2-NODENAME-PHYSICAL-001
+    claim: Phase-4B physically applies the merged Phase-4A NODENAME relocation plan to the untouched original TARGET byte stream.
+    status: IMPLEMENTED
+  - id: WRITER2-NODENAME-PHYSICAL-002
+    claim: Physical mutation is limited to CONTROL.NONAM, exact ELEMENT NODENAME pointer fields, and the complete NODENAME payload span.
+    status: IMPLEMENTED
+  - id: WRITER2-NODENAME-PHYSICAL-003
+    claim: CREATE, DELETE, and equal-count CREATE+DELETE transactions preserve deterministic pointer relocation and line-ending custody.
+    status: IMPLEMENTED
+  - id: WRITER2-NODENAME-PHYSICAL-004
+    claim: CONTROL.NONAM uses canonical fixed-width integer formatting and canonical integer preimage custody.
+    status: IMPLEMENTED
+  - id: WRITER2-NODENAME-VALIDATION-001
+    claim: The validator independently rebuilds the Phase-4A relocation plan and complete expected variable-length postimage rather than authorizing from writer testimony.
+    status: IMPLEMENTED
+  - id: WRITER2-NODENAME-VALIDATION-002
+    claim: The validator uses an independent six-significant-digit pointer formatter and requires exact final byte-stream equality.
+    status: IMPLEMENTED
+  - id: WRITER2-NODENAME-VALIDATION-003
+    claim: An unrelated later-section byte mutation and a forged writer mutation ledger are rejected.
+    status: AUTHORED_AND_ISOLATED_FALSIFIER_EXECUTED
+  - id: WRITER2-NODENAME-TEST-001
+    claim: Exact new writer and validator modules execute successfully in an isolated dependency-boundary harness.
+    status: PASS_ISOLATED_EXACT_NEW_MODULES
+  - id: WRITER2-NODENAME-TEST-002
+    claim: Repository focused Phase-4A/4B tests pass in a complete checkout.
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: WRITER2-NODENAME-TEST-003
+    claim: Full npm and browser/product regressions pass.
+    status: NOT_RUN_ENVIRONMENT
+non_claims:
+  - Writer2 product/core routing is not implemented in PR1012.
+  - SIF/TEE block create/delete is not implemented or authorized.
+  - Hanger create/delete and packed-array maintenance are not implemented or authorized.
+  - Generic auxiliary-section relocation is not implemented.
+  - Writer3 topology mutation is not implemented.
+  - No protected converter or workflow modification is made.
+merge_authority: OWNER_ONLY

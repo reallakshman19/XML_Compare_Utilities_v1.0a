@@ -1,0 +1,63 @@
+{
+  "schema": "CIIWriter2HangerPartialPostimageOracles.v1",
+  "authority": "IMMUTABLE_INDEPENDENT_EXPECTED_POSTIMAGE_SHA256",
+  "generation": "Independent fixed-card CII construction; no production writer or validator output used as the expected value.",
+  "cases": {
+    "H3_INTERLEAVED_DELETE2": {
+      "countBefore": 3,
+      "deletePositions": [2],
+      "tailOrder": "INTERLEAVED",
+      "target0ByteLength": 1708,
+      "target0Sha256": "bfd357d92de8d8e49fa3ad58283cf9253e798cfd7d7815af68bbcc05828c650d",
+      "expectedFinalByteLength": 1402,
+      "expectedFinalSha256": "ebb2c93cff46f07c5dbcdc6ab324880a100157283d5e168bc14ced308042d238",
+      "packedRowsBefore": 1,
+      "packedRowsAfter": 1
+    },
+    "H3_GROUPED_DELETE2": {
+      "countBefore": 3,
+      "deletePositions": [2],
+      "tailOrder": "GROUPED",
+      "target0ByteLength": 1708,
+      "target0Sha256": "46b33291174308fb67570aca4cb2116d35ce7cc71617c960e5321eba93943384",
+      "expectedFinalByteLength": 1402,
+      "expectedFinalSha256": "04e443d9f4b6ddee8cd5f3e9489e0236062a22d900e55dad8bccbdf0ccfd4854",
+      "packedRowsBefore": 1,
+      "packedRowsAfter": 1
+    },
+    "H7_INTERLEAVED_DELETE2": {
+      "countBefore": 7,
+      "deletePositions": [2],
+      "tailOrder": "INTERLEAVED",
+      "lexicalRawI13": { "family": "IHGRNUM", "recordIndex": 7, "rawToken": "+12" },
+      "target0ByteLength": 3008,
+      "target0Sha256": "c83056922dc5e5b61774aada19e65d1ca686508b1f0805b46426e637bf1a1d73",
+      "expectedFinalByteLength": 2682,
+      "expectedFinalSha256": "555d62e451d7b2728bd6a9ac6f8aabedb970417122892e625e8725b11cd36132",
+      "packedRowsBefore": 2,
+      "packedRowsAfter": 1
+    },
+    "H7_GROUPED_DELETE2": {
+      "countBefore": 7,
+      "deletePositions": [2],
+      "tailOrder": "GROUPED",
+      "target0ByteLength": 3008,
+      "target0Sha256": "6665b287d69115c6ce640721b74b93ab5754584082c22d9427fa0bb9b49458f2",
+      "expectedFinalByteLength": 2682,
+      "expectedFinalSha256": "ceb728f41a827ece2a48373968f216cb31e474e772aab7fad52b0da4b7c7fa8c",
+      "packedRowsBefore": 2,
+      "packedRowsAfter": 1
+    },
+    "H13_INTERLEAVED_DELETE1": {
+      "countBefore": 13,
+      "deletePositions": [1],
+      "tailOrder": "INTERLEAVED",
+      "target0ByteLength": 4946,
+      "target0Sha256": "1d2bfe30abfe1270afe6b9700c8d5ddcd2fb8d849335788d9c520426569d987c",
+      "expectedFinalByteLength": 4620,
+      "expectedFinalSha256": "4656bcb56e827c9d7aa011368c5bdfe00487e9f4a2d4d1bb13aa89e3c8984d75",
+      "packedRowsBefore": 3,
+      "packedRowsAfter": 2
+    }
+  }
+}

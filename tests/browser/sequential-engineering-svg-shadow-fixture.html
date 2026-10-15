@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sequential Engineering SVG Shadow Fixture</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; }
+    .layout { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 16px; }
+    .panel { border: 1px solid #999; padding: 12px; min-width: 0; }
+    label { display: grid; gap: 6px; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+    [data-engineering-svg-shell] { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 12px; }
+    [data-engineering-svg-shell-canvas] { min-height: 520px; }
+    [data-engineering-svg-shell-status] { grid-column: 1 / -1; }
+    [data-engineering-svg-property-key] { display: grid; gap: 4px; margin: 6px 0; }
+    svg { width: 100%; min-height: 520px; border: 1px solid #bbb; }
+    [data-engineering-svg-entity-id] { stroke: currentColor; fill: white; }
+    [data-engineering-svg-entity-id].is-selected { stroke-width: 4; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <section class="panel" aria-label="Sequential domain evidence summary">
+      <h1>Sequential domain evidence summary</h1>
+      <label>Scenario
+        <select id="scenario">
+          <option>BLOCKED</option>
+          <option>REPAIRED</option>
+          <option>SUPPORTED</option>
+          <option>REJECTED</option>
+        </select>
+      </label>
+      <pre id="summary"></pre>
+    </section>
+    <section class="panel">
+      <h1>Shared Engineering SVG shadow</h1>
+      <div id="shadow"></div>
+    </section>
+  </div>
+  <script type="module">
+    import { createSequentialEngineeringSvgShadowWorkspace } from '../../tabs/sequential-sketcher/sequential-engineering-svg-shadow-workspace.js';
+    import {
+      adapterState,
+      blockedSequentialFixture,
+      confirmedSupportSequentialFixture,
+      rejectedSequentialFixture,
+      repairedSequentialFixture,
+    } from '../helpers/sequential-engineering-svg-fixture.js';
+
+    const scenarios = Object.freeze({
+      BLOCKED: blockedSequentialFixture(),
+      REPAIRED: repairedSequentialFixture(),
+      SUPPORTED: confirmedSupportSequentialFixture(),
+      REJECTED: rejectedSequentialFixture(),
+    });
+    const listeners = new Set();
+    const selector = document.querySelector('#scenario');
+    let scenarioName = 'BLOCKED';
+    let projection = 'ISO';
+    let state = adapterState(scenarios[scenarioName], projection);
+    let workspace = null;
+    let selectorListenerCount = 0;
+
+    function constructionSnapshot(name) {
+      const fixture = scenarios[name];
+      return JSON.stringify({
+        session: fixture.session,
+        confirmedConstruction: fixture.confirmedConstruction || null,
+        supportProjection: fixture.supportProjection || null,
+      });
+    }
+
+    function allConstructionSnapshots() {
+      return Object.fromEntries(Object.keys(scenarios).map((name) => [name, constructionSnapshot(name)]));
+    }
+
+    function ownerState() {
+      return state;
+    }
+
+    function emit(reason) {
+      listeners.forEach((listener) => listener({ state, visibleProjection: projection, reason }));
+    }
+
+    function renderSummary() {
+      const parity = workspace?.getParityReport();
+      document.querySelector('#summary').textContent = JSON.stringify({
+        scenario: scenarioName,
+        constructionState: state.session.state,
+        activePortId: state.session.activeExitPortId,
+        decisionReason: state.session.currentDecisionRequest?.reason || null,
+        confirmedComponents: state.session.confirmedComponentIds.length,
+        candidates: state.session.currentDecisionRequest?.candidates?.length || 0,
+        repairs: state.session.repairLedger.length,
+        rejectedCandidates: state.session.rejectedCandidateIds.length,
+        supportGlyphs: state.supportProjection?.supportGlyphs?.length || 0,
+        parity: parity ? {
+          mapped: parity.mappedCountByCategory,
+          omissions: parity.omissions,
+          revisionConsistency: parity.revisionConsistency,
+        } : null,
+      }, null, 2);
+    }
+
+    async function mount() {
+      workspace?.destroy();
+      workspace = await createSequentialEngineeringSvgShadowWorkspace({
+        adapterId: 'ssk-shadow-adapter',
+        sceneId: 'ssk-shadow-scene',
+        shellId: 'ssk-shadow-shell',
+        host: document.querySelector('#shadow'),
+        projection,
+        viewport: { width: 980, height: 560 },
+        padding: 28,
+        getState: ownerState,
+        subscribeState(listener) {
+          listeners.add(listener);
+          return () => listeners.delete(listener);
+        },
+        ariaLabel: 'Sequential Sketcher engineering viewer',
+      });
+      renderSummary();
+      return workspace;
+    }
+
+    async function setScenario(name) {
+      if (!scenarios[name]) throw new Error(`Unknown scenario "${name}".`);
+      scenarioName = name;
+      selector.value = name;
+      state = adapterState(scenarios[name], projection);
+      emit('fixture-scenario-change');
+      renderSummary();
+      await workspace.shell.refreshProperties('fixture-scenario-change');
+      return state;
+    }
+
+    async function setOwnerProjection(value) {
+      projection = value;
+      state = adapterState(scenarios[scenarioName], projection);
+      emit('fixture-owner-projection-change');
+      renderSummary();
+      await workspace.shell.refreshProperties('fixture-owner-projection-change');
+    }
+
+    function geometryLedger(scene) {
+      return scene.entities.map((entity) => ({
+        id: entity.id,
+        geometry: entity.geometry,
+        contributesToFit: entity.contributesToFit,
+      })).sort((left, right) => left.id.localeCompare(right.id));
+    }
+
+    function entityId(category) {
+      return workspace.adapter.getScene().then((scene) => (
+        scene.entities.find((entity) => entity.domainRef.category === category)?.id || null
+      ));
+    }
+
+    function destroy() {
+      if (!workspace) return false;
+      const current = workspace;
+      workspace = null;
+      return current.destroy();
+    }
+
+    async function failureContracts() {
+      const results = [];
+      const base = {
+        adapterId: 'failure-adapter',
+        sceneId: 'failure-scene',
+        shellId: 'failure-shell',
+        getState: () => adapterState(scenarios.BLOCKED),
+        subscribeState: () => () => true,
+      };
+      async function capture(label, overrides = {}) {
+        const host = document.createElement('div');
+        document.body.appendChild(host);
+        const localListeners = new Set();
+        const options = {
+          ...base,
+          host,
+          subscribeState(listener) {
+            localListeners.add(listener);
+            return () => localListeners.delete(listener);
+          },
+          ...overrides,
+        };
+        try {
+          await createSequentialEngineeringSvgShadowWorkspace(options);
+          results.push({ label, rejected: false });
+        } catch (error) {
+          results.push({
+            label,
+            rejected: true,
+            message: String(error.message || error),
+            shellCount: host.querySelectorAll('[data-engineering-svg-shell]').length,
+            svgCount: host.querySelectorAll('[data-engineering-svg-root]').length,
+            listenerCount: localListeners.size,
+          });
+        } finally {
+          host.remove();
+        }
+      }
+      await capture('missing-host', { host: null });
+      await capture('missing-adapter', { adapterId: '' });
+      await capture('missing-scene', { sceneId: '' });
+      await capture('missing-shell', { shellId: '' });
+      await capture('missing-state-owner', { getState: null });
+      await capture('missing-subscription-owner', { subscribeState: null });
+      await capture('malformed-state', { getState: () => null });
+      await capture('malformed-session', {
+        getState: () => {
+          const value = adapterState(scenarios.BLOCKED);
+          return { ...value, session: { ...value.session, schema: 'MalformedSession.v1' } };
+        },
+      });
+      await capture('missing-indexes', {
+        getState: () => ({ ...adapterState(scenarios.BLOCKED), indexes: null }),
+      });
+      await capture('stale-confirmed', {
+        getState: () => ({
+          ...adapterState(scenarios.REPAIRED),
+          confirmedConstruction: {
+            ...scenarios.REPAIRED.confirmedConstruction,
+            rootBranchId: '/STALE',
+          },
+        }),
+      });
+      await capture('stale-support', {
+        getState: () => ({
+          ...adapterState(scenarios.SUPPORTED),
+          supportProjection: {
+            ...scenarios.SUPPORTED.supportProjection,
+            constructionFingerprint: 'stale',
+          },
+        }),
+      });
+      await capture('malformed-event', {
+        subscribeState(listener) {
+          listener({ state: adapterState(scenarios.BLOCKED) });
+          return () => true;
+        },
+      });
+      await capture('missing-unsubscribe', { subscribeState: () => null });
+      await capture('shell-mount-failure', { viewport: { width: 0, height: 400 } });
+      return results;
+    }
+
+    selector.addEventListener('change', () => setScenario(selector.value));
+    selectorListenerCount += 1;
+    const immutableBaseline = allConstructionSnapshots();
+    await mount();
+
+    globalThis.__sequentialEngineeringSvgShadowFixture = {
+      get workspace() { return workspace; },
+      get state() { return state; },
+      scenarios,
+      immutableBaseline,
+      allConstructionSnapshots,
+      setScenario,
+      setOwnerProjection,
+      geometryLedger,
+      entityId,
+      listenerCount: () => listeners.size,
+      selectorListenerCount: () => selectorListenerCount,
+      failureContracts,
+      mount,
+      destroy,
+    };
+  </script>
+</body>
+</html>

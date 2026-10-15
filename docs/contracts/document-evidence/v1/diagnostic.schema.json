@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.xml-compare-utilities.local/document-evidence/v1/diagnostic.schema.json",
+  "title": "Diagnostic.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "code", "severity", "message", "retainedEvidence", "blockedDownstream", "reviewerResolution"],
+  "properties": {
+    "schema": {"const": "Diagnostic.v1"},
+    "code": {"type": "string", "minLength": 1},
+    "severity": {"type": "string", "enum": ["INFO", "WARNING", "REVIEW_REQUIRED", "BLOCKED"]},
+    "message": {"type": "string", "minLength": 1},
+    "subjectId": {"type": "string", "minLength": 1},
+    "retainedEvidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "blockedDownstream": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "reviewerResolution": {"type": "string", "enum": ["REVIEWER_CAN_RESOLVE", "REGENERATION_REQUIRED", "RECOMPUTE_REQUIRED", "SOURCE_REBIND_REQUIRED", "NOT_APPLICABLE"]},
+    "details": {"type": "object"}
+  }
+}

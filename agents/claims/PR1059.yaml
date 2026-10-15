@@ -1,0 +1,122 @@
+pr: 1059
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-w2a-runtime-closure
+base_main: 9685a2f41ec2b5a5c170762816702fefe90e18a7
+claim_state: W2_A_EXACT_RUNTIME_PLUS_QUALIFIED_I13_AND_BENCHMARK_PHASE_1
+merge_authority: OWNER_ONLY
+merge_authorized: false
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RELEASE_FREEZE
+
+claims:
+  - id: W2_C0_BROAD_PRODUCT_ROUTING_RUNTIME
+    state: PASS_RUNTIME_EXACT_14_FILE_BLOB_GRAPH_NODE_ESM_MODE
+    inherited_from_pr: 1057
+    required: true
+
+  - id: W2_A_SYNTHETIC_PUBLIC_PRODUCT_RUNTIME
+    state: NOT_RUN_GRAPH_RECONSTRUCTION_IN_PROGRESS
+    required: true
+    entrypoint: tests/cii-workspace-writer2-restraint-product-routing.test.js
+    entrypoint_blob: 9922377ddeda86fc9167d65f33c97095346e79fa
+    public_entrypoint: applyCiiWorkspaceTargetWriter2
+    exact_graph_required: true
+    stubs_allowed: false
+    import_rewrites_allowed: false
+    partial_core_allowed: false
+    historical_sparse_mirror_evidence_only:
+      pr: 1054
+      exact_files_admitted: 54
+      unresolved_static_modules: 31
+      last_missing_module: tabs/cii-workspace/cii-workspace-auxiliary.js
+      authored_assertion_failure_observed: false
+
+  - id: W2_V14_I13_LEXICAL_FIXED_FIELD_AUTHORITY
+    state: PASS_RUNTIME_EXACT_3_FILE_BLOB_SUBGRAPH
+    required: true
+    source_cross_check: reallaksh19/3D_Converters@e5dbfcd2d86a5705a60df87b932d839fbc78301e
+    production_path: tabs/cii-workspace/cii-workspace-v14-writer2-fixed-field-authority.js
+    production_preimage_blob: fc97ddd7fd5645e46c70a722c7f96f17dc7ae188
+    production_postimage_blob: 5f1473f692c172de5aa0712a70bc72d917a6934d
+    regression_path: tests/cii-workspace-v14-writer2-i13-lexical.test.js
+    regression_blob: 37703add4fbefd5e5636ef49a4b54214e33e5820
+    existing_regression_path: tests/cii-workspace-v14-writer2-fixed-field-authority.test.js
+    existing_regression_blob: 78dbe0af0b8d0d8fd55aae26f586f727bb2d03df
+    invariant: CHANGED_CONTROL_AND_ELEMENT_WRITER2_COUNT_POINTER_FIELDS_MUST_BE_LEXICAL_I13
+
+  - id: CII_WRITER2_BENCHMARK_ROADMAP
+    state: AUTHORED
+    required: true
+    path: ciibenchmarkroadmap.md
+    frozen_source:
+      path: Benchmark/CIICompare/BM_CII_SOURCE.CII
+      git_blob: e41cd05603b56837cbb6e31b9d4074ef6106fe9b
+      commit: 9685a2f41ec2b5a5c170762816702fefe90e18a7
+      neutral_version_major: 11
+    benchmark_ladder:
+      - BM-W2-00
+      - BM-W2-01
+      - BM-W2-02
+      - BM-W2-03
+      - BM-W2-04
+      - BM-W2-05
+      - BM-W2-06
+    generated_v14_not_native: true
+    w2_a_not_replaced: true
+
+  - id: BM_W2_04_RETAINED_REAL_V11_RESTRAINT_DELETE
+    state: AUTHORED_SOURCE_API_VALIDATED_RUNTIME_NOT_RUN
+    required: true
+    role: PRIMARY_W2_B_RETAINED_REAL_V11
+    manifest: Benchmark/CIICompare/Writer2/CII_WRITER2_BENCHMARKS.json
+    independent_oracle: Benchmark/CIICompare/Writer2/cii-writer2-benchmark-oracle.js
+    test: tests/cii-workspace-writer2-benchmark-restraint-delete.test.js
+    frozen_candidate:
+      pointer: 1
+      slot: 1
+      node: '190'
+      owner_from: '180'
+      owner_to: '190'
+      expected_owner_count: 1
+      expected_occupied_slot_count: 1
+      expected_node_record_count: 1
+    expected:
+      restraint_block_count: '7_TO_6'
+      restraint_rows: '168_TO_144'
+      deleted_pointer: '1_TO_0'
+      retained_pointer_rule: P_GT_1_DECREMENT_BY_1
+      control_nonam: '4_UNCHANGED'
+      element_count: '40_UNCHANGED'
+      topology: UNCHANGED
+      i13_lexical_required: true
+    oracle_authority:
+      class: INDEPENDENT_STRUCTURAL_POSTIMAGE
+      imports_writer2_mutation_code: false
+      dynamic_candidate_fallback: false
+    source_contract_inspection:
+      writer2_restraint_composite_schema: CIIWorkspaceWriter2CompositeRestraintResult.v1
+      product_validator: validateCiiWriter2ProductRoundTrip
+      result: PASS_SOURCE_INSPECTION
+    runtime: NOT_RUN_EXACT_GRAPH_NOT_MATERIALIZED
+    pass_claimed: false
+
+  - id: W2_B_RETAINED_REAL_V11_PUBLIC_PRODUCT_RUNTIME
+    state: NOT_RUN
+    required: true
+    candidate_benchmark: BM-W2-04
+    precondition_w2_a_pass: true
+
+  - id: FOCUSED_BROWSER_GATE
+    state: NOT_RUN
+    required: true
+
+validation_integrity:
+  production_changed: true
+  production_changed_paths:
+    - tabs/cii-workspace/cii-workspace-v14-writer2-fixed-field-authority.js
+  benchmark_files_are_oracle_and_tests_not_writer_production: true
+  not_run_promoted_to_pass: false
+  historical_sparse_mirror_promoted_to_current_runtime: false
+  i13_hardening_exact_runtime_pass_claimed: true
+  w2_a_runtime_pass_claimed: false
+  bm_w2_04_runtime_pass_claimed: false
+  w2_b_runtime_pass_claimed: false

@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/resolved-font-manifest.schema.json",
+  "title":"ResolvedFontManifest.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","entries","fontManifestHash","substitutionCount","diagnosticCodes"],
+  "properties":{
+    "schema":{"const":"ResolvedFontManifest.v1"},
+    "fontManifestHash":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},
+    "substitutionCount":{"type":"integer","minimum":0},
+    "diagnosticCodes":{"type":"array","uniqueItems":true,"items":{"type":"string"}},
+    "entries":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["requestedFamily","resolvedFamily","fileHash","substituted"],"properties":{"requestedFamily":{"type":"string","minLength":1},"resolvedFamily":{"type":"string","minLength":1},"fileHash":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},"substituted":{"type":"boolean"},"style":{"type":"string"},"weight":{"type":["string","number"]},"fallbackReason":{"type":"string"},"sourcePathHint":{"type":"string"}}}}
+  }
+}

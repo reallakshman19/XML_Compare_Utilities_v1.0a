@@ -1,0 +1,134 @@
+/* Contain dynamically rendered review and transfer controls inside the evidence column. */
+.revc-review-side > .revc-transfer-section {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.revc-transfer-section > *,
+.revc-transfer-plan,
+.revc-transfer-result,
+.revc-transfer-toolbar,
+.revc-transfer-batch,
+.revc-transfer-page-controls,
+.revc-transfer-facts,
+.revc-transfer-candidates,
+.revc-transfer-pair,
+.revc-transfer-fields,
+.revc-transfer-field,
+.revc-transfer-table-wrap {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.revc-transfer-section > header,
+.revc-transfer-plan > header,
+.revc-transfer-result > header {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.revc-transfer-section > header > *,
+.revc-transfer-plan > header > *,
+.revc-transfer-result > header > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.revc-transfer-toolbar {
+  grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+}
+
+.revc-transfer-toolbar label,
+.revc-transfer-page-controls label {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.revc-transfer-toolbar input:not([type="checkbox"]),
+.revc-transfer-toolbar select,
+.revc-transfer-page-controls input,
+.revc-transfer-page-controls select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.revc-transfer-facts {
+  grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+}
+
+.revc-transfer-facts div,
+.revc-transfer-facts dt,
+.revc-transfer-facts dd {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.revc-transfer-pair {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.revc-transfer-pair > label {
+  grid-template-columns: auto minmax(0, 1fr);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.revc-transfer-pair > label > span,
+.revc-transfer-pair > label > em {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.revc-transfer-pair > label > span,
+.revc-transfer-pair > label > em {
+  grid-column: 2;
+}
+
+.revc-transfer-field {
+  align-items: flex-start;
+}
+
+.revc-transfer-field > span,
+.revc-transfer-field b,
+.revc-transfer-field code,
+.revc-transfer-field small,
+.revc-transfer-field em,
+.revc-transfer-messages,
+.revc-transfer-messages li {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.revc-transfer-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.revc-transfer-section table {
+  max-width: 100%;
+}
+
+@media (max-width: 560px) {
+  .revc-transfer-toolbar,
+  .revc-transfer-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .revc-transfer-page-controls {
+    align-items: stretch;
+  }
+
+  .revc-transfer-page-controls > * {
+    flex: 1 1 100%;
+  }
+}

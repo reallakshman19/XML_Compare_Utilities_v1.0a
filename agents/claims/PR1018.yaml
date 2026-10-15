@@ -1,0 +1,34 @@
+pr: 1018
+claims:
+  - id: QF-1018-001
+    statement: Qualification uses the unchanged repository BM_CII_TARGET1.CII as a real CAESAR V11 physical preimage, not a hand-built miniature.
+    evidence: Benchmark/CIICompare/BM_CII_TARGET1.CII
+    status: SOURCE_INSPECTED
+  - id: QF-1018-002
+    statement: The operation oracle is controlled; the benchmark SOURCE/TARGET pair is not claimed to naturally encode the same mixed cardinality transaction.
+    evidence: agents/PR1018_workreport.md
+    status: EXPLICIT_BOUNDARY
+  - id: QF-1018-003
+    statement: The authored test selects a true zero-pointer NODENAME endpoint with no existing physical name span and selects every owner of the chosen existing SIF pointer.
+    evidence: tests/cii-workspace-writer2-real-benchmark-roundtrip.test.js
+    status: AUTHORED_NOT_EXECUTED
+  - id: QF-1018-004
+    statement: Public apply output must exactly equal the merged one-original-preimage low-level composite output for the same TARGET0 and bound scope.
+    evidence: tests/cii-workspace-writer2-real-benchmark-roundtrip.test.js
+    status: AUTHORED_NOT_EXECUTED
+  - id: QF-1018-005
+    statement: Exported output must re-intake with NODENAME count 2->3, SIF count 9->8, selected SIF owners cleared, and element connectivity unchanged.
+    evidence: tests/cii-workspace-writer2-real-benchmark-roundtrip.test.js
+    status: AUTHORED_NOT_EXECUTED
+  - id: QF-1018-006
+    statement: Replaying the old bound preview against its modified export must fail stale-target hash custody.
+    evidence: tests/cii-workspace-writer2-real-benchmark-roundtrip.test.js
+    status: AUTHORED_NOT_EXECUTED
+  - id: QF-1018-007
+    statement: One unrelated reparsable byte change outside authorized Writer2 claims must be rejected by exact full-postimage validation.
+    evidence: tests/cii-workspace-writer2-real-benchmark-roundtrip.test.js
+    status: AUTHORED_NOT_EXECUTED
+  - id: BOUND-1018-001
+    statement: No production mutation authority is expanded by PR1018; SIF CREATE, hanger cardinality and topology remain blocked.
+    evidence: changed-file ledger
+    status: ENFORCED

@@ -1,0 +1,25 @@
+export const SEQUENTIAL_ENGINEERING_SVG_PREVIEW_POLICY_SCHEMA =
+  'SequentialEngineeringSvgPreviewPolicy.v1';
+
+export const SEQUENTIAL_ENGINEERING_SVG_RENDERER = Object.freeze({
+  CONSTRUCTION: 'CONSTRUCTION_SVG',
+  PREVIEW: 'ENGINEERING_SVG_PREVIEW',
+});
+
+export const SEQUENTIAL_ENGINEERING_SVG_PREVIEW_POLICY = Object.freeze({
+  schema: SEQUENTIAL_ENGINEERING_SVG_PREVIEW_POLICY_SCHEMA,
+  defaultRenderer: SEQUENTIAL_ENGINEERING_SVG_RENDERER.CONSTRUCTION,
+  availableRenderers: Object.freeze([
+    SEQUENTIAL_ENGINEERING_SVG_RENDERER.CONSTRUCTION,
+    SEQUENTIAL_ENGINEERING_SVG_RENDERER.PREVIEW,
+  ]),
+  sharedAccessMode: 'read-only',
+  visibleSurfaceRule: 'ONE_ACTIVE_VISUAL_SURFACE',
+  preSessionSharedAvailability: 'DISABLED',
+  failureFallback: SEQUENTIAL_ENGINEERING_SVG_RENDERER.CONSTRUCTION,
+  persistence: 'WORKSPACE_ONLY',
+});
+
+export function getSequentialEngineeringSvgPreviewPolicy() {
+  return SEQUENTIAL_ENGINEERING_SVG_PREVIEW_POLICY;
+}

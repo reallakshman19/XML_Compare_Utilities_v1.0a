@@ -1,0 +1,59 @@
+schema_version: relay-v2.5
+checkpoint:
+  id: CP-CII-W2-NB-R1-V25-0002
+  issue: github:reallaksh19/XML_Compare_Utilities#1224
+  roadmap_revision_observed: RM-0004
+  branch: main
+  product_head: 45f2a3ed7bbb186030e141a8313ccc04ddc997cb
+  pull_request: 1228
+  pull_request_state: MERGED
+  merge_authority: OWNER_ONLY
+state:
+  implementation: MERGED
+  retained_validation: NOT_RUN_ENVIRONMENT
+  independent_qualification: NOT_SATISFIED
+  product_merge: OWNER_AUTHORIZED_COMPLETE
+merge_evidence:
+  merge_sha: 45f2a3ed7bbb186030e141a8313ccc04ddc997cb
+  issue_state: CLOSED
+  owner_instruction: proceed
+  owner_acceptance: ENVIRONMENT_BLOCKED_VALIDATION_ACCEPTED_FOR_DELIVERY
+validation_attempts:
+  - run_id: 35266182142
+    classification: NOT_RUN_ENVIRONMENT
+    runner_id: 0
+    steps_executed: 0
+  - run_id: 35266754547
+    attempt: 1
+    classification: NOT_RUN_ENVIRONMENT
+    runner_id: 0
+    steps_executed: 0
+  - run_id: 35266754547
+    attempt: 2
+    classification: NOT_RUN_ENVIRONMENT
+    runner_id: 0
+    steps_executed: 0
+limited_local_evidence:
+  status: PASS_LIMITED_PREDICATE_ONLY
+  scope:
+    - source-subgraph positive
+    - missing-target-support negative
+    - injective frontier
+    - insufficient frontier cardinality
+    - ambiguity retention
+  exclusions:
+    - retained S1/S2/S3/T execution
+    - full import graph execution
+    - browser retained benchmark
+governance_deviation:
+  recorded: true
+  statement: >-
+    EP-CII-W2-NB-R1-V25-0001 required independent DISC/QUAL/TC before product mutation. The owner subsequently instructed the active session to fix and proceed; implementation was performed without fabricating the missing certification. The deviation remains unresolved as a quality finding and is not retroactively certified.
+quality_findings:
+  - Retained Node commands never executed and remain NOT_RUN_ENVIRONMENT.
+  - Independent preimplementation qualification remains unsatisfied.
+  - DELETE-specific independent compaction-oracle coverage remains outside the retained known-positive zero-delete oracle.
+completion_basis: >-
+  Owner accepted delivery with the environment-blocked validation state explicitly disclosed. PR 1228 merged and issue 1224 closed. Terminal lifecycle closure does not convert missing retained execution into PASS.
+next_action: >-
+  None under issue 1224. Any future retained execution or repair must be opened as a new owner-directed follow-up with a functioning runner or byte-faithful checkout.

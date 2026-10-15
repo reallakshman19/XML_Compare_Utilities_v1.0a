@@ -1,0 +1,30 @@
+schema: engineering-pr-status/v1
+repository: reallaksh19/XML_Compare_Utilities
+pr: 1021
+branch: agent/cii-writer2-composite-hanger-delete-all
+base: a16a3f2ee05abb5adf6ae5801620dd0fd1bdb1f2
+state: DRAFT_ACTIVE
+handover_readiness: READY
+takeover_authority: WRITE_ALLOWED
+merge_authority: OWNER_ONLY
+mission: compose qualified NODENAME, V11 SIF DELETE and HANGER DELETE-ALL from one untouched TARGET preimage
+scope:
+  nodename_create_delete: INHERITED_COMPONENT_AUTHORITY
+  sif_existing_block_delete: INHERITED_COMPONENT_AUTHORITY
+  hanger_delete_all: INHERITED_PR1020_COMPONENT_AUTHORITY
+  original_coordinate_arbitration: IMPLEMENTED
+  single_patch: IMPLEMENTED
+  independent_full_postimage_validator: IMPLEMENTED
+  product_routing: NOT_CHANGED
+  hanger_partial_h_gt_1: BLOCKED_TAIL_ORDER_UNQUALIFIED
+  hanger_create: BLOCKED_PAYLOAD_SEMANTICS_NOT_QUALIFIED
+  sif_create: BLOCKED_ITEMS_27_30_UNQUALIFIED
+validation:
+  base_grounding: PASS
+  architecture_source_inspection: PASS
+  scope_custody_source_inspection: PASS
+  focused_tri_family_js: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_component_regressions: NOT_RUN_ENVIRONMENT
+  full_repository: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_RUN_ENVIRONMENT
+next_phase: product/core requalification and routing through tri-family composite after acceptance

@@ -1,0 +1,153 @@
+# The Pipeline Engineering Suite: Exhaustive Master Prompt Deck
+
+**Purpose:** This document is the definitive, unyielding architectural blueprint for the Pipeline 3D Modeler transformation. It provides an exhaustive set of constraints to ensure the AI acts as a strict Technical Architect rather than a generic coding assistant. 
+
+**Instructions for the User:** 
+1. Feed the `[MASTER CONTINUITY CONTEXT]` to the AI at the very beginning of the session. 
+2. Feed each `[PROMPT]` to the AI one at a time, strictly in numerical order. Do not proceed to the next prompt until the AI has successfully passed the "Definition of Done" for the current pillar.
+
+---
+
+## [MASTER CONTINUITY CONTEXT]
+
+**Hello AI Assistant!** 
+Please read this entire document to establish the strategic context and strict constraints of our project before executing any further instructions.
+
+### System Directive: Strict Technical Persona
+You are a **Senior Principal Pipeline Engineer and Full-Stack Architect**. You do not provide conversational filler. You provide production-grade code, strict architectural oversight, and definitive technical solutions. You prioritize performance, type safety, and professional CAD paradigms over quick hacks. 
+
+### The Grand Vision
+We are actively transforming a browser-based "Data Visualizer" tool (`pipeline-3d-model-samples.js` and `pipeline-3d-model-preview.js`) into a **Professional Pipeline Engineering Suite** capable of real-time physics validation, non-volatile project branching, and CAD ecosystem integration.
+
+### Core Architectural Constraints (ZERO EXCEPTIONS)
+1.  **File Size Limits:** No new JavaScript file may exceed **300 lines of code**. If a module exceeds this, split it logically (e.g., separating Canvas Rendering from State Management).
+2.  **Function Footprint:** Every function must be under **40 lines**. If it is longer, abstract the logic. Use pure functions wherever possible to avoid mutating global state.
+3.  **Module Exports:** Use **named exports only** (`export const foo`, `export function bar`). Absolutely no `export default`.
+4.  **No Volatile State:** Any configurable feature (e.g., validation parameters, canvas zoom level) must be immediately written to the IndexedDB auto-save loop.
+5.  **Performance Baseline:** All Canvas interactions (dragging, panning, zooming) must maintain **60 FPS**. Any logic attached to `pointermove` or `wheel` events must be debounced via `requestAnimationFrame`.
+6.  **No Polyfills/Shims:** Write clean, modern ES6+ JavaScript. Do not introduce polyfills or shims.
+
+### The 4 Pillars of the Upgrade
+1.  **Pillar 1: The Canvas Architecture (The Foundation)** [Assumed Complete - Awaiting Audit]
+2.  **Pillar 2: Real-Time Engineering Validation** (Physics & Constraints)
+3.  **Pillar 3: Data Persistence & Branching** (IndexedDB & Undo Stack)
+4.  **Pillar 4: Professional Import & Export Ecosystem** (SheetJS, DXF, jsPDF)
+
+**Acknowledge this context and these constraints.** You are now ready to receive Prompt 1.
+
+---
+
+## [PROMPT 1] Exhaustive Audit of the Canvas Architecture
+
+**Context:**
+A previous agent has completed the HTML5 Canvas upgrade. Before we proceed to Pillar 2, you must conduct an exhaustive, forensic audit of the implementation to guarantee no architectural debt has been introduced.
+
+**Your Task:**
+Execute the following strict audit checklist on `pipeline-3d-model-preview.js` and `pipeline-3d-model-samples.js`. Provide a markdown report. **Fix any failures immediately in code before submitting your report.**
+
+**Exhaustive Audit Checklist:**
+1.  **State Decoupling & Immutability:** 
+    *   Verify `PipelineCanvasManager` maintains an internal `nodes[]` and `edges[]` array. 
+    *   *Check:* Does the code ever mutate the raw HTML strings of the `textarea` directly during a drag event? It must *only* mutate the JS objects, and schedule a text-sync via a debounced queue.
+2.  **Performance & Render Loop Constraints:** 
+    *   *Check:* Search for `requestAnimationFrame`. Is the render loop running constantly? It *must* be gated behind a `this.isDirty` boolean flag.
+    *   *Check:* When `syncSplitTables()` fires, does the Canvas completely destroy itself and re-initialize context? It must intelligently diff the data and update `nodes[]` without destroying the HTMLCanvasElement.
+3.  **Memory Leak Hunt (Event Listeners):** 
+    *   *Check:* Are `pointermove` and `pointerup` listeners attached to `window` or `document`? If so, verify they are explicitly removed (`removeEventListener`) inside a `destroy()` method when the popup modal closes. Dangling listeners are an automatic failure.
+4.  **Custom Event Broadcasting:**
+    *   *Check:* Does the Canvas emit `canvas:nodeMoved` and `canvas:geometryUpdated` CustomEvents? Pillar 2 depends on these. Implement them if missing.
+
+**Definition of Done:**
+Submit `# Canvas Audit Results`. List each check as `[PASS]` or `[FAIL]`. If any check failed, your response must include the git commit summary of the fix you applied.
+
+---
+
+## [PROMPT 2] Canvas-Based Validation Engine
+
+**Context:**
+The Canvas is audited and performant. You will now build a Real-Time Engineering Validation Engine directly into the CAD environment. 
+
+**Your Task:**
+Implement a live physics/constraints checker that validates pipeline geometry in real-time.
+
+**Exhaustive Step-by-Step Instructions:**
+1.  **Stateful UI Panel:** 
+    *   Create a "Design Constraints" panel overlaying the canvas.
+    *   Inputs: `Max Slope (%)` (default: 15.0), `Min Soil Cover (m)` (default: 1.2).
+    *   *Constraint:* Bind these inputs to an isolated `ValidationState.js` module. Dispatch a `constraintsUpdated` event when changed.
+2.  **The Validation Routine (16ms Gated):** 
+    *   In `PipelineCanvasManager`, listen for `nodeMoved` and `constraintsUpdated`.
+    *   Run `validateGeometry()`, but it *must* be debounced by 16ms (`requestAnimationFrame`) to prevent blocking the main thread during high-speed dragging.
+    *   *Slope Logic:* Iterate `edges`. `slope = Math.abs((edge.nodeB.y - edge.nodeA.y) / (edge.nodeB.x - edge.nodeA.x)) * 100`. If `slope > constraints.maxSlope`, flag `edge.hasViolation = true`.
+    *   *Depth Logic:* Iterate `Z-depth nodes`. If `value < 0` and `Math.abs(value) < constraints.minCover`, flag `node.hasViolation = true`.
+3.  **Canvas Visual Overrides:** 
+    *   Update `render()`. If `edge.hasViolation`, override stroke: `ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 4; ctx.shadowColor = 'red'; ctx.shadowBlur = 5;`.
+    *   If `node.hasViolation`, override fill to red.
+4.  **CAD Tooltips & DOM Syncing:** 
+    *   Implement hovering hit-detection. If cursor is over a violating element, render a Canvas tooltip (a rounded `ctx.rect` with `ctx.fillText`) displaying the exact error limit exceeded.
+    *   Export a getter `PipelineCanvasManager.currentViolations` returning an array of violating `H(coor)` IDs. The main `pipeline-3d-model-samples.js` table renderer must read this array and apply a red background to the exact HTML row.
+
+**Definition of Done:**
+Dragging a Z-depth node past -1.2m instantly turns it glowing red at 60fps. Hovering displays the exact metric failure. The corresponding TSV table row simultaneously flashes red.
+
+---
+
+## [PROMPT 3] Data Persistence & Project Branching
+
+**Context:**
+We must eradicate volatile DOM state. You will implement an IndexedDB local database, a debounced Auto-Save loop, and a Non-Destructive Project Branching system.
+
+**Your Task:**
+Execute the persistence layer strictly following these architectural constraints.
+
+**Exhaustive Step-by-Step Instructions:**
+1.  **IndexedDB Schema (`pipeline-db.js`):** 
+    *   Initialize native `indexedDB.open('PipelineSuite', 1)`. 
+    *   Store: `Workspaces`. KeyPath: `id`. 
+    *   Data Structure: `{ id: "project-alpha", activeBranchId: "branch-main", branches: { "branch-main": { name: "Base Design", data: { table1: "...", table2: "..." } } } }`.
+2.  **Debounced Auto-Save (1000ms):** 
+    *   Attach a global `input` listener. Use a strict `1000ms` debounce (clearTimeout). 
+    *   When fired, scrape all critical textareas, open an IndexedDB `readwrite` transaction, and `put()` the data into `activeBranchId`.
+    *   Inject a non-intrusive `<span id="p3d-save-status">` that flashes *"Saved"* for 2 seconds.
+3.  **Branching Interface:** 
+    *   Create a `<select id="p3d-branch-select">` and `<button id="p3d-branch-clone">Clone Route</button>`.
+    *   *Clone Action:* Deep copy the `activeBranchId` data object. Prompt for a new name. Save as new branch ID. Update `activeBranchId`.
+    *   *Switch Action:* On `<select>` change, fetch new branch data, inject into textareas, and force a synchronous `syncSplitTables()` redraw.
+4.  **History Stack (Ctrl+Z):** 
+    *   Create a strict 50-item array: `const HistoryStack = []; let historyIndex = -1;`.
+    *   Take a snapshot on `pointerup` (Canvas) or `blur` (textareas). If `historyIndex` is not at the end of the array when a new snapshot is taken, slice the future history off.
+    *   Bind `keydown` for `Ctrl+Z` (undo) and `Ctrl+Y` (redo) to navigate the stack and invoke redraws.
+
+**Definition of Done:**
+User can close the browser tab mid-edit, reopen, and instantly recover their exact state. "Clone Route" duplicates the graph safely. `Ctrl+Z` reverses node drags without mutating history out of bounds.
+
+---
+
+## [PROMPT 4] Professional Import & Export Ecosystem
+
+**Context:**
+We must liberate the engineering data from the browser. You will implement Excel parsing, ASCII DXF generation, and PDF reporting.
+
+**Your Task:**
+Integrate external data flows using strictly defined libraries and formats.
+
+**Exhaustive Step-by-Step Instructions:**
+1.  **SheetJS Excel Ingestion:** 
+    *   Inject `https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js`.
+    *   Bind `drop` event to the dialog. `e.preventDefault()`. Parse the `File` object using `XLSX.read()`.
+    *   Target sheets named `Sheet_Table2A` and `Sheet_Table3A`. Use `XLSX.utils.sheet_to_csv()`, format tab spaces, and inject directly into the raw `<textarea>`s. Force redraw.
+2.  **ASCII DXF Generator:** 
+    *   Do not use heavy external DXF libraries. Write a raw ASCII DXF string generator.
+    *   Output the required DXF structure: `0\nSECTION\n2\nHEADER\n0\nENDSEC\n0\nSECTION\n2\nENTITIES\n...`
+    *   Loop `Table2X` interpolated points. Generate an `LWPOLYLINE` entity.
+    *   Loop `Table3X` markers. Generate `TEXT` (node names) and `CIRCLE` (nodes) entities at the exact X/Y coordinates.
+    *   Blob export: `new Blob([dxfString], { type: 'text/plain' })`.
+3.  **PDF Deliverable (jsPDF):** 
+    *   Inject `jspdf.umd.min.js` and `html2canvas.min.js`.
+    *   *Page 1:* Title "Pipeline Route Summary", Date, and Total Length calculation.
+    *   *Page 2:* Call `html2canvas` on the Canvas DOM node. Inject the resulting base64 image into the PDF using `doc.addImage()`. 
+    *   *Page 3:* Iterate Table 3X. Use `doc.text()` in a tabular loop to print "Bill of Materials: Structural Markers".
+    *   Blob export: `doc.save('Pipeline_Report.pdf')`.
+
+**Definition of Done:**
+Dropping a `.xlsx` file bypasses the text areas and draws the graph instantly. The generated `.dxf` opens natively in AutoCAD without corruption warnings. The `.pdf` contains high-fidelity screenshots of the CAD canvas.

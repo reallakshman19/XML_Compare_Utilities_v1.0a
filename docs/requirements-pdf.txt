@@ -1,0 +1,7 @@
+# Native positioned PDF extraction (optional; DOCX path remains stdlib-only).
+pdfplumber==0.11.10
+pdfminer.six==20260107
+
+# Controlled OCR rasterization (Tesseract CLI is a separately deployed system dependency).
+pypdfium2==5.8.0
+Pillow==12.3.0

@@ -1,0 +1,165 @@
+# Branch-scoped, read-only qualification for Issue #69 / PR #68.
+# Never use pull_request_target or secrets with untrusted PR code.
+name: CII Method A PR Qualification
+on:
+  push:
+    branches:
+      - fix/cii-method-a-confidence-config-20261013
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cii-method-a-qualification-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-node:
+    name: Method A focused Node tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Run native confidence and selected-base tests
+        run: |
+          set -euo pipefail
+          node tests/cii-workspace-method-a-confidence-config.test.js
+          node tests/cii-workspace-method-a-confidence-policy-ui.test.js
+          node tests/cii-workspace-method-a-weight-policy.test.js
+          node tests/cii-workspace-method-a-weight-policy-ui.test.js
+          node tests/cii-workspace-method-a-canonical-review-parity.test.js
+          node tests/cii-workspace-method-a-forensic-selection.test.js
+          node tests/cii-workspace-multisource-target-node-custody.test.js
+          node tests/cii-workspace-method-a-terminal-retained-opt-in.test.js
+          node tests/cii-workspace-owner-lexical-golden.test.js
+
+  retained-forensics:
+    name: Genuine S1-S3 / T grade and weight matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Compute exact retained 11-pair grading
+        run: |
+          set -euo pipefail
+          mkdir -p test-results/cii-method-a-qualification
+          node tests/cii-workspace-method-a-retained-grade-forensics.test.js | tee test-results/cii-method-a-qualification/forensics.json
+      - name: Compare default and tuned weights on authentic fixtures
+        run: |
+          set -euo pipefail
+          node tests/cii-workspace-method-a-retained-weight-matrix.test.js | tee test-results/cii-method-a-qualification/weight-matrix.json
+      - name: Upload exact-head forensic receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cii-method-a-forensics-${{ github.sha }}
+          path: test-results/cii-method-a-qualification/
+          if-no-files-found: warn
+          retention-days: 14
+
+  writer2-byte-closure:
+    name: Writer2 retained physical output byte closure
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Run retained Auto Anchor through Writer2 byte closure
+        run: node tests/cii-workspace-multisource-retained-auto-anchor-benchmark.test.js
+      - name: Qualify opt-in terminal node Writer2 byte closure
+        run: node tests/cii-workspace-multisource-retained-terminal-optin-byte-closure.test.js
+      - name: Audit Owner complete-golden intake readiness (explicit missing-input hold)
+        run: node tests/cii-workspace-owner-golden-retained-gate.mjs
+      - name: Independently qualify 150-node census, strict negatives and Owner hold
+        run: node tests/cii-workspace-method-a-technical-qualification.test.js
+      - name: Generate explicit PH0-PH7 Owner release-admission HOLD
+        run: node tests/cii-workspace-owner-release-admission-gate.mjs
+      - name: Upload 150-node SOURCE census evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cii-source-target-census-${{ github.sha }}
+          path: |
+            test-results/cii-method-a-qualification/source-target-census.json
+            test-results/cii-method-a-qualification/source-target-census.csv
+            test-results/cii-method-a-qualification/source-target-census-optin.json
+            test-results/cii-method-a-qualification/source-target-census-optin.csv
+            test-results/cii-method-a-qualification/terminal-tail-forensics.json
+            test-results/cii-method-a-qualification/owner-golden-readiness.json
+            test-results/cii-method-a-qualification/owner-golden-readiness.csv
+            test-results/cii-method-a-qualification/technical-qualification.json
+            test-results/cii-method-a-qualification/owner-release-admission-hold.json
+            test-results/cii-method-a-qualification/owner-release-admission-hold.md
+          if-no-files-found: warn
+          retention-days: 14
+
+  chromium-ui:
+    name: Chromium retained Inspect / Compare / Review
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Install Chromium browser and system dependencies
+        run: npx playwright install --with-deps chromium
+      - name: Run retained multi-source browser qualification
+        run: npx playwright test --config=playwright.cii-writer2-retained.config.mjs
+      - name: Upload Chromium traces and screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cii-method-a-chromium-${{ github.sha }}
+          path: test-results/cii-writer2-retained-browser/
+          if-no-files-found: warn
+          retention-days: 14
+
+  cross-route-compatibility:
+    name: Writer1C and generic REVIEW_ONLY/export compatibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Independently verify Writer1C raw spans and generic REVIEW_ONLY outputs
+        run: node tests/cii-workspace-cross-route-compatibility.test.mjs
+      - name: Upload exact-head cross-route compatibility evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cii-cross-route-compatibility-${{ github.sha }}
+          path: test-results/cii-method-a-qualification/cross-route-compatibility.json
+          if-no-files-found: warn
+          retention-days: 14

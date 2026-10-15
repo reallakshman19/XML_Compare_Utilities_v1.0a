@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/effective-evidence-view.schema.json",
+  "title":"EffectiveEvidenceView.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","observationHash","correctionSetHash","effectiveText","effectiveSource","lineage","effectiveViewHash"],
+  "properties":{
+    "schema":{"const":"EffectiveEvidenceView.v1"},
+    "observationHash":{"type":"string","minLength":1},"correctionSetHash":{"type":"string","minLength":1},
+    "effectiveText":{"type":"string"},"effectiveNumericValue":{"type":"number"},
+    "effectiveSource":{"type":"string","enum":["machine-observation","reviewer-correction"]},
+    "selectedCorrectionHash":{"type":"string","minLength":1},
+    "lineage":{"type":"object","additionalProperties":false,"required":["observationHash"],"properties":{"observationHash":{"type":"string","minLength":1},"correctionHash":{"type":"string","minLength":1}}},
+    "effectiveViewHash":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"}
+  }
+}

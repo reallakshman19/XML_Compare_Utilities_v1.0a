@@ -1,0 +1,21 @@
+{
+  "schema": "InputXmlChangeSetProtectedPaths.v1",
+  "baseCommit": "97e7181b772c1079d1e3f1eaf372ff25dd7ddd84",
+  "policy": "service-only additions; existing XML Compare runtime remains unchanged",
+  "protectedPaths": [
+    "xml-compare/CategorizedInputXmlConverter.js",
+    "xml-compare/XmlCompareCategorizedXmlTree.js",
+    "xml-compare/XmlCompareTransferPatchEngine.js",
+    "xml-compare/categorized-inputxml-api/**",
+    "xml-compare/XmlCompareTabView.js",
+    "xml-compare/XmlCompareLinewiseWorkflowActions.js",
+    "tabs/**",
+    "converters/**"
+  ],
+  "allowedReadOnlyDependencies": [
+    "xml-compare/CategorizedInputXmlConverter.js",
+    "xml-compare/XmlCompareCategorizedXmlTree.js",
+    "xml-compare/categorized-inputxml-api/**"
+  ],
+  "newServiceRoot": "xml-compare/inputxml-changeset-api/"
+}

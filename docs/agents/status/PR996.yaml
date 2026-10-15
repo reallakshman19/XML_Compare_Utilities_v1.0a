@@ -1,0 +1,58 @@
+schema: AgentStatus.v1
+pr: 996
+state: DRAFT_IMPLEMENTATION_COMPLETE_INDEPENDENT_NUMERICAL_ORACLE_PASS
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+base_branch: main
+base_basis_sha: d28e33c1b4fd4facf559c218a36367149e270777
+branch: agent/cii-base-anchor-method-fusion
+current_stage: HANDOVER_READY
+handover_readiness: READY
+coordination: SAFE
+mutation_authority: WRITE_ALLOWED_WITHIN_DECLARED_SCOPE
+merge_authority: OWNER_ONLY
+scope_authority: CII_BASE_ANCHOR_METHOD_DISCOVERY_AND_FUSION
+qualified_scope:
+  - BOUNDED_DIVERSIFIED_METHOD_A_CANDIDATE_POOL
+  - METHOD_A_SEPARATE_CANDIDATE_SEARCH_FLOOR
+  - ONE_TO_ONE_NONCOLLINEAR_METHOD_A_SEEDS
+  - MUTUAL_SPATIAL_WINNER_EXPANSION
+  - THREE_ANCHOR_AUTOMATIC_REVIEW_CAP
+  - METHOD_A_SPATIAL_RUNNER_UP_SURFACING
+  - METHOD_B_MUTUAL_BEST_AUTHORITY_PRESERVATION
+  - METHOD_B_WINNER_GAP_AUTHORITY_PRESERVATION
+  - METHOD_A_AND_B_EVIDENCE_LABEL
+  - METHOD_A_SPATIAL_LABEL
+  - METHOD_B_NETWORK_LABEL
+  - LANDMARK_ONLY_LABEL
+blocked_scope:
+  - PR994_GEOMETRY_OR_METHOD_B_MATH_CHANGES
+  - PR995_CORRESPONDENCE_ARBITRATION_CHANGES
+  - FULL_SCREEN_OR_METHOD_CARD_UI
+  - WRITER_1A_OR_1B_CHANGES
+  - TRANSFER_POLICY_PLAN_OR_APPLY_EXCLUDE
+  - FIXED_FIELD_PARSER_CHANGES
+  - SIF_TEE_OR_NODENAME_MUTATION_AUTHORITY
+  - PROTECTED_EXTERNAL_WRITER_OR_CONVERTER
+  - WORKFLOW_CHANGES
+validation:
+  current_main_grounding: PASS_SOURCE_INSPECTION
+  two_local_transform_oracle: PASS_INDEPENDENT_REPRODUCTION
+  structural_decoy_spatial_runner_up_oracle: PASS_INDEPENDENT_REPRODUCTION
+  focused_js_production_module_test: NOT_RUN_ENVIRONMENT
+  benchmark_base_anchor_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_cii_suite: NOT_RUN_ENVIRONMENT
+  full_repository_suite: NOT_RUN_ENVIRONMENT
+  browser_chromium: NOT_RUN_ENVIRONMENT
+  ci_observation_basis_sha: a1e10e55b74a07ff2e3398eab8ce0677d404a806
+  ci_status_checks_at_basis: NONE_OBSERVED
+  pr_workflow_runs_at_basis: NONE_OBSERVED
+reconciliation:
+  base_behind_by: 0
+  expected_changed_files: 8
+  actual_changed_files: 8
+  unexplained_changed_files: 0
+  wip_records_remaining: 0
+known_engineering_defect: NONE_IDENTIFIED_WITHIN_EXECUTED_NUMERICAL_SCOPE
+highest_risk: chance-congruent triplets; mitigated by diversified bounded search, one-to-one seeds, mutual spatial winner expansion, PR994 full-base consistency and 3-anchor REVIEW cap
+exact_next_action: execute focused JS and benchmark tests in a complete checkout; owner review afterward; do not merge without explicit authorization

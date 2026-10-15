@@ -1,0 +1,45 @@
+schema: AgentStatus.v1
+pr: 992
+state: IMPLEMENTATION_COMPLETE_VALIDATION_PARTIAL_DRAFT
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+base_branch: main
+base_basis_sha: edf297f7e749d4ff2fe68a84d2482d5344c284d5
+branch: agent/cii-writer-1b-qualified-slice
+current_stage: VALIDATE_RECONCILE
+handover_readiness: READY
+coordination: SAFE
+mutation_authority: WRITE_ALLOWED_WITHIN_DECLARED_SCOPE
+merge_authority: OWNER_ONLY
+merge_disposition: CONDITIONAL_ON_EXPLICIT_OWNER_ACCEPTANCE_OF_NOT_RUN_ENVIRONMENT
+scope_authority: CII_WRITER_1B_QUALIFIED_CARDINALITY_PRESERVING
+protected_external_writer: reallaksh19/3D_Converters/converters/scripts/inputxml_to_cii2019.py
+qualified_scope:
+  - ELEMENT_EXTENDED_PROCESS_FIXED_FIELDS_P1_P9_T1_T9_DENSITIES
+  - CONDITIONAL_OD_PLAIN_PIPE_NO_REDUCER_TOPOLOGY_CLOSED
+  - EXISTING_RESTRAINT_BLOCK_SINGLE_FREE_SLOT_CREATE_CLEAR
+  - WRITER_1A_COMPATIBILITY_MODE
+  - PLAN_DRIVEN_ROUND_TRIP_NEGATIVE_ASSURANCE
+blocked_scope:
+  - SIF_TEE_SEMANTIC_REWRITE
+  - NEW_RESTRAINT_BLOCK_OR_POINTER_REINDEX
+  - MULTI_SLOT_RESTRAINT_CARDINALITY_CHANGE
+  - RESTRAINT_TAG_GUID_STRING_MUTATION
+  - BEND_FORCMNT_DISPLMNT_AND_OTHER_UNQUALIFIED_AUXILIARY_MUTATION
+  - NODE_ELEMENT_CONNECTIVITY_GEOMETRY_MUTATION
+  - WORKFLOW_CHANGES
+validation_state: FOCUSED_WRITER1B_EXECUTION_PASS_REAL_BENCHMARK_FULL_RUNTIME_NOT_RUN_ENVIRONMENT
+focused_execution:
+  element_extended_fields: PASS_IMPLEMENTATION_COUPLED
+  restraint_slot_create_clear: PASS_IMPLEMENTATION_COUPLED
+  exact_15_row_element_layout: PASS_IMPLEMENTATION_COUPLED
+  transfer_policy_authority: PASS_IMPLEMENTATION_COUPLED
+  od_topology_closed_eligibility: PASS_IMPLEMENTATION_COUPLED
+  round_trip_negative_assurance: PASS_IMPLEMENTATION_COUPLED
+real_benchmark_target1_target2: NOT_RUN_ENVIRONMENT
+writer1a_target1_target2_compatibility: NOT_RUN_ENVIRONMENT
+full_checkout_browser_lifecycle: NOT_RUN_ENVIRONMENT
+ci_status: NONE
+known_engineering_defect: NONE_IDENTIFIED
+highest_risk: real TARGET1/TARGET2 and inherited browser/full-suite execution still require a complete checkout; do not infer PASS from focused reconstruction
+exact_next_action: if owner explicitly accepts the retained NOT_RUN_ENVIRONMENT gates, merge PR992 with expected head SHA; otherwise execute the committed Writer 1B/Writer 1A compatibility/transfer-policy/lifecycle suite in a complete checkout before merge

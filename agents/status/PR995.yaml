@@ -1,0 +1,50 @@
+schema: AgentStatus.v1
+pr: 995
+state: DRAFT_IMPLEMENTATION_COMPLETE_FOCUSED_ARBITRATION_PASS
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+base_branch: main
+base_basis_sha: daf3be0a23524c4e25c6adc915f8841732180c36
+branch: agent/cii-multi-base-orchestration
+current_stage: HANDOVER_REVIEW
+handover_readiness: READY
+coordination: SAFE
+mutation_authority: WRITE_ALLOWED_WITHIN_DECLARED_SCOPE
+merge_authority: OWNER_ONLY
+scope_authority: CII_MULTI_BASE_WORKSPACE_ORCHESTRATION
+qualified_scope:
+  - EXPLICIT_METHOD_A_B_BASE_LOOPS_IN_PREVIEW
+  - PER_READY_LOOP_CORRESPONDENCE_GENERATION
+  - CROSS_LOOP_NODE_ELEMENT_ARBITRATION
+  - METHOD_A_B_CORROBORATION_PROVENANCE
+  - UNRESOLVED_LOOP_OR_ISOLATION
+  - LEGACY_ANCHOR_CORRESPONDENCE_ID_AUTHORITY_PRESERVATION
+  - NO_FAKE_GLOBAL_METHOD_A_TRANSFORM_ACROSS_INDEPENDENT_LOOPS
+blocked_scope:
+  - FULL_SCREEN_OR_METHOD_CARD_UI
+  - WRITER_1A_OR_1B_CHANGES
+  - TRANSFER_POLICY_PLAN_OR_APPLY_EXCLUDE
+  - FIXED_FIELD_PARSER_CHANGES
+  - SIF_TEE_OR_NODENAME_MUTATION_AUTHORITY
+  - PROTECTED_EXTERNAL_WRITER_OR_CONVERTER
+  - WORKFLOW_CHANGES
+validation:
+  cross_loop_arbitration_smoke: PASS_LOCAL_EXECUTION
+  arbitration_module_syntax: PASS_LOCAL_EXECUTION
+  multi_base_correspondence_module_syntax: PASS_LOCAL_EXECUTION
+  full_synthetic_production_module_test: NOT_RUN_ENVIRONMENT
+  source3_target31_workspace_benchmark: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_cii_suite: NOT_RUN_ENVIRONMENT
+  full_repository_suite: NOT_RUN_ENVIRONMENT
+  browser_chromium: NOT_RUN_ENVIRONMENT
+  writer_lifecycle: NOT_RUN_OUT_OF_SCOPE
+  ci_observation: NO_STATUS_CHECKS_OR_PULL_REQUEST_WORKFLOW_RUNS_AT_RECONCILE_HEAD_bf2970a73d9b0e9bd62d3a709094780054fa66c9
+reconciliation:
+  changed_files: 9
+  expected_changed_files: 9
+  unexplained_files: 0
+  wip_records_retired: true
+  base_drift: NONE_AT_RECONCILE
+known_engineering_defect: NONE_IDENTIFIED_WITHIN_EXECUTED_ARBITRATION_SCOPE
+highest_risk: valid local Method A or B bases may produce unresolved correspondence when existing locked-span or whole-component propagation reaches legitimately revised geometry; retain loop diagnostics and do not weaken fail-closed propagation
+exact_next_action: execute focused production and SOURCE 3/TARGET 3-1 tests in a complete checkout; owner review afterward; do not merge without explicit authorization

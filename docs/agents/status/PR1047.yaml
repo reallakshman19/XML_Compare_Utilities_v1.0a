@@ -1,0 +1,55 @@
+pr: 1047
+issue: 1046
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-product-w213
+base_main: 72afe8fa9e8167e0284d34259bc7ad304ac14d99
+current_stage: W2_13_PRODUCT_CORE_RESTRAINT_DELETE_ADOPTION
+agent_state: SOURCE_COMPLETE_OWNER_AUTHORIZED_MERGE
+handover_readiness: READY
+criticality: ENGINEERING_CRITICAL
+takeover_authority: WRITE_ALLOWED
+merge_authority: OWNER_ONLY
+merge_authorized: true
+owner_accepts_recorded_residuals: true
+ready_for_review: true
+pr_state: READY_FOR_MERGE
+
+predecessor:
+  pr: 1045
+  phase: W2_12_RESTRAINT_ONE_TARGET0_COMPOSITE
+  merge_sha: 72afe8fa9e8167e0284d34259bc7ad304ac14d99
+
+inherited_authority_correction:
+  control_row1_field4: NONAM_PRESERVE
+  control_row2_field4: RESTRAINT_BLOCK_COUNT_I13
+
+scope:
+  routing: implemented
+  core_dispatch: implemented
+  product_validation: implemented
+  real_cii_qualification: authored
+  physical_writer_change: false
+  restraint_create: false
+  parser_converter: false
+  ui: false
+  writer3: false
+
+coordination_state: SAFE
+changed_file_count: 8
+unexplained_path_count: 0
+
+validation:
+  base_grounding: PASS
+  predecessor_merge: PASS
+  product_route_source: PASS_SOURCE_INSPECTION
+  exact_blob_syntax: PASS_LOCAL_SYNTAX_EXACT_BLOB
+  synthetic_product_runtime: NOT_RUN_ENVIRONMENT
+  real_cii_product_runtime: NOT_RUN_ENVIRONMENT
+  repository_npm: NOT_RUN_ENVIRONMENT
+  pr_workflow_runs: NONE_OBSERVED
+
+compliance_residual:
+  edited_oversized_existing_files: ACCEPTED_BY_OWNER_FOR_MERGE
+  resolved: false
+
+next_phase: W2_14_RUNTIME_QUALIFICATION_AND_RELEASE_FREEZE

@@ -1,0 +1,238 @@
+pr: 1055
+issue: 1052
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-product-runtime-w218
+base_main: 297fb37a0e894a3aac91de9188ebf30e810781fb
+current_stage: W2_34_WRITER2_EXPORT_CUSTODY
+agent_state: STACKED_PROGRAM_COMPLETION
+handover_readiness: READY
+criticality: ENGINEERING_CRITICAL
+production_change_authority: OWNER_AUTHORIZED_COPY_ADAPT_3D_CONVERTERS_ONLY
+source_repository_mutation_authority: NONE
+merge_authority: OWNER_ONLY
+merge_authorized: false
+ready_for_review: false
+pr_state: DRAFT
+program_release_freeze_verdict: NOT_READY_FOR_WRITER2_RELEASE_FREEZE
+
+source_reuse:
+  repository: reallaksh19/3D_Converters
+  pinned_commit: ca8d391ac5f829f53bebb3c37adf0547c34a67b4
+  source_repository_modified: false
+  policy: FROZEN_PYTHON_BYTE_IDENTICAL_ADAPT_INTEGRATION_ONLY
+  custody_state: PASS_EXACT_BLOB_CUSTODY
+  runtime_worker_verifies_git_blob_before_execution: true
+  verified_target_blob_identity:
+    cii_v11_v14.py: 6152f28c0c43b4d70029f360d993da5794310c8a
+    cii_v11_v14_format.py: 56f59fb7e095a887fc84e8a008a5f40acbadaec5
+    cii_v11_v14_records.py: 1a1f7bdd78a4b1479dd474fd9cc61a2b9adef235
+    cii_v11_v14_sif.py: 88c1d80bdb7bd2d5197a56c5be60ac2057c02367
+    cii_v11_v14_validate.py: 8e6896e8b61ac3c90d579139d39b29a6ace1637c
+    cii2019_section_rules.py: efa894afd241f8ac0b74f6a6e0ecfaedc3d6d76e
+
+writer_version_architecture:
+  v11_path: EXISTING_QUALIFIED_WRITER_VIA_DIRECT_V11_BRIDGE_PATH
+  v14_path: ORIGINAL_V14_PLUS_CANONICAL_WRITER2_DELTA_VIA_FROZEN_V11_BRIDGE
+  v14_bridge_scope: WRITER2_ONLY
+  v14_writer1_fixed_field_projection: NOT_QUALIFIED_FAIL_CLOSED
+  allow_lossy_in_writer_bridge: false
+  canonical_v14_used_as_final_output: false
+  original_v14_untouched_bytes_preserved: true
+  canonical_modified_v14_to_v11_exact_postimage_proof_required: true
+  projected_native_v14_to_v11_exact_postimage_proof_required: true
+  architecture_state: W2_34_LIVE_PRODUCT_ROUTING_EXPORT_CUSTODY_IMPLEMENTED_RUNTIME_PENDING
+
+live_writer2_product_routing:
+  state: IMPLEMENTED_SOURCE_INSPECTION_RUNTIME_PENDING
+  production_default_writer: WRITER_1B
+  writer2_selection: EXPLICIT_SEPARATE_UTILITIES_TILE
+  writer2_tile_label: CII_WRITER_2_V11_V14
+  direct_writer2_ui_bypass_allowed: false
+  version_bridge_preview_required: true
+  version_bridge_apply_required: true
+  scoped_apply_missing_version_bridge: FAIL_CLOSED
+  writer2_byte_authoritative_export: REQUIRED
+  writer2_export_missing_bridge_validation: FAIL_CLOSED
+  writer2_export_missing_byte_string: FAIL_CLOSED
+  writer2_text_fallback_allowed: false
+  shell:
+    file: tabs/cii-workspace/cii-workspace-shell.js
+    blob: 226ae8f3a7906b0d28a8c10195ad9b27d7f6444e
+  scoped_transfer_ui:
+    file: tabs/cii-workspace/cii-workspace-transfer-scope-ui.js
+    blob: 4d60b2c1f418ed3a7490a1f4d91f3c83f2cc5ae8
+  engineering_ui:
+    file: tabs/cii-workspace/cii-workspace-engineering-ui.js
+    blob: cff53d820075417f817d6768c16ce550910c28c5
+  tile:
+    file: tabs/cii-workspace/cii-workspace-tab.js
+    blob: b7589c7595f3b33cdd8529a03c7e990da4b68d76
+  focused_source_regression:
+    file: tests/cii-workspace-writer2-live-version-bridge-routing.test.js
+    blob: 20b31c241ded6e475fe293277e3f3d29ac787093
+    graph_file_count: 7
+    source_state: PASS_SOURCE_INSPECTION_W2_34_LIVE_V11_V14_BRIDGE_AND_EXPORT_CUSTODY
+    runtime_state: NOT_RUN_EXACT_7_FILE_GRAPH_NOT_MATERIALIZED
+  broad_product_routing_regression:
+    file: tests/cii-workspace-writer2-product-routing.test.js
+    blob: 2b01a6eba2e60eabdb3dd19b28c7aaba1deb758d
+    graph_file_count: 14
+    source_state: PASS_SOURCE_INSPECTION_BRIDGE_BOUND_PRODUCT_AND_EXPORT_CUSTODY
+    runtime_state: NOT_RUN_EXACT_14_FILE_GRAPH_NOT_MATERIALIZED
+
+v14_projection:
+  module: tabs/cii-workspace/cii-workspace-v14-change-projection.js
+  schema: CIIWorkspaceV14ChangeProjection.v2
+  module_blob: 0a16b1383da6ef58abf55c53a91711a0a1f21c17
+  changed_section_allowlist: [CONTROL, ELEMENTS, NODENAME, RESTRANT, SIF&TEES]
+  cardinality_units:
+    NODENAME: 1
+    RESTRANT: 24
+    SIF&TEES: 14
+  retained_unit_reorder: FAIL_CLOSED
+  equal_cardinality_unit_replacement: FAIL_CLOSED
+  writer1_equal_cardinality_fields_in_cardinality_sections: NOT_QUALIFIED_FAIL_CLOSED
+  miscel_hanger_changed_section: NOT_AUTHORIZED_FAIL_CLOSED
+  nodename_whole_section_create: NOT_AUTHORIZED_V11_WRITER_REQUIRES_EXISTING_SECTION
+  final_projected_v14_normalization_must_equal_writer2_v11_postimage: true
+
+v14_writer2_fixed_field_authority:
+  module: tabs/cii-workspace/cii-workspace-v14-writer2-fixed-field-authority.js
+  schema: CIIWorkspaceV14Writer2FixedFieldAuthority.v1
+  module_blob: fc97ddd7fd5645e46c70a722c7f96f17dc7ae188
+  bridge_integration_blob: 8038993f0a97719c0c316f31c2d6c30ea0386ec4
+  native_v14_layout_crosscheck: PASS_SOURCE_INSPECTION_AUTHORITATIVE_REFERENCE
+  native_v14_layout_sources:
+    - reallaksh19/3D_Converters@ca8d391ac5f829f53bebb3c37adf0547c34a67b4:converters/scripts/cii14_section_rules.py
+    - reallaksh19/3D_Converters@ca8d391ac5f829f53bebb3c37adf0547c34a67b4:converters/scripts/cii14_multi_merge.py
+    - frozen:converters/scripts/cii-v11-v14-upstream/cii_v11_v14_records.py
+  native_v14_layout_facts:
+    control_layout_reuses_v11: true
+    element_record_rows: 15
+    numeric_field_profile: 2X_PLUS_13_COLUMN_CELLS
+    element_rows_12_15_preserved_across_converter: true
+    upstream_v14_hangers_merge_blocked: true
+  control_fields:
+    row0_field3: CONTROL_NODENAME_NONAM_COUNT
+    row1_field3: CONTROL_RESTRAINT_BLOCK_COUNT
+    row2_field4: CONTROL_SIF_TEE_BLOCK_COUNT
+  element_fields_per_15_row_block:
+    row12_field3: ELEMENT_RESTRAINT_POINTER
+    row13_field4: ELEMENT_SIF_TEE_POINTER
+    row13_field5: ELEMENT_NODENAME_POINTER
+  whole_row_adoption_as_authority: BLOCKED_BY_PREFLIGHT_GUARD
+  count_payload_correlation: REQUIRED
+  cardinality_change_same_family_pointer_claim: REQUIRED
+  pointer_without_cardinality_change: BLOCKED
+  sif_restraint_cardinality_increase: BLOCKED
+  changed_pointer_postimage_range: REQUIRED
+
+source_authority_scope:
+  writer2_create_edition: CAESAR_II_2019_VERSION_11_ONLY
+  v14_dialect_conversion_authority: PINNED_3D_CONVERTERS_ENGINE
+  sif_create: SOURCE_BLOCKED_REAFFIRMED_V11
+  hanger_create: SOURCE_BLOCKED_REAFFIRMED_V11
+  restraint_create: SOURCE_BLOCKED_REAFFIRMED_V11
+  writer3_topology: OUTSIDE_WRITER2
+
+inherited_authority_correction:
+  source: issue_1042
+  control_row1_field4: NONAM_PRESERVE_UNDER_NON_RELATED_FAMILIES_NODENAME_CARDINALITY_OWNER_ONLY
+  control_row2_field4: RESTRAINT_BLOCK_COUNT_I13_MUTABLE_UNDER_RESTRAINT_CARDINALITY_AUTHORITY
+  negative_assurance_anchors: [W2_11_P19, W2_12_R09]
+
+runtime:
+  w2_11_restraint_physical: PASS_RUNTIME_EXACT_BLOB
+  w2_12_r01_r22: PASS_RUNTIME_EXACT_BLOB
+  v11_v14_frozen_engine_authored_test: PASS_RUNTIME_EXACT_SEVEN_FILE_BLOB_GRAPH
+  v11_v14_frozen_engine_test_blob: 43721ed3f2c990080945afa2a8a3702dbb021eb4
+  v11_v14_frozen_source_historical_blob: 18433c7664428a02bea97625ce6bdc3c21bd8365
+  v11_v14_frozen_source_historical_state: PASS_RUNTIME_EXACT_TWELVE_FILE_BLOB_GRAPH_NODE_ESM_MODE
+  v11_v14_frozen_source_current_test_blob: ade99d0d4f4d4ff394a90f81286e4394b5409a54
+  v11_v14_frozen_source_current_graph_file_count: 13
+  v11_v14_frozen_source_current_test_state: PASS_RUNTIME_EXACT_THIRTEEN_FILE_BLOB_GRAPH_NODE_ESM_MODE_W2_32
+  v11_v14_frozen_source_current_execution: UNCHANGED_TEST_EXACT_GIT_BLOB_RECONSTRUCTION
+  v14_change_projection_w2_30_module_blob: 0a16b1383da6ef58abf55c53a91711a0a1f21c17
+  v14_change_projection_w2_30_test_blob: 90b7b8fb4edbdb63accbf0ff21a8185610ab06b0
+  v14_change_projection_w2_30_result: PASS_RUNTIME_EXACT_TWO_FILE_BLOB_GRAPH_NODE_ESM_MODE_W2_30_WRITER2_ONLY_SCOPE
+  v14_fixed_field_authority_w2_31_module_blob: 7bc3a83ef37159c9a70fb0e16acaba721fd73b26
+  v14_fixed_field_authority_w2_31_test_blob: 74077b00b094c5e30ff402f8a0adeb1814bb24cc
+  v14_fixed_field_authority_w2_31_result: PASS_RUNTIME_EXACT_TWO_FILE_BLOB_GRAPH_NODE_ESM_MODE_W2_31_FIXED_FIELD_AUTHORITY
+  v14_pointer_correlation_w2_32_module_blob: fc97ddd7fd5645e46c70a722c7f96f17dc7ae188
+  v14_pointer_correlation_w2_32_test_blob: 78dbe0af0b8d0d8fd55aae26f586f727bb2d03df
+  v14_pointer_correlation_w2_32_result: PASS_RUNTIME_EXACT_TWO_FILE_BLOB_GRAPH_NODE_ESM_MODE_W2_32_POINTER_CORRELATION
+  w2_34_live_route_test_blob: 20b31c241ded6e475fe293277e3f3d29ac787093
+  w2_34_live_route_test_state: PASS_SOURCE_INSPECTION_RUNTIME_PENDING_EXACT_7_FILE_GRAPH
+  writer2_product_routing_static_test_blob: 2b01a6eba2e60eabdb3dd19b28c7aaba1deb758d
+  writer2_product_routing_static_test_state: PASS_SOURCE_INSPECTION_RUNTIME_PENDING_EXACT_14_FILE_GRAPH
+  w2_13_synthetic_runtime: NOT_RUN_EXACT_EXECUTABLE_ENVIRONMENT
+  w2_13_real_cii_runtime: NOT_RUN_EXACT_EXECUTABLE_ENVIRONMENT
+  v14_real_writer2_change_isolated_roundtrip: NOT_RUN
+  v14_writer_bridge_browser_runtime: NOT_RUN
+  external_caesar_v11_acceptance_after_v14_conversion: NOT_RUN
+  inherited_writer2_regression: PARTIAL
+  writer1_adjacent_regression: NOT_RUN_ENVIRONMENT
+  repository_npm: NOT_RUN_ENVIRONMENT
+  engineering_defect_w2_31: FOUND_AND_FIXED_BROAD_CONTROL_ELEMENTS_ROW_ADOPTION_AND_FIELD_CORRELATION_GAPS
+  engineering_defect_w2_32: FOUND_AND_FIXED_CARDINALITY_WITHOUT_POINTER_EVIDENCE_GAP
+  engineering_defect_w2_33: FOUND_AND_FIXED_LIVE_WRITER2_UI_BYPASSED_VERSION_BRIDGE_AND_WRITER2_WAS_NOT_NORMAL_UTILITIES_REACHABLE
+  engineering_defect_w2_34: FOUND_AND_FIXED_WRITER2_EXPORT_TEXT_FALLBACK_AND_MISSING_EXPORT_BOUNDARY_BRIDGE_PROOF
+  regression_test_drift: FOUND_AND_FIXED_STALE_PRE_RESTRAINT_AND_PRE_EXPORT_CUSTODY_ASSERTIONS
+  engineering_failure_open: NONE
+
+execution_environment:
+  native_clone_result: FAIL_ENVIRONMENT_NETWORK_DNS
+  native_clone_latest_observation: Could_not_resolve_host_github.com
+  exact_executable_mirror_available: false
+  source_custody_exact_13_file_mirror_available: true
+  source_custody_exact_13_file_runtime: PASS
+  w2_34_live_route_exact_7_file_mirror_available: false
+  writer2_product_routing_exact_14_file_mirror_available: false
+  github_actions_authorized: false
+  source_inspection_promoted_to_runtime_pass: false
+  focused_runtime_promoted_to_full_bridge_pass: false
+  current_source_test_promoted_to_pass_without_rerun: false
+  full_workspace_graph_stubbed_or_import_rewritten: false
+  not_run_promoted_to_pass: false
+
+program_matrix:
+  nodename_create_delete_v11: DONE_EXISTING_NODENAME_SECTION
+  nodename_cardinality_v14_projection: IMPLEMENTED_EXISTING_SECTION_RUNTIME_PENDING_FULL_BRIDGE
+  nodename_equal_cardinality_v14_writer1_projection: NOT_QUALIFIED_FAIL_CLOSED
+  sif_delete_compaction_v11: DONE
+  sif_delete_v14_projection: IMPLEMENTED_DELETE_ONLY_RUNTIME_PENDING_FULL_BRIDGE
+  sif_equal_cardinality_v14_writer1c_projection: NOT_QUALIFIED_FAIL_CLOSED
+  sif_create: SOURCE_BLOCKED_REAFFIRMED_V11
+  hanger_delete_v11: DONE_PRODUCT_ROUTED
+  hanger_v14_projection: NOT_AUTHORIZED_FAIL_CLOSED
+  hanger_create: SOURCE_BLOCKED_REAFFIRMED_V11
+  restraint_delete_product_v11: IMPLEMENTED_RUNTIME_PENDING_FULL_WORKSPACE
+  restraint_delete_v14_projection: IMPLEMENTED_DELETE_ONLY_RUNTIME_PENDING_FULL_BRIDGE
+  restraint_equal_cardinality_v14_writer1_projection: NOT_QUALIFIED_FAIL_CLOSED
+  restraint_create: SOURCE_BLOCKED_REAFFIRMED_V11
+  writer3_topology: OUTSIDE_WRITER2
+
+negative_assurance:
+  lossy_v14_bridge_enabled: false
+  source_3d_converters_modified: false
+  core_v11_writer_modified: false
+  v11_writer1_authority_reduced: false
+  production_default_writer1b_changed: false
+  writer2_auto_selected_by_default_tile: false
+  explicit_writer2_live_route_added: true
+  live_ui_writer2_bridge_routing_modified: true
+  writer2_export_text_fallback_allowed: false
+  writer2_export_without_bridge_pass_allowed: false
+  writer2_export_without_byte_string_allowed: false
+  writer3_changed: false
+  workflow_changed_in_current_diff: false
+  canonical_v14_whole_file_used_as_output: false
+  unauthorized_v14_fixed_control_element_field_projected: false
+  cardinality_change_without_pointer_evidence_allowed: false
+  v14_writer1_equal_cardinality_projection_claimed: false
+  miscel_hanger_v14_projected: false
+  nodename_absent_section_create_claimed: false
+  v11_text_view_used_as_v14_restore_authority: false
+
+changed_file_count_expected: 35
+next_gate: exact_w2_34_live_route_7_file_graph_if_materializable_then_exact_writer2_product_routing_14_file_graph_then_full_workspace_w2_13_and_retained_real_v11_then_real_v14_writer2_roundtrip_browser_regressions_and_freeze

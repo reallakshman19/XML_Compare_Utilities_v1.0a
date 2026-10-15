@@ -1,0 +1,34 @@
+schema: engineering-pr-claims/v1
+repository: reallaksh19/XML_Compare_Utilities
+pr: 1020
+base: 663423670dd6f0b198b02d97d66148d35edb1024
+claims:
+  - id: HGR-1020-001
+    statement: physical HANGER delete-all mutates only CONTROL.NOHGRS and the complete MISCEL_1 payload envelope
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: HGR-1020-002
+    statement: retained RRMAT/VFLEX prefix rows and four execution rows are copied from untouched TARGET bytes rather than reserialized
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: HGR-1020-003
+    statement: H>1 delete-all does not require resolving the conflicting HGRDAT/TAG-GUID tail order because all hanger-specific rows are removed
+    evidence: PASS_SOURCE_REASONING
+  - id: HGR-1020-004
+    statement: independent validator rebuilds the delete-all plan and complete expected variable-length postimage without using writer replacement helpers
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: HGR-1020-005
+    statement: exact postimage equality is primary authorization; mutation and delete-plan ledgers are testimony only
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: HGR-1020-006
+    statement: BM_CII_SOURCE node 205 physical delete-all regression is authored for NOHGRS 1->0 and MISCEL_1 rows 23->11
+    evidence: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: QF-1020-001
+    statement: validator initially allowed missing byteString/deletePlan testimony and was hardened to require both plus schema/count/length testimony
+    evidence: FIXED_SOURCE_INSPECTION
+prohibited_claims:
+  - partial H>1 HANGER deletion is qualified
+  - HANGER CREATE is qualified
+  - HANGER delete-all is product-routed
+  - HANGER delete-all is adopted into the existing NODENAME/SIF composite
+  - focused PR1020 JS tests passed
+  - full repository tests passed
+  - browser/product tests passed

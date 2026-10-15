@@ -1,0 +1,36 @@
+schema_version: relay-v2.5
+progress_basis:
+  id: PB-0004
+  roadmap_revision: RM-0004
+overall: {earned_weight: 84, total_weight: 100, percent: 84}
+objectives:
+  - {id: OBJ-CII-W2-NB-R1-1224, earned_weight: 84, total_weight: 100, percent: 84}
+phases:
+  - {id: PH-V25-MIGRATION, earned_weight: 100, total_weight: 100, percent: 100}
+  - {id: PH-ARCHITECTURE, earned_weight: 100, total_weight: 100, percent: 100}
+  - {id: PH-IMPLEMENTATION, earned_weight: 64, total_weight: 100, percent: 64}
+  - {id: PH-DELIVERY, earned_weight: 100, total_weight: 100, percent: 100}
+work_packages:
+  - {id: WP-V25-MIGRATION-001, earned_weight: 100, total_weight: 100, percent: 100}
+  - {id: WP-ARCH-001, earned_weight: 100, total_weight: 100, percent: 100}
+  - {id: WP-ORACLE-001, earned_weight: 100, total_weight: 100, percent: 100}
+  - {id: WP-IMPL-001, earned_weight: 100, total_weight: 100, percent: 100}
+  - {id: WP-RET-001, earned_weight: 10, total_weight: 100, percent: 10}
+  - {id: WP-DELIVERY-001, earned_weight: 100, total_weight: 100, percent: 100}
+execution_packages:
+  - {id: EP-CII-W2-NB-R1-V25-0001, earned_weight: 70, total_weight: 100, percent: 70, state: SUPERSEDED_WITH_GOVERNANCE_DEVIATION}
+  - {id: EP-CII-W2-NB-R1-V25-0002, earned_weight: 15, total_weight: 100, percent: 15, state: TERMINAL_OWNER_ACCEPTED_ENVIRONMENT_EXCEPTION}
+implementation_steps:
+  - {id: IMPL-SOURCE-SUBGRAPH, earned_weight: 100, total_weight: 100, percent: 100, basis: [CP-CII-W2-NB-R1-V25-0001]}
+  - {id: IMPL-MIXED-NODENAME, earned_weight: 100, total_weight: 100, percent: 100, basis: [CP-CII-W2-NB-R1-V25-0001]}
+  - {id: ORACLE-RETAINED-BYTE-CLOSURE, earned_weight: 100, total_weight: 100, percent: 100, basis: [CP-CII-W2-NB-R1-V25-0001]}
+  - {id: RETAINED-EXECUTION, earned_weight: 0, total_weight: 100, percent: 0, basis: [ACTIONS-35266182142-NOT_RUN_ENVIRONMENT, ACTIONS-35266754547-ATTEMPT-1-NOT_RUN_ENVIRONMENT, ACTIONS-35266754547-ATTEMPT-2-NOT_RUN_ENVIRONMENT]}
+  - {id: DELIVERY-MERGE, earned_weight: 100, total_weight: 100, percent: 100, basis: [PR-1228-MERGED-45f2a3ed7bbb186030e141a8313ccc04ddc997cb]}
+acceptance_criteria:
+  - {id: AC-01, ep_id: EP-CII-W2-NB-R1-V25-0002, status: NOT_RUN_ENVIRONMENT, earned_weight: 0, total_weight: 25, percent: 0, basis: []}
+  - {id: AC-02, ep_id: EP-CII-W2-NB-R1-V25-0002, status: NOT_RUN_ENVIRONMENT, earned_weight: 0, total_weight: 30, percent: 0, basis: []}
+  - {id: AC-03, ep_id: EP-CII-W2-NB-R1-V25-0002, status: NOT_RUN_ENVIRONMENT, earned_weight: 0, total_weight: 30, percent: 0, basis: []}
+  - {id: AC-04, ep_id: EP-CII-W2-NB-R1-V25-0002, status: COMPLETE, earned_weight: 15, total_weight: 15, percent: 100, basis: [PR-1228-MERGED-45f2a3ed7bbb186030e141a8313ccc04ddc997cb, CP-CII-W2-NB-R1-V25-0002]}
+limitations:
+  - Lifecycle is terminal because the owner accepted delivery with the environment-blocked validation state disclosed; retained technical execution is intentionally not credited as PASS.
+  - Independent preimplementation qualification remains unsatisfied and is not counted as PASS.

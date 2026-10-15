@@ -1,0 +1,203 @@
+/*
+ * This component enables the Revision Impact Report by connecting report markup
+ * to the existing responsive Stage 3 review-side layout.
+ */
+.revc-impact-report {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #294a69;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(15, 38, 61, 0.96), rgba(7, 22, 36, 0.96));
+}
+
+.revc-impact-report > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.revc-impact-report > header > div {
+  min-width: 0;
+}
+
+.revc-impact-report > header span {
+  display: block;
+  margin-bottom: 4px;
+  color: #7dd3fc;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.revc-impact-report > header h2,
+.revc-impact-report > header p {
+  margin: 0;
+}
+
+.revc-impact-report > header p {
+  margin-top: 6px;
+  color: #a9c5dc;
+  line-height: 1.45;
+}
+
+.revc-impact-report > header strong {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border: 1px solid #355f85;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.revc-impact-report > header strong[data-status="ready"] {
+  border-color: #2f8066;
+  color: #8ff0cb;
+  background: rgba(23, 91, 68, 0.28);
+}
+
+.revc-impact-report > header strong[data-status="blocked"] {
+  border-color: #9a593a;
+  color: #fdba8c;
+  background: rgba(128, 51, 25, 0.24);
+}
+
+.revc-impact-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.revc-impact-cards > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #294a69;
+  border-radius: 8px;
+  background: rgba(3, 16, 27, 0.62);
+}
+
+.revc-impact-cards b {
+  font-size: 1.2rem;
+  color: #e0f2fe;
+}
+
+.revc-impact-cards span {
+  color: #9fbcd3;
+  font-size: 0.78rem;
+}
+
+.revc-impact-cards [data-tone="decision"] b,
+.revc-impact-cards [data-tone="review"] b {
+  color: #fcd34d;
+}
+
+.revc-impact-filter-note {
+  margin: 0;
+  padding: 9px 10px;
+  border-left: 3px solid #38bdf8;
+  background: rgba(14, 70, 104, 0.28);
+  color: #c5e7fb;
+}
+
+.revc-impact-authority {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.revc-impact-authority > div {
+  min-width: 0;
+  padding: 8px;
+  border-radius: 7px;
+  background: rgba(4, 17, 29, 0.56);
+}
+
+.revc-impact-authority dt {
+  color: #8fb2cc;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.revc-impact-authority dd {
+  margin: 4px 0 0;
+  color: #e0f2fe;
+  overflow-wrap: anywhere;
+}
+
+.revc-impact-breakdown {
+  border: 1px solid #294a69;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.revc-impact-breakdown > summary {
+  padding: 10px;
+  cursor: pointer;
+  font-weight: 750;
+  background: rgba(8, 30, 49, 0.82);
+}
+
+.revc-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+
+.revc-impact-grid section {
+  min-width: 0;
+  border: 1px solid #24445f;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.revc-impact-grid h4 {
+  margin: 0;
+  padding: 8px;
+  background: rgba(13, 42, 66, 0.72);
+}
+
+.revc-impact-grid table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.revc-impact-grid th,
+.revc-impact-grid td {
+  padding: 6px 8px;
+  border-top: 1px solid #213e56;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.revc-impact-grid td {
+  width: 64px;
+  text-align: right;
+  color: #bae6fd;
+}
+
+.revc-impact-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.revc-impact-actions button {
+  min-width: 0;
+  min-height: 38px;
+}
+
+@media (max-width: 720px) {
+  .revc-impact-cards,
+  .revc-impact-authority,
+  .revc-impact-grid,
+  .revc-impact-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

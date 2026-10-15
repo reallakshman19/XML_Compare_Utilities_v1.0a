@@ -1,0 +1,69 @@
+schema: AgentClaim.v1
+pr_or_wip: PR991
+claim_state: COMPLETE_OWNER_AUTHORIZED_MERGE
+files:
+  exact:
+    - agents/MASTER_INDEX.md
+    - agents/PR991_workreport.md
+    - agents/status/PR991.yaml
+    - agents/claims/PR991.yaml
+    - tabs/cii-workspace/cii-workspace-core.js
+    - tabs/cii-workspace/cii-workspace-engineering-delta.js
+    - tabs/cii-workspace/cii-workspace-placeholders.js
+    - tabs/cii-workspace/cii-workspace-shell.js
+    - tabs/cii-workspace/cii-workspace-target-writer.js
+    - tabs/cii-workspace/cii-workspace-topology-adapter.js
+    - tabs/cii-workspace/cii-workspace-transfer-plan.js
+    - tabs/cii-workspace/cii-workspace-transfer-policy.js
+    - tabs/cii-workspace/cii-workspace-restraint-pairing.js
+    - tabs/cii-workspace/cii-workspace-restraint-transfer.js
+    - tests/cii-workspace-anchor-approval-ui.test.js
+    - tests/cii-workspace-benchmark-end-to-end.test.js
+    - tests/cii-workspace-benchmark-transfer-preview.test.js
+    - tests/cii-workspace-benchmark-writer-1a.test.js
+    - tests/cii-workspace-benchmark-writer-1a-restraint.test.js
+    - tests/cii-workspace-placeholder-gate.test.js
+    - tests/cii-workspace-target-writer-1a.test.js
+    - tests/cii-workspace-target-writer-restraint.test.js
+    - tests/cii-workspace-restraint-pairing.test.js
+    - tests/cii-workspace-transfer-preview-policy.test.js
+    - tests/cii-workspace-transfer-preview-ui.test.js
+authority_domains:
+  - CII_TARGET_WRITER_1A
+  - CII_ELEMENT_FIXED_FIELD_MUTATION
+  - CII_RIGID_POINTER_MUTATION
+  - CII_RESTRAINT_RECORD_PAIRING
+  - CII_RESTRAINT_POINTER_SLOT_MUTATION
+  - CII_STAGE06_APPLY_AUTHORITY
+  - CII_TRANSFER_POLICY_WRITER_1A
+claim_modes:
+  - EXCLUSIVE
+forbidden_existing_file_edits:
+  - converters/**
+  - parser/**
+  - tabs/cii-workspace/cii-workspace-match-methods.js
+  - tabs/cii-workspace/cii-workspace-evidence.js
+  - tabs/cii-workspace/cii-workspace-candidates.js
+  - tabs/cii-workspace/cii-workspace-propagation.js
+  - any workflow file
+implementation_claims:
+  - writer patches exact fixed-field spans and preserves unrelated bytes
+  - Writer 1A never changes node numbers, topology, geometry, element count, section cardinality, OD, or auxiliary pointer ownership
+  - WT and qualified P1/T1/T2 are executable in-place ELEMENT mutations
+  - existing RIGID weight uses qualified pointer-bound row custody
+  - existing restraint mutation requires explicit qualified source-record to target pointer-slot pairing
+  - singleton restraint pairs qualify only under equal one-to-one cardinality
+  - multi-restraint pairing exhaustively evaluates at most 6! = 720 global one-to-one assignments
+  - restraint slot number is never identity evidence and never resolves ambiguity
+  - typeCode stiffness gap and friction are mutable engineering values and contribute zero to restraint identity pairing
+  - multi-restraint stable evidence is exact GUID exact tag approved mapped connecting-node identity and direction cosines
+  - tied best multi-restraint assignments fail closed with RESTRAINT_RECORD_PAIRING_AMBIGUOUS
+  - source connecting-node numbering is translated through bound node correspondence before target mutation
+  - target restraint node pointer slot tag and GUID remain target-native and immutable
+  - aggregate restraint code gap friction stiffness direction sets remain review evidence only and do not authorize mutation
+  - current TARGET hash must match reviewed TARGET hash before mutation
+  - modified target is reparsed and must have zero unexpected semantic deltas before export
+  - unsupported approved operations block apply and are never silently skipped
+validation_state: FOCUSED_EXECUTION_PASS_REAL_BENCHMARK_ORACLE_VERIFIED_FULL_RUNTIME_NOT_RUN_ENVIRONMENT
+qualification_exception: OWNER_AUTHORIZED_ENVIRONMENTAL_EXCEPTION
+merge_authority: OWNER_GRANTED_AFTER_QUALIFICATION_CLOSURE

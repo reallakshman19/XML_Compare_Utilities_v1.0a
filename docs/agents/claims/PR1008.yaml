@@ -1,0 +1,33 @@
+schema: AgentPrClaims.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr: 1008
+claims:
+  - id: PR1008-CLAIM-001
+    statement: Writer1C NODENAME writable custody requires exact parsed ELEMENT index to physical 15-row block index plus matching FROM/TO endpoints.
+    evidence: tabs/cii-workspace/cii-workspace-nodename.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1008-CLAIM-002
+    statement: Unique endpoint-only fallback is explicitly read-only and forces physical custody BLOCKED.
+    evidence: tabs/cii-workspace/cii-workspace-nodename.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1008-CLAIM-003
+    statement: Multiple endpoint-only candidates fail as NODENAME_ELEMENT_BLOCK_AMBIGUOUS and create no writable physical span.
+    evidence: tests/cii-workspace-writer1c-element-custody-hardening.test.js
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: PR1008-CLAIM-004
+    statement: Non-multiple-of-15/incomplete ELEMENT physical layout cannot qualify Writer1C custody.
+    evidence: tests/cii-workspace-writer1c-element-custody-hardening.test.js
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: PR1008-CLAIM-005
+    statement: PR1004 byte-negative-assurance, alias arbitration, pointer/cardinality and semantic validation logic are unchanged by PR1008.
+    evidence: changed-file boundary contains only cii-workspace-nodename.js plus test/recovery files
+    status: PASS_GIT_COMPARE
+limitations:
+  - focused PR1008 test not executed in a complete checkout
+  - inherited Writer1C regressions not executed in a complete checkout
+  - full npm test not executed
+  - browser not executed
+prohibited_claims:
+  - do not claim runtime PASS from authored tests
+  - do not claim SIF/TEE production authority
+  - do not claim Writer1C composite 1A/1B transaction authority

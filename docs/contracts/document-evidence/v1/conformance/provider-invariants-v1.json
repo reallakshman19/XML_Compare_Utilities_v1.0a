@@ -1,0 +1,6 @@
+{
+  "schema":"ProviderConformanceInvariants.v1",
+  "normative":["immutable-input-identity","named-surfaces","explicit-units-origins-axes","invertible-geometry-transforms","provider-surface-for-provider-geometry","immutable-observation-lineage","diagnostic-status-semantics","canonical-schema-version"],
+  "providerSpecific":["parser-algorithm","backend-object-id","ocr-model","confidence-scale","preprocessing-implementation","raw-provider-response","cache-strategy"],
+  "comparisonPolicy":{"requireExactProviderTextEquality":false,"requireInvariantConformance":true}
+}

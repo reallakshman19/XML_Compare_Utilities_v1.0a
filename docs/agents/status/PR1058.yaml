@@ -1,0 +1,47 @@
+pr: 1058
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-runtime-closure-next
+base_main: 6d2a1fe149a87c55de3606a9434adc51ccce5e8e
+current_stage: W2_A_SYNTHETIC_PUBLIC_PRODUCT_RUNTIME
+work_intent: INVESTIGATE_VALIDATE
+criticality: ENGINEERING_CRITICAL
+mutation_authority: EVIDENCE_AND_QUALIFICATION_TESTS_ONLY_UNLESS_EXACT_RUNTIME_EXPOSES_DEFECT
+production_change_authority: NONE_CURRENTLY
+merge_authority: OWNER_ONLY
+merge_authorized: false
+pr_state: DRAFT
+handover_readiness: READY
+program_release_freeze_verdict: NOT_READY_FOR_WRITER2_RELEASE_FREEZE
+
+inherited_runtime:
+  w2_34_focused_bridge_export: PASS
+  w2_c0_product_routing_14_file_graph: PASS_RUNTIME_EXACT_14_FILE_BLOB_GRAPH_NODE_ESM_MODE
+
+runtime:
+  w2_a_synthetic_product: NOT_RUN_FULL_PUBLIC_ENTRYPOINT_GRAPH_NOT_YET_MATERIALIZED
+  w2_a_entrypoint_blob_identity: PASS_EXACT_GIT_BLOB_9922377ddeda86fc9167d65f33c97095346e79fa
+  w2_a_local_seed: PR1057_W2C0_EXACT_GRAPH_PLUS_EXACT_W2A_ENTRYPOINT
+  w2_a_immediate_missing_import_count_from_public_core_graph: 34
+  w2_a_environment_observation: CONTAINER_DNS_CANNOT_RESOLVE_GITHUB_COM
+  w2_a_partial_substitute_allowed: false
+  w2_b_retained_real_v11_product: NOT_RUN
+  w2_35_generated_v14_browser_product: NOT_RUN_IN_SUCCESSOR
+  w2_35a_1042_generated_v14_authority: NOT_RUN_IN_SUCCESSOR
+  w2_40_native_v14_writer2_product: NOT_RUN_IN_SUCCESSOR
+
+source_reuse:
+  repository: reallaksh19/3D_Converters
+  pinned_commit: ca8d391ac5f829f53bebb3c37adf0547c34a67b4
+  repin_required: false
+  source_repository_modified: false
+
+negative_assurance:
+  stubs_or_import_rewrites_allowed: false
+  partial_core_substitute_allowed: false
+  lossy_bridge_enabled: false
+  writer3_scope_leakage_allowed: false
+  generated_v14_may_substitute_native_target_gate: false
+  not_run_promoted_to_pass: false
+  runtime_failure_claimed: false
+
+exact_next_action: COMPLETE_EXACT_W2_A_PUBLIC_ESM_DEPENDENCY_MATERIALIZATION_VERIFY_EVERY_GIT_BLOB_THEN_RUN_UNCHANGED_TEST; ONLY_AFTER_PASS_PROCEED_W2_B

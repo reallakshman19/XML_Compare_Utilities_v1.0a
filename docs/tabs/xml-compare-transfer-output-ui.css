@@ -1,0 +1,282 @@
+/* Transfer output action visibility fixes */
+.xmlc-transfer-output-dashboard {
+  position: relative;
+  z-index: 7;
+  border: 1px solid rgba(45, 212, 191, 0.58);
+  background:
+    radial-gradient(circle at 18px 18px, rgba(45, 212, 191, 0.18), transparent 34px),
+    linear-gradient(180deg, rgba(8, 47, 73, 0.98), rgba(15, 23, 42, 0.98));
+  box-shadow: 0 16px 36px rgba(2, 6, 23, 0.48);
+}
+
+.xmlc-transfer-next-action {
+  display: grid;
+  gap: 4px;
+  margin: 10px 12px 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(125, 211, 252, 0.42);
+  border-radius: 10px;
+  background: rgba(2, 6, 23, 0.46);
+  color: #e0f2fe;
+}
+
+.xmlc-transfer-next-action b {
+  color: #7dd3fc;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.xmlc-transfer-next-action span {
+  color: #f8fafc;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.28;
+}
+
+.xmlc-transfer-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 10px;
+  padding: 0 12px 14px;
+}
+
+.xmlc-transfer-dashboard-card {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+  align-content: start;
+  min-height: 118px;
+  padding: 11px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.74);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.xmlc-transfer-dashboard-card b {
+  color: #f8fafc;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.xmlc-transfer-dashboard-card span {
+  width: fit-content;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(100, 116, 139, 0.36);
+  color: #e2e8f0;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.xmlc-transfer-dashboard-card-details small {
+  min-width: 0;
+  color: #cbd5e1;
+  font-size: 11px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.xmlc-transfer-dashboard-card-details em {
+  min-width: 0;
+  color: #38bdf8;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.xmlc-transfer-dashboard-card.is-ready {
+  border-color: rgba(34, 197, 94, 0.58);
+  background: linear-gradient(180deg, rgba(20, 83, 45, 0.60), rgba(15, 23, 42, 0.76));
+}
+
+.xmlc-transfer-dashboard-card.is-ready span {
+  background: rgba(22, 163, 74, 0.30);
+  color: #bbf7d0;
+}
+
+.xmlc-transfer-dashboard-card.is-blocked {
+  border-color: rgba(245, 158, 11, 0.62);
+  background: linear-gradient(180deg, rgba(120, 53, 15, 0.58), rgba(15, 23, 42, 0.76));
+}
+
+.xmlc-transfer-dashboard-card.is-blocked span {
+  background: rgba(217, 119, 6, 0.32);
+  color: #fde68a;
+}
+
+.xmlc-transfer-dashboard-card.is-not-available {
+  border-color: rgba(100, 116, 139, 0.44);
+}
+
+.xmlc-transfer-detail-group {
+  overflow: hidden;
+}
+
+.xmlc-transfer-detail-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 13px;
+  color: #dbeafe;
+  background: rgba(15, 23, 42, 0.82);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+  font-weight: 900;
+  cursor: pointer;
+  list-style: none;
+}
+
+.xmlc-transfer-detail-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.xmlc-transfer-detail-group > summary::after {
+  content: '+';
+  width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.18);
+  color: #bfdbfe;
+  font-weight: 900;
+}
+
+.xmlc-transfer-detail-group[open] > summary::after {
+  content: '−';
+}
+
+.xmlc-transfer-detail-group > .xml-compare-panel,
+.xmlc-transfer-detail-group > .xmlc-transfer-card {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.xmlc-transfer-output {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  border-color: rgba(14, 165, 233, 0.52);
+  background: linear-gradient(180deg, rgba(8, 47, 73, 0.98), rgba(15, 23, 42, 0.98));
+  box-shadow: 0 14px 32px rgba(2, 6, 23, 0.42);
+}
+
+.xmlc-transfer-output-body {
+  display: grid;
+  grid-template-columns: minmax(210px, 300px) minmax(320px, 1fr);
+  gap: 12px;
+  align-items: stretch;
+  padding: 12px;
+}
+
+.xmlc-transfer-output-state {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  align-content: center;
+}
+
+.xmlc-transfer-output-state b {
+  color: #bae6fd;
+  font-size: 16px;
+}
+
+.xmlc-transfer-output-state span {
+  color: #93c5fd;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.xmlc-transfer-output-actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+  gap: 8px;
+  justify-content: stretch;
+  margin: 0;
+}
+
+.xmlc-transfer-output-actions .xmlc-transfer-action {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  white-space: normal;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.xmlc-transfer-output-actions .xmlc-transfer-action:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+  box-shadow: 0 4px 12px rgba(34, 211, 238, 0.15);
+}
+
+.xmlc-transfer-output-actions .xmlc-transfer-action:active:not(:disabled) {
+  transform: translateY(1px);
+  filter: brightness(0.95);
+}
+
+.xmlc-transfer-action-icon {
+  min-width: 24px;
+  min-height: 24px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.44);
+  color: #e0f2fe;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.xmlc-transfer-action-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.xmlc-transfer-output-actions .xmlc-transfer-action.is-primary,
+.xmlc-transfer-output-actions .xmlc-transfer-action.is-export {
+  border-color: rgba(34, 211, 238, 0.72);
+  background: rgba(14, 116, 144, 0.86);
+  color: #ecfeff;
+  font-weight: 900;
+  box-shadow: 0 0 0 1px rgba(125, 211, 252, 0.22), 0 8px 18px rgba(8, 47, 73, 0.34);
+}
+
+.xmlc-transfer-output-actions .xmlc-transfer-action:focus-visible,
+.xmlc-transfer-detail-group > summary:focus-visible {
+  outline: 3px solid rgba(125, 211, 252, 0.72);
+  outline-offset: 2px;
+}
+
+.xmlc-transfer-output-actions .xmlc-transfer-action:disabled {
+  opacity: 0.62;
+  filter: grayscale(0.2);
+}
+
+@media (max-width: 900px) {
+  .xmlc-transfer-output-body {
+    grid-template-columns: 1fr;
+  }
+
+  .xmlc-transfer-output-actions,
+  .xmlc-transfer-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .xmlc-transfer-dashboard-card {
+    min-height: auto;
+  }
+}

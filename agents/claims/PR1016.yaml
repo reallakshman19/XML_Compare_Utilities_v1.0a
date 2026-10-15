@@ -1,0 +1,46 @@
+pr: 1016
+claims:
+  - id: QF-1016-001
+    statement: Recursive deepFreeze of the composite result is invalid because component byte arrays are non-empty Uint8Array values.
+    evidence: LOCAL_NODE_REPRODUCTION_PLUS_REPOSITORY_DEEPFREEZE_SOURCE
+    disposition: FIXED_SHALLOW_RESULT_FREEZE
+  - id: QF-1016-002
+    statement: A family projection must not mutate APPLY decisions while continuing to represent the projected operation set as the original user-bound scope.
+    evidence: tabs/cii-workspace/cii-workspace-transfer-scope.js plus composite source audit
+    disposition: FIXED_PARENT_SCOPE_PRESERVED_WITH_DERIVED_BOUND_SUBSET_METADATA
+  - id: QF-1016-003
+    statement: Set-style operation-id comparison can conceal duplicate operation IDs and therefore cannot prove transfer-scope cardinality by itself.
+    evidence: composite adversarial scope audit
+    disposition: FIXED_EXACT_NONEMPTY_UNIQUE_ID_CARDINALITY_WRITER_AND_VALIDATOR
+  - id: AUTH-1016-001
+    statement: Every composite physical claim is anchored to the untouched TARGET byte coordinate system and must prove exact beforeField equality.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-composite.js
+    status: IMPLEMENTED
+  - id: AUTH-1016-002
+    statement: Cross-family overlapping original-coordinate spans always block; identical postimages do not canonicalize.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-composite.js
+    status: IMPLEMENTED
+  - id: AUTH-1016-003
+    statement: Composite execution requires canonical USER_EXPLICIT_OPERATION_SCOPE custody with exact source/target hashes and exact candidate/applied/excluded operation-id cardinality before family projection.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-composite.js
+    status: IMPLEMENTED
+  - id: VAL-1016-001
+    statement: Final authorization is independently reconstructed from NODENAME and SIF relocation plans; writer mutation testimony is not authority.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-composite-validation.js
+    status: IMPLEMENTED_NOT_REPOSITORY_EXECUTED
+  - id: VAL-1016-002
+    statement: The independent validator separately checks canonical bound-scope hashes, exact operation-id sets, uniqueness/cardinality, APPLY-EXCLUDE disjointness, and post-image original-byte custody.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-composite-validation.js
+    status: IMPLEMENTED_NOT_REPOSITORY_EXECUTED
+  - id: REG-1016-001
+    statement: Authored mixed fixture grows NODENAME before SIF while deleting a later SIF block, exercising real variable-length offset drift.
+    evidence: tests/cii-workspace-writer2-composite.test.js
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: REG-1016-002
+    statement: Authored scope falsifiers cover duplicate plan IDs, duplicate scope IDs, APPLY-EXCLUDE overlap, and target-hash drift on writer and independent-validator paths.
+    evidence: tests/cii-workspace-writer2-composite-scope-custody.test.js
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: BOUND-1016-001
+    statement: SIF CREATE remains blocked by unresolved V11 items 27-30 and is not admitted by the composite.
+    evidence: WRITER_2_SIF_CREATE_PAYLOAD_SEMANTICS_UNQUALIFIED_ITEMS_27_30
+    status: ENFORCED

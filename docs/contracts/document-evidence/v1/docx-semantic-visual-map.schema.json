@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.xml-compare-utilities.local/document-evidence/v1/docx-semantic-visual-map.schema.json",
+  "title": "DocxSemanticVisualMap.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "mappingId", "mappingHash", "sourceHash", "semanticContentHash", "renderProfileHash", "semanticRefs", "visualRegions", "mappingMethod", "cardinality", "status", "diagnosticCodes", "exactLocationTrusted"],
+  "properties": {
+    "schema": {"const": "DocxSemanticVisualMap.v1"},
+    "mappingId": {"type": "string", "minLength": 1},
+    "mappingHash": {"$ref": "#/$defs/sha256"},
+    "sourceHash": {"$ref": "#/$defs/sha256"},
+    "semanticContentHash": {"$ref": "#/$defs/sha256"},
+    "renderProfileHash": {"$ref": "#/$defs/sha256"},
+    "semanticRefs": {"type": "array", "items": {"$ref": "docx-semantic-ref.schema.json"}},
+    "visualRegions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sourceHash", "renderProfileHash", "surfaceId", "surfaceHash", "geometry"],
+        "properties": {
+          "sourceHash": {"$ref": "#/$defs/sha256"},
+          "renderProfileHash": {"$ref": "#/$defs/sha256"},
+          "surfaceId": {"type": "string", "minLength": 1},
+          "surfaceHash": {"$ref": "#/$defs/sha256"},
+          "geometry": {"$ref": "geometry.schema.json"}
+        }
+      }
+    },
+    "mappingMethod": {"type": "string", "minLength": 1},
+    "cardinality": {"type": "string", "enum": ["one-to-one", "one-to-many", "many-to-one", "many-to-many"]},
+    "status": {"type": "string", "enum": ["mapped", "ambiguous", "unmapped", "stale"]},
+    "diagnosticCodes": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "exactLocationTrusted": {"type": "boolean"}
+  },
+  "$defs": {"sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}
+}

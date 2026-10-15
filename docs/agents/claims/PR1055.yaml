@@ -1,0 +1,269 @@
+pr: 1055
+issue: 1052
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-product-runtime-w218
+base_main: 297fb37a0e894a3aac91de9188ebf30e810781fb
+claim_state: W2_34_WRITER2_EXPORT_CUSTODY
+ready_for_review: false
+merge_authority: OWNER_ONLY
+merge_authorized: false
+program_release_freeze_verdict: NOT_READY_FOR_WRITER2_RELEASE_FREEZE
+
+claims:
+  - id: FROZEN_3D_CONVERTERS_SOURCE_CUSTODY
+    state: PASS_EXACT_GIT_BLOB_IDENTITY
+    required: true
+    source_repository: reallaksh19/3D_Converters
+    source_commit: ca8d391ac5f829f53bebb3c37adf0547c34a67b4
+    source_repository_modified: false
+
+  - id: V14_WRITER_DIALECT_BRIDGE
+    state: IMPLEMENTED_CHANGE_ISOLATED_RUNTIME_PARTIAL
+    required: true
+    architecture: ORIGINAL_V14_PLUS_CANONICAL_WRITER2_DELTA_VIA_V11
+    scope: WRITER2_ONLY
+    v14_writer1_fixed_field_projection: NOT_QUALIFIED_FAIL_CLOSED
+    allow_lossy: false
+    canonical_v14_final_output_allowed: false
+    projected_native_v14_to_v11_exact_postimage_proof: REQUIRED
+
+  - id: WRITER2_LIVE_V11_V14_PRODUCT_ROUTE_W2_34
+    state: IMPLEMENTED_SOURCE_INSPECTION_RUNTIME_PENDING
+    required: true
+    production_default_writer: WRITER_1B
+    writer2_selection: EXPLICIT_SEPARATE_UTILITIES_TILE
+    writer2_auto_selected: false
+    inspect_route: inspectCiiWorkspaceModelsWithVersionBridge
+    preview_route: createCiiWorkspacePreviewWithVersionBridge
+    apply_route: applyCiiWorkspaceTargetWriter2WithVersionBridge
+    scoped_apply_requires_version_bridge: true
+    writer2_export_requires_version_bridge_validation_pass: true
+    writer2_export_requires_byte_string: true
+    writer2_text_fallback_allowed: false
+    files:
+      shell: 226ae8f3a7906b0d28a8c10195ad9b27d7f6444e
+      transfer_scope_ui: 4d60b2c1f418ed3a7490a1f4d91f3c83f2cc5ae8
+      engineering_ui: cff53d820075417f817d6768c16ce550910c28c5
+      tab: b7589c7595f3b33cdd8529a03c7e990da4b68d76
+      bridge: 8038993f0a97719c0c316f31c2d6c30ea0386ec4
+      focused_source_regression: 20b31c241ded6e475fe293277e3f3d29ac787093
+      broader_product_regression: 2b01a6eba2e60eabdb3dd19b28c7aaba1deb758d
+    source_verdict: PASS_SOURCE_INSPECTION_W2_34_LIVE_V11_V14_BRIDGE_AND_EXPORT_CUSTODY
+    focused_runtime_verdict: NOT_RUN_EXACT_7_FILE_GRAPH_NOT_MATERIALIZED
+    broader_runtime_verdict: NOT_RUN_EXACT_14_FILE_GRAPH_NOT_MATERIALIZED
+    browser_verdict: NOT_RUN
+
+  - id: WRITER2_EXPORT_CUSTODY_W2_34
+    state: PASS_SOURCE_INSPECTION_FAIL_CLOSED_EXPORT_BOUNDARY
+    required: true
+    shell_blob: 226ae8f3a7906b0d28a8c10195ad9b27d7f6444e
+    scoped_ui_blob: 4d60b2c1f418ed3a7490a1f4d91f3c83f2cc5ae8
+    blockers:
+      - CII_WRITER_2_VERSION_BRIDGE_VALIDATION_REQUIRED
+      - CII_WRITER_2_BYTE_STRING_REQUIRED
+    rules:
+      - WRITER2_NO_TEXT_FALLBACK
+      - WRITER2_EXPORT_REQUIRES_VERSION_BRIDGE_VALIDATION_PASS
+      - WRITER2_EXPORT_REQUIRES_BYTE_STRING
+      - WRITER1C_BYTE_EXPORT_BEHAVIOR_PRESERVED
+      - WRITER1A_B_TEXT_BEHAVIOR_PRESERVED
+    source_regression_blob: 20b31c241ded6e475fe293277e3f3d29ac787093
+    runtime_promoted: false
+
+  - id: V14_CHANGE_PROJECTION_AUTHORITY
+    state: IMPLEMENTED_FAIL_CLOSED_W2_30
+    required: true
+    module: tabs/cii-workspace/cii-workspace-v14-change-projection.js
+    current_module_blob: 0a16b1383da6ef58abf55c53a91711a0a1f21c17
+    projectable_changed_sections: [CONTROL, ELEMENTS, NODENAME, RESTRANT, SIF&TEES]
+    cardinality_units: { NODENAME: 1, RESTRANT: 24, SIF&TEES: 14 }
+    retained_unit_reorder: BLOCK
+    equal_cardinality_unit_replacement: BLOCK
+    writer1_equal_cardinality_fields: NOT_QUALIFIED_BLOCK
+    miscel_hanger_changed_section: NOT_AUTHORIZED_BLOCK
+    nodename_whole_section_create: NOT_AUTHORIZED_EXISTING_SECTION_REQUIRED
+
+  - id: V14_WRITER2_FIXED_FIELD_AUTHORITY
+    state: IMPLEMENTED_FAIL_CLOSED_W2_32
+    required: true
+    module: tabs/cii-workspace/cii-workspace-v14-writer2-fixed-field-authority.js
+    schema: CIIWorkspaceV14Writer2FixedFieldAuthority.v1
+    module_blob: fc97ddd7fd5645e46c70a722c7f96f17dc7ae188
+    bridge_blob: 8038993f0a97719c0c316f31c2d6c30ea0386ec4
+    allowed_control_fields:
+      - CONTROL_NODENAME_NONAM_COUNT@row0_field3
+      - CONTROL_RESTRAINT_BLOCK_COUNT@row1_field3
+      - CONTROL_SIF_TEE_BLOCK_COUNT@row2_field4
+    allowed_element_fields_per_15_row_block:
+      - ELEMENT_RESTRAINT_POINTER@row12_field3
+      - ELEMENT_SIF_TEE_POINTER@row13_field4
+      - ELEMENT_NODENAME_POINTER@row13_field5
+    unauthorized_control_element_field: BLOCK
+    whole_row_adoption_as_authority: BLOCKED_BY_PREFLIGHT
+    cardinality_control_correlation: REQUIRED
+    cardinality_change_same_family_pointer_claim: REQUIRED
+    pointer_without_cardinality_change: BLOCK
+    sif_restraint_cardinality_increase: BLOCK
+    changed_pointer_out_of_postimage_range: BLOCK
+
+  - id: V14_WRITER2_FIXED_FIELD_NATIVE_LAYOUT_CROSSCHECK
+    state: PASS_SOURCE_INSPECTION_AUTHORITATIVE_REFERENCE
+    required: true
+    observation: SOURCE_INSPECTION
+    oracle: AUTHORITATIVE_REFERENCE
+    source_repository: reallaksh19/3D_Converters
+    source_commit: ca8d391ac5f829f53bebb3c37adf0547c34a67b4
+    source_files:
+      - converters/scripts/cii14_section_rules.py
+      - converters/scripts/cii14_multi_merge.py
+      - converters/scripts/cii_v11_v14_records.py
+    evidence:
+      - V14_CONTROL_LAYOUT_REUSES_V11_CONTROL_LAYOUT
+      - V14_ELEMENT_RECORD_LINES_15
+      - V14_NUMERIC_PROFILE_2X_PLUS_13_COLUMN_CELLS
+      - FROZEN_ELEMENT_ROWS_12_15_PRESERVED_ACROSS_DIALECT_CONVERSION
+      - V14_MULTI_MERGE_HANGERS_BLOCKED
+    supports: SIX_W2_31_W2_32_CONTROL_ELEMENT_COUNT_POINTER_COORDINATES
+    runtime_promoted: false
+    evidence_record: docs/cii-writer2-v14-fixed-field-authority-runtime-2026-08-26.md
+
+  - id: V14_WRITER2_FIXED_FIELD_AUTHORITY_W2_31_RUNTIME
+    state: PASS_RUNTIME_EXACT_TWO_FILE_BLOB_GRAPH_NODE_ESM_MODE_W2_31_FIXED_FIELD_AUTHORITY
+    required: true
+    module_blob: 7bc3a83ef37159c9a70fb0e16acaba721fd73b26
+    test_blob: 74077b00b094c5e30ff402f8a0adeb1814bb24cc
+
+  - id: V14_WRITER2_POINTER_CORRELATION_W2_32_RUNTIME
+    state: PASS_RUNTIME_EXACT_TWO_FILE_BLOB_GRAPH_NODE_ESM_MODE_W2_32_POINTER_CORRELATION
+    required: true
+    module_blob: fc97ddd7fd5645e46c70a722c7f96f17dc7ae188
+    test_blob: 78dbe0af0b8d0d8fd55aae26f586f727bb2d03df
+    command: node --experimental-default-type=module tests/cii-workspace-v14-writer2-fixed-field-authority.test.js
+    exact_blob_admission: true
+    explicit_falsifier: MATCHING_CARDINALITY_AND_CONTROL_WITH_ZERO_SAME_FAMILY_POINTER_CLAIM_BLOCKED
+    source_grounding:
+      - V11_NODENAME_RELOCATION_REQUIRES_OWNED_POINTER_CHANGE
+      - V11_SIF_DELETE_REQUIRES_OWNED_POINTER_CHANGE
+      - V11_RESTRAINT_BLOCK_DELETE_REQUIRES_UNIQUE_OWNED_POINTER_CHANGE
+    evidence: docs/cii-writer2-v14-fixed-field-authority-runtime-2026-08-26.md
+    scope_limit: DOES_NOT_QUALIFY_FULL_BRIDGE_PYODIDE_PRODUCT_BROWSER
+
+  - id: V14_CHANGE_PROJECTION_W2_30_RUNTIME
+    state: PASS_RUNTIME_EXACT_TWO_FILE_BLOB_GRAPH_NODE_ESM_MODE_W2_30_WRITER2_ONLY_SCOPE
+    required: true
+    module_blob: 0a16b1383da6ef58abf55c53a91711a0a1f21c17
+    test_blob: 90b7b8fb4edbdb63accbf0ff21a8185610ab06b0
+
+  - id: V11_V14_FROZEN_ENGINE_SYNTHETIC_TEST
+    state: PASS_RUNTIME_EXACT_SEVEN_FILE_BLOB_GRAPH
+    required: true
+    corrected_test_blob: 43721ed3f2c990080945afa2a8a3702dbb021eb4
+    final_result: 6_PASS_0_FAIL
+    frozen_python_modified: false
+
+  - id: V11_V14_FROZEN_SOURCE_CURRENT
+    state: PASS_RUNTIME_EXACT_THIRTEEN_FILE_BLOB_GRAPH_NODE_ESM_MODE_W2_32
+    required: true
+    current_test_blob: ade99d0d4f4d4ff394a90f81286e4394b5409a54
+    current_graph_file_count: 13
+    command: node --experimental-default-type=module tests/cii-workspace-v11-v14-frozen-source.test.js
+    exact_blob_admission: true
+    admitted_blob_count: 13
+    source_inspection_promoted_to_runtime_pass: false
+
+  - id: WRITER2_PRODUCT_ROUTING_STATIC_REGRESSION
+    state: SOURCE_ASSERTIONS_UPDATED_RUNTIME_PENDING_EXACT_14_FILE_GRAPH
+    required: true
+    current_test_blob: 2b01a6eba2e60eabdb3dd19b28c7aaba1deb758d
+    drift_found: PRE_RESTRAINT_PRODUCT_CORE_ASSERTIONS_AND_UNBRIDGED_LIVE_WRITER2_ROUTE_AND_PRE_EXPORT_CUSTODY_ASSERTIONS
+    current_assertions:
+      - writer2HasRestraintApply
+      - applyCiiWriter2CompositeWithRestraintDelete
+      - applyCiiWriter2CompositeWithHangerDeleteAll
+      - validateCiiWriter2ProductRoundTrip
+      - inspectCiiWorkspaceModelsWithVersionBridge
+      - createCiiWorkspacePreviewWithVersionBridge
+      - applyCiiWorkspaceTargetWriter2WithVersionBridge
+      - scoped_writer2_versionBridge_required
+      - writer2_export_bridge_validation_required
+      - writer2_export_byte_string_required
+      - writer2_text_fallback_forbidden
+      - production_default_writer1b_preserved
+    source_architecture_check: PASS_SOURCE_INSPECTION_BRIDGE_BOUND_PRODUCT_AND_EXPORT_CUSTODY
+    runtime_promoted: false
+
+  - id: W2_11_RESTRAINT_RUNTIME
+    state: PASS_RUNTIME_EXACT_BLOB
+    required: true
+
+  - id: W2_12_R01_R22_RUNTIME
+    state: PASS_RUNTIME_EXACT_BLOB
+    required: true
+
+  - id: W2_13_SYNTHETIC_PRODUCT_RUNTIME
+    state: NOT_RUN_EXACT_EXECUTABLE_ENVIRONMENT
+    required: true
+    exact_entrypoint_blob: 9922377ddeda86fc9167d65f33c97095346e79fa
+    blocker: STATIC_IMPORT_OF_FULL_CII_WORKSPACE_CORE_GRAPH
+    stubs_or_import_rewrites_allowed: false
+
+  - id: W2_13_RETAINED_REAL_V11_PRODUCT_RUNTIME
+    state: NOT_RUN_EXACT_EXECUTABLE_ENVIRONMENT
+    required: true
+    exact_entrypoint_blob: c341b99e2786b0034ef672b4efb03d167d9ad26c
+    blocker: STATIC_IMPORT_OF_FULL_CII_WORKSPACE_CORE_GRAPH
+    stubs_or_import_rewrites_allowed: false
+
+  - id: REAL_V14_CHANGE_ISOLATED_WRITER2_ROUNDTRIP
+    state: NOT_RUN
+    required: true
+    required_oracle: PROJECTED_V14_DOWNGRADE_EQUALS_EXACT_VALIDATED_V11_WRITER2_POSTIMAGE
+
+  - id: V14_WRITER1_FIXED_FIELD_PROJECTION
+    state: NOT_QUALIFIED_FAIL_CLOSED
+    required_for_writer2_release_freeze: false
+    future_requirement: SEPARATE_SOURCE_QUALIFIED_FIELD_IDENTITY_PROJECTION_AUTHORITY
+
+  - id: WRITER2_PROGRAM_CAPABILITY_MATRIX
+    state: ESTABLISHED
+    classifications:
+      nodename_create_delete_v11: DONE_EXISTING_NODENAME_SECTION
+      nodename_cardinality_v14_projection: IMPLEMENTED_EXISTING_SECTION_RUNTIME_PENDING_FULL_BRIDGE
+      nodename_equal_cardinality_v14_writer1_projection: NOT_QUALIFIED_FAIL_CLOSED
+      sif_delete_compaction_v11: DONE
+      sif_delete_v14_projection: IMPLEMENTED_DELETE_ONLY_RUNTIME_PENDING_FULL_BRIDGE
+      sif_create: SOURCE_BLOCKED_REAFFIRMED_V11
+      hanger_delete_v11: DONE_PRODUCT_ROUTED
+      hanger_v14_projection: NOT_AUTHORIZED_FAIL_CLOSED
+      hanger_create: SOURCE_BLOCKED_REAFFIRMED_V11
+      restraint_delete_product_v11: IMPLEMENTED_RUNTIME_PENDING_FULL_WORKSPACE
+      restraint_delete_v14_projection: IMPLEMENTED_DELETE_ONLY_RUNTIME_PENDING_FULL_BRIDGE
+      restraint_create: SOURCE_BLOCKED_REAFFIRMED_V11
+      writer3_topology: OUTSIDE_WRITER2
+
+validation_integrity:
+  source_3d_converters_modified: false
+  lossy_bridge_enabled: false
+  broad_canonical_v14_rewrite_used_as_output: false
+  unauthorized_v14_control_element_field_projection_allowed: false
+  cardinality_change_without_pointer_evidence_allowed: false
+  v14_writer1_equal_cardinality_projection_claimed: false
+  miscel_hanger_v14_projection_allowed: false
+  nodename_absent_section_create_claimed: false
+  production_default_writer1b_changed: false
+  writer2_auto_selected: false
+  writer2_live_route_bypasses_version_bridge: false
+  writer2_export_text_fallback_allowed: false
+  writer2_export_without_bridge_pass_allowed: false
+  writer2_export_without_byte_string_allowed: false
+  focused_runtime_promoted_to_full_bridge_pass: false
+  native_v14_layout_source_inspection_promoted_to_runtime_pass: false
+  current_source_test_promoted_to_pass_without_rerun: false
+  writer2_product_routing_static_test_promoted_to_runtime_pass: false
+  writer2_live_route_source_test_promoted_to_runtime_pass: false
+  full_workspace_graph_stubbed_or_import_rewritten: false
+  not_run_promoted_to_pass: false
+  writer3_scope_leakage: false
+
+changed_file_count_expected: 35
+next_claim_gate: exact_w2_34_live_route_7_file_graph_if_materializable_then_exact_writer2_product_routing_14_file_graph_then_exact_full_workspace_w2_13_and_retained_real_v11_then_real_v14_change_isolated_writer2_roundtrip_then_browser_regressions_and_freeze

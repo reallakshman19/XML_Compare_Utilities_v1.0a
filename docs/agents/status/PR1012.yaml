@@ -1,0 +1,33 @@
+pr: 1012
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-nodename-physical-rewrite
+base: main@a450ab3533089166fa6b8bbe86cab86a6e90ecc1
+handover_readiness: READY
+current_stage: PHASE4B_IMPLEMENTED_AWAITING_REPOSITORY_RUNTIME_QUALIFICATION
+ready_for_review: false
+merge_authority: OWNER_ONLY
+qualification_verdict: IMPLEMENTED_PARTIALLY_EXECUTED_NOT_REPOSITORY_QUALIFIED
+scope:
+  - Writer2 NODENAME physical row insertion/deletion
+  - ELEMENT NODENAME pointer relocation
+  - CONTROL.NONAM maintenance
+  - independent exact-full-postimage validation
+excluded:
+  - Writer2 product/core routing
+  - SIF/TEE block create/delete
+  - hanger create/delete or packed-array maintenance
+  - generic auxiliary-section insertion/deletion
+  - topology mutation
+  - Writer3
+runtime:
+  writer_syntax: PASS_LOCAL_EXECUTION
+  validator_syntax: PASS_LOCAL_EXECUTION
+  focused_test_source_syntax: PASS_LOCAL_EXECUTION
+  isolated_exact_new_modules: PASS_ISOLATED_EXACT_NEW_MODULES
+  forged_writer_testimony_attack: FAIL_AS_REQUIRED
+  repository_focused_tests: AUTHORED_NOT_RUN_ENVIRONMENT
+  real_benchmark: NOT_RUN_ENVIRONMENT
+  inherited_writer_regressions: NOT_RUN_ENVIRONMENT
+  full_npm: NOT_RUN_ENVIRONMENT
+  browser: NOT_RUN_ENVIRONMENT
+next: Writer2 product/core routing after Phase4B acceptance

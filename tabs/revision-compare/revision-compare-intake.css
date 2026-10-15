@@ -1,0 +1,50 @@
+.revc-slot[data-revc-drop-enabled="true"] {
+  position: relative;
+  transition: border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+}
+
+.revc-drop-hint {
+  margin: 0;
+  color: #93a8bd;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.revc-slot.is-revc-drop-active {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgb(56 189 248 / 22%);
+  transform: translateY(-1px);
+}
+
+.revc-slot.is-revc-drop-active .revc-drop-hint {
+  color: #dff6ff;
+  font-weight: 700;
+}
+
+.revc-slot.is-revc-drop-active::after {
+  position: absolute;
+  inset: 8px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed #7dd3fc;
+  border-radius: 8px;
+  background: rgb(3 18 31 / 88%);
+  color: #e0f7ff;
+  content: "Drop staged JSON";
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  text-transform: uppercase;
+  z-index: 4;
+}
+
+.revc-clear {
+  align-self: flex-start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revc-slot[data-revc-drop-enabled="true"] {
+    transition: none;
+  }
+}

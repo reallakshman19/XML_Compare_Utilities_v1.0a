@@ -1,0 +1,79 @@
+pr: 1053
+issue: 1052
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-runtime-w216
+base_main: a0098a7b6f1aff9f0219b051da964c6a9adad5ce
+current_stage: W2_13_PRODUCT_RUNTIME
+agent_state: READ_ONLY_QUALIFICATION
+handover_readiness: READY
+criticality: ENGINEERING_CRITICAL
+production_change_authority: false
+merge_authority: OWNER_ONLY
+merge_authorized: true
+merge_authorization_source: OWNER_INSTRUCTION_2026_08_25_MERGE_PROCEED_NEXT
+ready_for_review: true
+pr_state: DRAFT_PENDING_READY_TRANSITION
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RESTRAINT_DELETE_RELEASE_FREEZE
+
+predecessor:
+  pr: 1051
+  phase: W2_15_RUNTIME_EVIDENCE_CHECKPOINT
+  merge_sha: a0098a7b6f1aff9f0219b051da964c6a9adad5ce
+
+live_corrections:
+  w2_13_product_core_pr: 1047
+  w2_13_product_core_state: MERGED
+  w2_13_merge_sha: f51f8acdcdcbd108073e2a2e57753c07d9f27c42
+  pr1039_master_index_state: STALE_INDEX_LIVE_MERGED
+  open_sif_create_pr: 1033
+  coordination: SAFE_WITH_PRESERVED_SIF_CREATE_BLOCKER
+
+inherited_authority_correction:
+  control_row1_field4: NONAM_PRESERVE
+  control_row2_field4: RESTRAINT_BLOCK_COUNT_I13
+
+runtime:
+  w2_11_restraint_physical: PASS_RUNTIME_EXACT_BLOB
+  w2_11_control_p19: PASS_RUNTIME_EXACT_BLOB
+  w2_11_falsifiers: PASS_RUNTIME_EXACT_BLOB
+  w2_12_support_probe: PASS_RUNTIME_EXACT_BLOB_NONQUALIFYING
+  w2_12_writer_dependency_closure: COMPLETE_IMPORTS_UNDER_NODE_22_16_0
+  w2_12_validator_dependency_closure: COMPLETE_IMPORTS_UNDER_NODE_22_16_0
+  w2_12_r01_r22: PASS_RUNTIME_EXACT_BLOB
+  w2_13_synthetic_runtime: NOT_RUN_ENVIRONMENT
+  w2_13_real_cii_runtime: NOT_RUN_ENVIRONMENT
+  inherited_writer2_regression: PARTIAL_PASS_W2_11_RESTRAINT_ONLY
+  repository_npm: NOT_RUN_ENVIRONMENT
+  engineering_failure: NONE_OBSERVED
+
+w2_12_runtime_anchors:
+  r02_node_restraint_original_coordinate_separation: PASS_RUNTIME_EXACT_BLOB
+  r05_partial_hanger_restraint_one_target0: PASS_RUNTIME_EXACT_BLOB
+  r09_control_nonam_preserve_restraints_mutate: PASS_RUNTIME_EXACT_BLOB
+  r20_unrelated_final_byte_drift_rejected: PASS_RUNTIME_EXACT_BLOB
+
+exact_blobs_added_to_sparse_mirror:
+  partial_hanger_validator: 309770a62e5c2a9caa317383ae70c89c5ff02679
+  nodename_evidence: 050df81250d62cc454856e403d6e4ffc85fd9321
+  writer1c_sif_custody: 915ceb0a199091f00823e89d6c73c6007da62f9d
+  w2_12_fixture: b725d56be579e7a2d7c40995ca2e13af7e702cbc
+  w2_12_positive_entrypoint: b46ddd256df56353e21c0137bb075462904e14b3
+  w2_12_partial_hanger_entrypoint: 1c8f3fa5cc4c55eba7159c361147d533a4b1ba50
+  w2_12_falsifier_entrypoint: 708101527d126409ba79f6761a02672c8e23be78
+
+local_sparse_mirror:
+  path: /mnt/data/w215
+  node_version: v22.16.0
+  w2_12_import_closure: COMPLETE
+  w2_12_authored_runtime: PASS
+
+negative_assurance:
+  production_changed: false
+  restraint_create_enabled: false
+  sif_create_enabled: false
+  hanger_create_enabled: false
+  writer3_changed: false
+  parser_converter_changed: false
+  workflow_changed: false
+
+next_gate: after authorized checkpoint merge, continue exact W2.13 product-routing and retained-real-CII runtime plus inherited Writer2 regressions in a separate successor PR

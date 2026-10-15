@@ -1,0 +1,72 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR981
+mission: CII Workspace V1 anchored topology correspondence and property-transfer preview
+workstream: cii-workspace-v1
+branch: agent/issue-980-cii-workspace-v1
+validated_implementation_head: f5bfd5aeb4dc5cefef1583be12b94531dfa469f5
+main_base: b0f13c99e036c590a281e2d10bd2b7f0d64e58eb
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+agent_state: APPROVED_PROTECTED_INTEGRATION_EXTENDED_VALIDATION_COMPLETE_WITH_ENVIRONMENT_LIMITS
+pr_recovery_state: READY_FOR_OWNER_REVIEW_WITH_ENVIRONMENT_LIMITS
+handover_readiness: READY
+report_path: agents/PR981_workreport.md
+appendix_a_status: OWNER_RECORDED_QUALIFIED
+owner_authorization_comment_id: 5308388872
+scope_authority: OWNER_APPROVED_AUTH_001A_AND_AUTH_002
+validation_state: GE011_EXTENDED_LOCAL_VALIDATION_ACTIONS_WAIVED
+validation_summary: >-
+  22 CII Workspace JavaScript tests PASS. Diameter policy 5/5 and the six existing
+  CII2019 section-rule regression intents PASS in reconstructed current slices. Exact
+  Utilities runtime + CII Workspace mount/destroy/re-entry passes in the DOM harness.
+  Revision Compare matcher/custody focused regression remains PASS and a 5000-row
+  property-evidence stress slice PASSes. Full XML/Revision/Python commands remain PARTIAL
+  because a complete private checkout is unavailable; real browser validation is
+  ENVIRONMENT_BLOCKED because Chromium hangs even on trivial local HTML. GitHub Actions
+  and commit-status evidence are WAIVED_BY_OWNER per active-chat direction at
+  2026-08-16T21:07+04:00.
+actions_status_gate: WAIVED_BY_OWNER
+acceptance_matrix:
+  cii_workspace_focused_suite: PASS_22
+  intake_parser_supported_cii: PASS
+  maintained_full_cii_intake_path: PASS_FOCUSED
+  legacy_root_output_cii: DOCUMENTED_INVALID_ARTIFACT
+  generated_unknown_od: PASS_FAIL_CLOSED
+  diameter_policy_reconstructed_slice: PASS_5_OF_5
+  legacy_cii2019_section_rule_intents: PASS_6_OF_6
+  utilities_registration: IMPLEMENTED
+  utilities_dom_lifecycle: PASS
+  utilities_real_browser_smoke: ENVIRONMENT_BLOCKED
+  anchor_contract_and_one_anchor: PASS
+  topology_path_reuse: PASS
+  bounded_candidate_winner_gap: PASS
+  multihop_neighbourhood: PASS
+  structural_conflicts: PASS
+  permutation_determinism: PASS
+  target_custody: PASS
+  review_identity_binding: PASS
+  node_element_component_separation: PASS
+  transfer_preview: PASS
+  stage06_placeholder: PASS
+  audit_export: PASS
+  xml_topology_regression_focused: PASS
+  xml_topology_full_suite: PARTIAL_COMPLETE_CHECKOUT_UNAVAILABLE
+  revision_compare_matcher_focused: PASS
+  revision_compare_property_evidence_5000: PASS
+  revision_compare_full_qualification: PARTIAL_BROWSER_ENVIRONMENT_BLOCKED
+  python_converter_full_suite: PARTIAL_COMPLETE_CHECKOUT_UNAVAILABLE
+  github_actions_status: WAIVED_BY_OWNER
+protected_changes:
+  cii2019_section_rules.py: 44 additions, 0 deletions; OD pre-write guard only
+  tabs/psnm-utility-tab.js: 1 addition, 0 deletions; one CII Workspace descriptor
+  inputxml_to_cii2019.py: unchanged from baseline
+known_limits:
+  - broader interior rigid-component ownership remains fail-closed outside the unique-terminal record slice
+  - literal full-suite claims require a complete authenticated checkout
+  - real-browser coexistence is blocked by the local Chromium runtime, not by an observed application failure
+exact_next_action: >-
+  Keep PR draft. Owner may review the focused/partial evidence and decide whether the
+  unavailable full-checkout/browser gates are required before merge. Do not wait on or
+  poll GitHub Actions/status unless the owner reverses the explicit waiver.
+last_updated: 2026-08-16T21:07:00+04:00

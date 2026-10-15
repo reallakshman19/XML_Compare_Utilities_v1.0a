@@ -1,0 +1,9 @@
+schema_version: relay-v2.5-compatibility-pointer
+status: NON_AUTHORITATIVE
+superseded_by: agents/relay/roadmap/PROGRESS.yaml
+roadmap_revision: RM-0003
+progress_basis: PB-0003
+note: >-
+  This bootstrap-era duplicate is retained only for migration history. The canonical V2.5 progress artifact is
+  agents/relay/roadmap/PROGRESS.yaml. Do not use this path for execution authority, progress, qualification,
+  or handover decisions.

@@ -1,0 +1,42 @@
+schema: AgentClaim.v1
+pr_or_wip: PR995
+claim_state: IMPLEMENTATION_COMPLETE_HANDOVER_READY
+branch: agent/cii-multi-base-orchestration
+base_basis_sha: daf3be0a23524c4e25c6adc915f8841732180c36
+authority_domains:
+  - CII_MULTI_BASE_WORKSPACE_ORCHESTRATION
+  - CII_CROSS_LOOP_CORRESPONDENCE_ARBITRATION
+  - CII_LEGACY_ANCHOR_COMPATIBILITY_ADAPTER
+claim_modes:
+  - EXCLUSIVE
+files:
+  exact:
+    - agents/MASTER_INDEX.md
+    - agents/PR995_workreport.md
+    - agents/status/PR995.yaml
+    - agents/claims/PR995.yaml
+    - tabs/cii-workspace/cii-workspace-core.js
+    - tabs/cii-workspace/cii-workspace-correspondence-arbitration.js
+    - tabs/cii-workspace/cii-workspace-multi-base-correspondence.js
+    - tests/cii-workspace-multi-base-correspondence.test.js
+    - tests/cii-workspace-benchmark-base-anchor.test.js
+forbidden_existing_file_edits:
+  - tabs/cii-workspace/cii-workspace-target-writer.js
+  - tabs/cii-workspace/cii-workspace-target-writer-1b.js
+  - tabs/cii-workspace/cii-workspace-transfer-policy.js
+  - tabs/cii-workspace/cii-workspace-transfer-plan.js
+  - parser/fixed-field.js
+  - converters/**
+  - .github/workflows/**
+implementation_claims:
+  - explicit Method A and Method B base loops drive the actual workspace preview correspondence path
+  - each Method A loop uses only its own local geometry transform for correspondence generation
+  - Method B loops reuse existing qualified single-anchor propagation after the Method B run-basis gate
+  - only READY loop-correspondence outputs contribute to OR union
+  - identical cross-loop node/element claims collapse with complete multi-base provenance
+  - source-to-multiple-target and target-to-multiple-source READY claims fail closed as AMBIGUOUS
+  - unresolved independent loops remain auditable and do not poison another READY loop
+  - legacy flat anchorPairs preserve existing correspondence rows IDs and authority strings
+  - multiple independent contributing loops never publish one local Method A transform as a global transform
+validation_state: PURE_ARBITRATION_LOCAL_PASS_NEW_MODULE_SYNTAX_PASS_FULL_PRODUCTION_REAL_BENCHMARK_INHERITED_SUITE_BROWSER_NOT_RUN_ENVIRONMENT
+merge_disposition: OWNER_ONLY_NO_MERGE_AUTHORITY

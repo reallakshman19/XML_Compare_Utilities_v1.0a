@@ -1,0 +1,33 @@
+pr: 1017
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-composite-product-routing
+base: 5a1602855a0de6c933e52126f8a8a0348f16ba66
+state: IMPLEMENTED_DRAFT_AWAITING_REPOSITORY_AND_BROWSER_QUALIFICATION
+handover_readiness: READY
+takeover_authority: WRITE_ALLOWED
+merge_authority: OWNER_ONLY
+ready_for_review: false
+mission: route explicit Writer2 product/core through one-original-preimage NODENAME plus V11 SIF DELETE composite
+scope:
+  - WRITER2_COMPOSITE_PREVIEW_ROUTING
+  - WRITER2_COMPOSITE_SCOPE_READINESS
+  - WRITER2_COMPOSITE_CORE_APPLY
+  - WRITER2_COMPOSITE_ROUNDTRIP_VALIDATION
+  - BINARY_AUTHORITATIVE_EXPORT_REUSED
+blocked:
+  - SIF_CREATE_ITEMS_27_30_UNRESOLVED
+  - PROCESS_WRITER2
+  - RESTRAINT_CARDINALITY_WRITER2
+  - HANGER_CARDINALITY_WRITER2
+  - WRITER3_TOPOLOGY
+validation:
+  branch_grounding: PASS_GIT_COMPARE
+  base_sif_presence_delta: PASS_SOURCE_INSPECTION
+  generic_sif_policy: PASS_SOURCE_INSPECTION
+  core_dispatch: PASS_SOURCE_INSPECTION
+  scope_readiness: PASS_SOURCE_INSPECTION
+  focused_product_routing: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_writer2: NOT_RUN_ENVIRONMENT
+  full_repository: NOT_RUN_ENVIRONMENT
+  browser: NOT_RUN_ENVIRONMENT
+  real_cii_roundtrip: NOT_RUN_ENVIRONMENT

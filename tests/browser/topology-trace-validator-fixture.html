@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Topology Trace Validator Fixture</title><style>html,body,#fixture{height:100%;margin:0;background:#020617}</style></head>
+<body><div id="fixture"></div><script type="module">
+import { mountTopologyTraceValidatorWorkspace } from '../../tabs/topology-trace-validator/topology-trace-validator-tab.js';
+import { topologyBrowserFixtureArtifacts } from '../fixtures/topology-trace-validator-fixture.js';
+const root = document.querySelector('#fixture');
+const mounted = await mountTopologyTraceValidatorWorkspace(root, topologyBrowserFixtureArtifacts);
+window.__topologyValidatorHarness = mounted;
+document.body.dataset.topologyValidatorReady = '1';
+</script></body></html>

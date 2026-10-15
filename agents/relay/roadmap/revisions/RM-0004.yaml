@@ -1,0 +1,26 @@
+schema_version: relay-v2.5
+revision:
+  id: RM-0004
+  from_revision: RM-0003
+  to_revision: RM-0004
+  classification: EXECUTION_DERIVED_STATUS
+  trigger:
+    type: OWNER_MERGE_DECISION
+    ref: github:reallaksh19/XML_Compare_Utilities#1228@45f2a3ed7bbb186030e141a8313ccc04ddc997cb
+changes:
+  added: []
+  removed: []
+  changed: [OBJ-CII-W2-NB-R1-1224, PH-IMPLEMENTATION, WP-RET-001, PH-DELIVERY, WP-DELIVERY-001]
+  unaffected: [PH-V25-MIGRATION, WP-V25-MIGRATION-001, PH-ARCHITECTURE, WP-ARCH-001, WP-ORACLE-001, WP-IMPL-001]
+invalidated_execution_packages: []
+issue_graph_reconciled: true
+progress_basis_change:
+  old_basis: PB-0003
+  new_basis: PB-0004
+  old_total_weight: 100
+  new_total_weight: 100
+frontier_after: []
+notes:
+  - PR 1228 merged under OWNER_ONLY authority after the environment-blocked retained validation state was disclosed.
+  - WP-RET-001 is terminal by owner acceptance of that environment exception; retained execution remains NOT_RUN_ENVIRONMENT and is not credited as PASS.
+  - The objective lifecycle is terminal with technical progress below 100 percent because missing executable validation and preimplementation qualification are preserved as limitations rather than rewritten.

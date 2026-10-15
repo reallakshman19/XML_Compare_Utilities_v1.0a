@@ -1,0 +1,25 @@
+schema_version: relay-v2.5
+revision:
+  id: RM-0002
+  from_revision: RM-0001
+  to_revision: RM-0002
+  classification: EXECUTION_DERIVED_STATUS
+  trigger:
+    type: MIGRATION_RECONCILIATION
+    ref: agents/relay/migration/MIGRATION_RECONCILIATION.yaml
+changes:
+  added: [PH-ARCHITECTURE, WP-ARCH-001, WP-ORACLE-001, PH-IMPLEMENTATION, WP-IMPL-001, WP-RET-001, PH-DELIVERY, WP-DELIVERY-001]
+  removed: []
+  changed: [PH-V25-MIGRATION, WP-V25-MIGRATION-001]
+  unaffected: []
+invalidated_execution_packages: []
+issue_graph_reconciled: true
+progress_basis_change:
+  old_basis: PB-0001
+  new_basis: PB-0002
+  old_total_weight: 0
+  new_total_weight: 100
+frontier_after: [WP-ARCH-001]
+notes:
+  - Migration custody is complete; production repair and retained benchmark remain unresolved.
+  - Fresh qualification is required because the active phase and material engineering boundary changed.

@@ -1,0 +1,5 @@
+contractBaseline=3D_Converters@ba8b4e43698e1bed8e30f25832659603b40e86b2
+currentExternalMain=2a0aca7de1a7f5572865a049ff13e9aac075e830
+canonicalContractFilesChangedSincePinned=false
+xsd=True
+schematron=True

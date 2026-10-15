@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Topology Engineering SVG Shadow Fixture</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; }
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .panel { border: 1px solid #999; padding: 12px; min-width: 0; }
+    [data-engineering-svg-shell] { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 12px; }
+    [data-engineering-svg-shell-canvas] { min-height: 420px; }
+    [data-engineering-svg-shell-status] { grid-column: 1 / -1; }
+    [data-engineering-svg-property-key] { display: grid; gap: 4px; margin: 6px 0; }
+    svg { width: 100%; min-height: 420px; border: 1px solid #bbb; }
+    [data-engineering-svg-entity-id] { stroke: currentColor; fill: white; }
+    [data-engineering-svg-entity-id].is-selected { stroke-width: 4; }
+  </style>
+</head>
+<body>
+  <div class="comparison">
+    <section class="panel">
+      <h1>Existing TTV SVG</h1>
+      <div id="legacy"></div>
+    </section>
+    <section class="panel">
+      <h1>Shared Engineering SVG Shadow</h1>
+      <div id="shadow"></div>
+    </section>
+  </div>
+  <script type="module">
+    import { createEngineeringRevisionToken } from '../../core/engineering-scene/index.js';
+    import { readCanonicalTopology, readTopologyInputXml, readTopologyTraceLedger } from '../../tabs/topology-trace-validator/topology-artifact-reader.js';
+    import { validateTopologyArtifacts } from '../../tabs/topology-trace-validator/topology-independent-validator.js';
+    import { readManagedTopologySource } from '../../tabs/topology-trace-validator/topology-source-reader.js';
+    import { createTopologyEngineeringSvgShadowWorkspace } from '../../tabs/topology-trace-validator/topology-engineering-svg-shadow-workspace.js';
+    import { buildTopologySvgMarkup } from '../../tabs/topology-trace-validator/topology-svg-renderer.js';
+    import { buildTopologySvgViewModel } from '../../tabs/topology-trace-validator/topology-svg-view-model.js';
+    import { GEOMETRY_TOLERANCE_MM } from '../../tabs/topology-trace-validator/topology-validator-values.js';
+    import {
+      canonicalTopologyFixture,
+      topologyInputXmlFixture,
+      topologySourceFixture,
+      topologyTraceLedgerFixture,
+    } from '../fixtures/topology-trace-validator-fixture.js';
+
+    const source = readManagedTopologySource(topologySourceFixture);
+    const canonical = readCanonicalTopology(canonicalTopologyFixture);
+    const ledger = readTopologyTraceLedger(topologyTraceLedgerFixture);
+    const inputXml = readTopologyInputXml(topologyInputXmlFixture);
+    const validation = validateTopologyArtifacts({ source, canonical, ledger, inputXml }, GEOMETRY_TOLERANCE_MM);
+    const listeners = new Set();
+    let projection = 'XY';
+    let revisionNumber = 1;
+    let workspace = null;
+
+    function state() {
+      return Object.freeze({
+        mode: 'spatial', projection, branch: '', types: [], disposition: '',
+        searchName: '', searchRef: '', searchPath: '', labels: true, showComponentSymbols: true,
+        visibility: Object.freeze({ source: true, canonical: true, pointFeatures: true, junctions: true, boundaries: true }),
+      });
+    }
+
+    function viewModel() {
+      return buildTopologySvgViewModel({ source, canonical, ledger, inputXml, validation, state: state() });
+    }
+
+    function revision() {
+      return createEngineeringRevisionToken({ topologyShadow: revisionNumber });
+    }
+
+    function buildLegacyMarkup() {
+      return buildTopologySvgMarkup(viewModel());
+    }
+
+    function renderLegacy() {
+      const markup = buildLegacyMarkup();
+      document.querySelector('#legacy').innerHTML = markup;
+      return markup;
+    }
+
+    async function mount() {
+      workspace?.destroy();
+      workspace = await createTopologyEngineeringSvgShadowWorkspace({
+        adapterId: 'ttv-shadow-adapter',
+        sceneId: 'ttv-shadow-scene',
+        shellId: 'ttv-shadow-shell',
+        host: document.querySelector('#shadow'),
+        projection: 'XY',
+        viewport: { width: 760, height: 440 },
+        padding: 28,
+        getViewModel: viewModel,
+        getRevision: revision,
+        subscribeViewModel(listener) {
+          listeners.add(listener);
+          return () => listeners.delete(listener);
+        },
+        ariaLabel: 'Topology Trace engineering viewer',
+      });
+      return workspace;
+    }
+
+    function changeOwnerProjection(value) {
+      projection = value;
+      revisionNumber += 1;
+      const nextView = viewModel();
+      const nextRevision = revision();
+      renderLegacy();
+      listeners.forEach((listener) => listener({
+        viewModel: nextView,
+        revision: nextRevision,
+        reason: 'owner-projection-change',
+      }));
+    }
+
+    function geometryLedger(scene) {
+      return scene.entities.map((entity) => ({ id: entity.id, geometry: entity.geometry }))
+        .sort((left, right) => left.id.localeCompare(right.id));
+    }
+
+    function destroy() {
+      if (!workspace) return false;
+      const current = workspace;
+      workspace = null;
+      return current.destroy();
+    }
+
+    const legacyMarkupBeforeShadow = renderLegacy();
+    await mount();
+    globalThis.__topologyEngineeringSvgShadowFixture = {
+      get workspace() { return workspace; },
+      source,
+      canonical,
+      ledger,
+      inputXml,
+      validation,
+      viewModel,
+      revision,
+      buildLegacyMarkup,
+      legacyMarkupBeforeShadow,
+      changeOwnerProjection,
+      geometryLedger,
+      listenerCount: () => listeners.size,
+      mount,
+      destroy,
+    };
+  </script>
+</body>
+</html>

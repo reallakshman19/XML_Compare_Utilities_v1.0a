@@ -1,0 +1,53 @@
+schema: AgentClaim.v1
+pr_or_wip: PR984
+claim_state: IMPLEMENTATION_COMPLETE_HANDOVER_READY
+files:
+  exact:
+    - tabs/cii-workspace/cii-workspace-evidence.js
+    - tabs/cii-workspace/cii-workspace-topology-adapter.js
+    - tabs/cii-workspace/cii-workspace-candidates.js
+    - tabs/cii-workspace/cii-workspace-alignment.js
+    - tabs/cii-workspace/cii-workspace-match-methods.js
+    - tests/cii-workspace-hard-conflict.test.js
+    - tests/cii-workspace-m1-m2-evidence.test.js
+    - tests/cii-workspace-m1-endpoint-spatial.test.js
+    - agents/PR984_workreport.md
+    - agents/status/PR984.yaml
+    - agents/claims/PR984.yaml
+authority_domains:
+  - CII_M1_SPATIAL_EVIDENCE
+  - CII_M2_NETWORK_EVIDENCE
+  - CII_IDENTITY_FUSION
+  - CII_ALIGNMENT_CONFIDENCE_PROJECTION
+claim_modes:
+  - EXCLUSIVE
+shared_read_authorities:
+  - tabs/cii-workspace/cii-workspace-topology.js
+  - tabs/cii-workspace/cii-workspace-geometry.js
+  - Benchmark/CIICompare/
+forbidden_existing_file_edits:
+  - parser/**
+  - converters/**
+  - tabs/cii-workspace/cii-workspace-topology.js
+  - tabs/cii-workspace/cii-workspace-transfer*.js
+  - tabs/revision-compare/**
+  - tabs/model-converters/**
+implementation_claims:
+  - M1 uses maximum orientation-independent matched-endpoint Euclidean displacement
+  - midpoint distance is not authoritative for M1
+  - M1 and M2 are independently visible evidence
+  - OD and wall are supporting evidence only
+  - M2 topology token contains no OD or wall
+  - method disagreement maps to REVIEW
+  - MEDIUM confidence projects to existing workflow REVIEW until engineer approval
+  - branch/rigid contradictions remain hard identity conflicts
+  - identity-unsupported candidates receive zero confidence and ranking score
+  - confidence score is distinct from method-quality ranking score
+  - method-specific winner gaps preserve repeated-network discrimination
+validation_state: FOCUSED_RECONSTRUCTED_PASS_FULL_CHECKOUT_NOT_RUN
+validated_implementation_head: dd165a4a04b51b15d06322d7f577c88a33641b6c
+remaining_validation_gates:
+  - literal current-head repository test commands in a complete authenticated checkout
+known_limits:
+  - anchor-seeded propagation is intentionally a separate PR985 authority
+  - direct container checkout environment-blocked by GitHub DNS resolution

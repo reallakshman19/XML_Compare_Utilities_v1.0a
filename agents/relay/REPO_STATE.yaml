@@ -1,0 +1,89 @@
+schema_version: relay-v2.5
+relay_state: TERMINAL
+repository:
+  name: XML_Compare_Utilities
+  remote: reallaksh19/XML_Compare_Utilities
+relay_protocol:
+  version: '2.5'
+  basis_ref: reallaksh19/Common@feae969b860b83ee3df230fef1a162d4a4e7968e
+roadmap:
+  id: ROADMAP-XMLCU-V25-1224
+  revision: RM-0004
+  path: agents/relay/roadmap/OVERALL_ROADMAP.yaml
+current_position:
+  objective: OBJ-CII-W2-NB-R1-1224
+  phase: PH-DELIVERY
+  work_package: WP-DELIVERY-001
+  work_packages: []
+execution_policy:
+  mode: SERIAL
+active_ep:
+  id: null
+  path: null
+  state: NONE
+  continuity_receipt: null
+last_checkpoint:
+  id: CP-CII-W2-NB-R1-V25-0002
+  path: agents/relay/checkpoints/CP-CII-W2-NB-R1-V25-0002.yaml
+predecessor_join:
+  id: null
+  path: null
+predecessor_replan:
+  id: null
+  path: null
+takeover_admissions: []
+progress:
+  overall_percent: 84
+  phase_percent: 100
+  ep_percent: 0
+  basis_revision: PB-0004
+status_planes:
+  execution:
+    state: COMPLETE
+    can_continue: false
+    material_authority: NONE
+    next_action: No material action is scheduled. Retained Node validation remains NOT_RUN_ENVIRONMENT and may be reopened only as a new owner-directed follow-up.
+  quality:
+    state: NEEDS_ATTENTION
+    findings:
+      - PR 1228 merged to main at 45f2a3ed7bbb186030e141a8313ccc04ddc997cb after the owner instructed progression with the environment-blocked validation state disclosed.
+      - The mandatory retained Node commands never executed because GitHub Actions failed before runner assignment and no byte-faithful checkout was available; this is NOT_RUN_ENVIRONMENT, not PASS.
+      - EP-CII-W2-NB-R1-V25-0001 required independent DISC/QUAL/TC before product mutation; that preimplementation qualification remains unsatisfied and is recorded as a governance deviation rather than retroactively certified.
+      - A local Node predicate reproduction passed the source-subgraph positive, missing-target-support negative, injectivity, insufficient-frontier, and ambiguity falsifiers; this is limited evidence only.
+      - The retained byte-closure oracle covers the known-positive 35 REPLACE + 1 CREATE + 0 DELETE path; DELETE-specific independent compaction-oracle coverage remains a documented limitation.
+  evidence:
+    state: PARTIAL
+    summary: Issue 1224 is closed and PR 1228 is merged. Implementation, strict byte oracle, merge evidence, and limited local propagation/M2 predicate proof are durable; retained S1/S2/S3/T Node execution remains NOT_RUN_ENVIRONMENT.
+    not_run:
+      - id: RETAINED-SOURCE-SUBGRAPH
+        reason: No byte-faithful checkout was available; only a standalone predicate reproduction executed locally.
+        cause: UNAVAILABLE_TOOL
+      - id: RETAINED-STRUCTURAL-MIXED
+        reason: Actions run 35266754547 attempt 2 failed before runner assignment with zero steps.
+        cause: INFRASTRUCTURE
+      - id: RETAINED-PB0003
+        reason: Actions run 35266754547 attempt 2 failed before runner assignment with zero steps.
+        cause: INFRASTRUCTURE
+  stop:
+    active: false
+    category: NONE
+    reason: ''
+    basis: []
+projection:
+  required: false
+  state: NOT_REQUIRED
+  operation_id: null
+  target: null
+  roadmap_revision: RM-0004
+  execution_ref: NONE
+  receipt: null
+  basis:
+    - github:reallaksh19/XML_Compare_Utilities#1224:CLOSED
+    - github:reallaksh19/XML_Compare_Utilities#1228:MERGED
+relay_readiness:
+  baton_ready: true
+  projection_ready: true
+  handover_ready: true
+  reasons:
+    - Owner-authorized delivery is merged and terminal checkpoint CP-CII-W2-NB-R1-V25-0002 records the environment exception and unresolved evidence limitations.
+chat_context_required: false

@@ -1,0 +1,200 @@
+/* TTCX-004: Recipe Builder usability polish and guided mapping controls. */
+
+.table-categorized-xml-dialog .table-categorized-structure-workspace {
+  display: grid;
+  gap: 14px;
+}
+
+.table-categorized-xml-dialog .table-categorized-recipe-tree {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(56, 189, 248, .16);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, .48);
+}
+
+.table-categorized-xml-dialog .table-categorized-tree-node {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 10px 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, .18);
+  background: rgba(2, 6, 23, .32);
+}
+
+.table-categorized-xml-dialog .table-categorized-tree-node::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, .34);
+}
+
+.table-categorized-xml-dialog .table-categorized-tree-node.is-selected {
+  border-color: rgba(14, 165, 233, .95);
+  background: linear-gradient(90deg, rgba(14, 165, 233, .18), rgba(2, 6, 23, .28));
+  box-shadow: 0 0 0 1px rgba(14, 165, 233, .18), 0 14px 34px rgba(2, 6, 23, .28);
+}
+
+.table-categorized-xml-dialog .table-categorized-tree-node.is-selected::before {
+  background: #38bdf8;
+}
+
+.table-categorized-xml-dialog .table-categorized-tree-node > button:first-child {
+  justify-self: stretch;
+  text-align: left;
+  font-size: .96rem;
+}
+
+.table-categorized-xml-dialog .table-categorized-tree-node > small {
+  justify-self: start;
+  grid-column: 1 / -1;
+  color: #93c5fd;
+  font-size: .78rem;
+}
+
+.table-categorized-xml-dialog .table-categorized-tree-children {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 8px;
+  margin-left: 16px;
+  padding-left: 14px;
+  border-left: 1px dashed rgba(125, 211, 252, .28);
+}
+
+.table-categorized-xml-dialog [data-table-categorized-selected-node-panel] {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: grid;
+  gap: 10px;
+  border-color: rgba(96, 165, 250, .26);
+  background: linear-gradient(180deg, rgba(15, 23, 42, .98), rgba(2, 6, 23, .88));
+  box-shadow: 0 18px 36px rgba(2, 6, 23, .32);
+}
+
+.table-categorized-xml-dialog [data-table-categorized-selected-node-panel] h4:first-child::after {
+  content: 'Edit one hierarchy level at a time';
+  display: block;
+  margin-top: 4px;
+  color: #93c5fd;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.table-categorized-xml-dialog [data-table-categorized-selected-node-panel] label {
+  display: grid;
+  gap: 4px;
+  color: #bfdbfe;
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.table-categorized-xml-dialog [data-table-categorized-node-summary] {
+  margin: 0;
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(14, 165, 233, .1);
+  color: #bfdbfe;
+  font-size: .78rem;
+  line-height: 1.45;
+}
+
+.table-categorized-xml-dialog [data-field-catalog-resolver-options="FieldCatalog.v1"] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+  max-height: 240px;
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid rgba(148, 163, 184, .14);
+  border-radius: 12px;
+  background: rgba(2, 6, 23, .34);
+}
+
+.table-categorized-xml-dialog .table-categorized-field-action-chip {
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid rgba(125, 211, 252, .24);
+  border-radius: 12px;
+  background: rgba(14, 165, 233, .12);
+  color: #e0f2fe;
+  font-size: .78rem;
+}
+
+.table-categorized-xml-dialog .table-categorized-field-action-chip strong {
+  font-size: .86rem;
+}
+
+.table-categorized-xml-dialog .table-categorized-field-action-chip small {
+  color: #93c5fd;
+}
+
+.table-categorized-xml-dialog .table-categorized-field-action-chip span {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.table-categorized-xml-dialog .table-categorized-field-action-chip button {
+  min-height: 28px;
+  padding: 4px 6px;
+  border-radius: 8px;
+  font-size: .72rem;
+}
+
+.table-categorized-xml-dialog .table-categorized-live-preview {
+  border-color: rgba(34, 197, 94, .2);
+  background: linear-gradient(180deg, rgba(20, 83, 45, .14), rgba(2, 6, 23, .34));
+}
+
+.table-categorized-xml-dialog .table-categorized-live-preview h4::after {
+  content: 'Shows how the selected node will resolve from real rows';
+  display: block;
+  margin-top: 4px;
+  color: #86efac;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.table-categorized-xml-dialog .table-categorized-live-preview table,
+.table-categorized-xml-dialog .table-categorized-raw-preview table {
+  font-size: .82rem;
+}
+
+.table-categorized-xml-dialog .table-categorized-shell-side-card:has([data-table-categorized-action="load-suggested-profile"]) {
+  border-color: rgba(250, 204, 21, .18);
+  background: linear-gradient(180deg, rgba(113, 63, 18, .16), rgba(2, 6, 23, .34));
+}
+
+.table-categorized-xml-dialog .table-categorized-shell-side-card:has([data-table-categorized-action="load-suggested-profile"]) h4::after {
+  content: 'Start with a template, then tune keys and display fields';
+  display: block;
+  margin-top: 4px;
+  color: #fde68a;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+@media (max-width: 980px) {
+  .table-categorized-xml-dialog .table-categorized-tree-node {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .table-categorized-xml-dialog .table-categorized-tree-node > button {
+    width: 100%;
+  }
+
+  .table-categorized-xml-dialog [data-field-catalog-resolver-options="FieldCatalog.v1"] {
+    grid-template-columns: 1fr;
+  }
+}

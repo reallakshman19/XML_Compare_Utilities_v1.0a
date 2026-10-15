@@ -1,0 +1,54 @@
+pr: 1025
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-hanger-partial-delete-planner
+base: main@1f3f7b8e1e9c3829278af131606c056af80c2c00
+claims:
+  - id: QF-1025-001
+    status: PASS_SOURCE_INSPECTION
+    claim: >-
+      Partial H>1 HANGER planner readiness cannot authorize physical or product
+      mutation: the unchanged delete-all physical writer requires deleteAll=true
+      and countAfter=0, and composite product readiness independently emits
+      WRITER_2_HANGER_DELETE_ALL_SCOPE_REQUIRED for a ready partial plan.
+  - id: QF-1025-002
+    status: AUTHORED_NOT_EXECUTED
+    claim: >-
+      A qualified partial H>1 plan binds the same physical record index across
+      IHGRNODE, HGRDAT/TAG/GUID, IHGRFREE, IHGRNUM, IHGRTABLE, IHGRSHORT and
+      IHGRCN; equal values at another record index cannot substitute for custody.
+  - id: QF-1025-003
+    status: AUTHORED_NOT_EXECUTED
+    claim: >-
+      Partial-record packed-field custody requires an explicit integer token in
+      each raw 13-byte field, so an all-blank field cannot silently canonicalize
+      to numeric zero authority.
+  - id: QF-1025-004
+    status: AUTHORED_NOT_EXECUTED
+    claim: >-
+      Retained HGRDAT/TAG/GUID rows preserve the target's qualified physical
+      ordering class exactly; grouped rows are never canonicalized into
+      interleaved order.
+  - id: QF-1025-005
+    status: AUTHORED_NOT_EXECUTED
+    claim: >-
+      When tail, IHGRFREE, or packed-array positional binding is not qualified,
+      partial H>1 planning fails closed with
+      WRITER_2_HANGER_PARTIAL_MULTI_RECORD_TAIL_ORDER_UNQUALIFIED plus detailed
+      WRITER_2_HANGER_PARTIAL_RECORD_BINDING_REQUIRED evidence.
+  - id: QF-1025-006
+    status: AUTHORED_NOT_EXECUTED
+    claim: >-
+      Existing HANGER delete-all authority remains independent of retained-record
+      mapping; malformed retained-record custody evidence does not by itself
+      revoke delete-all where the existing delete-all structural gates pass.
+  - id: QF-1025-007
+    status: PASS_SOURCE_INSPECTION
+    claim: >-
+      PR1025 introduces positional physical custody only and explicitly grants no
+      HGRDAT engineering-value semantic authority.
+  - id: BOUND-1025-001
+    status: PASS_SOURCE_INSPECTION
+    claim: >-
+      PR1025 does not modify the HANGER physical writer/validator, tri-family
+      composite implementation, product/core routing, UI, parser, protected
+      converter, benchmark CII files, workflows, or Writer3 topology authority.

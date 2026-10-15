@@ -1,0 +1,69 @@
+schema_version: relay-v2.5-question-set
+id: QSET-CII-W2-NB-R1-V25-0001
+route:
+  route_key: SERIAL:EP-CII-W2-NB-R1-V25-0001
+  mode: SERIAL
+  execution_ref: EP-CII-W2-NB-R1-V25-0001
+  ep_id: EP-CII-W2-NB-R1-V25-0001
+  ep_path: agents/relay/execution-packages/EP-CII-W2-NB-R1-V25-0001.yaml
+  plan_id: null
+  plan_path: null
+  lane_id: null
+  roadmap_revision: RM-0002
+  work_package: WP-ARCH-001
+  ep_contract_digest: sha256:0152815e8adc4aa4e834c92aec7998bb8f29aef45e339331a8a19bc0c38b1f1d
+boundary:
+  trigger: PHASE_CHANGED
+  from_phase: PH-V25-MIGRATION
+  to_phase: PH-ARCHITECTURE
+  changed_dimensions: [PRODUCTION_PATH, ENGINEERING_AUTHORITY, PROTECTED_INVARIANT, VERIFICATION_ORACLE]
+  basis:
+    - V2.5 migration is complete and current work now concerns the actual CII production path.
+    - The first REPLACE-loss boundary is Writer2 contraction before multisource aggregation, which materially differs from the legacy candidate diagnosis.
+questions:
+  - id: Q1
+    focus: PRODUCTION_PATH
+    anchors: [WP-ARCH-001, INPUT-02]
+    prompt: Trace createCiiWorkspacePreview through rawTransferPlan, Writer2 contraction, member preview and combined multisource transfer plan. Identify the first point where nonblank-to-different-nonblank NodeName REPLACE becomes unavailable to multisource arbitration.
+    required_output_keys: [production_entrypoint, state_owner, authority_source, downstream_consumer]
+    evidence_required: true
+  - id: Q2
+    focus: ENGINEERING_PROBLEM
+    anchors: [WP-ARCH-001, INPUT-02, AC-01]
+    prompt: Reconstruct a reviewed NodeName replacement from raw transfer intent to its post-Writer2 representation. Explain why downstream selector changes alone cannot recover intent that has already been rewritten BLOCKED.
+    reconstruction_mode: LOGIC_RECONSTRUCTION
+    payload:
+      source: tabs/cii-workspace/cii-workspace-core.js; tabs/cii-workspace/cii-workspace-writer2-routing.js; tabs/cii-workspace/cii-workspace-multisource-preview.js
+      values:
+        source_value: NONBLANK_A
+        target_value: NONBLANK_B
+        source_not_equal_target: true
+    required_output_keys: [reconstruction_steps, intermediate_result, expected_result]
+    evidence_required: true
+  - id: Q3
+    focus: BOUNDARIES_INVARIANTS
+    anchors: [WP-ARCH-001, AC-02]
+    prompt: Apply an extra TARGET-only branch to a topology where every SOURCE frontier edge has a unique injective target match. State the correct propagation result, then state the missing-target-support and symmetric-ambiguity falsifiers that must still fail closed.
+    mutation:
+      condition: Add one unmatched TARGET-only frontier edge after the anchor while preserving all SOURCE-edge candidates.
+      protected_invariant: Every SOURCE edge must be mapped injectively; TARGET-only remainder need not be claimed.
+      falsifier: Any SOURCE edge lacks a valid target candidate, or two equally valid injective assignments remain without the required winner gap.
+    required_output_keys: [mutation_effect, protected_invariant, falsifier]
+    evidence_required: true
+  - id: Q4
+    focus: VERIFICATION
+    anchors: [AC-03, TEST-03, BENCH-01, BENCH-02]
+    prompt: Define an independent byte oracle for the later mixed transaction. It must not import the production splice/relocation/projector and must distinguish pure REPLACE authorized spans from structural CREATE/DELETE count/pointer/row closure.
+    oracle_refs: [BENCH-01, BENCH-02]
+    independence_requirement: Derive allowed byte offsets/physical-unit closure from fixed-format contract and before/after bytes, not from production mutation output metadata.
+    required_output_keys: [independent_method, predicted_result, tolerance_or_exactness]
+    evidence_required: true
+  - id: Q5
+    focus: FIRST_SAFE_SLICE
+    anchors: [STEP-01, AC-01, AC-02, TEST-01, TEST-02]
+    prompt: State the first exact bounded downstream product change that should be implemented after this architecture/oracle gate, with predicted before/after behavior and a negative test. Do not broaden Writer2 overwrite authority.
+    step_refs: [STEP-01]
+    required_output_keys: [first_change, predicted_before, predicted_after, verification]
+    evidence_required: true
+prepared_by:
+  agent_instance_id: chatgpt:gpt-5.6-sol:v25-preparer-2026-09-17

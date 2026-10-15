@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pipeline Table Paste Sample Fixture</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#020617;color:#e2e8f0;font-family:system-ui,sans-serif}.pipeline-3d-model-dialog{min-height:100vh;padding:16px;display:grid;gap:12px}.fixture-actions{display:flex;gap:8px}.p3d-input-panel{display:grid;gap:6px}.p3d-input-grid textarea,textarea{width:100%;min-height:90px;background:#07111f;color:#cbd5e1;border:1px solid #334155;font:11px monospace}.p3d-editable-table,.p3d-split-grid{overflow:auto}.p3d-editable-table table,.p3d-split-grid table{border-collapse:collapse;min-width:680px}.p3d-editable-table th,.p3d-editable-table td,.p3d-split-grid th,.p3d-split-grid td{border:1px solid #334155;padding:4px}.p3d-output{display:flex;flex-direction:column;gap:8px}.p3d-output-scroll{display:grid;gap:8px}[data-p3d="table2x-output"],[data-p3d="table3x-output"]{min-height:40px;border:1px solid #334155;padding:6px;overflow:auto}.p3d-derived-grid table{border-collapse:collapse}.p3d-derived-grid th,.p3d-derived-grid td{border:1px solid #334155;padding:3px}pre{white-space:pre-wrap;max-height:260px;overflow:auto}
+</style>
+</head>
+<body>
+<main class="pipeline-3d-model-dialog" data-browser-fixture="pipeline-table-paste-samples">
+  <div class="fixture-actions">
+    <button type="button" data-p3d="new-multisheet">Load Multi-Sheet Table 1 Sample</button>
+    <button type="button" data-p3d="run">Run</button>
+    <button type="button" data-p3d="download-coordinate">Download Coordinate</button>
+    <button type="button" data-p3d="download-xml">Download XML</button>
+  </div>
+  <input data-p3d-field="lineNo" value="PL-XX"><input data-p3d-field="boreMm" value="168.3">
+  <input data-p3d-field="wallThickness" value="7.1"><input data-p3d-field="p1" value="10">
+  <input data-p3d-field="t1" value="120"><input data-p3d-field="t2" value="90"><input data-p3d-field="t3" value="5">
+  <input data-p3d-field="fluidDensity" value="100"><input data-p3d-field="materialCode" value="106">
+  <input data-p3d-field="corrosionAllowance" value="0"><input data-p3d-field="insulationThickness" value="0">
+  <input data-p3d-field="insulationDensity" value="0"><input data-p3d-field="hydroPressure" value="15">
+  <textarea data-p3d="table1"></textarea>
+  <textarea data-p3d="table2"></textarea>
+  <textarea data-p3d="table3"></textarea>
+  <div data-p3d="table3-panel"></div>
+  <div data-p3d="error-message" style="display:none"></div>
+  <section class="p3d-output">
+    <div class="p3d-output-scroll">
+      <pre data-p3d="table1-output">Fixture</pre>
+      <pre data-p3d="coordinate-output">Run to generate.</pre>
+      <pre data-p3d="xml-output">Run to generate.</pre>
+    </div>
+  </section>
+</main>
+<script type="module">
+const samples = await import('../../tabs/pipeline-3d-model/pipeline-3d-model-samples.js?v=20260719-table2-elevation-authority-1');
+const addon = await import('../../tabs/pipeline-3d-model/pipeline-3d-model-table-paste-addon.js?v=20260719-elastic-bend-2');
+const dialog = document.querySelector('.pipeline-3d-model-dialog');
+dialog.querySelector('[data-p3d="table1"]').value = samples.SAMPLE_TABLE_1_MULTISHEET;
+addon.patchPipeline3dTablePasteDialog(dialog);
+window.__pipelineTablePasteSample = {
+  dialog,
+  value(selector) { return dialog.querySelector(selector)?.value || ''; },
+  text(selector) { return dialog.querySelector(selector)?.textContent || ''; },
+};
+document.body.dataset.pipelineTablePasteSampleReady = '1';
+</script>
+</body>
+</html>

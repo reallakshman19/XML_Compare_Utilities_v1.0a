@@ -1,0 +1,49 @@
+schema: AgentStatus.v1
+pr: 997
+state: DRAFT_IMPLEMENTATION_COMPLETE_SOURCE_REVIEW_PASS
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL_UI
+base_branch: main
+base_basis_sha: df19d1834459f486fddd77eaec4297767ef83c6b
+branch: agent/cii-fullscreen-anchor-evidence-ui
+current_stage: VALIDATE_RECONCILE
+handover_readiness: READY
+coordination: SAFE
+mutation_authority: WRITE_ALLOWED_WITHIN_DECLARED_SCOPE
+merge_authority: OWNER_ONLY
+scope_authority: CII_FULLSCREEN_METHOD_QUALIFIED_ENGINEERING_UI
+qualified_scope:
+  - APPLICATION_LEVEL_FULL_VIEWPORT
+  - COMPACT_LAYOUT_TOGGLE
+  - SOURCE_TARGET_IDENTITY_STRIP
+  - METHOD_A_SPATIAL_EVIDENCE_CARD
+  - METHOD_B_NETWORK_EVIDENCE_CARD
+  - METHOD_A_AND_B_CORROBORATION_PRESENTATION
+  - LANDMARK_ONLY_REVIEW_PRESENTATION
+  - STRUCTURED_TRANSFORM_DETAILS
+  - STRUCTURED_RUN_MAPPING_DETAILS
+  - STICKY_REVIEW_TABLE_HEADERS
+  - LEGACY_ACCEPT_CONTROL_DELEGATION
+blocked_scope:
+  - METHOD_A_REGISTRATION_MATH
+  - METHOD_B_PIPE_RUN_QUALIFICATION
+  - MULTI_BASE_CORRESPONDENCE_ARBITRATION
+  - CORRESPONDENCE_GENERATION
+  - ENGINEERING_DELTA_SEMANTICS
+  - TRANSFER_POLICY_OR_PLAN
+  - WRITER_1A_OR_1B
+  - FIXED_FIELD_PARSER
+  - PROTECTED_CONVERTERS
+  - WORKFLOW_CHANGES
+validation:
+  merged_main_grounding: PASS_SOURCE_INSPECTION
+  shell_ui_defect_isolation: PASS_SOURCE_INSPECTION
+  ui_only_changed_path_boundary: PASS_GIT_COMPARE
+  focused_engineering_ui_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_cii_shell_lifecycle: NOT_RUN_ENVIRONMENT
+  browser_chromium: NOT_RUN_ENVIRONMENT
+  full_repository_suite: NOT_RUN_ENVIRONMENT
+  ci: REFRESH_REQUIRED_EXACT_HEAD
+known_engineering_defect: NONE_IDENTIFIED_WITHIN_SOURCE_REVIEW_SCOPE
+highest_risk: browser layout and acceptance-delegation behavior remain unexecuted in a complete Chromium environment
+exact_next_action: execute focused UI and existing shell lifecycle tests plus Chromium in a complete checkout; owner review afterward; do not merge without explicit authorization

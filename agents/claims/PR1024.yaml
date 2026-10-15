@@ -1,0 +1,29 @@
+pr: 1024
+claims:
+  - id: QF-1024-001
+    claim: grouped-layout retention preserves grouped physical order and never silently interleaves retained records
+    status: PASS_SOURCE_INSPECTION
+  - id: QF-1024-002
+    claim: the H>1 interleaved emitter order is physically numeric6,numeric5,string,string per record
+    status: PASS_SOURCE_INSPECTION
+  - id: QF-1024-003
+    claim: the H>1 grouped emitter order is all numeric HGRDAT pairs followed by all TAG/GUID string pairs
+    status: PASS_SOURCE_INSPECTION
+  - id: QF-1024-004
+    claim: the two H>1 layouts are distinguishable from untouched physical row shape without interpreting hanger engineering values
+    status: AUTHORED_NOT_EXECUTED
+  - id: QF-1024-005
+    claim: H=1 is physically order-equivalent for the two qualified source layouts
+    status: AUTHORED_NOT_EXECUTED
+  - id: QF-1024-006
+    claim: malformed, mixed, wrong-cardinality, or forged-string envelopes fail closed
+    status: AUTHORED_NOT_EXECUTED
+  - id: BOUND-1024-001
+    claim: no merged Writer2 planner, physical writer, composite, product/core, UI, parser, protected converter, benchmark, or workflow authority is expanded
+    status: PASS_SOURCE_INSPECTION
+  - id: BOUND-1024-002
+    claim: WRITER_2_HANGER_PARTIAL_MULTI_RECORD_TAIL_ORDER_UNQUALIFIED remains the production planner blocker after this PR
+    status: PASS_SOURCE_INSPECTION
+  - id: BOUND-1024-003
+    claim: HANGER CREATE and SIF CREATE blockers remain unchanged
+    status: PASS_SOURCE_INSPECTION

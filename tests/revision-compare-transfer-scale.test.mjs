@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import { createRevisionCompareTransferCandidateCache, createRevisionCompareTransferCandidateIndex } from '../tabs/revision-compare/revision-transfer-candidate-index.js';
+import { deriveRevisionCompareTransferCandidates, deriveRevisionCompareTransferCandidatesScanning } from '../tabs/revision-compare/revision-transfer-candidates.js';
+import { applyRevisionCompareTransferDraftAction, createRevisionCompareTransferReviewState, updateRevisionCompareTransferPresentation } from '../tabs/revision-compare/revision-transfer-review-state.js';
+import { queryRevisionCompareTransferCandidates } from '../tabs/revision-compare/revision-transfer-query.js';
+import { productivityState } from './revision-compare-transfer-productivity-fixtures.mjs';
+
+const state = productivityState(1000); const index = createRevisionCompareTransferCandidateIndex(state);
+assert.equal(index.stats.auditRows, 1000); assert.equal(index.stats.reviewItems, 1000); assert.equal(index.stats.constructionPasses, 7);
+const indexed = deriveRevisionCompareTransferCandidates(state, index); const semantic = deriveRevisionCompareTransferCandidatesScanning(state);
+assert.equal(indexed.length, 1000); assert.deepEqual(indexed, semantic);
+const cache = createRevisionCompareTransferCandidateCache((value, lookup) => deriveRevisionCompareTransferCandidates(value, lookup));
+const first = cache.get(state); const second = cache.get({ ...state, transferReview: createRevisionCompareTransferReviewState() });
+assert.equal(first, second, 'presentation-only workspace object replacement reuses authority cache'); assert.deepEqual(cache.evidence(), { builds: 1, hits: 1 });
+const changedReview = { ...state, review: { session: { ...state.review.session, items: [...state.review.session.items] } } };
+const third = cache.get(changedReview); assert.notEqual(third, first); assert.equal(cache.evidence().builds, 2);
+let review = updateRevisionCompareTransferPresentation(createRevisionCompareTransferReviewState(), { pageSize: 25, page: 20 });
+let query = queryRevisionCompareTransferCandidates(indexed, review.draft, review.presentation); assert.equal(query.entries.length, 25);
+let draft = applyRevisionCompareTransferDraftAction(review.draft, indexed, { kind: 'SELECT_VISIBLE', entries: query.entries });
+assert.equal(draft.pairs.length, 25); assert.equal(draft.pairs.reduce((sum, pair) => sum + pair.fieldKeys.length, 0), 25);
+review = updateRevisionCompareTransferPresentation(review, { page: 21 }); query = queryRevisionCompareTransferCandidates(indexed, draft, review.presentation);
+draft = applyRevisionCompareTransferDraftAction(draft, indexed, { kind: 'SELECT_VISIBLE', entries: query.entries });
+assert.equal(draft.pairs.length, 50, 'selection persists across pages'); assert.equal(draft.revision, 2);
+const cleared = applyRevisionCompareTransferDraftAction(draft, indexed, { kind: 'CLEAR_VISIBLE', entries: query.entries });
+assert.equal(cleared.pairs.length, 25, 'clear visible preserves off-page selection'); assert.equal(cleared.revision, 3);
+assert(query.entries.length <= query.presentation.pageSize); assert.equal(query.summary.totalCandidatePairs, 1000);
+console.log('revision-compare-transfer-scale.test.mjs passed');

@@ -1,0 +1,28 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/decision.schema.json",
+  "title":"EvidenceDecision.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","decisionId","decisionHash","state","observationHashes","diagnosticCodes"],
+  "properties":{
+    "schema":{"const":"EvidenceDecision.v1"},
+    "decisionId":{"type":"string","minLength":1},
+    "decisionHash":{"type":"string","minLength":1},
+    "state":{"type":"string","enum":["accepted","review_required","blocked","not_found"]},
+    "observationHashes":{"type":"array","items":{"type":"string","minLength":1}},
+    "selectedObservationHash":{"type":"string","minLength":1},
+    "effectiveText":{"type":"string"},
+    "effectiveNumericValue":{"type":"number"},
+    "diagnosticCodes":{"type":"array","items":{"type":"string","minLength":1}},
+    "reconciliationProfileHash":{"type":"string","minLength":1},
+    "notes":{"type":"object"}
+  },
+  "allOf":[
+    {
+      "if":{"properties":{"state":{"const":"accepted"}}},
+      "then":{"required":["selectedObservationHash"]},
+      "else":{"not":{"anyOf":[{"required":["effectiveText"]},{"required":["effectiveNumericValue"]}]}}
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+pr: 1025
+state: DRAFT_ACTIVE
+handover_readiness: READY
+current_stage: PLANNER_AUTHORITY_AND_FALSIFIERS_AUTHORED_NOT_EXECUTED
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-hanger-partial-delete-planner
+base: main@1f3f7b8e1e9c3829278af131606c056af80c2c00
+mission: >-
+  Integrate PR1024 H>1 HANGER tail-order custody into the existing Writer-2
+  HANGER delete planner without expanding physical, composite, product, UI,
+  parser, converter, or topology authority.
+scope:
+  - HANGER_PARTIAL_H_GT_1_PLANNER
+  - PR1024_TAIL_ORDER_CLASSIFIER_CONSUMPTION
+  - POSITIONAL_RECORD_BINDING
+  - IHGRFREE_FIXED_WIDTH_CUSTODY
+  - PACKED_ARRAY_RECORD_INDEX_CUSTODY
+  - GROUPED_AND_INTERLEAVED_ORDER_PRESERVATION
+  - PHYSICAL_DELETE_ALL_GATE_PRESERVED
+blocked:
+  - HANGER_PARTIAL_PHYSICAL_WRITE
+  - HANGER_PARTIAL_COMPOSITE_PRODUCT_ROUTE
+  - HANGER_CREATE
+  - SIF_CREATE_ITEMS_27_30_UNRESOLVED
+  - WRITER3_TOPOLOGY
+validation:
+  pr1024_merge_base_grounding: PASS
+  branch_scope: PASS_SOURCE_INSPECTION
+  product_delete_all_gate: PASS_SOURCE_INSPECTION
+  physical_delete_all_gate: PASS_SOURCE_INSPECTION
+  record_binding_source_audit: PASS_SOURCE_INSPECTION
+  planner_source_audit: PASS_SOURCE_INSPECTION
+  regression_source_audit: PASS_SOURCE_INSPECTION
+  focused_record_binding: AUTHORED_NOT_RUN_ENVIRONMENT
+  focused_hanger_planner: AUTHORED_NOT_RUN_ENVIRONMENT
+  hanger_delete_all_physical: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_writer2: NOT_RUN_ENVIRONMENT
+  tri_family_composite_product: NOT_RUN_ENVIRONMENT
+  full_repository: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_RUN_ENVIRONMENT
+merge_authority: OWNER_ONLY
+next_action: >-
+  Execute focused tests in an exact checkout when available; after owner
+  acceptance, implement physical partial H>1 compaction in a separate PR with
+  an independent complete-postimage validator. Do not product-route partial
+  HANGER deletion in PR1025.

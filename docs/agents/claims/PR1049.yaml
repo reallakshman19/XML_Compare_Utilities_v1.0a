@@ -1,0 +1,65 @@
+pr: 1049
+issue: 1048
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-runtime-w214
+base_main: f51f8acdcdcbd108073e2a2e57753c07d9f27c42
+claim_state: OWNER_MERGE_AUTHORIZED_RUNTIME_MATRIX_PARTIALLY_OBSERVED
+ready_for_review: true
+merge_authority: OWNER_ONLY
+merge_authorized: true
+owner_accepts_recorded_residuals: true
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RESTRAINT_DELETE_RELEASE_FREEZE
+
+claims:
+  - id: W2_11_RESTRAINT_PHYSICAL_RUNTIME
+    state: PASS_RUNTIME_EXACT_BLOB
+    required: true
+    evidence: P01_P06_POSITIVE__P19_CONTROL_CUSTODY__P07_P18_FALSIFIERS
+    node: v22.16.0
+    tree_ref: f51f8acdcdcbd108073e2a2e57753c07d9f27c42
+  - id: W2_12_SUPPORT_OBSERVATION
+    state: PASS_RUNTIME_EXACT_BLOB_NONQUALIFYING
+    required: false
+    blob: 5b1494ba95dbfdf663bc377f8632a50d7cd2b65b
+    evidence: TARGET0_CUSTODY__CANONICAL_CHILD_SCOPE__ORIGINAL_COORDINATE_ARBITRATION__OVERLAP_FAIL_CLOSED
+  - id: W2_12_FOCUSED_RUNTIME
+    state: NOT_RUN_DEPENDENCY_CLOSURE_IN_PROGRESS
+    required: true
+  - id: W2_13_SYNTHETIC_PRODUCT_RUNTIME
+    state: NOT_RUN_ENVIRONMENT
+    required: true
+  - id: W2_13_REAL_CII_PRODUCT_RUNTIME
+    state: NOT_RUN_ENVIRONMENT
+    required: true
+  - id: WRITER2_INHERITED_REGRESSION_RUNTIME
+    state: PARTIAL_PASS_W2_11_RESTRAINT_ONLY
+    required: true
+  - id: REPOSITORY_NPM_GATE
+    state: NOT_RUN_ENVIRONMENT
+    required: true
+  - id: ENGINEERING_FAILURE
+    state: NONE_OBSERVED
+    authority: OBSERVED_W2_11_RUNTIME_PLUS_NONQUALIFYING_W2_12_SUPPORT_PROBE_PLUS_UNRUN_REMAINING_MATRIX
+  - id: RESTRAINT_BLOCK_CREATE
+    state: BLOCKED_RUNTIME_CONFIRMED_P18
+    authority: NONE
+  - id: OWNER_EVIDENCE_CHECKPOINT_MERGE
+    state: AUTHORIZED
+    effect: DOES_NOT_CONVERT_RELEASE_FREEZE_TO_READY
+
+runtime_custody:
+  mode: EXACT_GIT_BLOB_SPARSE_MIRROR
+  verification: git_hash_object_equals_repository_blob_sha_for_every_loaded_repository_file
+  synthetic_top_level_package_json: MODULE_MODE_ONLY_NOT_ENGINEERING_SOURCE
+
+negative_assurance:
+  production_diff: NONE
+  workflow_diff_final: NONE
+  trusted_workflow_restored_blob_sha: ec5182b4a893b05f717746691164ec06a421a47f
+  control_row1_nonam_protected: true
+  control_row2_restraints_authority_preserved: true
+  authority_widening: false
+  merge_does_not_imply_release_ready: true
+
+qualification_rule: authored/source/static evidence cannot substitute for observed runtime PASS; nonqualifying support probes cannot substitute for source-authored focused entrypoints
+next_claim_gate: after evidence-checkpoint merge, continue W2.12 R01-R22, W2.13 and remaining inherited regression; repository npm remains a separate full-checkout gate

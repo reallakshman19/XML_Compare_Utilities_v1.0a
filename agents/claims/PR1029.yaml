@@ -1,0 +1,86 @@
+schema: AgentClaim.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1029
+branch: agent/cii-writer2-hanger-partial-composite
+claim_state: ACTIVE_SOURCE_QUALIFIED_DRAFT
+base: main@e9a28071aa932e5c360206d20807aeaf2e4f9517
+source_task: issue#1028
+claim_modes:
+  - EXCLUSIVE
+files:
+  exact:
+    - tabs/cii-workspace/cii-workspace-writer2-composite-hanger.js
+    - tabs/cii-workspace/cii-workspace-writer2-composite-hanger-partial-validation.js
+    - tests/cii-workspace-writer2-composite-hanger-partial.test.js
+    - tests/cii-workspace-writer2-composite-hanger-partial-trifamily.test.js
+    - agents/PR1029_workreport.md
+    - agents/status/PR1029.yaml
+    - agents/claims/PR1029.yaml
+    - agents/MASTER_INDEX.md
+  prefixes: []
+shared_read_only:
+  - tabs/cii-workspace/cii-workspace-writer2-composite-hanger-validation.js
+  - tests/cii-workspace-writer2-composite-hanger.test.js
+  - tabs/cii-workspace/cii-workspace-writer2-hanger-partial-write.js
+  - tabs/cii-workspace/cii-workspace-writer2-hanger-partial-validation.js
+  - tabs/cii-workspace/cii-workspace-writer2-hanger-delete-all-write.js
+  - tabs/cii-workspace/cii-workspace-writer2-hanger-delete.js
+  - tabs/cii-workspace/cii-workspace-writer2-hanger-record-binding.js
+  - tabs/cii-workspace/cii-workspace-writer2-hanger-tail-order.js
+  - tabs/cii-workspace/cii-workspace-writer2-composite-routing.js
+  - tabs/cii-workspace/cii-workspace-writer2-product-routing.js
+authority_domains:
+  - CII_WRITER2_ONE_TARGET0_COMPOSITE_PARTIAL_HANGER_ADOPTION
+  - CANONICAL_PARTIAL_HANGER_FAMILY_SUBSCOPE
+  - PARENT_TRANSFER_SCOPE_CANONICAL_SUBSCOPE
+  - ORIGINAL_COORDINATE_WRITER2_CLAIM_ARBITRATION
+  - INDEPENDENT_COMPOSITE_COMPLETE_POSTIMAGE_VALIDATION
+  - PARTIAL_COMPONENT_HASH_AND_REPRESENTATION_TESTIMONY_FALSIFICATION
+dependency:
+  pr: 1027
+  state: SATISFIED_BY_MERGE
+  accepted_head: 457a2c4572c0773cdf1cd2e15fa36f6a3e305638
+  merge_sha: e9a28071aa932e5c360206d20807aeaf2e4f9517
+coordination:
+  state: SAFE_FOR_DRAFT_REVIEW
+  known_open_pr_overlap: NONE_IN_AUTHORITY_DOMAIN
+  changed_paths_intended: 8
+  unexplained_paths: 0
+implementation:
+  writer_commit: 2af0c55368e321a1017b4b1e7f83351d2546aaf8
+  independent_validator_commits:
+    - 0d2e127e412bbbe602b1c15b007373cf5b141f48
+    - 5b55744b7c81af1aadb2b90034477e223532db4b
+  qualification_commits:
+    - 7ec16e44d2455e09b7f315e35b135f4e3e216829
+    - 0de845e07e31413587b9db186cedd2f714ef42d9
+    - 47af1a191e6c237124bbd78eb622d53b9d736f5c
+    - 4f290a2beea53065161b80ecb72780745ef13a22
+validation_custody:
+  writer_source: PASS_SOURCE_INSPECTION
+  canonical_child_subscope: PASS_SOURCE_INSPECTION
+  independent_composite_partial_oracle: PASS_SOURCE_INSPECTION_INDEPENDENT_ORACLE
+  partial_only_test: AUTHORED_PASS_SOURCE_INSPECTION_NOT_RUN
+  tri_family_h3_to_h2_test: AUTHORED_PASS_SOURCE_INSPECTION_NOT_RUN
+  legacy_delete_all_test: EXISTING_UNCHANGED_SOURCE
+  native_exact_checkout_current_head: NOT_AVAILABLE_DNS
+  full_repository: NOT_RUN_ENVIRONMENT
+  real_h_gt_1_source: NOT_AVAILABLE
+negative_assurance:
+  - no product/core Writer2 readiness expansion
+  - no browser/UI partial HANGER enablement
+  - no real H>1 product qualification claim
+  - no HANGER CREATE or value editing
+  - no SIF CREATE
+  - no parser/converter changes
+  - no workflow or package-script changes
+  - no weakening of PR1027 canonical BOUND operation-container custody
+  - no weakening of existing HANGER delete-all scope gate
+  - no sequential family mutation against intermediate files
+review_state:
+  draft: true
+  source_review_ready: true
+  runtime_evidence_limits_explicit: true
+  merge_authority: OWNER_ONLY
+  merge_authorized: false
+last_updated: 2026-08-23T17:10:00+05:30

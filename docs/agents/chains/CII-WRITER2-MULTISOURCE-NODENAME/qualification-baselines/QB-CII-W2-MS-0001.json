@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "baselineId": "QB-CII-W2-MS-0001",
+  "source": "OWNER_DIRECT:2026-09-03 CII Writer2 S1/S2/S3 -> T NODE NAME CHANGES task",
+  "sourceAuthority": "OWNER",
+  "activeQuestionSetId": "CII-W2-MS-QS-0001",
+  "questions": [
+    {
+      "baselineQuestion": "Q1",
+      "coveredBy": ["Q1"],
+      "requiredLiterals": [
+        "S1.CII", "S2.CII", "S3.CII", "T.CII",
+        "9a9cb14db4c13f5aac41cc74a60e7e528722eb5003d09f07192762ab6bfb1a2b",
+        "7ec48b76b65eedfd5ecc9c8e8feca1a45dd8c83721a68b53aa0db3363e6d27fd",
+        "c2143b31c482158ac5514d2709406c14a9179e656277c654e932bb845d090caa",
+        "abfa3ffc9281fe75d4170b2d885d554cb1f120dadedae7c7ab609548b63cc060"
+      ],
+      "requiredConcepts": ["virtual source set", "base anchors", "source member custody", "untouched target"],
+      "requiredObligations": ["trace", "reconstruct"]
+    },
+    {
+      "baselineQuestion": "Q2",
+      "coveredBy": ["Q2"],
+      "requiredLiterals": ["147", "131", "329", "0d941b97833ad55e9ef634c8a1935b233d57cf8ab6c07ba3fb7e7bef410e037e"],
+      "requiredConcepts": ["OR conflict veto", "target custody conflict", "cardinality"],
+      "requiredObligations": ["calculate", "predict", "falsify"]
+    },
+    {
+      "baselineQuestion": "Q3",
+      "coveredBy": ["Q3"],
+      "requiredLiterals": ["CII_WRITER_2_NODENAME_RELOCATION", "FORCMNT 6", "ALLOWBLS 8", "FLANGES 16"],
+      "requiredConcepts": ["CREATE", "DELETE", "same-cardinality overwrite", "frozen V11↔V14 bridge"],
+      "requiredObligations": ["prove", "identify"]
+    },
+    {
+      "baselineQuestion": "Q4",
+      "coveredBy": ["Q4"],
+      "requiredLiterals": ["[2,28)", "[28,53)", "13", "CONTROL NONAM"],
+      "requiredConcepts": ["I13", "pointer correlation", "independent oracle", "unchanged-byte invariant"],
+      "requiredObligations": ["reconstruct", "calculate", "validate"]
+    },
+    {
+      "baselineQuestion": "Q5",
+      "coveredBy": ["Q5"],
+      "requiredLiterals": ["EXCLUDE", "APPLY", "ciibenchmarkroadmap.md@7d061341a8c038316752007a3d4ed02b7ea66b58"],
+      "requiredConcepts": ["minimal patch", "negative test", "rollback", "NO-PATCH"],
+      "requiredObligations": ["specify", "protect", "stop"]
+    }
+  ]
+}

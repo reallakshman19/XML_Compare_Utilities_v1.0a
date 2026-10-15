@@ -1,0 +1,50 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR991
+mission: CII target Writer 1A cardinality-preserving mutation
+workstream: cii-writer-1a
+branch: agent/cii-writer-1a
+base_branch: main
+base_basis_sha: 87123aa6f7ba0980c9cd94c3ff4f479601cfccf7
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+agent_state: QUALIFICATION_CLOSED_OWNER_EXCEPTION
+pr_recovery_state: IMPLEMENTATION_COMPLETE_FOCUSED_RUNTIME_PASS_FULL_SUITE_TRANSPORT_BLOCKED
+handover_readiness: READY
+report_path: agents/PR991_workreport.md
+scope_authority: WRITER_1A_CARDINALITY_PRESERVING_TARGET_MUTATION
+validation_state: FOCUSED_EXECUTION_PASS_REAL_BENCHMARK_ORACLE_VERIFIED_FULL_RUNTIME_NOT_RUN_ENVIRONMENT
+merge_ready: true
+merge_authority: OWNER_GRANTED_AFTER_QUALIFICATION_CLOSURE
+qualification_closure:
+  type: OWNER_AUTHORIZED_ENVIRONMENTAL_EXCEPTION
+  owner_instruction: proceed_then_merge
+  focused_element_rigid_writer_current_head: PASS
+  deterministic_restraint_pairing_current_head: PASS
+  paired_restraint_writer_current_head: PASS
+  benchmark_oracle_source_custody: PASS_SOURCE_INSPECTION
+  real_target1_target2_runtime: NOT_RUN_ENVIRONMENT
+  inherited_cii_workspace_runtime: NOT_RUN_ENVIRONMENT
+  browser_lifecycle: NOT_RUN_ENVIRONMENT
+  reason: execution container cannot resolve/connect to GitHub and no repository workflow executes the CII qualification suite; exact connector source remains available
+  truth_rule: NOT_RUN items are not relabeled PASS
+acceptance_matrix:
+  wt_existing_element: IMPLEMENTED_FOCUSED_PASS
+  p1_existing_element: IMPLEMENTED_FOCUSED_PASS
+  t1_existing_element: IMPLEMENTED_FOCUSED_PASS
+  t2_existing_element: IMPLEMENTED_FOCUSED_PASS
+  rigid_weight_existing_record: IMPLEMENTED_FOCUSED_PASS
+  existing_restraint_fields: IMPLEMENTED_FOCUSED_PASS
+  multi_restraint_pairing: IMPLEMENTED_FOCUSED_PASS_AMBIGUITY_FAIL_CLOSED
+  stale_target_hash_gate: IMPLEMENTED
+  reparse_negative_assurance: IMPLEMENTED
+  stage06_status_contract: FIXED_WRITER_1A_READINESS
+  target_mutation_export: ENABLED_CONDITIONALLY_AFTER_VALIDATION
+  node_name: PENDING_LATER_SLICE
+  od: DEFERRED_WRITER_1B
+  sif_tee: DEFERRED_WRITER_1B
+  free_slot_restraint_create: DEFERRED_WRITER_1B
+  pointer_cardinality_create_delete: BLOCKED_WRITER_2
+  topology_mutation: BLOCKED_WRITER_3
+dependency_state: PR990_MERGED_AT_87123aa6f7ba0980c9cd94c3ff4f479601cfccf7
+exact_next_action: verify incremental diff against main, mark PR991 ready, and merge exact head under owner-authorized environmental qualification exception

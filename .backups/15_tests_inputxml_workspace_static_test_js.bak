@@ -1,0 +1,41 @@
+import assert from 'assert';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { _test as workspaceUi } from '../tabs/inputxml-workspace/inputxml-workspace-tab.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.join(__dirname, '..');
+
+const workspaceRender = workspaceUi.renderPopup(workspaceUi.defaultState());
+assert.ok(workspaceRender.includes('1 Clean XML / Table to CleanXML'), 'Workspace should expose CleanXML as Tab 1.');
+assert.ok(workspaceRender.includes('2 InputXML Enrichment'), 'Workspace should expose InputXML Enrichment as Tab 2.');
+assert.ok(workspaceRender.includes('3 XML to InputXML'), 'Workspace should expose XML to InputXML as Tab 3.');
+assert.ok(workspaceRender.includes('DTXR'), 'CleanXML Tab 1 should include the DTXR subtab.');
+
+const psnmUtilityTab = fs.readFileSync(path.join(repoRoot, 'tabs', 'psnm-utility-tab.js'), 'utf8');
+assert.ok(psnmUtilityTab.includes('installInputXmlWorkspaceTile'), 'Utilities tab should install InputXML Workspace tile.');
+
+const panel5c = fs.readFileSync(path.join(repoRoot, 'tabs', 'model-converters', 'xml-cii-topology-5c-panel.js'), 'utf8');
+assert.ok(panel5c.includes('state.consumeDuplicateNodes = false;'), 'InputXML_Topo should disable duplicate consuming.');
+assert.ok(panel5c.includes('state.enableShortFillers = false;'), 'InputXML_Topo should disable <50mm fillers.');
+assert.ok(panel5c.includes('state.enableRayFillers = false;'), 'InputXML_Topo should disable ray fillers.');
+assert.ok(panel5c.includes('state.splitRayMidspanHits = false;'), 'InputXML_Topo should disable ray mid-span splitting.');
+
+// Close button regression: must not be bound once at mount only (the old one-shot pattern), and
+// must be handled by the delegated modal-level click handler so it survives every rerender.
+const workspaceTabSource = fs.readFileSync(path.join(repoRoot, 'tabs', 'inputxml-workspace', 'inputxml-workspace-tab.js'), 'utf8');
+assert.ok(!workspaceTabSource.includes('dialog.querySelector(\'[data-ixw-close="1"]\')?.addEventListener'), 'Close button must not be bound with the old one-shot querySelector pattern.');
+assert.ok(/modal\.addEventListener\(ACTIVATE, \(event\) => \{[\s\S]*?data-ixw-close="1"/.test(workspaceTabSource), 'Close button must be handled by the delegated modal-level click handler.');
+
+// Tab 6 Misc should expose Config/Topo/Support config as real subtabs.
+const miscRender = workspaceUi.renderPopup({ ...workspaceUi.defaultState(), activeTab: 'misc' });
+assert.ok(miscRender.includes('>Config<'), 'Misc tab should expose a Config subtab.');
+assert.ok(miscRender.includes('>Topo<'), 'Misc tab should expose a Topo subtab.');
+assert.ok(miscRender.includes('>Support config<'), 'Misc tab should expose a Support config subtab.');
+
+// Launcher tile should show an icon.
+const launcherRender = workspaceUi.renderLauncher();
+assert.ok(launcherRender.includes('inputxml-workspace-launcher-icon'), 'Launcher tile should render an icon span.');
+
+console.log('InputXML Workspace static contract checks passed.');

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>XML Builder Viewport Fixture</title></head>
+<body>
+  <button type="button" data-xml-compare-universal-categorizer-open>Universal XML Categorizer</button>
+  <script type="module">
+    import { publishUniversalViewportContext } from '/xml-compare/universal-categorizer/universal-viewport-context.js';
+    import {
+      closeUniversalXmlCategorizer,
+      getUniversalXmlCategorizerLifecycle,
+      installUniversalXmlCategorizerRuntime,
+      openUniversalXmlCategorizer,
+    } from '/tabs/xml-compare-universal-categorizer-runtime.js';
+
+    const params = new URLSearchParams(location.search);
+    const sample = params.get('sample') === '1';
+    const large = params.get('large') === '1';
+    const dataset = params.get('dataset') || 'a';
+    const offset = dataset === 'b' ? 100_000 : 0;
+
+    function smallRecords() {
+      const source = Object.freeze([
+        Object.freeze({ uid: `source:${dataset}:element`, fromNode: String(10 + offset), toNode: String(20 + offset), lineNo: `LINE-${100 + offset}` }),
+        Object.freeze({ uid: `source:${dataset}:node`, nodeNumber: String(10 + offset), position: Object.freeze({ x: 1 + offset, y: 2, z: 3 }) }),
+        Object.freeze({ uid: `source:${dataset}:restraint`, nodeNumber: String(20 + offset), evidenceKind: 'RestraintsBlock', TYPE: 'GUIDE', STIFFNESS: '1000', GAP: '5', TAG: `RS-${20 + offset}` }),
+      ]);
+      const target = Object.freeze([
+        Object.freeze({ uid: `target:${dataset}:element`, levelId: 'element', elementKey: `${10 + offset}+${20 + offset}`, displayName: `Element ${10 + offset}-${20 + offset}`, LINE_ID: `LINE-${100 + offset}` }),
+        Object.freeze({ uid: `target:${dataset}:node-a`, levelId: 'node', nodeNumber: String(10 + offset), displayName: `Node ${10 + offset}`, elementKey: `${10 + offset}+${20 + offset}` }),
+        Object.freeze({ uid: `target:${dataset}:node-b`, levelId: 'node', nodeNumber: String(20 + offset), displayName: `Node ${20 + offset}`, elementKey: `${10 + offset}+${20 + offset}` }),
+      ]);
+      return { source, target };
+    }
+
+    function largeRecords() {
+      const source = Object.freeze(Array.from({ length: 10_000 }, (_, index) => Object.freeze({
+        uid: `source:${dataset}:node:${index}`,
+        nodeNumber: String(index + offset),
+        position: Object.freeze({ x: index + offset, y: index % 97, z: -(index % 12) }),
+      })));
+      const target = Object.freeze(Array.from({ length: 10_000 }, (_, index) => Object.freeze({
+        uid: `target:${dataset}:node:${index}`,
+        levelId: 'node',
+        nodeNumber: String(index + offset),
+        displayName: `Node ${index + offset}`,
+      })));
+      return { source, target };
+    }
+
+    const records = large ? largeRecords() : smallRecords();
+    const workspace = sample ? {} : Object.freeze({
+      source: Object.freeze({ fileName: `source-${dataset}.xml`, records: records.source, baseRecords: records.source }),
+      target: Object.freeze({ fileName: `target-${dataset}.xml`, records: records.target, baseRecords: records.target }),
+    });
+    const state = Object.freeze({ workspaceRevision: dataset === 'b' ? 2 : 1 });
+    const startedAt = performance.now();
+    const context = publishUniversalViewportContext(document, { state, workspace });
+    const installer = installUniversalXmlCategorizerRuntime(document);
+    window.__xmlBuilderViewport = Object.freeze({
+      context,
+      installer,
+      open: () => openUniversalXmlCategorizer({ document }),
+      close: () => closeUniversalXmlCategorizer(document),
+      lifecycle: () => getUniversalXmlCategorizerLifecycle(document),
+      sourceRecords: records.source,
+      targetRecords: records.target,
+      fixture: Object.freeze({ large, dataset, sourceRows: records.source.length, targetRows: records.target.length, startedAt }),
+    });
+    document.body.dataset.xmlBuilderViewportReady = '1';
+  </script>
+</body>
+</html>

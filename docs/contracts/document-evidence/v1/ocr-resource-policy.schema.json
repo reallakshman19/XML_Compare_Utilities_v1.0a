@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/ocr-resource-policy.schema.json",
+  "title":"OcrResourcePolicy.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","maxPagesPerJob","maxRegionsPerJob","maxPixelsPerInput","maxDimensionPx","maxProviderInvocationsPerJob","maxConcurrencyPerJob","callTimeoutSeconds","pageBudgetSeconds","jobWallBudgetSeconds","maxAttemptMemoryBytes","maxWorkerRssBytes","maxJobOcrMemoryBytes","maxPersistedObservationBytes","passProfiles"],
+  "properties":{
+    "schema":{"const":"OcrResourcePolicy.v1"},
+    "maxPagesPerJob":{"type":"integer","minimum":1},"maxRegionsPerJob":{"type":"integer","minimum":1},
+    "maxPixelsPerInput":{"type":"integer","minimum":1},"maxDimensionPx":{"type":"integer","minimum":1},
+    "maxProviderInvocationsPerJob":{"type":"integer","minimum":1},"maxConcurrencyPerJob":{"type":"integer","minimum":1},
+    "callTimeoutSeconds":{"type":"number","exclusiveMinimum":0},"pageBudgetSeconds":{"type":"number","exclusiveMinimum":0},"jobWallBudgetSeconds":{"type":"number","exclusiveMinimum":0},
+    "maxAttemptMemoryBytes":{"type":"integer","minimum":1},"maxWorkerRssBytes":{"type":"integer","minimum":1},"maxJobOcrMemoryBytes":{"type":"integer","minimum":1},"maxPersistedObservationBytes":{"type":"integer","minimum":1},
+    "passProfiles":{"type":"object","additionalProperties":false,"required":["single","auto","enhanced"],"properties":{"single":{"type":"array","maxItems":1},"auto":{"type":"array","maxItems":2},"enhanced":{"type":"array","maxItems":4}}}
+  }
+}

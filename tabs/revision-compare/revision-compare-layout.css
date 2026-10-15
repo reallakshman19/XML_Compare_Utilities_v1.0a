@@ -1,0 +1,331 @@
+/* Responsive containment and accessibility overrides for Revision Compare. */
+.revc-backdrop,
+.revc-backdrop *,
+.revc-dialog,
+.revc-dialog * {
+  box-sizing: border-box;
+}
+
+.revc-backdrop {
+  padding: clamp(6px, 2vw, 20px);
+  overflow: hidden;
+}
+
+.revc-dialog,
+.revc-review-dialog {
+  width: min(1320px, 100%);
+  height: min(900px, calc(100vh - 40px));
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 0;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.revc-review-dialog {
+  width: min(1540px, 100%);
+  height: min(960px, calc(100vh - 40px));
+}
+
+.revc-head {
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.revc-head > div {
+  min-width: 0;
+}
+
+.revc-head > button {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  min-height: 40px;
+}
+
+/* A vertical flex stack keeps every stage at content height and lets the body scroll. */
+.revc-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.revc-body > * {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.revc-load-stage,
+.revc-preflight,
+.revc-scope-stage,
+.revc-compare-control {
+  min-width: 0;
+}
+
+.revc-actions,
+.revc-compare-actions,
+.revc-group-actions,
+.revc-session-actions,
+.revc-review-actions,
+.revc-review-navigation,
+.revc-decision-controls,
+.revc-decision-actions,
+.revc-candidate-navigation {
+  flex-wrap: wrap;
+}
+
+/* Preserve keyboard access to visually styled file controls. */
+.revc-file-button,
+.revc-import-button {
+  position: relative;
+}
+
+.revc-dialog .revc-file-button input,
+.revc-dialog .revc-import-button input {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.revc-file-button:focus-within,
+.revc-import-button:focus-within,
+.revc-dialog button:focus-visible,
+.revc-dialog summary:focus-visible,
+.revc-dialog input:focus-visible,
+.revc-dialog textarea:focus-visible,
+.revc-dialog select:focus-visible {
+  outline: 2px solid #7dd3fc;
+  outline-offset: 2px;
+}
+
+/* Keep the review workspace and its evidence column inside their assigned tracks. */
+.revc-review-workspace,
+.revc-view-column,
+.revc-review-side {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Prevent evidence growth in the right column from resizing and refitting the SVG viewport. */
+.revc-review-workspace {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.revc-view-column {
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
+.revc-review-side {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.revc-review-side > *,
+.revc-review-summary > div,
+.revc-review-progress > div,
+.revc-decision-progress > div {
+  min-width: 0;
+}
+
+.revc-review-side h2,
+.revc-review-side h3,
+.revc-review-side strong,
+.revc-review-side b,
+.revc-review-side code,
+.revc-review-side dd,
+.revc-review-side p {
+  overflow-wrap: anywhere;
+}
+
+.revc-view-toolbar {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.revc-view-toolbar > div {
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+/* Make the fixed footer compact and allow long identities to wrap without hiding actions. */
+.revc-dialog > footer {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.revc-dialog > footer > div,
+.revc-dialog > footer b,
+.revc-dialog > footer p {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.revc-dialog > footer p {
+  flex: 0 1 360px;
+}
+
+/* Secondary handover inspection remains available without dominating or overflowing setup. */
+.revc-dialog .revc-handover-inspection {
+  min-width: 0;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  overflow: hidden;
+}
+
+.revc-dialog .revc-handover-inspection h2,
+.revc-dialog .revc-handover-inspection p {
+  margin-block: 0;
+}
+
+.revc-dialog .revc-handover-inspection label {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.revc-dialog .revc-handover-inspection input[type="file"] {
+  width: 100%;
+  max-width: 100%;
+  min-height: 42px;
+  padding: 5px;
+  border: 1px solid #35587b;
+  border-radius: 7px;
+  background: #06111d;
+  color: #dbeafe;
+}
+
+.revc-dialog .revc-handover-inspection input[type="file"]::file-selector-button {
+  min-height: 30px;
+  margin-right: 10px;
+  padding: 6px 10px;
+  border: 1px solid #35587b;
+  border-radius: 6px;
+  background: #0e2238;
+  color: #dbeafe;
+  cursor: pointer;
+}
+
+.revc-dialog .revc-handover-inspection dl {
+  min-width: 0;
+}
+
+.revc-dialog .revc-handover-artifacts {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 980px) {
+  .revc-dialog,
+  .revc-review-dialog {
+    width: 100%;
+  }
+
+  .revc-head {
+    gap: 12px;
+  }
+
+  .revc-review-workspace {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    grid-auto-rows: max-content;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+
+  .revc-view-column {
+    min-height: 50vh;
+    grid-template-rows: auto auto minmax(0, 1fr);
+  }
+
+  .revc-review-side {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .revc-view-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .revc-view-toolbar > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
+  }
+
+  .revc-view-toolbar button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .revc-dialog > footer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 8px 12px;
+    padding: 10px 14px;
+  }
+
+  .revc-dialog > footer > div:first-child,
+  .revc-dialog > footer .revc-actions,
+  .revc-dialog > footer p {
+    grid-column: 1 / -1;
+  }
+
+  .revc-dialog > footer .revc-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .revc-dialog > footer .revc-actions button {
+    width: 100%;
+  }
+
+  .revc-dialog > footer p {
+    max-width: none;
+  }
+
+  .revc-dialog .revc-handover-inspection dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .revc-head {
+    padding: 14px;
+  }
+
+  .revc-head h1 {
+    font-size: 20px;
+  }
+
+  .revc-body {
+    padding: 12px;
+  }
+
+  .revc-stage-head,
+  .revc-preflight > header,
+  .revc-compare-control > header {
+    padding: 12px;
+  }
+
+  .revc-slots,
+  .revc-scope-groups {
+    padding: 12px;
+  }
+
+  .revc-review-summary > div,
+  .revc-review-progress > div,
+  .revc-decision-progress > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

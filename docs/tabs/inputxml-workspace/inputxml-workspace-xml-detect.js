@@ -1,0 +1,116 @@
+import { detectXmlCompareProfile, XML_COMPARE_PROFILE_TYPES } from '../../xml-compare/XmlCompareProfileDetector.js';
+
+/**
+ * Global XML/InputXML/CategorizedXML schema + enriched/raw detector, and the XML_Masked
+ * save/import toggle, shared across all InputXML Workspace tabs.
+ * Inputs: file text (+ optional file name) for detection; a boolean for the mask toggle.
+ * Outputs: a detection result {kind, label, enriched, enrichedSignals, confidence, reason};
+ * mask-aware file names/accept lists for save/import dialogs.
+ * Fallback: detection defaults to 'unknown' when no known markers are present; the mask
+ * toggle defaults to OFF (normal .xml downloads) when nothing has been saved yet.
+ */
+
+export const INPUTXML_WORKSPACE_XML_DETECT_SCHEMA = 'inputxml-workspace-xml-detect/v1';
+export const XML_MASK_STORAGE_KEY = 'inputxml-workspace-xml-masked-v1';
+
+const clean = (value) => String(value ?? '').trim();
+
+export const XML_WORKSPACE_KINDS = Object.freeze({
+  XML: 'xml',
+  INPUT_XML: 'inputxml',
+  CATEGORIZED_XML: 'categorizedxml',
+  UNKNOWN: 'unknown',
+});
+
+const KIND_LABELS = Object.freeze({
+  [XML_WORKSPACE_KINDS.XML]: 'XML (Aveva/PDMS native node XML)',
+  [XML_WORKSPACE_KINDS.INPUT_XML]: 'InputXML (CAESAR II PIPINGELEMENT)',
+  [XML_WORKSPACE_KINDS.CATEGORIZED_XML]: 'CategorizedInputXML (Line/Element)',
+  [XML_WORKSPACE_KINDS.UNKNOWN]: 'Unknown',
+});
+
+// Sub-detector: markers that indicate the file already carries enrichment data
+// (piping class/rating/material/DTXR/line-id/node-name), vs. a raw/unenriched export.
+const ENRICHED_MARKERS = Object.freeze([
+  { tag: 'PipingClass', label: 'PipingClass' },
+  { tag: 'Rating', label: 'Rating' },
+  { tag: 'DTXR_POS', label: 'DTXR_POS' },
+  { tag: 'DTXR_PS', label: 'DTXR_PS' },
+  { tag: 'MaterialNumber', label: 'MaterialNumber' },
+  { tag: 'MaterialName', label: 'MaterialName' },
+]);
+const ENRICHED_ATTR_MARKERS = Object.freeze([
+  { attr: 'LINE_ID', label: 'LINE_ID' },
+  { attr: 'FROM_NAME', label: 'FROM_NAME' },
+  { attr: 'TO_NAME', label: 'TO_NAME' },
+]);
+
+function mapProfileType(type) {
+  if (type === XML_COMPARE_PROFILE_TYPES.CATEGORIZED_XML) return XML_WORKSPACE_KINDS.CATEGORIZED_XML;
+  if (type === XML_COMPARE_PROFILE_TYPES.INPUT_XML) return XML_WORKSPACE_KINDS.INPUT_XML;
+  if (type === XML_COMPARE_PROFILE_TYPES.CII_ENRICHED_XML) return XML_WORKSPACE_KINDS.XML;
+  return XML_WORKSPACE_KINDS.UNKNOWN;
+}
+
+function detectEnrichedSignals(body = '') {
+  const signals = [];
+  for (const marker of ENRICHED_MARKERS) {
+    const re = new RegExp(`<(?:\\w+:)?${marker.tag}\\b[^>]*>[^<]*\\S`, 'i');
+    if (re.test(body)) signals.push(marker.label);
+  }
+  for (const marker of ENRICHED_ATTR_MARKERS) {
+    const re = new RegExp(`\\b${marker.attr}\\s*=\\s*"[^"]*\\S`, 'i');
+    if (re.test(body)) signals.push(marker.label);
+  }
+  return signals;
+}
+
+/**
+ * Detects whether text looks like raw Aveva-style XML (<Branch>/<Node>), InputXML
+ * (PIPINGELEMENT), or CategorizedInputXML, plus whether it already carries enrichment data.
+ */
+export function detectXmlWorkspaceSchema({ name = '', text: sourceText = '' } = {}) {
+  const body = clean(sourceText);
+  const profile = detectXmlCompareProfile({ name, text: body });
+  let kind = mapProfileType(profile.type);
+  // detectXmlCompareProfile only recognizes <Branch>/<Node> XML when it already looks
+  // enriched; a raw/unenriched Aveva export still has <Branch>/<Node> but no enrichment tags.
+  if (kind === XML_WORKSPACE_KINDS.UNKNOWN && /<Branch\b/i.test(body) && /<Node\b/i.test(body)) kind = XML_WORKSPACE_KINDS.XML;
+  const enrichedSignals = detectEnrichedSignals(body);
+  return Object.freeze({
+    schema: INPUTXML_WORKSPACE_XML_DETECT_SCHEMA,
+    kind,
+    label: KIND_LABELS[kind],
+    enriched: enrichedSignals.length > 0,
+    enrichedSignals: Object.freeze(enrichedSignals),
+    confidence: profile.confidence,
+    reason: profile.reason,
+  });
+}
+
+export function isXmlMaskEnabled() {
+  try {
+    return typeof localStorage !== 'undefined' && localStorage.getItem(XML_MASK_STORAGE_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+export function setXmlMaskEnabled(enabled) {
+  try {
+    if (typeof localStorage === 'undefined') return;
+    if (enabled) localStorage.setItem(XML_MASK_STORAGE_KEY, '1');
+    else localStorage.removeItem(XML_MASK_STORAGE_KEY);
+  } catch {}
+}
+
+/** When XML_Masked is ON, rewrites a .xml/.XML output file name to .txt so it saves as plain text. */
+export function maskedFileName(fileName = '') {
+  if (!isXmlMaskEnabled()) return fileName;
+  return /\.xml$/i.test(fileName) ? fileName.replace(/\.xml$/i, '.txt') : fileName;
+}
+
+/** Accept-list for file inputs that should take XML content: always also allows .txt. */
+export const XML_OR_TXT_ACCEPT = '.xml,.XML,.txt,.TXT,text/xml,application/xml,text/plain';
+
+export const _test = Object.freeze({ mapProfileType, detectEnrichedSignals, KIND_LABELS });

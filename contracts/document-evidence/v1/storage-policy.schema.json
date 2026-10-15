@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/storage-policy.schema.json",
+  "title":"EvidenceStoragePolicy.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","mode","accessScope","eviction","encryptionAtRest","storagePolicyHash"],
+  "properties":{
+    "schema":{"const":"EvidenceStoragePolicy.v1"},
+    "mode":{"type":"string","enum":["ephemeral","content-addressed-persistent"]},
+    "accessScope":{"type":"string","enum":["job","principal","workspace","service"]},
+    "eviction":{"type":"string","enum":["on-job-complete","ttl","lru-with-ttl","manual-admin"]},
+    "encryptionAtRest":{"type":"string","enum":["required","platform-managed","not-claimed"]},
+    "ttlSeconds":{"type":"integer","minimum":1},
+    "maxRetainedBytes":{"type":"integer","minimum":1},
+    "storagePolicyHash":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"}
+  },
+  "allOf":[{"if":{"properties":{"mode":{"const":"content-addressed-persistent"}}},"then":{"required":["ttlSeconds","maxRetainedBytes"]}}]
+}

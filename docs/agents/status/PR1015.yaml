@@ -1,0 +1,26 @@
+schema: engineering-pr-status/v1
+pr: 1015
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-sif-delete-physical
+base_main: 9a2984cb3b9a60ceccd375104e4cca5248b25122
+state: IMPLEMENTED_DRAFT_AWAITING_REPOSITORY_RUNTIME_QUALIFICATION
+handover_readiness: READY
+merge_authority: OWNER_ONLY
+scope:
+  family: WRITER_2_SIF_TEE_DELETE
+  neutral_version: 11
+  create_authority: BLOCKED_ITEMS_27_30_UNRESOLVED
+  physical_replacements:
+    - CONTROL_SIF_TEE_COUNT
+    - ELEMENT_SIF_TEE_POINTER
+    - SIF_TEE_SECTION_PAYLOAD
+  final_authorization_source: INDEPENDENT_COMPLETE_POSTIMAGE_RECONSTRUCTION
+  writer_testimony_role: TESTIMONY_ONLY
+validation:
+  main_grounding: PASS
+  source_audit: PASS_SOURCE_INSPECTION
+  focused_regression: AUTHORED_NOT_RUN_ENVIRONMENT
+  exact_checkout: BLOCKED_ENVIRONMENT_DNS
+  full_repository: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_RUN_ENVIRONMENT
+next_gate: WRITER_2_ONE_PREIMAGE_NODENAME_PLUS_SIF_DELETE_COMPOSITE

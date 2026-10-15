@@ -1,0 +1,93 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  PAGES_BUILD_TOKEN: standalone-20260903-ciiw-ms-compare-action-refresh-1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Verify Pages graph
+        run: node tests/deploy-workflow-pages-artifact.test.js
+
+      - name: Prepare Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          staging="${{ runner.temp }}/pages"
+          rm -rf "$staging"
+          mkdir -p "$staging"
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.*' \
+            --exclude='tests/' \
+            --exclude='node_modules/' \
+            --exclude='README.md' \
+            --exclude='package.json' \
+            --exclude='package-lock.json' \
+            --exclude='**/__pycache__/' \
+            --exclude='**/*.pyc' \
+            ./ "$staging/"
+          touch "${{ runner.temp }}/pages/.nojekyll"
+          test -f "$staging/index.html"
+          test -f "$staging/tabs/psnm-utility-pages-entry.js"
+          grep -F "$PAGES_BUILD_TOKEN" "$staging/index.html"
+          grep -F "$PAGES_BUILD_TOKEN" "$staging/tabs/psnm-utility-pages-entry.js"
+          cat > "$staging/pages-deployment.json" <<EOF
+          {
+            "repository": "${{ github.repository }}",
+            "sha": "${{ github.sha }}",
+            "run_id": "${{ github.run_id }}",
+            "run_attempt": "${{ github.run_attempt }}",
+            "build": "$PAGES_BUILD_TOKEN"
+          }
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/pages
+          retention-days: 1
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v5

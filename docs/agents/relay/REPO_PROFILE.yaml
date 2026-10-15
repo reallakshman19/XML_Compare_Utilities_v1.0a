@@ -1,0 +1,22 @@
+schema_version: relay-v2.5
+repository_type: application
+default_branch: main
+important_paths:
+  source: [tabs/cii-workspace]
+  tests: [tests, tests/browser]
+  documentation: [docs]
+  engineering_specs: [agents/chains/CII-W2-NODENAME-BYTE-R1-1224, agents/relay]
+commands:
+  unit_test: node tests/cii-workspace-propagation.test.js
+  retained_structural: node tests/cii-workspace-multisource-retained-auto-anchor-benchmark.test.js
+  retained_selectability: node tests/cii-workspace-multisource-pb0003-benchmark.test.js
+protected_domains:
+  - tabs/cii-workspace/cii-workspace-writer1c-nodename.js
+  - tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js
+  - tabs/cii-workspace/cii-workspace-writer2-nodename-write.js
+  - tabs/cii-workspace/cii-workspace-v11-v14-converter.js
+generated_paths: []
+repository_rules:
+  - Do not broaden Writer2 authority to same-cardinality NodeName overwrite; route REPLACE through Writer1C.
+  - Retained TEXPECTED is a lower-bound witness, not an upper-bound mutation oracle.
+  - Original target bytes are preservation authority outside the qualified mutation closure.

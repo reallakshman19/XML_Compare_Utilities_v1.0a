@@ -1,0 +1,85 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1009
+mission: Writer 1C SIF Phase-2B exact Version-11 ii/io existing-block mutation
+branch: agent/cii-writer-1c-sif-phase2b
+base: main
+base_head: 430b2b0edb52df586059137e0a8886d4c695b871
+criticality: ENGINEERING_CRITICAL
+agent_state: ACTIVE
+handover_readiness: READY
+merge_authority: OWNER_ONLY
+ready_for_review: false
+ready_for_review_reason: isolated production-module qualification passes, but exact full-repository inherited/npm/browser execution remains unavailable in this session
+implemented:
+  neutral_format: VERSION_11_ONLY
+  sif_block_shape: EXISTING_POINTER_EXISTING_10_ROW_BLOCK_ONLY
+  mutable_fields:
+    - SLOT_1_ITEM_3_II
+    - SLOT_1_ITEM_4_IO
+    - SLOT_2_ITEM_3_II
+    - SLOT_2_ITEM_4_IO
+  value_domain: EXPLICIT_FINITE_GE_1_TO_EXPLICIT_FINITE_GE_1
+  blank_zero_semantics: DISTINCT_FAIL_CLOSED
+  tee_type: FINITE_EQUAL_SOURCE_TARGET_AND_ACTUAL_TARGET
+  element_binding: PARSED_INDEX_EQUALS_PHYSICAL_BLOCK_INDEX_PLUS_ENDPOINT_MATCH
+  piping_code_context: ENGINEER_ATTESTED_SAME_ACTIVE_PIPING_CODE
+  piping_code_context_defense_in_depth:
+    - TRANSFER_POLICY_CLASSIFICATION
+    - LOW_LEVEL_SIF_MUTATION_PLANNER
+    - INDEPENDENT_ROUND_TRIP_VALIDATOR
+    - UI_APPLY_TIME_STALE_CONTEXT_CHECK
+  shared_pointer_aliasing: ALL_OWNERS_REQUIRED_IDENTICAL_POSTIMAGE
+  transaction: ONE_ORIGINAL_TARGET_BYTE_PREIMAGE_FOR_NODENAME_AND_SIF
+  validator: INDEPENDENT_AUTHORIZED_SPAN_DERIVATION
+qualification_execution:
+  exact_checkout_attempt: BLOCKED_ENVIRONMENT_DNS_GITHUB_COM
+  source_integration_audit: PASS_SOURCE_INSPECTION
+  transfer_operation_sif_metadata_custody: PASS_SOURCE_INSPECTION
+  low_level_code_context_bypass_finding: FIXED
+  four_position_plan_coverage_gap: CLOSED_TEST_AUTHORED
+  isolated_exact_blob_checks:
+    writer1c_sif_js: 980e5c6df1d16a66ddd32ee83da9f2eae583108a
+    writer1c_sif_custody_js: 915ceb0a199091f00823e89d6c73c6007da62f9d
+    writer1c_validation_js: 7d389a7e52e0c0b6b7592f282fa639535915ced9
+    physical_file_js: 0c4c445fbd3d4b929b1f9288b789b244547c8867
+    fixed_field_js: 485daa43553681ca54f488499e57f36d2239be58
+    contracts_js: 6ab30d8dd088225fd89bb729bf9ffdebefe652f6
+    context_planner_test_js: b00748ede3d7e467ec0a023fbde3e8710356858d
+    four_position_test_js: 7b4e4c1decd571e9cf82f9c061265846b3c483a7
+  isolated_context_planner_test: PASS_ISOLATED_EXACT_PLANNER_HARNESS
+  isolated_four_position_plan_test: PASS_ISOLATED_EXACT_PLANNER_HARNESS
+  isolated_custody_v11_position_and_index_falsifiers: PASS_ISOLATED_EXACT_MODULE_HARNESS
+  isolated_four_field_round_trip: PASS_ISOLATED_PRODUCTION_MODULE_HARNESS
+  isolated_unrelated_pointer_byte_falsifier: PASS_ISOLATED_PRODUCTION_MODULE_HARNESS
+  independent_v11_field_arithmetic_oracle: PASS_INDEPENDENT_ORACLE
+  independent_blank_semantics_oracle: PASS_INDEPENDENT_ORACLE
+  independent_shared_alias_oracle: PASS_INDEPENDENT_ORACLE
+validation:
+  main_grounding: PASS_REMOTE_SOURCE_INSPECTION
+  branch_compare: PASS_GIT_COMPARE
+  source_diff_review: PASS_SOURCE_INSPECTION
+  focused_phase2b_repository_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  target1_sif_custody_repository_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  sif_context_ui_repository_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  sif_context_planner_repository_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  sif_four_position_repository_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_writer1c_tests: NOT_RUN_ENVIRONMENT
+  full_npm_test: NOT_RUN_ENVIRONMENT
+  browser: NOT_RUN_ENVIRONMENT
+not_run_reason: direct git checkout fails with Could not resolve host github.com; no complete executable repository checkout is available in this session
+scope_audit:
+  protected_converter_files_changed: 0
+  fixed_field_parser_files_changed: 0
+  workflow_files_changed: 0
+  writer1a_writer1b_implementation_files_changed: 0
+explicit_exclusions:
+  - blank_zero_default_9999_99_transition_semantics
+  - sif_record_create_delete
+  - pointer_allocate_reindex
+  - control_mutation
+  - tee_type_mutation
+  - raw_10_row_payload_copy
+  - version_12_14_15_mutation
+  - general_writer1a_1b_1c_composite_transaction
+next_action: keep PR1009 draft pending full exact-checkout inherited/npm/browser qualification; merge only with owner authorization

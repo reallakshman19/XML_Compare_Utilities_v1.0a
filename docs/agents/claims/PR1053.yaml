@@ -1,0 +1,76 @@
+pr: 1053
+issue: 1052
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-runtime-w216
+base_main: a0098a7b6f1aff9f0219b051da964c6a9adad5ce
+claim_state: W2_12_RUNTIME_PASS_W2_13_PENDING
+ready_for_review: true
+merge_authority: OWNER_ONLY
+merge_authorized: true
+merge_authorization_source: OWNER_INSTRUCTION_2026_08_25_MERGE_PROCEED_NEXT
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RESTRAINT_DELETE_RELEASE_FREEZE
+
+claims:
+  - id: INHERITED_W2_11_RESTRAINT_RUNTIME
+    state: PASS_RUNTIME_EXACT_BLOB
+    required: true
+  - id: W2_12_WRITER_SIDE_DEPENDENCY_CLOSURE
+    state: COMPLETE_IMPORTS_UNDER_NODE_22_16_0
+    required: true
+  - id: W2_12_VALIDATOR_SIDE_DEPENDENCY_CLOSURE
+    state: COMPLETE_IMPORTS_UNDER_NODE_22_16_0
+    required: true
+  - id: W2_12_R01_R22_RUNTIME
+    state: PASS_RUNTIME_EXACT_BLOB
+    required: true
+    anchors:
+      R02: PASS_ORIGINAL_COORDINATE_NODE_RESTRAINT_DISJOINT
+      R05: PASS_PARTIAL_HANGER_RESTRAINT_ONE_TARGET0
+      R09: PASS_CONTROL_ROW1_NONAM_PRESERVED_ROW2_RESTRAINTS_MUTATED
+      R20: PASS_UNRELATED_FINAL_BYTE_DRIFT_REJECTED
+  - id: W2_13_PRODUCT_CORE_IMPLEMENTATION
+    state: ALREADY_MERGED_PR1047
+    merge_sha: f51f8acdcdcbd108073e2a2e57753c07d9f27c42
+    required: true
+  - id: W2_13_SYNTHETIC_PRODUCT_RUNTIME
+    state: NOT_RUN_ENVIRONMENT
+    required: true
+  - id: W2_13_REAL_CII_PRODUCT_RUNTIME
+    state: NOT_RUN_ENVIRONMENT
+    required: true
+  - id: WRITER2_INHERITED_REGRESSION_RUNTIME
+    state: PARTIAL_PASS_W2_11_RESTRAINT_ONLY
+    required: true
+  - id: REPOSITORY_NPM_GATE
+    state: NOT_RUN_ENVIRONMENT
+    required: true
+  - id: RESTRAINT_BLOCK_CREATE
+    state: BLOCKED_RUNTIME_CONFIRMED_W2_12_R10
+    authority: NONE
+  - id: SIF_CREATE
+    state: BLOCKED_RUNTIME_CONFIRMED_W2_12_R11
+    authority: NONE
+  - id: HANGER_CREATE
+    state: BLOCKED_RUNTIME_CONFIRMED_W2_12_R12
+    authority: NONE
+  - id: UNSUPPORTED_PROCESS_TOPOLOGY_APPLY
+    state: BLOCKED_RUNTIME_CONFIRMED_W2_12_R22
+  - id: ENGINEERING_FAILURE
+    state: NONE_OBSERVED
+
+runtime_custody:
+  mode: EXACT_GIT_BLOB_SPARSE_MIRROR_WHERE_NEEDED
+  local_mirror: /mnt/data/w215
+  node_version: v22.16.0
+  verification: every_transitively_loaded_repository_file_hashes_to_BASE_MAIN_blob_before_qualifying_execution
+
+negative_assurance:
+  control_row1_nonam_protected: true
+  control_row2_restraints_authority_preserved: true
+  complete_postimage_drift_oracle_r20: PASS
+  authority_widening: false
+  production_diff: NONE
+  workflow_diff: NONE
+
+qualification_rule: only authored entrypoint assertions qualify runtime gates; W2.12 is observed PASS, but release/freeze remains NOT_READY until W2.13 product plus inherited Writer2 regression gates are observed
+next_claim_gate: after authorized checkpoint merge, execute exact-blob W2.13 product-routing and retained-real-CII entrypoints plus inherited Writer2 regressions in a separate successor PR

@@ -1,0 +1,59 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR983
+mission: CII benchmark preflight and normalized engineering-data capability states
+workstream: cii-compare-oracle-capabilities
+branch: agent/cii-oracle-capability-states
+stacked_base_pr: PR982
+stacked_base_head: aacbcf9e95645d8ee964d01ebca24b80da7e7de9
+main_base: ceb0c0193a4be68b28a913b74bdc453ccf79d336
+validated_implementation_head: 65fede36f5adb016fe12194ccc6d2ca2ae509d44
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+agent_state: IMPLEMENTATION_COMPLETE_VALIDATION_PARTIAL
+pr_recovery_state: HANDOVER_READY_STACKED_DRAFT
+handover_readiness: READY
+report_path: agents/PR983_workreport.md
+appendix_a_status: NOT_REQUIRED_SAME_AGENT_CONTINUATION
+scope_authority: LOCKED_TO_ORACLE_AND_CAPABILITY_STATES
+validation_state: SOURCE_QUALIFIED_RUNTIME_PARTIAL
+validation_summary: >-
+  Capability authority and benchmark oracle/preflight are implemented. Current-source inspection
+  confirms null/NOT_PARSED fail-closed semantics, partial restraint/process disclosures, explicit
+  non-authoritative numbering hints, and a clean production diff limited to capability+intake.
+  SOURCE/TARGET1/TARGET2 oracle gang edges were independently verified in repository benchmark
+  text. Earlier focused synthetic capability/oracle execution passed, but exact current-head
+  execution of the two repository PR983 test files remains NOT_RUN in this environment.
+acceptance_matrix:
+  capability_states_contract: PASS_SOURCE_INSPECTION
+  nodes_semantic_authority: PASS_SOURCE_INSPECTION
+  intake_integration: PASS_SOURCE_INSPECTION
+  raw_presence_separate_from_semantic_authority: PASS_SOURCE_INSPECTION
+  unparsed_family_false_zero_guard: PASS_SOURCE_INSPECTION
+  restraint_partial_semantics_disclosure: PASS_SOURCE_INSPECTION
+  process_unique_values_not_case_counts: PASS_SOURCE_INSPECTION
+  benchmark_oracle_integrity: PASS_AUTHORITATIVE_SOURCE_INSPECTION
+  source_gang_paths: PASS_AUTHORITATIVE_SOURCE_INSPECTION
+  target1_gang_paths: PASS_AUTHORITATIVE_SOURCE_INSPECTION
+  target2_blind_gang_paths: PASS_AUTHORITATIVE_SOURCE_INSPECTION
+  oracle_failure_modes_focused_synthetic: PASS_EARLIER_HEAD
+  capability_test_current_head: NOT_RUN
+  benchmark_oracle_test_current_head: NOT_RUN
+  matcher_unchanged: PASS_DIFF_GUARD
+  topology_propagation_unchanged: PASS_DIFF_GUARD
+  parser_unchanged_in_pr983: PASS_DIFF_GUARD
+  transfer_mutation_unchanged: PASS_DIFF_GUARD
+  protected_writer_unchanged: PASS_DIFF_GUARD
+  github_actions_status: NOT_OBSERVED
+known_limits:
+  - PR983 depends on PR982 fixed-field parser until PR982 is merged and PR983 is retargeted
+  - restraint semantic classification outside qualified codes remains partial; raw rows are retained
+  - P1/T1/T2 evidence is partial and not a qualified load-case/process-case model
+  - line-number, hanger, SIF/tee and general weight semantic parsers are not yet connected; counts remain null
+  - no UI change is in scope; future UI must not render NOT_PARSED/null as zero
+  - exact current-head runtime evidence for the two new tests remains NOT_RUN
+exact_next_action: >-
+  Keep PR983 draft. Execute tests/cii-workspace-capabilities.test.js and
+  tests/cii-workspace-benchmark-oracle.test.js in a complete qualified checkout/runner and attach
+  exact-head evidence. After PR982 merges, retarget PR983 to main and re-ground before owner review.
+last_updated: 2026-08-18T17:49:00+04:00

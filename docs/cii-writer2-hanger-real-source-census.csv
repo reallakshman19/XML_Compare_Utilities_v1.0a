@@ -1,0 +1,10 @@
+path,git_blob_sha,provenance_class,numelt,numnoz,nohgrs,h_gt_1_candidate,packed_shape_observed,qualification_note
+Benchmark/CIICompare/BM_CII_SOURCE.CII,e41cd05603b56837cbb6e31b9d4074ef6106fe9b,REAL_VENDOR_BENCHMARK,40,0,1,false,ACTIVE_FIELDS_ONLY_H1,Real vendor H=1 authority; five one-value packed HANGER arrays are 2X plus one I13 field.
+Benchmark/CIICompare/BM_CII_TARGET1.CII,1a1cb9ac27e9c347cfcd3e4a8766ebad0e4b7853,REAL_VENDOR_BENCHMARK,40,0,0,false,NOT_APPLICABLE_H0,No HANGER payload.
+Benchmark/CIICompare/BM_CII_TARGET2.CII,0259cc73c0951627b9b3ef12481f620c9c8d2008,REAL_VENDOR_BENCHMARK,40,0,0,false,NOT_APPLICABLE_H0,No HANGER payload.
+Benchmark/CIICompare/SOURCE 3.CII,20c0c37014004fb9de46e3e4d01f0c62535495d5,REAL_CAESAR_NEUTRAL,219,0,0,false,NOT_APPLICABLE_H0,Large CAESAR II neutral source; CONTROL NOHGRS is zero.
+Benchmark/CIICompare/TARGET 3-1.CII,b79806ac2082e8355bfcd323d7e6496439759a5a,REAL_CAESAR_NEUTRAL,223,0,0,false,NOT_APPLICABLE_H0,Large CAESAR II neutral target; CONTROL NOHGRS is zero.
+Benchmark/Pipeline/CII,f79fa4ea8bdb7e507815268c26f2c0278bf7f853,GENERATED_PIPELINE_CII,25,0,0,false,NOT_APPLICABLE_H0,Pipeline benchmark CII; CONTROL NOHGRS is zero.
+converters/scripts/inputxml_profile_bm_cii_2019.cii,c72c0ee3c7a2e9a36d849085fbc8fc5b8757bca8,CONVERTER_PROFILE,40,0,1,false,ACTIVE_FIELDS_ONLY_H1,Repository converter profile carries H=1 synchronizer layout; subject to independent runtime census test.
+converters/scripts/inputxml_profile_sys30_b7410250_benchmark.cii,a18e20ac2a0acb845a3e1ccfc171a4f94a491b28,CONVERTER_PROFILE,54,0,0,false,NOT_APPLICABLE_H0,Legacy profile control shape; third CONTROL token NOHGRS is zero.
+output.cii,3a8d5cacebb71df8f4a7e372654b84206aa22268,GENERATED_ROOT_CII,65,0,0,false,NOT_APPLICABLE_H0,Repository root generated CII; CONTROL NOHGRS is zero.

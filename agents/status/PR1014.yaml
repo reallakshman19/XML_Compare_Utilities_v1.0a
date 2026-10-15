@@ -1,0 +1,22 @@
+pr: 1014
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-sif-block-authority
+base: 70c7004f872ccba019c1e8b12b27e5ff7dbd0b4f
+state: DRAFT_ACTIVE
+handover_readiness: READY
+takeover_authority: WRITE_ALLOWED
+merge_authority: OWNER_ONLY
+mission: Writer 2 V11 SIF/TEE existing-block DELETE relocation authority
+scope:
+  create: BLOCKED_ITEMS_27_30_UNRESOLVED
+  delete: PLANNER_IMPLEMENTED
+  physical_rewrite: NOT_IMPLEMENTED
+  product_routing: NOT_IMPLEMENTED
+validation:
+  source_inspection: PASS
+  independent_relocation_oracle: PASS
+  repository_regression: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_regressions: NOT_RUN_ENVIRONMENT
+  full_npm: NOT_RUN_ENVIRONMENT
+  browser: NOT_RUN_ENVIRONMENT
+next_action: implement physical SIF block deletion/reindex in a separate successor PR after owner disposition

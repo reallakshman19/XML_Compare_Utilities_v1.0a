@@ -1,0 +1,28 @@
+pr: 1018
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-product-qualification
+base: 112e2d78de82d537186a266ed6f9d93cb30a4160
+state: DRAFT_ACTIVE
+handover_readiness: READY
+takeover_authority: WRITE_ALLOWED
+merge_authority: OWNER_ONLY
+current_stage: REAL_BENCHMARK_QUALIFICATION_AUTHORED_NOT_EXECUTED
+scope:
+  - REAL_BM_CII_TARGET1_PHYSICAL_PREIMAGE
+  - CONTROLLED_BOUND_NODENAME_CREATE
+  - CONTROLLED_BOUND_V11_SIF_DELETE
+  - PUBLIC_WRITER2_PRODUCT_APPLY
+  - BINARY_EXPORT_REINTAKE
+  - STALE_PREVIEW_REJECTION
+  - UNRELATED_BYTE_ANTI_DRIFT
+blocked:
+  - SIF_CREATE_ITEMS_27_30_UNRESOLVED
+  - HANGER_CARDINALITY
+  - WRITER3_TOPOLOGY
+validation:
+  base_grounding: PASS
+  benchmark_custody: PASS_SOURCE_INSPECTION
+  exact_checkout: BLOCKED_ENVIRONMENT_GITHUB_DNS
+  real_benchmark_writer2_regression: AUTHORED_NOT_RUN_ENVIRONMENT
+  full_repository: NOT_RUN_ENVIRONMENT
+  browser: NOT_RUN_ENVIRONMENT

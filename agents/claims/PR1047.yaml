@@ -1,0 +1,53 @@
+pr: 1047
+issue: 1046
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-product-w213
+base_main: 72afe8fa9e8167e0284d34259bc7ad304ac14d99
+claim_state: SOURCE_COMPLETE_OWNER_AUTHORIZED_MERGE
+ready_for_review: true
+merge_authority: OWNER_ONLY
+merge_authorized: true
+owner_accepts_recorded_residuals: true
+
+claims:
+  - id: RESTRAINT_PRODUCT_READINESS_ROUTE
+    state: IMPLEMENTED_SOURCE
+    authority: MERGED_W2_12_DELETE_ONLY
+  - id: RESTRAINT_PRODUCT_CORE_DISPATCH
+    state: IMPLEMENTED_SOURCE
+    authority: CII_WRITER_2_RESTRAINT_ONE_TARGET0_COMPOSITE
+  - id: RESTRAINT_PRODUCT_INDEPENDENT_VALIDATION
+    state: IMPLEMENTED_SOURCE
+    authority: INDEPENDENT_COMPLETE_POSTIMAGE_RESTRAINT_COMPOSITE_VALIDATION
+  - id: RESTRAINT_REAL_CII_PRODUCT_QUALIFICATION
+    state: AUTHORED_NOT_RUN_ENVIRONMENT
+    authority: RETAINED_V11_CII_PREIMAGE
+  - id: RESTRAINT_SYNTHETIC_PRODUCT_QUALIFICATION
+    state: AUTHORED_NOT_RUN_ENVIRONMENT
+    authority: CONTROLLED_W2_13_PRODUCT_FIXTURE
+  - id: RESTRAINT_BLOCK_CREATE
+    state: BLOCKED_UNCHANGED
+    authority: NONE
+
+negative_assurance:
+  w2_12_physical_writer_changed: false
+  writer1b_changed: false
+  sif_create_enabled: false
+  hanger_create_enabled: false
+  restraint_create_enabled: false
+  parser_converter_changed: false
+  writer3_changed: false
+  no_restraint_writer2_route_preserved: true
+
+validation:
+  source_inspection: PASS
+  exact_blob_syntax: PASS_LOCAL_SYNTAX_EXACT_BLOB
+  synthetic_runtime: NOT_RUN_ENVIRONMENT
+  real_cii_runtime: NOT_RUN_ENVIRONMENT
+  repository_npm: NOT_RUN_ENVIRONMENT
+
+historical_w2_12_validation:
+  focused_R01_R22: NOT_RUN_ENVIRONMENT
+  repository_npm: NOT_RUN_ENVIRONMENT
+
+next_claim_gate: W2_14 exact-checkout runtime qualification and release/freeze verdict

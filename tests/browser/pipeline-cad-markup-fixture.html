@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PCAD-005A Markup Fixture</title>
+<style>
+html,body{margin:0;background:#020617;color:#e2e8f0;font-family:sans-serif}
+.fixture-dialog{position:relative;padding:12px;min-height:760px}
+.graphs{display:grid;grid-template-columns:1fr;gap:12px}
+canvas{width:900px;height:300px;border:1px solid #334155}
+#status{position:fixed;left:8px;bottom:8px;z-index:20}
+</style>
+</head>
+<body>
+<div class="fixture-dialog">
+  <div class="graphs">
+    <canvas id="table2" width="900" height="300" aria-label="Table 2 markup fixture"></canvas>
+    <canvas id="table3" width="900" height="300" aria-label="Table 3 markup fixture"></canvas>
+  </div>
+</div>
+<output id="status">loading</output>
+<script type="module">
+import { PipelineProfileModel } from '../../tabs/pipeline-3d-model/pipeline-3d-model-cad-model.js';
+import { Table2XCanvas } from '../../tabs/pipeline-3d-model/pipeline-3d-model-table2x-canvas.js';
+import { Table3XCanvas } from '../../tabs/pipeline-3d-model/pipeline-3d-model-table3x-canvas.js';
+import { createPipelineCadMarkupRuntime } from '../../tabs/pipeline-3d-model/pipeline-3d-model-cad-markup-commands.js';
+import { mountPipelineCadMarkupView } from '../../tabs/pipeline-3d-model/pipeline-3d-model-cad-markup-view.js';
+
+const raw = {
+  table2a: `H(coor)\tV(coor)\t[H vs V] Length\tStation Text\tElevation Text
+500\t—\t—\t0+000.0\t100.00
+510\t—\t—\t0+010.0\t104.00
+520\t—\t—\t0+020.0\t102.00`,
+  table3a: `From H(coor)\tTo H(coor)\tText Position X\tHLength Text
+500\t510\t505\t10.0
+510\t520\t515\t10.0`,
+  table3b: `From H(coor)\tTo H(coor)\tText Position X\tZ Text
+500\t520\t505\t1.5M`,
+  table3c: `Text Position X\tMarker Text
+507\tPM-001
+515\tPM-002`,
+};
+const exactReloadRaw = {
+  ...raw,
+  table3c: `Text Position X\tMarker Text
+508\tPM-001-REVISED
+516\tPM-002-REVISED`,
+};
+const missingReloadRaw = {
+  ...raw,
+  table3c: `Text Position X\tMarker Text
+508\tPM-001-ONLY`,
+};
+let model = PipelineProfileModel.fromRaw(raw);
+const graphs = {
+  table2x: new Table2XCanvas(document.querySelector('#table2'), { width: 900, height: 300 }),
+  table3x: new Table3XCanvas(document.querySelector('#table3'), { width: 900, height: 300 }),
+};
+graphs.table2x.setModel(model); graphs.table3x.setModel(model);
+const projectionCounts = { table2x: 0, table3x: 0 };
+for (const [name, graph] of Object.entries(graphs)) {
+  const original = graph.setMarkupProjection.bind(graph);
+  graph.setMarkupProjection = (projection) => {
+    projectionCounts[name] += 1; return original(projection);
+  };
+}
+let markup = null; let view = null; let publishCount = 0;
+function mount(initialDocument) {
+  markup = createPipelineCadMarkupRuntime({
+    getProfileModel: () => model, graphs, initialDocument,
+    onPublish: () => { publishCount += 1; },
+  });
+  view = mountPipelineCadMarkupView({
+    dialog: document.querySelector('.fixture-dialog'), markup,
+  });
+}
+mount();
+const sourceState = () => JSON.stringify({
+  raw: model.serializeRaw(), revision: model.revision,
+  table2Rows: model.table2Rows, table3LengthRows: model.table3LengthRows,
+  table3DepthRows: model.table3DepthRows, table3MarkerRows: model.table3MarkerRows,
+});
+const baseline = sourceState();
+const entity = (graph, entityId, entityType) => ({
+  kind: 'ENTITY', graph, entityId, entityType, pointRole: 'CENTER',
+});
+const point = (graph, x, y) => ({ kind: 'GRAPH_POINT', graph, x, y });
+function dimensionPayload(type = 'LINEAR_HORIZONTAL') {
+  return {
+    graph: 'table2x', dimensionType: type,
+    firstAnchor: entity('table2x', 'table2a-0001', 'elevation-node'),
+    secondAnchor: entity('table2x', 'table2a-0002', 'elevation-node'),
+    offset: 1.5, labelMode: 'MEASURED',
+  };
+}
+function table2Dimension(type = 'LINEAR_HORIZONTAL') {
+  markup.createDimension(dimensionPayload(type));
+  return markup.getDocument().dimensions.at(-1);
+}
+function markerDimension() {
+  markup.createDimension({
+    graph: 'table3x', dimensionType: 'LINEAR_HORIZONTAL',
+    firstAnchor: entity('table3x', 'table3c-0001', 'marker'),
+    secondAnchor: entity('table3x', 'table3c-0002', 'marker'),
+    offset: .5, labelMode: 'MEASURED',
+  });
+  return markup.getDocument().dimensions.at(-1);
+}
+function graphPointDimension() {
+  markup.createDimension({
+    graph: 'table2x', dimensionType: 'LINEAR_VERTICAL',
+    firstAnchor: point('table2x', 4, 99),
+    secondAnchor: point('table2x', 4, 106),
+    offset: 2, labelMode: 'MEASURED',
+  });
+  return markup.getDocument().dimensions.at(-1);
+}
+function annotationPayload() {
+  return {
+    graph: 'table3x',
+    anchor: entity('table3x', 'table3c-0001', 'marker'),
+    text: 'Exact marker annotation', alignment: 'LEFT',
+    leader: { enabled: true, dx: 1.5, dy: .75 },
+  };
+}
+function entityAnnotation() {
+  markup.createAnnotation(annotationPayload());
+  return markup.getDocument().annotations.at(-1);
+}
+function pointAnnotation() {
+  markup.createAnnotation({
+    graph: 'table2x', anchor: point('table2x', 12, 103),
+    text: 'Presentation note', alignment: 'CENTER',
+    leader: { enabled: false },
+  });
+  return markup.getDocument().annotations.at(-1);
+}
+function snapshot() {
+  return {
+    document: JSON.parse(markup.export()), evidence: markup.getEvidence(),
+    panelRows: [...document.querySelectorAll('[data-p3d-cad-markup-panel] tbody tr')]
+      .map((row) => row.textContent),
+    projectionCounts: { ...projectionCounts }, publishCount,
+    table2Projection: graphs.table2x.markupProjection,
+    table3Projection: graphs.table3x.markupProjection,
+    sourceUnchanged: sourceState() === baseline, engineeringRevision: model.revision,
+  };
+}
+function dimensionScreen(graphName, id) {
+  const graph = graphs[graphName];
+  const item = graph.markupProjection.dimensions.find((candidate) => candidate.id === id);
+  if (!item?.geometry) return null;
+  const start = graph.worldToScreen(item.geometry.start);
+  const end = graph.worldToScreen(item.geometry.end);
+  return { start, end, label: item.label, authority: item.authorityLabel };
+}
+function reload(nextRaw) {
+  model = PipelineProfileModel.fromRaw(nextRaw);
+  graphs.table2x.setModel(model); graphs.table3x.setModel(model);
+  return markup.reconcile();
+}
+function errorOf(callback) {
+  try { callback(); return null; } catch (error) { return error.message; }
+}
+window.pcadMarkupHarness = {
+  empty: () => snapshot(),
+  createTable2Horizontal: () => ({ record: table2Dimension(), state: snapshot() }),
+  createTable2Aligned: () => ({ record: table2Dimension('LINEAR_ALIGNED'), state: snapshot() }),
+  createMarkerDimension: () => ({ record: markerDimension(), state: snapshot() }),
+  createGraphPointDimension: () => ({ record: graphPointDimension(), state: snapshot() }),
+  createEntityAnnotation: () => ({ record: entityAnnotation(), state: snapshot() }),
+  createPointAnnotation: () => ({ record: pointAnnotation(), state: snapshot() }),
+  panZoom() {
+    const record = table2Dimension(); const before = dimensionScreen('table2x', record.dimensionId);
+    graphs.table2x.panBy(35, -20); graphs.table2x.zoomAt({ x: 450, y: 150 }, 1.4);
+    return { before, after: dimensionScreen('table2x', record.dimensionId), state: snapshot() };
+  },
+  fitAndSnapExclusion() {
+    markup.createDimension({
+      graph: 'table2x', dimensionType: 'LINEAR_ALIGNED',
+      firstAnchor: point('table2x', 1000, 1000), secondAnchor: point('table2x', 1200, 1100),
+      offset: 0, labelMode: 'MEASURED',
+    });
+    const boundsBefore = { ...graphs.table2x.bounds };
+    const geometry = graphs.table2x.markupProjection.dimensions[0].geometry;
+    const midpoint = graphs.table2x.worldToScreen({
+      x: (geometry.start.x + geometry.end.x) / 2, y: (geometry.start.y + geometry.end.y) / 2,
+    });
+    const hit = graphs.table2x.hitTest(midpoint); graphs.table2x.fitToBounds();
+    return {
+      boundsBefore, boundsAfter: { ...graphs.table2x.bounds }, markupHit: hit,
+      engineeringCandidates: graphs.table2x.currentNodes().length,
+      sourceUnchanged: sourceState() === baseline,
+    };
+  },
+  updateDelete() {
+    const record = table2Dimension(); markup.updateDimension(record.dimensionId, { offset: 4 });
+    const updated = markup.getDocument().dimensions[0]; markup.deleteDimension(record.dimensionId);
+    return { updated, afterDelete: snapshot() };
+  },
+  undoRedo() {
+    const record = entityAnnotation(); const created = snapshot();
+    markup.undo(); const undone = snapshot(); markup.redo(); const redone = snapshot();
+    return { id: record.annotationId, created, undone, redone };
+  },
+  roundTrip() {
+    table2Dimension(); pointAnnotation(); const canonical = markup.export();
+    const shuffled = JSON.parse(canonical); shuffled.dimensions.reverse(); shuffled.annotations.reverse();
+    markup.import(JSON.stringify(shuffled)); return { canonical, after: markup.export(), state: snapshot() };
+  },
+  exactReconcile() {
+    const record = markerDimension(); const report = reload(exactReloadRaw);
+    return { id: record.dimensionId, report, state: snapshot() };
+  },
+  orphanReconcile() {
+    const record = markerDimension(); const report = reload(missingReloadRaw);
+    return { id: record.dimensionId, report, state: snapshot() };
+  },
+  invariance() {
+    table2Dimension(); markerDimension(); entityAnnotation();
+    markup.updateAnnotation('pcad-note-000003', { text: 'Updated only in sidecar' });
+    markup.deleteDimension('pcad-dim-000001');
+    return { sourceUnchanged: sourceState() === baseline, state: snapshot() };
+  },
+  destroyRemount() {
+    table2Dimension(); entityAnnotation();
+    const oldMarkup = markup; const oldPanel = view.element; const oldDocument = oldMarkup.export();
+    view.destroy(); oldMarkup.destroy();
+    const afterDestroy = {
+      oldPanelConnected: oldPanel.isConnected,
+      panels: document.querySelectorAll('[data-p3d-cad-markup-panel]').length,
+      table2Dimensions: graphs.table2x.markupProjection.dimensions.length,
+      projectionCounts: { ...projectionCounts }, publishCount,
+    };
+    const blocked = {
+      subscribe: errorOf(() => oldMarkup.subscribe(() => {})),
+      create: errorOf(() => oldMarkup.createDimension(dimensionPayload())),
+      update: errorOf(() => oldMarkup.updateDimension('pcad-dim-000001', { offset: 9 })),
+      delete: errorOf(() => oldMarkup.deleteDimension('pcad-dim-000001')),
+      annotation: errorOf(() => oldMarkup.createAnnotation(annotationPayload())),
+      import: errorOf(() => oldMarkup.import(oldDocument)),
+      reconcile: errorOf(() => oldMarkup.reconcile()),
+      undo: errorOf(() => oldMarkup.undo()),
+      redo: errorOf(() => oldMarkup.redo()),
+    };
+    const afterBlocked = {
+      document: oldMarkup.export(), projectionCounts: { ...projectionCounts }, publishCount,
+      canUndo: oldMarkup.canUndo, canRedo: oldMarkup.canRedo,
+    };
+    mount(); const afterRemount = snapshot();
+    const oldAfterRemount = errorOf(() => oldMarkup.undo());
+    return { oldDocument, afterDestroy, blocked, afterBlocked, afterRemount, oldAfterRemount };
+  },
+};
+document.querySelector('#status').textContent = 'ready';
+</script>
+</body>
+</html>

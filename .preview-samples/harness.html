@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Anchor Review Harness</title>
+<link rel="stylesheet" href="../tabs/xml-compare-tab.css">
+<link rel="stylesheet" href="../tabs/xml-compare-canvas-rebuild.css">
+<style>body{background:#0b1220;margin:0;padding:16px;font-family:system-ui,sans-serif}</style>
+</head><body>
+<div class="xml-compare-tab"><div id="root"></div></div>
+<script type="module">
+import { createXmlCompareWorkspaceModel } from '../xml-compare/XmlCompareWorkspaceModel.js';
+import { createXmlCompareCanvasState, applyXmlCompareCanvasAction } from '../xml-compare/XmlCompareCanvasStateController.js';
+import { renderXmlCompareWorkspaceShellHtml } from '../xml-compare/XmlCompareWorkspaceShell.js';
+const [srcRes, tgtRes] = await Promise.all([fetch('source.xml'), fetch('target.xml')]);
+const textA = await srcRes.text(); const textB = await tgtRes.text();
+const ws = (cs) => createXmlCompareWorkspaceModel({ fileA: { name: 'source.xml' }, textA, fileB: { name: 'target.xml' }, textB, canvasState: cs });
+let canvas = createXmlCompareCanvasState();
+canvas = applyXmlCompareCanvasAction(canvas, { type: 'set-level-view', side: 'source', selection: { levelId: 'node' } });
+canvas = applyXmlCompareCanvasAction(canvas, { type: 'set-level-view', side: 'target', selection: { levelId: 'node' } });
+let w = ws(canvas);
+const pick = (records, n) => records.find((r) => String(r.nodeNumber) === n) || records[0];
+const srcRec = pick(w.source.records, '10'); const tgtRec = pick(w.target.records, '1010');
+canvas = applyXmlCompareCanvasAction(canvas, { type: 'select-record', side: 'source', uid: srcRec.uid, records: w.source.records });
+canvas = applyXmlCompareCanvasAction(canvas, { type: 'select-record', side: 'target', uid: tgtRec.uid, records: w.target.records });
+canvas = applyXmlCompareCanvasAction(canvas, { type: 'set-compare-fields', fields: ['displayName', 'globalX', 'globalY', 'globalZ'] });
+canvas = applyXmlCompareCanvasAction(canvas, { type: 'set-validation-builder-field-type', fieldType: 'numeric' });
+canvas = applyXmlCompareCanvasAction(canvas, { type: 'set-validation-tolerance-mm', toleranceMm: 6 });
+canvas = applyXmlCompareCanvasAction(canvas, { type: 'request-auto-map', scope: 'node' });
+const root = document.getElementById('root');
+function candidateFromButton(b) { const d = b.dataset; return { id: `candidate:${d.sourceUid}=>${d.targetUid}`, sourceUid: d.sourceUid, targetUid: d.targetUid, sourceStableKey: d.sourceStable, targetStableKey: d.targetStable, sourceLabel: d.sourceLabel, targetLabel: d.targetLabel, status: d.status, score: 0.85, identityConfidence: 0.85 }; }
+function render() { w = ws(canvas); root.innerHTML = renderXmlCompareWorkspaceShellHtml(w); window.__ready = true; }
+root.addEventListener('click', (e) => { const ap = e.target.closest('[data-xml-compare-candidate-approve]'); const rj = e.target.closest('[data-xml-compare-candidate-reject]'); if (!ap && !rj) return; const candidate = candidateFromButton(ap || rj); canvas = applyXmlCompareCanvasAction(canvas, ap ? { type: 'accept-candidate', candidate } : { type: 'reject-candidate', candidate, candidateId: candidate.id }); render(); });
+render();
+</script>
+</body></html>

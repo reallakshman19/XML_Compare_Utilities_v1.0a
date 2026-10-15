@@ -1,0 +1,411 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PipeSupportProjectionBundle.v1.schema.json",
+  "$comment": "Copied from reallaksh19/3D_Converters@ffbbafbb1757a84826b736731a8d75c43a2c3e9c and owned by Sequential Sketcher from this revision forward.",
+  "title": "PipeSupportProjectionBundle.v1",
+  "description": "Support families projected onto an already validated ordered piping carrier traversal.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "branchId",
+    "coordinateSystem",
+    "carriers",
+    "supportGlyphs",
+    "unresolvedSupportFamilies",
+    "diagnostics"
+  ],
+  "properties": {
+    "schema": { "const": "PipeSupportProjectionBundle.v1" },
+    "branchId": { "type": "string", "minLength": 1 },
+    "coordinateSystem": { "$ref": "#/$defs/coordinateSystem" },
+    "carriers": {
+      "type": "array",
+      "description": "Preserves validated traversal order.",
+      "items": { "$ref": "#/$defs/carrier" }
+    },
+    "supportGlyphs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/supportGlyph" }
+    },
+    "unresolvedSupportFamilies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/supportFamily" }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/diagnostic" }
+    }
+  },
+  "$defs": {
+    "coordinateSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["units", "globalAxes"],
+      "properties": {
+        "units": { "const": "mm" },
+        "globalAxes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["x", "y", "z"],
+          "properties": {
+            "x": { "type": "string", "minLength": 1 },
+            "y": { "type": "string", "minLength": 1 },
+            "z": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "z"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "z": { "type": "number" }
+      }
+    },
+    "nullablePoint": {
+      "oneOf": [
+        { "$ref": "#/$defs/point" },
+        { "type": "null" }
+      ]
+    },
+    "traversal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceStartField", "traversalStartField", "reversedForTraversal"],
+      "properties": {
+        "sourceStartField": { "type": "string", "minLength": 1 },
+        "traversalStartField": { "type": "string", "minLength": 1 },
+        "reversedForTraversal": { "type": "boolean" }
+      }
+    },
+    "centerline": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "end", "lengthMm"],
+          "properties": {
+            "start": { "$ref": "#/$defs/point" },
+            "end": { "$ref": "#/$defs/point" },
+            "lengthMm": { "type": "number", "minimum": 0 }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "carrier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "carrierId",
+        "carrierType",
+        "sourceBranchId",
+        "sourceSequenceIndex",
+        "centerline",
+        "traversal",
+        "supportFamilies"
+      ],
+      "properties": {
+        "carrierId": { "type": "string", "minLength": 1 },
+        "carrierType": { "type": "string", "minLength": 1 },
+        "sourceBranchId": { "type": "string", "minLength": 1 },
+        "sourceSequenceIndex": { "type": ["number", "null"] },
+        "centerline": { "$ref": "#/$defs/centerline" },
+        "traversal": { "$ref": "#/$defs/traversal" },
+        "supportFamilies": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/supportFamily" }
+        }
+      }
+    },
+    "carrierBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "carrierId",
+        "carrierType",
+        "bindingStatus",
+        "bindingBasis",
+        "candidateCarrierIds"
+      ],
+      "properties": {
+        "carrierId": { "type": ["string", "null"] },
+        "carrierType": { "type": ["string", "null"] },
+        "bindingStatus": { "enum": ["RESOLVED", "AMBIGUOUS", "UNRESOLVED"] },
+        "bindingBasis": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "SOURCE_OWNER",
+              "CENTERLINE_PROJECTION",
+              "SOURCE_SEQUENCE",
+              "EXPLICIT_CARRIER_REFERENCE",
+              "FITTING_GEOMETRY"
+            ]
+          }
+        },
+        "candidateCarrierIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "offset": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["alongMm", "lateralMm", "verticalMm", "radialDistanceMm"],
+          "properties": {
+            "alongMm": { "type": ["number", "null"] },
+            "lateralMm": { "type": ["number", "null"] },
+            "verticalMm": { "type": ["number", "null"] },
+            "radialDistanceMm": { "type": ["number", "null"], "minimum": 0 }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "fittingLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locationType", "nearestCenterlinePointGlobal"],
+      "properties": {
+        "locationType": {
+          "enum": [
+            "INLET_PORT",
+            "OUTLET_PORT",
+            "BRANCH_PORT",
+            "COMPONENT_CENTRE",
+            "ARC_STATION",
+            "AXIAL_STATION",
+            "SURFACE_ATTACHMENT"
+          ]
+        },
+        "nearestCenterlinePointGlobal": { "$ref": "#/$defs/point" },
+        "portId": { "type": ["string", "null"] },
+        "surfaceId": { "type": ["string", "null"] },
+        "arcFraction": { "type": "number", "minimum": 0, "maximum": 1 },
+        "axialFraction": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supportPosGlobal",
+        "centerlinePointGlobal",
+        "carrierStationMm",
+        "carrierFraction",
+        "offsetFromCenterline",
+        "positionStatus",
+        "projectionToleranceMm"
+      ],
+      "properties": {
+        "supportPosGlobal": { "$ref": "#/$defs/nullablePoint" },
+        "centerlinePointGlobal": { "$ref": "#/$defs/nullablePoint" },
+        "carrierStationMm": { "type": ["number", "null"], "minimum": 0 },
+        "carrierFraction": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "offsetFromCenterline": { "$ref": "#/$defs/offset" },
+        "positionStatus": {
+          "enum": [
+            "ON_CENTERLINE",
+            "PROJECTED_TO_CENTERLINE",
+            "OFFSET_FROM_CENTERLINE",
+            "ATTACHED_TO_FITTING",
+            "ATTACHED_TO_COMPONENT_PORT",
+            "AMBIGUOUS_CARRIER",
+            "OUTSIDE_PROJECTION_TOLERANCE",
+            "UNRESOLVED"
+          ]
+        },
+        "projectionToleranceMm": { "type": "number", "exclusiveMinimum": 0 },
+        "fittingLocation": { "$ref": "#/$defs/fittingLocation" }
+      }
+    },
+    "localFrame": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["origin", "tangent", "lateral", "vertical", "handedness", "frameStatus"],
+          "properties": {
+            "origin": { "$ref": "#/$defs/point" },
+            "tangent": { "$ref": "#/$defs/point" },
+            "lateral": { "$ref": "#/$defs/nullablePoint" },
+            "vertical": { "$ref": "#/$defs/point" },
+            "handedness": { "enum": ["RIGHT_HANDED", "DEGENERATE"] },
+            "frameStatus": { "enum": ["RESOLVED", "DEGENERATE"] },
+            "reason": { "type": "string" }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "member": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "memberId",
+        "memberIdentitySource",
+        "semanticRole",
+        "sourceRecordType",
+        "physicalGeometryAvailable",
+        "attributes",
+        "sourceEvidence"
+      ],
+      "properties": {
+        "memberId": { "type": ["string", "null"] },
+        "memberIdentitySource": { "enum": ["attributes.NAME", "UNRESOLVED"] },
+        "semanticRole": {
+          "enum": [
+            "DATUM",
+            "PIPE_SHOE",
+            "WEAR_PLATE",
+            "STRUCTURAL_REFERENCE",
+            "LINE_STOP_MEMBER",
+            "GUIDE_MEMBER",
+            "SPRING_MEMBER",
+            "ANCHOR_MEMBER",
+            "OTHER_FAMILY_MEMBER"
+          ]
+        },
+        "sourceRecordType": { "type": "string" },
+        "physicalGeometryAvailable": { "type": "boolean" },
+        "attributes": { "type": "object" },
+        "sourceEvidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sourceIndex",
+            "sourceSequenceIndex",
+            "sourcePath",
+            "topLevelName",
+            "sourceParentBranch",
+            "sourcePositionGlobal"
+          ],
+          "properties": {
+            "sourceIndex": { "type": "integer", "minimum": 0 },
+            "sourceSequenceIndex": { "type": ["number", "null"] },
+            "sourcePath": {},
+            "topLevelName": { "type": ["string", "null"] },
+            "sourceParentBranch": { "type": ["string", "null"] },
+            "sourcePositionGlobal": { "$ref": "#/$defs/nullablePoint" }
+          }
+        }
+      }
+    },
+    "resolvedFunction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supportKind", "providedBy"],
+      "properties": {
+        "supportKind": { "enum": ["REST", "GUIDE", "LINESTOP", "ANCHOR", "SPRING"] },
+        "providedBy": { "const": "SUPPORT_RESOLUTION_MODULE" }
+      }
+    },
+    "supportGlyph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "familyId",
+        "carrierId",
+        "carrierStationMm",
+        "centerlinePointGlobal",
+        "offsetFromCenterline",
+        "fittingLocation",
+        "displayKind",
+        "label",
+        "resolutionStatus"
+      ],
+      "properties": {
+        "familyId": { "type": "string", "minLength": 1 },
+        "carrierId": { "type": "string", "minLength": 1 },
+        "carrierStationMm": { "type": ["number", "null"], "minimum": 0 },
+        "centerlinePointGlobal": { "$ref": "#/$defs/nullablePoint" },
+        "offsetFromCenterline": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["lateralMm", "verticalMm"],
+              "properties": {
+                "lateralMm": { "type": ["number", "null"] },
+                "verticalMm": { "type": ["number", "null"] }
+              }
+            },
+            { "type": "null" }
+          ]
+        },
+        "fittingLocation": {
+          "oneOf": [
+            { "$ref": "#/$defs/fittingLocation" },
+            { "type": "null" }
+          ]
+        },
+        "displayKind": { "enum": ["REST", "GUIDE", "LINESTOP", "ANCHOR", "SPRING"] },
+        "label": { "type": "string", "minLength": 1 },
+        "resolutionStatus": { "const": "RESOLVED" }
+      }
+    },
+    "supportFamily": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "familyId",
+        "familyIdBasis",
+        "sourceParentBranch",
+        "carrierBinding",
+        "position",
+        "traversal",
+        "localFrame",
+        "resolvedFunction",
+        "members",
+        "supportGlyph"
+      ],
+      "properties": {
+        "familyId": { "type": "string", "minLength": 1 },
+        "familyIdBasis": {
+          "enum": ["DERIVED_FROM_ATTRIBUTES_NAME", "SUPPORT_TAG_FALLBACK", "UNRESOLVED"]
+        },
+        "sourceParentBranch": { "type": "string" },
+        "carrierBinding": { "$ref": "#/$defs/carrierBinding" },
+        "position": { "$ref": "#/$defs/position" },
+        "traversal": {
+          "oneOf": [
+            { "$ref": "#/$defs/traversal" },
+            { "type": "null" }
+          ]
+        },
+        "localFrame": { "$ref": "#/$defs/localFrame" },
+        "resolvedFunction": { "$ref": "#/$defs/resolvedFunction" },
+        "members": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/member" }
+        },
+        "supportGlyph": {
+          "oneOf": [
+            { "$ref": "#/$defs/supportGlyph" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "required": ["severity", "code", "message"],
+      "properties": {
+        "severity": { "enum": ["INFO", "WARNING", "ERROR"] },
+        "code": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,61 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1011
+mission: Writer 2 Phase-4A NODENAME create/delete deterministic relocation planner
+branch: agent/cii-writer2-nodename-relocation
+base: main
+base_head: 7c1b7df01086b1889a765466de7bcb5b4c5ff805
+criticality: ENGINEERING_CRITICAL
+agent_state: ACTIVE
+handover_readiness: READY
+merge_authority: OWNER_ONLY
+ready_for_review: false
+ready_for_review_reason: relocation authority is implemented but repository-integrated tests remain unexecuted in the exact checkout environment
+implemented:
+  scope: PLAN_ONLY_NO_PHYSICAL_APPLY
+  nodename_row_layout:
+    prefix: 2
+    from_width: 26
+    to_width: 25
+    total_width: 53
+  control_nonam_field: CONTROL_LINE1_FIELD4_JS_INDEX3
+  element_nodename_pointer: ELEMENT_ROW13_FIELD6_JS_INDEX5
+  pointer_basis: ONE_BASED_NODENAME_ROW_INDEX
+  element_binding: EXACT_PARSED_INDEX_AND_ENDPOINTS
+  create_owner_selection: LOWEST_EXACT_ZERO_POINTER_PARSED_ELEMENT_INDEX
+  paired_endpoint_create: ONE_APPENDED_ROW_WHEN_SAME_ELEMENT
+  delete_semantics: CLEAR_ALL_SELECTED_NODE_PHYSICAL_FIELDS_THEN_REMOVE_EMPTY_ROWS
+  compaction: DETERMINISTIC_OLD_TO_NEW_POINTER_MAP
+  shifted_unselected_element_pointers: EXPLICIT_RELOCATION_CONSEQUENCE
+  changed_pointer_custody: EXACT_13_BYTE_FIELD_REQUIRED
+  control_after_count: FINAL_ROW_COUNT
+  shared_alias_policy: ALL_AFFECTED_NODE_OWNERS_MUST_BE_SELECTED
+validation:
+  base_grounding: PASS_GIT_COMPARE
+  branch_scope: PASS_GIT_COMPARE
+  planner_syntax: PASS_LOCAL_SOURCE
+  isolated_planner_harness: PASS_ISOLATED_PLANNER_HARNESS
+  focused_relocation_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  relocation_falsifier_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  full_npm_test: NOT_RUN_ENVIRONMENT
+  browser: NOT_RUN_ENVIRONMENT
+not_run_reason: exact repository checkout is unavailable because github.com DNS resolution fails in the execution container
+scope_audit:
+  writer1a_files_changed: 0
+  writer1b_files_changed: 0
+  writer1c_files_changed: 0
+  parser_fixed_field_files_changed: 0
+  converter_files_changed: 0
+  benchmark_files_changed: 0
+  workflow_files_changed: 0
+explicit_exclusions:
+  - physical_writer2_apply_export
+  - control_field_mutation
+  - element_pointer_physical_rewrite
+  - sif_tee_allocation
+  - hanger_allocation
+  - section_insertion_deletion
+  - topology_mutation
+  - new_field_semantics
+  - writer3
+next_action: Phase-4B physical NODENAME rewrite plus independent post-layout relocation validator after Phase-4A review; do not merge without owner authorization

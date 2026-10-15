@@ -1,0 +1,21 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/correction-event.schema.json",
+  "title":"CorrectionEvent.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","correctionId","eventHash","targetObservationHash","correctedText","reviewerPrincipal","reviewTimestamp","status"],
+  "properties":{
+    "schema":{"const":"CorrectionEvent.v1"},
+    "correctionId":{"type":"string","minLength":1},
+    "eventHash":{"type":"string","minLength":1},
+    "targetObservationHash":{"type":"string","minLength":1},
+    "correctedText":{"type":"string"},
+    "correctedNumericValue":{"type":"number"},
+    "reviewerPrincipal":{"type":"string","minLength":1},
+    "reviewTimestamp":{"type":"string","format":"date-time"},
+    "reason":{"type":"string"},
+    "status":{"type":"string","enum":["proposed","approved","rejected","superseded"]},
+    "supersedesCorrectionHash":{"type":"string","minLength":1}
+  }
+}

@@ -1,0 +1,65 @@
+schema: AgentClaim.v1
+pr_or_wip: PR992
+claim_state: IMPLEMENTATION_COMPLETE_HANDOVER_READY
+files:
+  exact:
+    - agents/MASTER_INDEX.md
+    - agents/PR992_workreport.md
+    - agents/claims/PR992.yaml
+    - agents/status/PR992.yaml
+    - parser/sections/elements.js
+    - tabs/cii-workspace/cii-workspace-capabilities.js
+    - tabs/cii-workspace/cii-workspace-core.js
+    - tabs/cii-workspace/cii-workspace-placeholders.js
+    - tabs/cii-workspace/cii-workspace-restraint-slot-transfer.js
+    - tabs/cii-workspace/cii-workspace-restraint-transfer.js
+    - tabs/cii-workspace/cii-workspace-shell.js
+    - tabs/cii-workspace/cii-workspace-target-writer-1b.js
+    - tabs/cii-workspace/cii-workspace-topology-adapter.js
+    - tabs/cii-workspace/cii-workspace-transfer-plan.js
+    - tabs/cii-workspace/cii-workspace-transfer-policy.js
+    - tabs/cii-workspace/cii-workspace-writer-validation.js
+    - tabs/cii-workspace/cii-workspace-writer1b-deltas.js
+    - tabs/cii-workspace/cii-workspace-writer1b-od.js
+    - tests/cii-workspace-anchor-approval-ui.test.js
+    - tests/cii-workspace-benchmark-writer-1a-restraint.test.js
+    - tests/cii-workspace-benchmark-writer-1a.test.js
+    - tests/cii-workspace-benchmark-writer-1b.test.js
+    - tests/cii-workspace-elements-writer1b-layout.test.js
+    - tests/cii-workspace-restraint-slot-writer-1b.test.js
+    - tests/cii-workspace-shell-lifecycle.test.js
+    - tests/cii-workspace-target-writer-1b.test.js
+    - tests/cii-workspace-transfer-preview-policy.test.js
+    - tests/cii-workspace-transfer-preview-ui.test.js
+    - tests/cii-workspace-writer1b-negative-assurance.test.js
+    - tests/cii-workspace-writer1b-od-eligibility.test.js
+    - tests/cii-workspace-writer1b-policy.test.js
+authority_domains:
+  - CII_WRITER_1B_ELEMENT_FIXED_FIELDS
+  - CII_WRITER_1B_CONDITIONAL_OD_TOPOLOGY_CLOSED
+  - CII_WRITER_1B_EXISTING_RESTRAINT_SINGLE_FREE_SLOT
+  - CII_WRITER_1B_PLAN_DRIVEN_NEGATIVE_ASSURANCE
+  - CII_WRITER_1A_COMPATIBILITY_MODE
+claim_modes:
+  - EXCLUSIVE
+forbidden_existing_file_edits:
+  - converters/**
+  - parser/fixed-field.js
+  - tabs/cii-workspace/cii-workspace-match-methods.js
+  - tabs/cii-workspace/cii-workspace-evidence.js
+  - tabs/cii-workspace/cii-workspace-candidates.js
+  - tabs/cii-workspace/cii-workspace-propagation.js
+  - any workflow file
+implementation_claims:
+  - extended ELEMENT mutation follows protected-writer exact fixed-field row/column custody only
+  - P1-P9 T1-T9 insulation corrosion density and hydro values remain downstream revision evidence and never enter M1/M2 identity
+  - OD mutation is conditional and never blanket PIPE_SIZE authority
+  - OD requires plain PIPE, zero reducer pointers, no component transition, and topology-closed neighboring TARGET OD compatibility at every non-terminal endpoint
+  - restraint CREATE/CLEAR uses one free slot only inside an already-owned 24-row block and preserves pointer and section cardinality
+  - restraint tag/GUID metadata must remain empty and is never mutated
+  - unchanged restraint records must pair uniquely or the operation fails closed
+  - SIF/TEE remains blocked because payload semantics are unqualified
+  - unsupported approved operations block apply and are never silently skipped
+  - modified target must reparse and pass plan-driven zero-unexpected-delta validation before export
+validation_state: FOCUSED_WRITER1B_EXECUTION_PASS_REAL_TARGET1_TARGET2_AND_FULL_LIFECYCLE_NOT_RUN_ENVIRONMENT
+merge_disposition: CONDITIONAL_ON_EXPLICIT_OWNER_ACCEPTANCE_OF_NOT_RUN_ENVIRONMENT

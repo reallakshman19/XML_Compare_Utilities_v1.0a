@@ -1,0 +1,283 @@
+.csvrc-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1900;
+  overflow: auto;
+  padding: 2vh 2vw;
+  background: rgba(12, 18, 28, 0.72);
+}
+
+.csvrc-shell {
+  width: min(1560px, 96vw);
+  min-height: 90vh;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid var(--border, #d7dce4);
+  border-radius: 14px;
+  background: var(--panel, #fff);
+  color: var(--text, #172033);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.csvrc-header,
+.csvrc-toolbar,
+.csvrc-export-row,
+.csvrc-review-item > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.csvrc-header {
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.csvrc-header h2,
+.csvrc-input-card h3,
+.csvrc-panel h3 {
+  margin: 0 0 6px;
+}
+
+.csvrc-header p,
+.csvrc-input-card p,
+.csvrc-panel p {
+  margin: 4px 0 8px;
+}
+
+.csvrc-kicker {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.68;
+}
+
+.csvrc-launcher-icon {
+  display: inline-flex;
+  min-width: 56px;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.csvrc-input-grid,
+.csvrc-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.csvrc-input-card,
+.csvrc-panel,
+.csvrc-workflow-card {
+  border: 1px solid var(--border, #d7dce4);
+  border-radius: 10px;
+  padding: 14px;
+  background: var(--panel-2, rgba(127, 127, 127, 0.04));
+}
+
+.csvrc-input-card textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  resize: vertical;
+  min-height: 210px;
+  padding: 10px;
+  border: 1px solid var(--border, #cbd2dc);
+  border-radius: 8px;
+  background: var(--panel, #fff);
+  color: inherit;
+  font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.csvrc-workflow-card,
+.csvrc-panel {
+  margin-bottom: 14px;
+}
+
+.csvrc-toolbar {
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.csvrc-primary {
+  font-weight: 700;
+}
+
+.csvrc-stage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.csvrc-stage-grid li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: start;
+  min-height: 54px;
+  padding: 8px;
+  border: 1px solid var(--border, #d7dce4);
+  border-radius: 8px;
+}
+
+.csvrc-stage-grid li > span {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(127, 127, 127, 0.12);
+  font-weight: 700;
+}
+
+.csvrc-stage-grid b,
+.csvrc-stage-grid small,
+.csvrc-stage-grid em {
+  display: block;
+}
+
+.csvrc-stage-grid small {
+  margin-top: 3px;
+  opacity: 0.72;
+}
+
+.csvrc-stage-grid em {
+  font-size: 0.66rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0.72;
+}
+
+.csvrc-stage-grid li[data-status="COMPLETE"],
+.csvrc-stage-grid li[data-status="READY"] {
+  border-color: rgba(36, 133, 80, 0.55);
+}
+
+.csvrc-stage-grid li[data-status="ACTION_REQUIRED"] {
+  border-color: rgba(201, 127, 20, 0.7);
+}
+
+.csvrc-stage-grid li[data-status="BLOCKED"] {
+  opacity: 0.68;
+}
+
+.csvrc-panel pre {
+  max-height: 260px;
+  overflow: auto;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(127, 127, 127, 0.08);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.csvrc-review-list,
+.csvrc-event-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.csvrc-review-item {
+  padding: 10px;
+  border: 1px solid var(--border, #d7dce4);
+  border-radius: 8px;
+}
+
+.csvrc-review-item small {
+  display: block;
+  margin: 5px 0 10px;
+  opacity: 0.75;
+}
+
+.csvrc-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.csvrc-metrics div {
+  padding: 10px;
+  border: 1px solid var(--border, #d7dce4);
+  border-radius: 8px;
+}
+
+.csvrc-metrics dt {
+  font-size: 0.74rem;
+  opacity: 0.7;
+}
+
+.csvrc-metrics dd {
+  margin: 4px 0 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.csvrc-event-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.csvrc-table-wrap {
+  max-height: 380px;
+  overflow: auto;
+}
+
+.csvrc-table-wrap table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.csvrc-table-wrap th,
+.csvrc-table-wrap td {
+  max-width: 320px;
+  padding: 6px 8px;
+  border: 1px solid var(--border, #d7dce4);
+  vertical-align: top;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.csvrc-table-wrap th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--panel, #fff);
+}
+
+.csvrc-muted {
+  opacity: 0.72;
+}
+
+.csvrc-export-row button:disabled,
+.csvrc-review-item button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (max-width: 900px) {
+  .csvrc-input-grid,
+  .csvrc-review-grid,
+  .csvrc-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .csvrc-shell {
+    width: 98vw;
+    padding: 12px;
+  }
+}

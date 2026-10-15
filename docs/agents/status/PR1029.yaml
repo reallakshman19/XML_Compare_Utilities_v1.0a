@@ -1,0 +1,104 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1029
+mission: >-
+  Adopt merged PR1027 partial H>1 HANGER physical claims into the existing
+  one-original-preimage Writer2 composite with independent complete-postimage validation.
+workstream: CII_WRITER2_HANGER_PARTIAL_COMPOSITE
+branch: agent/cii-writer2-hanger-partial-composite
+main_head_last_checked: e9a28071aa932e5c360206d20807aeaf2e4f9517
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+agent_state: SOURCE_REVIEW_READY_WITH_EXPLICIT_RUNTIME_LIMITATION
+pr_recovery_state: HEALTHY
+handover_readiness: READY
+report_path: agents/PR1029_workreport.md
+appendix_a_status: CURRENT
+grounding_epoch: GE-1029-001
+current_stage: COMPOSITE_PARTIAL_HANGER_IMPLEMENTED_SOURCE_QUALIFIED_DRAFT
+blocker: NONE_FOR_SOURCE_REVIEW
+real_source_evidence_limitation: NO_REAL_REPOSITORY_H_GT_1_CII_PREIMAGE
+remaining_environment_limitation: CURRENT_HEAD_NATIVE_EXECUTION_NOT_AVAILABLE
+highest_risk: >-
+  Production and independent-oracle source paths are implemented, including a true
+  NODENAME + SIF DELETE + H=3->2 HANGER partial composite case, but exact committed
+  Node execution is unavailable because the execution environment cannot resolve github.com.
+dependency:
+  pr: 1027
+  state: SATISFIED_BY_MERGE
+  accepted_head: 457a2c4572c0773cdf1cd2e15fa36f6a3e305638
+  merge_sha: e9a28071aa932e5c360206d20807aeaf2e4f9517
+coordination_state: SAFE_FOR_DRAFT_REVIEW
+merge_authority: OWNER_ONLY
+merge_authorized: false
+scope:
+  composite_only: true
+  product_core_routing: OUT_OF_SCOPE
+  browser_ui_enablement: OUT_OF_SCOPE
+  real_h_gt_1_product_qualification: OUT_OF_SCOPE
+  hanger_create: BLOCKED
+  hanger_value_edit: BLOCKED
+  sif_create: BLOCKED
+implementation:
+  writer_commit: 2af0c55368e321a1017b4b1e7f83351d2546aaf8
+  canonical_child_scope:
+    status: DERIVED_CANONICAL_BOUND_SUBSCOPE
+    authority: PARENT_TRANSFER_SCOPE_CANONICAL_SUBSCOPE
+    family: WRITER_2_HANGER_PARTIAL_DELETE
+  delete_all_path:
+    component_changed: false
+    legacy_projection_preserved: true
+  partial_path:
+    component: applyCiiWriter2HangerPartialDelete
+    original_target_only: true
+    authority_family: WRITER_2_HANGER_PARTIAL_DELETE
+  validator:
+    path: tabs/cii-workspace/cii-workspace-writer2-composite-hanger-partial-validation.js
+    initial_commit: 0d2e127e412bbbe602b1c15b007373cf5b141f48
+    custody_closure_commit: 5b55744b7c81af1aadb2b90034477e223532db4b
+    writer_helpers_imported: false
+    pr1027_independent_validator_oracle_reused: true
+qualification:
+  partial_only_test: tests/cii-workspace-writer2-composite-hanger-partial.test.js
+  tri_family_test: tests/cii-workspace-writer2-composite-hanger-partial-trifamily.test.js
+  transaction: NODENAME_CREATE_PLUS_SIF_DELETE_PLUS_H3_TO_H2_HANGER_PARTIAL
+validation:
+  pr1027_merge: PASS_REMOTE_EXECUTION
+  writer_source: PASS_SOURCE_INSPECTION
+  canonical_child_subscope_source: PASS_SOURCE_INSPECTION
+  independent_validator_source: PASS_SOURCE_INSPECTION_INDEPENDENT_ORACLE
+  partial_only_test_source: AUTHORED_PASS_SOURCE_INSPECTION_NOT_RUN
+  tri_family_test_source: AUTHORED_PASS_SOURCE_INSPECTION_NOT_RUN
+  legacy_delete_all_test: EXISTING_UNCHANGED_SOURCE
+  current_head_native_node_execution: NOT_RUN_ENVIRONMENT
+  full_repository_npm_test: NOT_RUN_ENVIRONMENT
+  real_repository_h_gt_1_source: NOT_AVAILABLE
+  real_h_gt_1_product_qualification: OUT_OF_SCOPE_NOT_RUN_NO_REAL_SOURCE
+execution_attempt:
+  command: git ls-remote https://github.com/reallaksh19/XML_Compare_Utilities.git HEAD
+  result: NOT_RUN_ENVIRONMENT_DNS
+  detail: Could not resolve host github.com
+changed_files:
+  intended: 8
+  actual: 8
+  unexplained: 0
+reconciliation_snapshot:
+  observed_head: a350a3cfb0b93bccdf41c5816a546dd562157ab3
+  base_main: e9a28071aa932e5c360206d20807aeaf2e4f9517
+  ahead: 16
+  behind: 0
+  merge_base_exact_main: true
+  review_threads: 0
+  submitted_reviews: 0
+  status_contexts: 0
+  pr_workflow_runs: 0
+runtime_adoption:
+  product_route_changed: false
+  package_json_changed: false
+  workflow_changed: false
+  parser_converter_changed: false
+exact_next_action: >-
+  Keep PR1029 draft for owner/source review or native exact checkout. On the first native
+  checkout run the two new partial-composite tests, existing delete-all composite test,
+  then broader Writer2 regression. Do not merge without fresh owner authorization.
+last_updated: 2026-08-23T17:15:00+05:30

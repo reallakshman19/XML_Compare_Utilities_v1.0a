@@ -1,0 +1,59 @@
+pr: 1037
+issue: 1034
+repository: reallaksh19/XML_Compare_Utilities
+claim_state: ACTIVE_REVIEW_READY_NOT_READY_VERDICT
+claim_scope: WRITER2_W2_5_HANGER_CREATE_SOURCE_QUALIFICATION_ONLY
+branch: agent/cii-writer2-hanger-create-qualification
+base_main: e5d3420f78794e465b4b8c7f858c3fc53baf3039
+qualification_content_head: b0d2f29b4f59fc929af2adefd5091b963d89020f
+ready_for_review: true
+merge_authority: OWNER_ONLY
+merge_authorized: false
+
+claims:
+  - id: V11_HANGER_NEUTRAL_FIELD_DICTIONARY
+    state: QUALIFIED
+    authority: VENDOR_AUTHORED_MIRROR_EXACT_V11
+  - id: V11_HANGER_GUID_SOFTWARE_ASSIGNED
+    state: QUALIFIED
+    authority: VENDOR_AUTHORED_MIRROR_EXACT_V11
+  - id: V12_HANGER_SCHEMA_CORROBORATION
+    state: QUALIFIED_CORROBORATION_ONLY
+    authority: OFFICIAL_HEXAGON_V12_CORROBORATION
+  - id: HANGER_CREATE_PHYSICAL_ROW_ARITHMETIC
+    state: QUALIFIED
+    authority: V11_PHYSICAL_LAYOUT_PLUS_MERGED_SECTION_RULES
+  - id: HANGER_CREATE_GENERIC_CONSTRUCTION_CONTRACT
+    state: NOT_QUALIFIED
+    authority: INCOMPLETE
+  - id: HANGER_GUID_CREATE_ASSIGNMENT
+    state: UNRESOLVED
+    authority: NONE
+  - id: FIRST_HANGER_HEADER_SYNTHESIS
+    state: UNRESOLVED
+    authority: NONE
+  - id: NEW_HANGER_RECORD_INSERTION_POLICY
+    state: UNRESOLVED
+    authority: NONE
+
+final_verdict: NOT_READY_FOR_WRITER2_HANGER_CREATE_IMPLEMENTATION
+production_blocker_preserved: WRITER_2_HANGER_CREATE_PAYLOAD_SEMANTICS_NOT_QUALIFIED
+w2_6_authorized: false
+
+final_reconciliation:
+  changed_paths_intended: 9
+  changed_paths_actual: 9
+  changed_paths_unexplained: 0
+  production_paths: 0
+  merge_base: e5d3420f78794e465b4b8c7f858c3fc53baf3039
+  behind_main_at_reconciliation: 0
+
+validation_truth:
+  exact_v11_manual: PASS_VENDOR_AUTHORED_EXACT_VERSION_MIRROR
+  official_v12_corroboration: PASS_OFFICIAL_HEXAGON_CORROBORATION
+  repository_source_inspection: PASS_SOURCE_INSPECTION
+  h1_payload_observation: PASS_REMOTE_SOURCE_INSPECTION
+  qualification_test: NOT_RUN_ENVIRONMENT
+  production_create: BLOCKED_UNCHANGED
+
+next_claim_gate: SOURCE_NATIVE_CREATE_AUTHORITY_REQUIRED_BEFORE_W2_6

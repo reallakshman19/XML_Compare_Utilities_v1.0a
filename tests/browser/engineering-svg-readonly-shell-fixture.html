@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Engineering SVG Read-only Shell Fixture</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; }
+    .fixtures { display: grid; grid-template-columns: repeat(auto-fit, minmax(520px, 1fr)); gap: 20px; }
+    [data-engineering-svg-shell] { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 12px; border: 1px solid #999; padding: 12px; }
+    [data-engineering-svg-shell-canvas] { min-height: 300px; }
+    [data-engineering-svg-property-key] { display: grid; gap: 4px; margin: 8px 0; }
+    [data-engineering-svg-property-previous], [data-engineering-svg-property-current] { display: grid; grid-template-columns: 84px 1fr; gap: 8px; }
+    [data-engineering-svg-property-previous-source], [data-engineering-svg-property-current-source] { grid-column: 2; font-size: 0.875rem; }
+    [data-engineering-svg-shell-status] { grid-column: 1 / -1; }
+    svg { width: 100%; height: 300px; border: 1px solid #bbb; }
+    [data-engineering-svg-entity-id] { stroke: currentColor; fill: white; }
+    [data-engineering-svg-entity-id].is-selected { stroke-width: 4; }
+  </style>
+</head>
+<body>
+  <main class="fixtures">
+    <div id="viewer-a"></div>
+    <div id="viewer-b"></div>
+    <div id="viewer-history"></div>
+  </main>
+  <script type="module">
+    import {
+      createEngineeringPropertySet,
+      createEngineeringRevisionToken,
+      createEngineeringScene,
+      createEngineeringSceneEntity,
+      createPointGeometry,
+    } from '../../core/engineering-scene/index.js';
+    import { createEngineeringSvgAdapter } from '../../core/engineering-svg/engineering-svg-adapter.js';
+    import { createEngineeringSvgAdapterBridge } from '../../core/engineering-svg/engineering-svg-adapter-bridge.js';
+    import { createEngineeringSvgPropertyProvider } from '../../core/engineering-svg/engineering-svg-property-provider.js';
+    import { createEngineeringSvgWorkspaceShellFromAdapterBridge } from '../../core/engineering-svg/shell-runtime.js';
+
+    function createDomain(name, host) {
+      let revisionNumber = 1;
+      let shell = null;
+      let bridge = null;
+      const sceneListeners = new Set();
+      const propertyListeners = new Set();
+      const values = {
+        a: { label: `${name}-A`, pressure: 10 },
+        b: { label: `${name}-B`, pressure: 20 },
+      };
+      const revision = () => createEngineeringRevisionToken({ domain: name, revision: revisionNumber });
+      const buildScene = () => createEngineeringScene({
+        sceneId: `${name}-scene`,
+        revision: revision(),
+        coordinateSystem: { unit: 'mm', verticalAxis: 'Z', frame: 'GLOBAL', handedness: 'right' },
+        projections: ['ISO', 'XY'],
+        entities: [
+          createEngineeringSceneEntity({
+            id: 'a', kind: 'point', domainType: 'READ_ONLY_POINT',
+            geometry: createPointGeometry({ x: 0, y: 0, z: 0 }),
+            domainRef: { owner: name, id: 'a' }, propertySetIds: ['a-properties'],
+          }),
+          createEngineeringSceneEntity({
+            id: 'b', kind: 'point', domainType: 'READ_ONLY_POINT',
+            geometry: createPointGeometry({ x: 100, y: 50, z: revisionNumber }),
+            domainRef: { owner: name, id: 'b' }, propertySetIds: ['b-properties'],
+          }),
+        ],
+      });
+      const propertyProvider = createEngineeringSvgPropertyProvider({
+        getPropertySets({ selectedIds, revision: requestedRevision }) {
+          return selectedIds.map((id) => createEngineeringPropertySet({
+            id: `${id}-properties`, revision: requestedRevision, ownerIds: [id], fields: [
+              { key: 'label', label: 'Label', type: 'text', value: values[id].label, editable: true },
+              { key: 'pressure', label: 'Pressure', type: 'number', unit: 'bar', value: values[id].pressure, editable: true },
+              { key: 'revision', label: 'Revision', type: 'number', value: revisionNumber, editable: false },
+              { key: 'material', label: 'Material', type: 'text', scope: 'REFERENCE', value: 'A106' },
+            ],
+          }));
+        },
+        subscribe(listener) {
+          propertyListeners.add(listener);
+          return () => propertyListeners.delete(listener);
+        },
+      });
+      const adapter = createEngineeringSvgAdapter({
+        descriptor: {
+          adapterId: `${name}-adapter`, domainType: 'READ_ONLY_FIXTURE', accessMode: 'read-only',
+          projections: ['ISO', 'XY'], capabilities: { selection: true, properties: true, editing: false },
+        },
+        getScene: buildScene,
+        subscribeScene(listener) {
+          sceneListeners.add(listener);
+          return () => sceneListeners.delete(listener);
+        },
+        propertyProvider,
+      });
+
+      async function mount() {
+        shell?.destroy();
+        bridge?.dispose();
+        bridge = await createEngineeringSvgAdapterBridge(adapter);
+        shell = createEngineeringSvgWorkspaceShellFromAdapterBridge({
+          bridge, shellId: name, host, projection: 'XY',
+          viewport: { width: 600, height: 300 }, padding: 24,
+        });
+        return shell;
+      }
+
+      function bumpSceneRevision() {
+        revisionNumber += 1;
+        const scene = buildScene();
+        sceneListeners.forEach((listener) => listener({ scene, reason: 'external-revision' }));
+        propertyListeners.forEach((listener) => listener({ reason: 'external-revision' }));
+      }
+
+      return {
+        get shell() { return shell; },
+        get bridge() { return bridge; },
+        revisionNumber: () => revisionNumber,
+        listenerCounts: () => ({ scene: sceneListeners.size, property: propertyListeners.size }),
+        bumpSceneRevision,
+        mount,
+        destroy() {
+          shell?.destroy(); shell = null;
+          bridge?.dispose(); bridge = null;
+        },
+      };
+    }
+
+    function createHistoryDomain(name, host) {
+      let revisionNumber = 1;
+      let shell = null;
+      let bridge = null;
+      const sceneListeners = new Set();
+      const propertyListeners = new Set();
+      const ids = [
+        'changed', 'unchanged', 'explicit-null', 'legacy', 'previous-source-absent', 'current-source-null',
+        'uniform-a', 'uniform-b', 'mixed-a', 'mixed-b', 'unavailable-a', 'unavailable-b',
+      ];
+      const revision = () => createEngineeringRevisionToken({ domain: name, revision: revisionNumber });
+      const buildScene = () => createEngineeringScene({
+        sceneId: `${name}-scene`, revision: revision(),
+        coordinateSystem: { unit: 'mm', verticalAxis: 'Z', frame: 'GLOBAL', handedness: 'right' },
+        projections: ['ISO', 'XY'],
+        entities: ids.map((id, index) => createEngineeringSceneEntity({
+          id, kind: 'point', domainType: 'PROPERTY_HISTORY_POINT',
+          geometry: createPointGeometry({ x: (index % 6) * 100, y: Math.floor(index / 6) * 100, z: 0 }),
+          domainRef: { owner: name, id }, propertySetIds: [`${id}-properties`],
+        })),
+      });
+
+      function changedField(offset) {
+        return {
+          key: 'pressure', label: 'Pressure', type: 'number', unit: 'bar',
+          previousValue: 10 + offset, value: 12 + offset,
+          previousSource: revisionNumber === 1 ? ' /sources/previous/pressure.xml#/P-1 ' : ' /sources/previous/pressure-r2.xml#/P-1 ',
+          source: revisionNumber === 1 ? ' /sources/current/pressure.xml#/P-1 ' : ' /sources/current/pressure-r2.xml#/P-1 ',
+        };
+      }
+
+      function historyFields(id) {
+        const offset = revisionNumber === 1 ? 0 : 10;
+        if (id === 'changed') return [changedField(offset)];
+        if (id === 'unchanged') return [{
+          key: 'status', label: 'Status', type: 'text',
+          previousValue: revisionNumber === 1 ? 'Ready' : 'Refreshed',
+          value: revisionNumber === 1 ? 'Ready' : 'Refreshed',
+          previousSource: 'model://status/shared', source: 'model://status/shared',
+        }];
+        if (id === 'explicit-null') return [{
+          key: 'comment', label: 'Comment', type: 'text', previousValue: null,
+          value: `Current ${revisionNumber}`, previousSource: null, source: `model://comment/current/${revisionNumber}`,
+        }];
+        if (id === 'legacy') return [{ key: 'legacyNote', label: 'Legacy Note', type: 'text', value: `Legacy ${revisionNumber}` }];
+        if (id === 'previous-source-absent') return [{
+          key: 'flow', label: 'Flow', type: 'number', unit: 'kg/s', previousValue: 4, value: 5,
+          source: 'model://flow/current',
+        }];
+        if (id === 'current-source-null') return [{
+          key: 'density', label: 'Density', type: 'number', unit: 'kg/m³', previousValue: 800, value: 810,
+          previousSource: 'model://density/previous', source: null,
+        }];
+        if (id.startsWith('uniform-')) return [{
+          key: 'temperature', label: 'Temperature', type: 'number', unit: '°C',
+          previousValue: 100 + offset, value: 110 + offset,
+          previousSource: 'model://temperature/previous/common', source: 'model://temperature/current/common',
+        }];
+        if (id.startsWith('mixed-')) return [{
+          key: 'temperature', label: 'Temperature', type: 'number', unit: '°C',
+          previousValue: (id.endsWith('a') ? 90 : 95) + offset, value: 110 + offset,
+          previousSource: `model://temperature/previous/${id}`, source: `model://temperature/current/${id}`,
+        }];
+        const field = {
+          key: 'temperature', label: 'Temperature', type: 'number', unit: '°C', value: 100 + offset,
+        };
+        if (id.endsWith('a')) {
+          field.previousValue = 80 + offset;
+          field.previousSource = 'model://temperature/previous/available';
+          field.source = 'model://temperature/current/available';
+        }
+        return [field];
+      }
+
+      const propertyProvider = createEngineeringSvgPropertyProvider({
+        getPropertySets({ selectedIds, revision: requestedRevision }) {
+          return selectedIds.map((id) => createEngineeringPropertySet({
+            id: `${id}-properties`, revision: requestedRevision, ownerIds: [id], fields: historyFields(id),
+          }));
+        },
+        subscribe(listener) {
+          propertyListeners.add(listener);
+          return () => propertyListeners.delete(listener);
+        },
+      });
+      const adapter = createEngineeringSvgAdapter({
+        descriptor: {
+          adapterId: `${name}-adapter`, domainType: 'PROPERTY_HISTORY_FIXTURE', accessMode: 'read-only',
+          projections: ['ISO', 'XY'], capabilities: { selection: true, properties: true, editing: false },
+        },
+        getScene: buildScene,
+        subscribeScene(listener) {
+          sceneListeners.add(listener);
+          return () => sceneListeners.delete(listener);
+        },
+        propertyProvider,
+      });
+
+      async function mount() {
+        shell?.destroy();
+        bridge?.dispose();
+        bridge = await createEngineeringSvgAdapterBridge(adapter);
+        shell = createEngineeringSvgWorkspaceShellFromAdapterBridge({
+          bridge, shellId: name, host, projection: 'XY', viewport: { width: 600, height: 300 }, padding: 24,
+        });
+        return shell;
+      }
+
+      function bumpProviderRevision() {
+        revisionNumber += 1;
+        const scene = buildScene();
+        sceneListeners.forEach((listener) => listener({ scene, reason: 'history-revision' }));
+        propertyListeners.forEach((listener) => listener({ reason: 'history-revision' }));
+      }
+
+      return {
+        get shell() { return shell; },
+        get bridge() { return bridge; },
+        listenerCounts: () => ({ scene: sceneListeners.size, property: propertyListeners.size }),
+        bumpProviderRevision,
+        mount,
+        destroy() {
+          shell?.destroy(); shell = null;
+          bridge?.dispose(); bridge = null;
+        },
+      };
+    }
+
+    const domainA = createDomain('viewer-a', document.querySelector('#viewer-a'));
+    const domainB = createDomain('viewer-b', document.querySelector('#viewer-b'));
+    const history = createHistoryDomain('viewer-history', document.querySelector('#viewer-history'));
+    await Promise.all([domainA.mount(), domainB.mount(), history.mount()]);
+    globalThis.__engineeringSvgReadOnlyShellFixture = { domainA, domainB, history };
+  </script>
+</body>
+</html>

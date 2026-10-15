@@ -1,0 +1,115 @@
+pr: 1057
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-runtime-closure-w236
+base_main: 10b7e60b39c18460c812c9fa6dc9c7f46d81e77e
+current_stage: W2_41_NATIVE_V14_PREFLIGHT_SOURCE_QUALIFIED
+work_intent: INVESTIGATE_VALIDATE
+criticality: ENGINEERING_CRITICAL
+mutation_authority: EVIDENCE_AND_QUALIFICATION_TESTS_ONLY_UNLESS_EXACT_RUNTIME_EXPOSES_DEFECT
+production_change_authority: NONE_CURRENTLY
+merge_authority: OWNER_ONLY
+merge_authorized: false
+pr_state: DRAFT
+handover_readiness: READY
+coordination_state: SAFE_EVIDENCE_ONLY
+program_release_freeze_verdict: NOT_READY_FOR_WRITER2_RELEASE_FREEZE
+last_report_basis_head: bba41b165fc5bf5c355c170e89dbeaabf2887f6e
+
+source_reuse:
+  repository: reallaksh19/3D_Converters
+  pinned_commit: ca8d391ac5f829f53bebb3c37adf0547c34a67b4
+  upstream_post_pr702_main: e5dbfcd2d86a5705a60df87b932d839fbc78301e
+  embedded_frozen_engine_blob_continuity: PASS_REMOTE_EXACT_GIT_BLOB_IDENTITY
+  repin_required: false
+  source_repository_modified: false
+  policy: COPY_ADAPT_WITH_FROZEN_UPSTREAM_SOURCE_UNCHANGED
+  embedded_blobs:
+    cii_v11_v14.py: 6152f28c0c43b4d70029f360d993da5794310c8a
+    cii_v11_v14_format.py: 56f59fb7e095a887fc84e8a008a5f40acbadaec5
+    cii_v11_v14_records.py: 1a1f7bdd78a4b1479dd474fd9cc61a2b9adef235
+    cii_v11_v14_sif.py: 88c1d80bdb7bd2d5197a56c5be60ac2057c02367
+    cii_v11_v14_validate.py: 8e6896e8b61ac3c90d579139d39b29a6ace1637c
+    cii2019_section_rules.py: efa894afd241f8ac0b74f6a6e0ecfaedc3d6d76e
+
+runtime:
+  w2_34_focused_7_file_graph: PASS_RUNTIME_EXACT_SEVEN_FILE_BLOB_GRAPH_NODE_ESM_MODE
+  w2_c0_product_routing_14_file_graph: NOT_RUN_EXACT_14_FILE_GRAPH_NOT_FULLY_MATERIALIZED
+  w2_a_synthetic_product: NOT_RUN_EXACT_EXECUTABLE_ENVIRONMENT
+  w2_b_retained_real_v11_product: NOT_RUN_EXACT_EXECUTABLE_ENVIRONMENT
+  w2_35_generated_v14_browser_product: AUTHORED_NOT_RUN_EXACT_BROWSER_ENVIRONMENT
+  w2_35a_1042_generated_v14_authority: AUTHORED_NOT_RUN_EXACT_BROWSER_ENVIRONMENT
+  w2_40_native_v14_writer2_product: AUTHORED_NOT_RUN_EXACT_BROWSER_ENVIRONMENT
+  github_actions_authorized: false
+  clone_observation: FAIL_ENVIRONMENT_DNS_COULD_NOT_RESOLVE_GITHUB_COM
+  worker_runtime_dependency: HTTPS_CDN_JSDELIVR_PYODIDE_0_27_2
+  native_archive_runtime_dependency: HTTPS_RAW_GITHUB_PINNED_COMMIT
+
+native_pre_runtime_eligibility:
+  status: PASS_SOURCE_AUTHORITY_ONLY_NOT_RUNTIME
+  upstream_repository_visibility: PUBLIC
+  pinned_raw_archive_fetch_design: VALID
+  archive_cors_runtime: TO_BE_OBSERVED_IN_EXACT_BROWSER_RUN
+  zip_method_8_runtime_support: SOURCE_CONFIRMED_DECOMPRESSIONSTREAM_DEFLATE_RAW
+  lossless_v14_to_v11_fixture_eligibility: SOURCE_CONFIRMED_BY_COMMITTED_UPSTREAM_BENCHMARK_TEST
+  upstream_test: converters/scripts/test_cii_v11_v14.py
+  upstream_test_contracts:
+    - test_v14_to_v11_matches_target_record_shape_calls_convert_bytes_without_allow_lossy
+    - test_generated_v11_passes_independent_structure_gate
+  runtime_promoted: false
+
+entrypoints:
+  w2_a_synthetic:
+    file: tests/cii-workspace-writer2-restraint-product-routing.test.js
+    blob: 9922377ddeda86fc9167d65f33c97095346e79fa
+  w2_b_real_v11:
+    file: tests/cii-workspace-writer2-restraint-product-real-cii.test.js
+    blob: c341b99e2786b0034ef672b4efb03d167d9ad26c
+    benchmark_blob: e41cd05603b56837cbb6e31b9d4074ef6106fe9b
+  w2_35_generated_v14_browser:
+    spec: tests/browser/cii-writer2-v14-generated-bridge.spec.mjs
+    spec_blob: be2bffb6ca001a84f1a6795970ac4e4c7f3b75b3
+    authority_spec: tests/browser/cii-writer2-v14-generated-bridge-1042.spec.mjs
+    authority_spec_blob: 4a717c2e5f432037634f09b6e71bfe474dd06f66
+  native_v14_product:
+    authored_entrypoint: true
+    spec: tests/browser/cii-writer2-v14-native-bridge.spec.mjs
+    spec_blob: ec99f9abcff5ab2df70b4f4635bbdeb7413a4bb1
+    fixture_class: PINNED_NATIVE_V14_TARGET_WITH_VALIDATED_GENERATED_V14_SOURCE
+    upstream_repository: reallaksh19/3D_Converters
+    upstream_commit: ca8d391ac5f829f53bebb3c37adf0547c34a67b4
+    archive: Benchmarks/v11-v14.zip
+    archive_git_blob_sha1: 8409e1c429665e34a83c2a464665ebf5d5f1b0a1
+    native_member: SYS-0001-v14.CII
+    native_member_sha256: d2d4316309d9b1aa34b55ad72f89193fd0e437930db203fecd9ede00e69b2faf
+    target_is_native: true
+    source_is_native: false
+    source_policy: VALIDATED_V11_WRITER2_SEED_UPGRADED_TO_V14_FOR_TRANSFER_INPUT_ONLY
+    required_oracle: PROJECTED_NATIVE_V14_DOWNGRADE_EXACTLY_EQUALS_DIRECT_VALIDATED_V11_WRITER2_POSTIMAGE
+    required_1042_oracle:
+      - CONTROL_ROW1_FIELD4_NONAM_RAW_I13_BYTE_IDENTICAL
+      - CONTROL_ROW2_FIELD4_RESTRAINT_COUNT_DECREASES_EXACTLY_ONE
+      - ONLY_RESTRAINT_CONTROL_AND_POINTER_FIXED_FIELD_CLAIMS
+    unrelated_native_section_byte_preservation_required: true
+    stale_native_target_rejection_required: true
+  browser_config:
+    file: playwright.cii-writer2.config.mjs
+    blob: 0de2666dd8e05a1cd989976ce28fce281d1a92cb
+    command: npx_playwright_test_--config=playwright.cii-writer2.config.mjs
+
+negative_assurance:
+  frozen_3d_converters_modified: false
+  upstream_pr702_requires_repin: false
+  lossy_bridge_enabled: false
+  v11_create_authority_widened: false
+  writer1_authority_changed: false
+  writer3_scope_leakage: false
+  generated_v14_claimed_as_native: false
+  generated_source_claimed_as_native: false
+  source_inspection_promoted_to_runtime_pass: false
+  not_run_promoted_to_pass: false
+  stubs_or_import_rewrites_used: false
+  worker_runtime_substituted: false
+  native_fixture_reconstructed_from_docs: false
+  production_default_writer1b_changed: false
+
+exact_next_action: EXECUTE_W2_C0_W2_A_W2_B_AND_FOCUSED_THREE_SPEC_BROWSER_GATE_ON_COMPLETE_EXACT_CHECKOUT; FIRST_NATIVE_RUNTIME_FALSIFIER_STOPS_PROMOTION_AND_MAY_AUTHORIZE_MINIMAL_PRODUCT_REPAIR

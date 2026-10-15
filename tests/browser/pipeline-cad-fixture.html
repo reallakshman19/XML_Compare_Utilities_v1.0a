@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pipeline CAD Browser Acceptance Fixture</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 1180px; background: #020617; color: #e2e8f0; }
+    header { padding: 12px 18px; border-bottom: 1px solid #334155; background: #0f172a; }
+    header h1 { margin: 0; font-size: 16px; }
+    header p { margin: 4px 0 0; color: #94a3b8; font-size: 12px; }
+    .pipeline-3d-model-dialog { display: grid; gap: 12px; padding: 12px; }
+    .raw-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+    .raw-panel { min-width: 0; padding: 8px; border: 1px solid #334155; border-radius: 8px; background: #0f172a; }
+    .raw-panel label { display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 11px; font-weight: 700; }
+    textarea { width: 100%; min-height: 118px; resize: vertical; border: 1px solid #475569; border-radius: 5px; background: #020617; color: #cbd5e1; padding: 6px; font: 10px/1.35 ui-monospace, monospace; }
+    .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .preview-card { min-width: 0; height: 470px; overflow: hidden; border: 1px solid #334155; border-radius: 10px; background: #0b1220; }
+    [data-p3d-split="table2x-preview"], [data-p3d-split="table3x-preview"] { width: 100%; height: 100%; }
+    .output-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .output-card { padding: 8px; border: 1px solid #334155; border-radius: 8px; background: #0f172a; }
+    .output-card h2 { margin: 0 0 6px; font-size: 12px; }
+    table { width: 100%; border-collapse: collapse; font: 10px ui-monospace, monospace; }
+    td { padding: 4px 6px; border: 1px solid #334155; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pipeline 3D CAD Canvas — Chromium acceptance fixture</h1>
+    <p>Real model, controller, Canvas renderers, authoring patches, raw TSV synchronization, toolbar, keyboard and context-menu paths.</p>
+  </header>
+
+  <main class="pipeline-3d-model-dialog" data-browser-fixture="pipeline-cad">
+    <section class="raw-grid" aria-label="Raw pipeline tables">
+      <div class="raw-panel">
+        <label for="table2a">Table 2A</label>
+        <textarea id="table2a" data-p3d-split="table2a-raw">H(coor)	V(coor)	[H vs V] Length	Station Text	Elevation Text
+659.791	—	—	0+000.0	231.32
+668.540	-715.825 → -650.258	65.567	0+006.7	230.95
+680.803	-715.825 → -650.258	65.567	0+019.0	230.82
+732.683	—	—	0+070.8	233.00</textarea>
+      </div>
+      <div class="raw-panel">
+        <label for="table3a">Table 3A</label>
+        <textarea id="table3a" data-p3d-split="table3a-raw">From H(coor)	To H(coor)	Text Position X	HLength Text
+661.791	682.337	671.704	20.5
+682.337	716.683	700.435	34.3
+716.683	732.683	723.927	16.0</textarea>
+      </div>
+      <div class="raw-panel">
+        <label for="table3b">Table 3B</label>
+        <textarea id="table3b" data-p3d-split="table3b-raw">From H(coor)	To H(coor)	Text Position X	Z Text
+—	—	665.621	A/G
+682.337	732.683	708.374	1.5M</textarea>
+      </div>
+      <div class="raw-panel">
+        <label for="table3c">Table 3C</label>
+        <textarea id="table3c" data-p3d-split="table3c-raw">Text Position X	Marker Text
+688.135	PM-001</textarea>
+      </div>
+    </section>
+
+    <section class="preview-grid" aria-label="Interactive CAD previews">
+      <div class="preview-card" data-p3d-split="table2x-preview"></div>
+      <div class="preview-card" data-p3d-split="table3x-preview"></div>
+    </section>
+
+    <section class="output-grid" aria-label="Derived output rows">
+      <div class="output-card" data-p3d="table2x-output">
+        <h2>Table 2X output evidence</h2>
+        <table><tbody>
+          <tr data-output-row="table2-station-19"><td>0+019.0</td><td>230.82</td></tr>
+        </tbody></table>
+      </div>
+      <div class="output-card" data-p3d="table3x-output">
+        <h2>Table 3X output evidence</h2>
+        <table><tbody>
+          <tr data-output-row="table3-decoy"><td>900.000</td><td>999.000</td><td>950.000</td><td>1.5M</td></tr>
+          <tr data-output-row="table3-range"><td>682.337</td><td>732.683</td><td>708.374</td><td>1.5M</td></tr>
+          <tr data-output-row="table3-marker"><td>688.135</td><td>PM-001</td></tr>
+        </tbody></table>
+      </div>
+    </section>
+  </main>
+
+  <script type="module">
+    import '../../tabs/pipeline-3d-model/pipeline-3d-model-cad-authoring.js';
+    import { mountPipelineCadWorkspace } from '../../tabs/pipeline-3d-model/pipeline-3d-model-cad-workspace.js';
+
+    localStorage.removeItem('pipeline3dCadSnapV1');
+    const dialog = document.querySelector('.pipeline-3d-model-dialog');
+    const workspace = mountPipelineCadWorkspace(dialog, { force: true });
+    if (!workspace) throw new Error('Pipeline CAD workspace did not mount.');
+    const initialGraphs = { ...workspace.graphs };
+
+    const frame = () => new Promise((resolve) => requestAnimationFrame(resolve));
+    await frame();
+    workspace.resize();
+    await frame();
+    await frame();
+
+    function rawValue(name) {
+      return dialog.querySelector(`[data-p3d-split="${name}-raw"]`)?.value || '';
+    }
+
+    function findNode(graphName, query = {}) {
+      const graph = workspace.graphs[graphName];
+      if (!graph) throw new Error(`Unknown graph ${graphName}`);
+      let nodes = [];
+      if (graphName === 'table2x') nodes = graph.currentNodes();
+      else nodes = [...graph.markerNodes(), ...graph.depthNodes()];
+      const node = nodes.find((candidate) => {
+        if (query.id && candidate.id !== query.id) return false;
+        if (query.type && candidate.type !== query.type) return false;
+        if (query.markerText && candidate.text !== query.markerText) return false;
+        if (query.zText && candidate.text !== query.zText) return false;
+        if (Number.isFinite(query.stationValue) && Math.abs(candidate.x - query.stationValue) > 0.001) return false;
+        return true;
+      });
+      if (!node) throw new Error(`Node not found in ${graphName}: ${JSON.stringify(query)}`);
+      const point = graph.worldToScreen(node);
+      return { id: node.id, type: node.type || 'elevation-node', x: point.x, y: point.y, world: { x: node.x, y: node.y }, text: node.text || node.stationText || '' };
+    }
+
+    function state() {
+      const { controller, graphs } = workspace;
+      return {
+        revision: controller.model?.revision || 0,
+        raw: {
+          table2a: rawValue('table2a'),
+          table3a: rawValue('table3a'),
+          table3b: rawValue('table3b'),
+          table3c: rawValue('table3c'),
+        },
+        table2Rows: controller.model?.table2Rows?.map((row) => ({ ...row })) || [],
+        depthRows: controller.model?.table3DepthRows?.map((row) => ({ ...row })) || [],
+        markerRows: controller.model?.table3MarkerRows?.map((row) => ({ ...row })) || [],
+        dirtyRowIds: [...(controller.model?.dirtyRowIds || [])],
+        table2Snapshot: graphs.table2x.renderSnapshot.map((row) => ({ ...row })),
+        table3Snapshot: graphs.table3x.depthSnapshot.map((row) => ({ ...row })),
+        table2Overrides: [...graphs.table2x.visualOverrides.entries()],
+        depthOverrides: [...graphs.table3x.depthOverrides.entries()],
+        markerOverrides: [...graphs.table3x.markerOverrides.entries()],
+        graphIdentityStable: graphs.table2x === initialGraphs.table2x && graphs.table3x === initialGraphs.table3x,
+        viewport: {
+          table2x: graphs.table2x.getViewport(),
+          table3x: graphs.table3x.getViewport(),
+        },
+        canvas: Object.fromEntries(Object.entries(graphs).map(([name, graph]) => [name, {
+          width: graph.canvas?.width || 0,
+          height: graph.canvas?.height || 0,
+          cssWidth: graph.canvas?.getBoundingClientRect?.().width || 0,
+          cssHeight: graph.canvas?.getBoundingClientRect?.().height || 0,
+          dpr: devicePixelRatio,
+        }])),
+        outputRows: Object.fromEntries([...document.querySelectorAll('[data-output-row]')].map((row) => [row.dataset.outputRow, {
+          dirty: row.classList.contains('p3d-cad-dirty-row'),
+          dirtyId: row.getAttribute('data-p3d-cad-dirty-row'),
+          text: row.textContent.trim(),
+        }])),
+        statuses: Object.fromEntries([...document.querySelectorAll('[data-p3d-cad-status]')].map((node) => [node.dataset.p3dCadStatus, node.textContent])),
+      };
+    }
+
+    window.__pipelineCadHarness = {
+      workspace,
+      state,
+      findNode,
+      worldPoint(graphName, world) {
+        const point = workspace.graphs[graphName].worldToScreen(world);
+        return { x: point.x, y: point.y };
+      },
+      setRaw(name, value) {
+        const element = dialog.querySelector(`[data-p3d-split="${name}-raw"]`);
+        element.value = value;
+        element.dispatchEvent(new Event('input', { bubbles: true }));
+      },
+    };
+
+    document.body.dataset.pipelineCadReady = '1';
+  </script>
+</body>
+</html>

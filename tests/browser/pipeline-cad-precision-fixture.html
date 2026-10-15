@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pipeline CAD Precision Fixture</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#020617;color:#e2e8f0;font-family:system-ui,sans-serif}.pipeline-3d-model-dialog{min-height:100vh;padding:12px}.workspace{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}textarea{width:100%;height:95px;background:#07111f;color:#cbd5e1;border:1px solid #334155;font:10px monospace}.p3d-x-modal{display:flex;flex-direction:column;margin-top:10px;height:760px;padding:10px;background:#07111f;border:1px solid #334155}.p3d-x-tabs{display:flex;gap:6px}.p3d-x-content{display:none;min-height:0;flex:1}.p3d-x-content[data-active="true"]{display:block}[data-p3d-split="table2x-preview"],[data-p3d-split="table3x-preview"]{width:100%;height:100%;min-height:560px}.outputs{display:none}
+</style>
+</head>
+<body>
+<main class="pipeline-3d-model-dialog" data-browser-fixture="pipeline-precision">
+<section class="workspace">
+<textarea data-p3d-split="table2a-raw">H(coor)	V(coor)	[H vs V] Length	Station Text	Elevation Text
+659.791	—	—	0+000.0	231.32
+668.540	-715.825 → -650.258	65.567	0+006.7	230.95
+680.803	-715.825 → -650.258	65.567	0+019.0	230.82
+693.658	-715.825 → -650.258	65.567	0+031.9	231.50</textarea>
+<textarea data-p3d-split="table3a-raw">From H(coor)	To H(coor)	Text Position X	HLength Text
+661.791	682.337	671.704	20.5
+682.337	716.683	700.435	34.3
+716.683	732.683	723.927	16.0</textarea>
+<textarea data-p3d-split="table3b-raw">From H(coor)	To H(coor)	Text Position X	Z Text
+—	—	665.621	A/G
+682.337	732.683	708.374	1.5M</textarea>
+<textarea data-p3d-split="table3c-raw">Text Position X	Marker Text
+688.135	PM-001</textarea>
+</section>
+<section class="p3d-x-modal" data-p3d-split="x-modal">
+<div><button type="button" data-p3d-split="x-reload">Reload</button><button type="button" data-p3d-split="x-close">Close</button></div>
+<div class="p3d-x-tabs"><button type="button" class="p3d-x-tab" data-x-tab="table2x" data-active="true">Table 2X</button><button type="button" class="p3d-x-tab" data-x-tab="table3x" data-active="false">Table 3X</button></div>
+<div class="p3d-x-content" data-x-content="table2x" data-active="true"><div data-p3d-split="table2x-preview"></div></div>
+<div class="p3d-x-content" data-x-content="table3x" data-active="false"><div data-p3d-split="table3x-preview"></div></div>
+</section>
+<section class="outputs"><table data-p3d="table2x-output"><tbody></tbody></table><table data-p3d="table3x-output"><tbody></tbody></table></section>
+</main>
+<script type="module">
+localStorage.setItem('pipeline3dCadRenderer','canvas');
+localStorage.setItem('pipeline3dCadPreviewModeV1',JSON.stringify({mode:'side-by-side',zOriginElevation:231.32}));
+localStorage.setItem('pipeline3dCadSnapV1',JSON.stringify({table2x:{objectEnabled:true},table3x:{objectEnabled:true}}));
+const module=await import('../../tabs/pipeline-3d-model/pipeline-3d-model-cad-workspace.js');
+const dialog=document.querySelector('.pipeline-3d-model-dialog');let workspace=module.mountPipelineCadWorkspace(dialog,{force:true});
+const frame=()=>new Promise((resolve)=>requestAnimationFrame(resolve));
+const settle=async()=>{workspace?.resize();await frame();await frame();workspace?.resize();await frame();};await settle();
+const raw=(name)=>dialog.querySelector(`[data-p3d-split="${name}-raw"]`)?.value||'';
+function nodes(name){const graph=workspace.graphs[name];return name==='table2x'?graph.currentNodes():[...graph.depthNodes(),...graph.markerNodes()];}
+function findNode(name,query={}){const graph=workspace.graphs[name];const node=nodes(name).find((item)=>{if(query.id&&item.id!==query.id)return false;if(query.type&&item.type!==query.type)return false;if(query.text&&item.text!==query.text)return false;return true;});if(!node)throw new Error(`Node not found ${name}`);return{...node,screen:graph.worldToScreen(node)};}
+function select(name,query={}){const graph=workspace.graphs[name];const node=findNode(name,query);if(name==='table2x')graph.selectedId=node.id;else graph.selected={id:node.id,type:node.type};graph.dispatchGraphEvent('selectionChanged',{graph:name,entityId:node.id,entityType:node.type||'elevation-node'});graph.render();return node;}
+function state(){const {controller,graphs,precision}=workspace;return{revision:controller.model?.revision||0,raw:{table2a:raw('table2a'),table3b:raw('table3b'),table3c:raw('table3c')},table2Rows:controller.model?.table2Rows?.map((row)=>({...row}))||[],depthRows:controller.model?.table3DepthRows?.map((row)=>({...row}))||[],markerRows:controller.model?.table3MarkerRows?.map((row)=>({...row}))||[],history:{undo:controller.history?.undoStack?.length||0,redo:controller.history?.redoStack?.length||0},lifecycle:dialog.dataset.p3dCadPrecisionLifecycle||'',panels:[...document.querySelectorAll('[data-p3d-cad-precision]')].map((panel)=>({name:panel.dataset.p3dCadPrecision,hidden:panel.hidden})),overrides:{table2:[...graphs.table2x.precisionOverrides.entries()],table3:[...graphs.table3x.precisionOverrides.entries()]},session:precision?.sessions?.session||null};}
+async function setMode(mode){const modal=dialog.querySelector('[data-p3d-split="x-modal"]');modal.dataset.p3dCadPreviewMode=mode;modal.dispatchEvent(new CustomEvent('pipelineCadPreviewModeChanged',{detail:{mode}}));await settle();}
+async function drag(name,query,target){const graph=workspace.graphs[name];const node=findNode(name,query);graph.setTool('select');graph.onPrimaryPointerDown({},node.screen,{x:node.x,y:node.y});const screen=graph.worldToScreen(target);graph.onPrimaryPointerMove({},screen,target);graph.onPrimaryPointerUp({},screen,target);await settle();}
+window.__pcadPrecision={get workspace(){return workspace;},state,findNode,select,setMode,drag,async settle(){await settle();},destroy(){const current=workspace;workspace=null;return current?.destroy()||false;},async remount(){workspace=module.mountPipelineCadWorkspace(dialog,{force:true});await settle();return Boolean(workspace);}};
+document.body.dataset.pcadPrecisionReady='1';
+</script>
+</body></html>

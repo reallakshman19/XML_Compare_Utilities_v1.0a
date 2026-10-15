@@ -1,0 +1,73 @@
+{
+  "schema": "EngineeringSvgCoreOwnership.v1",
+  "baselineMainSha": "74156da67ed0304ae0011d490dab9b7188ccfec5",
+  "coreRoot": "core/engineering-svg",
+  "publicEntryPoint": "core/engineering-svg/index.js",
+  "publicExports": [
+    "./engineering-svg-projection.js",
+    "./engineering-svg-fit.js",
+    "./engineering-svg-projected-scene.js",
+    "./engineering-svg-scene-source.js",
+    "./engineering-svg-renderer.js",
+    "./engineering-svg-selection.js",
+    "./engineering-svg-export.js",
+    "./engineering-svg-workspace.js"
+  ],
+  "prohibitedCoreImportRoots": [
+    "tabs",
+    "workbench3d"
+  ],
+  "consumers": [
+    {
+      "id": "PIPELINE_3D",
+      "root": "tabs/pipeline-3d-model",
+      "integrationKind": "DOMAIN_ADAPTER_AND_SHADOW",
+      "adoption": "READ_ONLY_SHADOW",
+      "integrationFiles": [
+        "tabs/pipeline-3d-model/pipeline-engineering-svg-adapter.js",
+        "tabs/pipeline-3d-model/pipeline-engineering-svg-scene.js",
+        "tabs/pipeline-3d-model/pipeline-engineering-svg-shadow-workspace.js"
+      ]
+    },
+    {
+      "id": "SEQUENTIAL_SKETCHER",
+      "root": "tabs/sequential-sketcher",
+      "integrationKind": "DOMAIN_ADAPTER_AND_PRODUCTION_PREVIEW",
+      "adoption": "OPTIONAL_READ_ONLY_PRODUCTION_PREVIEW",
+      "integrationFiles": [
+        "tabs/sequential-sketcher/sequential-engineering-svg-adapter.js",
+        "tabs/sequential-sketcher/sequential-engineering-svg-scene.js",
+        "tabs/sequential-sketcher/sequential-engineering-svg-preview-controller.js",
+        "tabs/sequential-sketcher/sequential-engineering-svg-preview-workspace.js"
+      ]
+    },
+    {
+      "id": "TOPOLOGY_TRACE",
+      "root": "tabs/topology-trace-validator",
+      "integrationKind": "DOMAIN_ADAPTER_AND_SHADOW",
+      "adoption": "READ_ONLY_SHADOW",
+      "integrationFiles": [
+        "tabs/topology-trace-validator/topology-engineering-svg-adapter.js",
+        "tabs/topology-trace-validator/topology-engineering-svg-shadow-workspace.js"
+      ]
+    },
+    {
+      "id": "REVISION_COMPARE",
+      "root": "tabs/revision-compare",
+      "integrationKind": "DOMAIN_SCENE_AND_VIEWER_INTEGRATION",
+      "adoption": "PRODUCTION_READ_ONLY_SVG_BACKEND",
+      "integrationFiles": [
+        "tabs/revision-compare/revision-compare-engineering-svg-scene.js",
+        "tabs/revision-compare/revision-compare-engineering-svg-viewer.js",
+        "tabs/revision-compare/revision-compare-svg-surfaces.js"
+      ]
+    }
+  ],
+  "rules": {
+    "coreMayImportConsumers": false,
+    "consumerMayImportAnotherConsumerIntegration": false,
+    "rendererOwnsDomainAuthority": false,
+    "consumerCommandsAllowedThroughReadOnlyIntegration": false,
+    "threeDimensionalBackendIsPartOfSharedSvgCore": false
+  }
+}

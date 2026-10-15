@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.xml-compare-utilities.local/document-evidence/v1/provider-profile.schema.json",
+  "title": "ProviderProfile.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "profileId", "profileHash", "role", "provider",
+    "providerVersion", "determinism"
+  ],
+  "properties": {
+    "schema": { "const": "ProviderProfile.v1" },
+    "profileId": { "type": "string", "minLength": 1 },
+    "profileHash": { "$ref": "#/$defs/sha256" },
+    "role": {
+      "type": "string",
+      "enum": ["native-text", "ocr", "pdf-geometry", "renderer", "docx-semantic", "other"]
+    },
+    "provider": { "type": "string", "minLength": 1 },
+    "providerVersion": { "type": "string", "minLength": 1 },
+    "providerBinaryHash": { "$ref": "#/$defs/sha256" },
+    "model": { "type": "string", "minLength": 1 },
+    "modelHash": { "$ref": "#/$defs/sha256" },
+    "language": { "type": "string", "minLength": 1 },
+    "coordinateConvention": {
+      "type": "string",
+      "enum": [
+        "document-surface", "continuous-pixel-edges", "pixel-centers",
+        "integer-pixel-edges", "provider-native", "unknown", "not-applicable"
+      ]
+    },
+    "quantizationErrorPx": { "type": "number", "minimum": 0 },
+    "options": { "type": "object" },
+    "determinism": { "$ref": "#/$defs/determinism" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "role": { "enum": ["ocr", "pdf-geometry"] } } },
+      "then": { "required": ["coordinateConvention"] }
+    }
+  ],
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "claim": {
+      "type": "string",
+      "enum": ["guaranteed", "profile-bound", "not-claimed", "not-applicable"]
+    },
+    "determinism": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["semantic", "artifact", "bitwiseRaster"],
+      "properties": {
+        "semantic": { "$ref": "#/$defs/claim" },
+        "artifact": { "$ref": "#/$defs/claim" },
+        "bitwiseRaster": { "$ref": "#/$defs/claim" }
+      }
+    }
+  }
+}

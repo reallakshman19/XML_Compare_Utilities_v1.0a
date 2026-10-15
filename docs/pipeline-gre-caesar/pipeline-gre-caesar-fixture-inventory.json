@@ -1,0 +1,201 @@
+{
+  "schema": "PipelineGreCaesarFixtureInventory.v2",
+  "fixtures": [
+    {
+      "authorityLevel": "REPOSITORY_EXPORT_OBSERVATION",
+      "bendCount": 12,
+      "bendRecords": [
+        {
+          "bendRecordId": "repo-gre-inputxml-v14:representative:1450-1500",
+          "curvatureNodes": [
+            {
+              "angle": -2.0202,
+              "node": 1499,
+              "role": "OTHER_AUTHENTICATED"
+            },
+            {
+              "angle": 0,
+              "node": 1498,
+              "role": "OTHER_AUTHENTICATED"
+            }
+          ],
+          "fittingThicknessAttributePresent": true,
+          "fittingThicknessValue": -1.0101,
+          "numMiterAttributePresent": true,
+          "numMiterLexicalValue": "-1.0101",
+          "numMiterValue": -1.0101,
+          "ownerElementId": "1450-1500",
+          "ownerFromNode": 1450,
+          "ownerToNode": 1500,
+          "radius": 1206,
+          "recordCoverage": "REPRESENTATIVE_ONLY",
+          "typeAttributePresent": true,
+          "typeLexicalValue": "3",
+          "typeValue": 3
+        }
+      ],
+      "blockerCodes": [
+        "PIPELINE_GRE_CAESAR_FIXTURE_UNAUTHENTICATED",
+        "PIPELINE_GRE_CAESAR_BUILD_UNRESOLVED",
+        "PIPELINE_GRE_CAESAR_CODE_EDITION_UNRESOLVED",
+        "PIPELINE_GRE_CAESAR_LAMINATE_UNRESOLVED",
+        "PIPELINE_GRE_CAESAR_UNIT_FILE_UNRESOLVED",
+        "PIPELINE_GRE_CAESAR_NATIVE_JOB_UNAUTHENTICATED",
+        "PIPELINE_GRE_CAESAR_OPERATOR_LOG_UNAUTHENTICATED",
+        "PIPELINE_GRE_CAESAR_SOURCE_COMMIT_UNRESOLVED",
+        "PIPELINE_GRE_CAESAR_IMPORT_NOT_PROVEN",
+        "PIPELINE_GRE_CAESAR_ROUND_TRIP_NOT_PROVEN",
+        "PIPELINE_GRE_CAESAR_ROUND_TRIP_COMPARISON_INCOMPLETE"
+      ],
+      "caesarBuild": "",
+      "caesarVersion": "14.00",
+      "continuityRecords": [
+        {
+          "bendOwnerElementId": "1450-1500",
+          "continuityRecordId": "repo-gre-inputxml-v14:continuity:1500",
+          "enteringElementId": "1450-1500",
+          "enteringFromNode": 1450,
+          "enteringToNode": 1500,
+          "inactiveCornerNode": 1490,
+          "inactiveCornerSerialized": false,
+          "incomingTangencyNode": 1450,
+          "leavingElementId": "1500-1550",
+          "leavingFromNode": 1500,
+          "leavingToNode": 1550,
+          "observedTopologyMode": "CONSECUTIVE_SHARED_LOGICAL_NODE",
+          "outgoingTangencyNode": 1550,
+          "sharedLogicalNode": true
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "PIPELINE_GRE_CAESAR_FIXTURE_UNAUTHENTICATED",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14",
+            "reason": "FIXTURE_RECORD_COVERAGE"
+          },
+          "message": "PIPELINE_GRE_CAESAR_FIXTURE_UNAUTHENTICATED",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_FIXTURE_UNAUTHENTICATED",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_FIXTURE_UNAUTHENTICATED",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_BUILD_UNRESOLVED",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_BUILD_UNRESOLVED",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_CODE_EDITION_UNRESOLVED",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_CODE_EDITION_UNRESOLVED",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_LAMINATE_UNRESOLVED",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_LAMINATE_UNRESOLVED",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_UNIT_FILE_UNRESOLVED",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_UNIT_FILE_UNRESOLVED",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_NATIVE_JOB_UNAUTHENTICATED",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_NATIVE_JOB_UNAUTHENTICATED",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_OPERATOR_LOG_UNAUTHENTICATED",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_OPERATOR_LOG_UNAUTHENTICATED",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_SOURCE_COMMIT_UNRESOLVED",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_SOURCE_COMMIT_UNRESOLVED",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_IMPORT_NOT_PROVEN",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_IMPORT_NOT_PROVEN",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_ROUND_TRIP_NOT_PROVEN",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_ROUND_TRIP_NOT_PROVEN",
+          "severity": "BLOCKING"
+        },
+        {
+          "code": "PIPELINE_GRE_CAESAR_ROUND_TRIP_COMPARISON_INCOMPLETE",
+          "details": {
+            "fixtureId": "repo-gre-inputxml-v14"
+          },
+          "message": "PIPELINE_GRE_CAESAR_ROUND_TRIP_COMPARISON_INCOMPLETE",
+          "severity": "BLOCKING"
+        }
+      ],
+      "elementCount": 100,
+      "fixtureCaseId": "",
+      "fixtureGitBlobSha1": "e7dc8ff9b1082d489609980bb495ced048a81679",
+      "fixtureId": "repo-gre-inputxml-v14",
+      "fixturePath": "docs/GREInputxml.xml",
+      "fixtureSha256": "",
+      "importEvidence": {
+        "status": "MISSING"
+      },
+      "importedJobSha256": "",
+      "laminateClassification": "",
+      "nativeJobSha256": "",
+      "operatorLogSha256": "",
+      "pipingCodeEdition": "",
+      "pipingCodeId": "36",
+      "pipingCodeName": "",
+      "ready": false,
+      "reexportSha256": "",
+      "roundTripEvidence": {
+        "status": "MISSING"
+      },
+      "schema": "PipelineGreCaesarFixtureEvidence.v2",
+      "sourceClassification": "CAESAR_EXPORTED_REPOSITORY_FIXTURE",
+      "sourceCommitSha": "",
+      "sourceReferences": [
+        "docs/GREInputxml.xml"
+      ],
+      "unitFileId": "",
+      "unitFileSha256": "",
+      "xmlVersion": "14.00"
+    }
+  ]
+}

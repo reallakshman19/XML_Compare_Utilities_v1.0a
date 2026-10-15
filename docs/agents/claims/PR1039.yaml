@@ -1,0 +1,65 @@
+pr: 1039
+issue: 1038
+repository: reallaksh19/XML_Compare_Utilities
+claim_state: ACTIVE_REVIEW_READY_NOT_READY_VERDICT
+claim_scope: WRITER2_W2_9_RESTRAINT_CARDINALITY_QUALIFICATION_ONLY
+branch: agent/cii-writer2-restraint-cardinality-w29
+base_main: ff9d706796e42a43ebfb1c74696350e9b8cc695b
+report_basis_head: 6aa1f04ad24958ab64c069074343c7ccb54f3c28
+ready_for_review: true
+merge_authority: OWNER_ONLY
+merge_authorized: false
+
+claims:
+  - id: WRITER1B_EXISTING_FREE_SLOT_BOUNDARY
+    state: PRESERVED
+    authority: MERGED_WRITER1B
+  - id: CONTROL_RESTRAINT_AUX_BLOCK_COUNT
+    state: QUALIFIED
+    authority: OFFICIAL_HEXAGON_NEUTRAL_CONTROL
+  - id: ELEMENT_RESTRAINT_BLOCK_POINTER
+    state: QUALIFIED
+    authority: VENDOR_NEUTRAL_FORMAT_PLUS_MERGED_PHYSICAL_CUSTODY
+  - id: V11_RESTRAINT_6_SLOT_24_ROW_BLOCK
+    state: QUALIFIED
+    authority: VENDOR_NEUTRAL_FORMAT_PLUS_REAL_V11_SOURCE
+  - id: RESTRAINT_DELETE_COMPACTION_RELOCATION_ARITHMETIC
+    state: QUALIFIED_DERIVED_ONLY
+    authority: DIRECT_FORMAT_INDEX_DERIVATION
+  - id: RESTRAINT_GENERIC_CARDINALITY_PLANNER
+    state: NOT_QUALIFIED
+    authority: INCOMPLETE
+  - id: RESTRAINT_GUID_CREATE_ASSIGNMENT
+    state: UNRESOLVED
+    authority: NONE_EXTERNAL_GENERATION_RULE
+  - id: RESTRAINT_NEW_BLOCK_ALLOCATION_POLICY
+    state: UNRESOLVED
+    authority: REPOSITORY_POLICY_ONLY
+  - id: RESTRAINT_SHARED_POINTER_SEMANTICS
+    state: UNRESOLVED
+    authority: NONE
+
+final_verdict: NOT_READY_FOR_WRITER2_RESTRAINT_CARDINALITY_PLANNER
+physical_writer_authority: false
+composite_product_authority: false
+production_planner_added: false
+
+changed_paths:
+  intended: 9
+  actual: 9
+  production: 0
+  unexplained: 0
+  observation: PASS_REMOTE_GITHUB_COMPARE_AT_REPORT_BASIS
+
+validation_truth:
+  exact_v11_restraint_input: PASS_VENDOR_AUTHORED_EXACT_VERSION_MIRROR
+  exact_v11_guid_owner: PASS_VENDOR_AUTHORED_EXACT_VERSION_MIRROR
+  official_control_count: PASS_OFFICIAL_HEXAGON_SOURCE
+  neutral_block_format: PASS_VENDOR_NEUTRAL_DOCUMENTATION
+  real_v11_multiblock_census: PASS_REMOTE_SOURCE_INSPECTION
+  delete_relocation_arithmetic: PASS_DERIVED_FROM_DIRECT_FORMAT
+  full_pointer_alias_census: NOT_RUN_ENVIRONMENT
+  qualification_test: NOT_RUN_ENVIRONMENT
+  production_restraint_cardinality: BLOCKED_UNCHANGED
+
+next_claim_gate: SOURCE_COMPLETE_CREATE_AUTHORITY_OR_EXPLICIT_NARROW_DELETE_COMPACTION_SCOPE_REQUIRED

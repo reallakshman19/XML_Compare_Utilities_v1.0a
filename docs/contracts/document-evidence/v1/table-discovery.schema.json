@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.xml-compare-utilities.local/document-evidence/v1/table-discovery.schema.json",
+  "title": "DocumentEvidenceTableDiscovery.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "sourceHash", "source", "candidates", "diagnostics"],
+  "properties": {
+    "schema": {"const": "DocumentEvidenceTableDiscovery.v1"},
+    "sourceHash": {"type": "string", "minLength": 1},
+    "source": {"$ref": "source.schema.json"},
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["candidateId", "page", "strategy", "bbox", "rowCount", "columnCount"],
+        "properties": {
+          "candidateId": {"type": "string", "minLength": 1},
+          "page": {"type": "integer", "minimum": 1},
+          "strategy": {"type": "string", "minLength": 1},
+          "bbox": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "number"}},
+          "rowCount": {"type": "integer", "minimum": 0},
+          "columnCount": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "diagnostics": {"type": "array"}
+  }
+}

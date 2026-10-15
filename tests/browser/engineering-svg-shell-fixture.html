@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Engineering SVG Shell Fixture</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; }
+    .fixtures { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    [data-engineering-svg-shell] { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 12px; border: 1px solid #999; padding: 12px; }
+    [data-engineering-svg-shell-canvas] { min-height: 320px; }
+    [data-engineering-svg-shell-inspector] > div { margin-bottom: 8px; }
+    [data-engineering-svg-property-key] { display: grid; gap: 4px; margin: 8px 0; }
+    [data-engineering-svg-property-control] { min-height: 30px; }
+    [data-engineering-svg-property-messages] { margin: 0; color: #a00; }
+    [data-engineering-svg-shell-status] { grid-column: 1 / -1; }
+    svg { width: 100%; height: 320px; border: 1px solid #bbb; }
+    [data-engineering-svg-entity-id] { stroke: currentColor; fill: white; }
+    [data-engineering-svg-entity-id].is-selected { stroke-width: 4; }
+  </style>
+</head>
+<body>
+  <main class="fixtures">
+    <div id="shell-a"></div>
+    <div id="shell-b"></div>
+  </main>
+  <script type="module">
+    import {
+      createEngineeringCommandResult,
+      createEngineeringPropertySet,
+      createEngineeringRevisionToken,
+      createEngineeringScene,
+      createEngineeringSceneEntity,
+      createPointGeometry,
+    } from '../../core/engineering-scene/index.js';
+    import {
+      createEngineeringSvgCommandGateway,
+      createEngineeringSvgPropertyProvider,
+    } from '../../core/engineering-svg/edit-runtime.js';
+    import { createEngineeringSvgSceneSource } from '../../core/engineering-svg/index.js';
+    import { createEngineeringSvgWorkspaceShell } from '../../core/engineering-svg/shell-runtime.js';
+
+    function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
+
+    function createDomain(name, host) {
+      let revisionNumber = 1;
+      let commandCalls = 0;
+      let shell = null;
+      const delays = new Map();
+      const listeners = new Set();
+      const values = {
+        a: { pressure: 10, tag: `${name}-A`, mode: 'A', enabled: true },
+        b: { pressure: 20, mode: 'A', enabled: false },
+      };
+      const revision = () => createEngineeringRevisionToken({ domain: name, revision: revisionNumber });
+      const buildScene = () => createEngineeringScene({
+        sceneId: `${name}-scene`,
+        revision: revision(),
+        coordinateSystem: { unit: 'mm', verticalAxis: 'Z', frame: 'GLOBAL', handedness: 'right' },
+        entities: [
+          createEngineeringSceneEntity({
+            id: 'a', kind: 'point', domainType: 'SYNTHETIC_POINT',
+            geometry: createPointGeometry({ x: 0, y: 0, z: 0 }),
+            domainRef: { owner: name, id: 'a' }, propertySetIds: ['a-properties'],
+          }),
+          createEngineeringSceneEntity({
+            id: 'b', kind: 'point', domainType: 'SYNTHETIC_POINT',
+            geometry: createPointGeometry({ x: 100, y: 50, z: 0 }),
+            domainRef: { owner: name, id: 'b' }, propertySetIds: ['b-properties'],
+          }),
+        ],
+      });
+      const sceneSource = createEngineeringSvgSceneSource(buildScene());
+
+      function ownerSet(id) {
+        const current = values[id];
+        const fields = [
+          { key: 'pressure', label: 'Pressure', type: 'number', unit: 'bar', value: current.pressure, min: 0, max: 100 },
+          { key: 'mode', label: 'Mode', type: 'enum', value: current.mode, options: ['A', 'B'] },
+          { key: 'enabled', label: 'Enabled', type: 'boolean', value: current.enabled },
+        ];
+        if (Object.hasOwn(current, 'tag')) fields.push({ key: 'tag', label: 'Tag', type: 'text', value: current.tag });
+        return createEngineeringPropertySet({
+          id: `${id}-properties`, revision: revision(), ownerIds: [id], fields,
+        });
+      }
+
+      function sharedSet() {
+        return createEngineeringPropertySet({
+          id: 'shared-properties', revision: revision(), ownerIds: [], fields: [
+            { key: 'material', label: 'Material', type: 'text', scope: 'REFERENCE', value: 'A106' },
+          ],
+        });
+      }
+
+      const propertyProvider = createEngineeringSvgPropertyProvider({
+        async getPropertySets(request) {
+          const selected = request.selectedIds;
+          const delay = Math.max(0, ...selected.map((id) => delays.get(id) || 0));
+          selected.forEach((id) => delays.delete(id));
+          if (delay) await sleep(delay);
+          return [...selected.map(ownerSet), sharedSet()];
+        },
+        subscribe(listener) {
+          listeners.add(listener);
+          return () => listeners.delete(listener);
+        },
+      });
+
+      const commandGateway = createEngineeringSvgCommandGateway({
+        getCurrentRevision: () => revision(),
+        async execute(intent) {
+          commandCalls += 1;
+          intent.entityIds.forEach((id) => Object.assign(values[id], intent.changes.properties));
+          revisionNumber += 1;
+          sceneSource.setSnapshot(buildScene(), 'property-command');
+          listeners.forEach((listener) => listener({ reason: 'property-command' }));
+          return createEngineeringCommandResult({
+            operationId: intent.operationId,
+            status: 'committed',
+            resultingRevision: revision(),
+            commandReason: 'synthetic-property-command',
+          });
+        },
+      });
+
+      function mount() {
+        shell?.destroy();
+        shell = createEngineeringSvgWorkspaceShell({
+          shellId: name,
+          host,
+          sceneSource,
+          propertyProvider,
+          commandGateway,
+          projection: 'XY',
+          viewport: { width: 600, height: 320 },
+          padding: 24,
+        });
+        return shell;
+      }
+
+      mount();
+      return {
+        get shell() { return shell; },
+        values,
+        commandCalls: () => commandCalls,
+        delayNext: (id, ms) => delays.set(id, ms),
+        bumpSceneRevision() {
+          revisionNumber += 1;
+          sceneSource.setSnapshot(buildScene(), 'external-revision');
+        },
+        forceStaleRevision() { revisionNumber += 1; },
+        syncSceneRevision() { sceneSource.setSnapshot(buildScene(), 'sync-revision'); },
+        mount,
+        destroy() { shell?.destroy(); shell = null; },
+      };
+    }
+
+    const domainA = createDomain('shell-a', document.querySelector('#shell-a'));
+    const domainB = createDomain('shell-b', document.querySelector('#shell-b'));
+    globalThis.__engineeringSvgShellFixture = { domainA, domainB };
+  </script>
+</body>
+</html>

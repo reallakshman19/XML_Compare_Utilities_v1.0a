@@ -1,0 +1,45 @@
+schema: AgentClaim.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1031
+branch: agent/cii-writer2-hanger-partial-product
+base_main: 9f2f11ccf3b2f62cecaf75677a3dcbff39c85f6b
+issue: 1030
+claim_state: REVIEW_READY
+write_authority: true
+owned_paths:
+  - agents/MASTER_INDEX.md
+  - agents/PR1031_workreport.md
+  - agents/status/PR1031.yaml
+  - agents/claims/PR1031.yaml
+  - tabs/cii-workspace/cii-workspace-core.js
+  - tabs/cii-workspace/cii-workspace-writer2-composite-routing.js
+  - tabs/cii-workspace/cii-workspace-writer2-product-validation.js
+  - tests/cii-workspace-writer2-composite-product-routing.test.js
+  - tests/cii-workspace-writer2-hanger-partial-product.test.js
+  - tests/cii-workspace-writer2-hanger-partial-product-trifamily.test.js
+authority_domains:
+  - WRITER2_PRODUCT_PARTIAL_HANGER_READINESS
+  - WRITER2_PRODUCT_HANGER_TRANSACTION_CLASSIFICATION
+  - WRITER2_PRODUCT_VALIDATOR_DISPATCH
+  - WRITER2_PRODUCT_PARTIAL_HANGER_QUALIFICATION
+  - WRITER2_PRODUCT_DELETE_ALL_NONREGRESSION
+  - REAL_H_GT_1_PRODUCT_EVIDENCE_CLASSIFICATION
+excluded_domains:
+  - HANGER_PHYSICAL_WRITER_IMPLEMENTATION
+  - HANGER_COMPOSITE_WRITER_IMPLEMENTATION
+  - HANGER_CREATE
+  - HANGER_VALUE_EDITING
+  - SIF_CREATE
+  - WRITER3
+  - PARSER_CONVERTER_CHANGES
+  - WORKFLOW_PACKAGE_CHANGES
+negative_assurance:
+  - low-level Writer2 mutation remains the merged PR1029 one-TARGET0 composite
+  - Writer1B remains the product default
+  - Writer2 remains explicit-only
+  - no synthetic H>1 fixture may be represented as real/native authority
+  - real repository H>1 source remains NOT_AVAILABLE
+  - real H>1 product roundtrip remains NOT_RUN_NO_REAL_SOURCE
+  - no unexecuted test may be represented as PASS
+merge_authority: OWNER_ONLY
+merge_authorized: false

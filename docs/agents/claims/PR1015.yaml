@@ -1,0 +1,24 @@
+schema: engineering-pr-claims/v1
+pr: 1015
+claims:
+  - id: QF-1015-001
+    claim: CONTROL payload row3 field5 is the V11 SIF block-count authority and is represented as a canonical right-aligned integer in the benchmark.
+    evidence: Benchmark/CIICompare/BM_CII_TARGET1.CII plus merged PR1014 custody.
+    disposition: CLOSED_SOURCE_INSPECTION
+  - id: QF-1015-002
+    claim: Physical SIF DELETE can preserve retained blocks without interpreting unresolved items 27..30 because retained 10-row blocks are copied byte-for-byte from the untouched TARGET.
+    disposition: CLOSED_BY_ORIGINAL_BYTE_COPY
+  - id: QF-1015-003
+    claim: SIF CREATE remains unauthorized.
+    blocker: WRITER_2_SIF_CREATE_PAYLOAD_SEMANTICS_UNQUALIFIED_ITEMS_27_30
+    disposition: OPEN_SEMANTIC_BLOCKER_FAIL_CLOSED
+  - id: QF-1015-004
+    claim: Variable-length SIF deletion requires complete expected-postimage validation rather than same-length changed-byte subset proof.
+    disposition: CLOSED_BY_INDEPENDENT_FULL_POSTIMAGE_VALIDATOR
+  - id: QF-1015-005
+    claim: Writer mutation and relocation ledgers are testimony and do not define authorization.
+    disposition: CLOSED_VALIDATOR_REBUILDS_PR1014_PLAN
+  - id: QF-1015-006
+    claim: Future NODENAME plus SIF Writer2 routing must not execute sequential variable-length writers.
+    risk: second-pass byte offsets would be derived from an intermediate postimage rather than the untouched TARGET.
+    disposition: NEXT_GATE_ONE_PREIMAGE_WRITER2_COMPOSITE

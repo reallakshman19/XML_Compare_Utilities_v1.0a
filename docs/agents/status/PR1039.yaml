@@ -1,0 +1,63 @@
+pr: 1039
+issue: 1038
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-cardinality-w29
+base_main: ff9d706796e42a43ebfb1c74696350e9b8cc695b
+report_basis_head: 6aa1f04ad24958ab64c069074343c7ccb54f3c28
+agent_state: REVIEW_READY_WITH_NOT_READY_ENGINEERING_VERDICT
+current_stage: W2_9_RESTRAINT_CARDINALITY_QUALIFICATION_COMPLETE_NOT_READY_RECONCILED
+handover_readiness: READY
+scope_authority: ISSUE_1038_QUALIFICATION_ONLY
+merge_authority: OWNER_ONLY
+merge_authorized: false
+final_verdict: NOT_READY_FOR_WRITER2_RESTRAINT_CARDINALITY_PLANNER
+physical_writer_authority: false
+composite_product_authority: false
+writer1b_free_slot_authority: PRESERVED
+restraint_cardinality_composite_blocker: PRESERVED
+
+qualified:
+  control_restraint_count_unit: PASS_OFFICIAL_HEXAGON_SOURCE
+  restraint_pointer_unit: PASS_VENDOR_NEUTRAL_DOCUMENTATION_PLUS_MERGED_CUSTODY
+  restraint_24_row_block_shape: PASS_VENDOR_NEUTRAL_DOCUMENTATION_PLUS_REAL_V11_SOURCE
+  v11_restraint_input_semantics: PASS_VENDOR_AUTHORED_EXACT_VERSION_MIRROR
+  v11_guid_software_assigned_display_only: PASS_VENDOR_AUTHORED_EXACT_VERSION_MIRROR
+  delete_compaction_relocation_arithmetic: PASS_DERIVED_FROM_DIRECT_FORMAT
+  real_v11_multiblock_sources: AVAILABLE
+
+blockers:
+  - RESTRAINT_GUID_SOFTWARE_ASSIGNED_CREATE_RULE_UNRESOLVED
+  - RESTRAINT_TYPE_DEPENDENT_CREATE_DEFAULTS_INCOMPLETE
+  - NEW_RESTRAINT_BLOCK_ALLOCATION_POLICY_NOT_VENDOR_QUALIFIED
+  - NATIVE_RESTRAINT_BLOCK_CREATE_TRANSITION_NOT_AVAILABLE
+  - SHARED_POINTER_ALIAS_SEMANTICS_NOT_SOURCE_QUALIFIED
+  - FULL_REPOSITORY_POINTER_ALIAS_CENSUS_NOT_EXECUTED
+
+source_availability:
+  real_v11_multiblock_source_7: AVAILABLE
+  real_v11_multiblock_source_132: AVAILABLE
+  real_v11_multiblock_source_135: AVAILABLE
+  native_block_create_transition: NOT_AVAILABLE
+  native_block_delete_compaction_transition: NOT_AVAILABLE
+
+runtime:
+  full_checkout_clone: NOT_RUN_ENVIRONMENT_DNS_GITHUB_UNRESOLVED
+  qualification_sentinel: NOT_RUN_ENVIRONMENT
+  exact_current_head_node: NOT_RUN_ENVIRONMENT
+  full_repository_test: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_APPLICABLE_NO_PRODUCTION_ROUTE_CHANGE
+
+changed_paths:
+  intended: 9
+  actual: 9
+  production: 0
+  unexplained: 0
+  observation: PASS_REMOTE_GITHUB_COMPARE_AT_REPORT_BASIS
+
+coordination:
+  classification: SAFE_WITH_SHARED_INDEX_RECONCILIATION
+  active_writer2_overlap: PR1033_QUALIFICATION_ONLY
+  shared_path: agents/MASTER_INDEX.md
+  production_authority_overlap: NONE
+
+next_action: SOURCE_ACQUISITION_OR_NARROW_DELETE_COMPACTION_SUCCESSOR_DO_NOT_START_GENERIC_W2_10

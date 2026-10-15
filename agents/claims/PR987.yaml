@@ -1,0 +1,76 @@
+schema: AgentClaim.v1
+pr_or_wip: PR987
+claim_state: HANDOVER_READY_SUCCESSOR_ALLOWED
+execution_mode: AUTO
+merge_authority: OWNER_GRANTED_IF_ALL_APPROVED_PHASES_COMPLETE_AND_QUALIFIED
+files:
+  exact:
+    - tabs/cii-workspace/cii-workspace-engineering-delta.js
+    - tabs/cii-workspace/cii-workspace-capabilities.js
+    - tabs/cii-workspace/cii-workspace-intake.js
+    - tabs/cii-workspace/cii-workspace-topology-adapter.js
+    - tabs/cii-workspace/cii-workspace-components.js
+    - tabs/cii-workspace/cii-workspace-core.js
+    - tabs/cii-workspace/cii-workspace-hanger.js
+    - Benchmark/CIICompare/CII_COMPARE_EXPECTED.json
+    - tests/cii-workspace-engineering-delta.test.js
+    - tests/cii-workspace-rigid-custody.test.js
+    - tests/cii-workspace-hanger-custody.test.js
+    - tests/cii-workspace-hanger-delta.test.js
+    - tests/cii-workspace-benchmark-end-to-end.test.js
+    - tests/cii-workspace-benchmark-qualification.test.js
+    - tests/cii-workspace-capabilities.test.js
+    - agents/PR987_workreport.md
+    - agents/status/PR987.yaml
+    - agents/claims/PR987.yaml
+  prefixes:
+    - tabs/cii-workspace/cii-workspace-auxiliary
+    - tests/cii-workspace-auxiliary
+authority_domains:
+  - CII_ELEMENT_AUX_POINTER_CUSTODY
+  - CII_RESTRAINT_SEMANTIC_EVIDENCE
+  - CII_RIGID_WEIGHT_CUSTODY
+  - CII_SIF_TEE_RAW_CUSTODY
+  - CII_HANGER_NODE_PRESENCE_CUSTODY
+  - CII_REGISTERED_DELTA_BASIS
+  - CII_BENCHMARK_QUALIFICATION
+claim_modes:
+  - EXCLUSIVE
+shared_read_authorities:
+  - parser/fixed-field.js
+  - tabs/cii-workspace/cii-workspace-nodename.js
+  - tabs/cii-workspace/cii-workspace-geometry.js
+  - tabs/cii-workspace/cii-workspace-transfer-plan.js
+  - Benchmark/CIICompare/BM_CII_SOURCE.CII
+  - Benchmark/CIICompare/BM_CII_TARGET1.CII
+  - Benchmark/CIICompare/BM_CII_TARGET2.CII
+  - Benchmark/CIICompare/Target1.txt
+forbidden_existing_file_edits:
+  - converters/**
+  - parser/sections/elements.js
+  - parser/sections/restraints.js
+  - tabs/cii-workspace/cii-workspace-candidates.js
+  - tabs/cii-workspace/cii-workspace-evidence.js
+  - tabs/cii-workspace/cii-workspace-match-methods.js
+  - tabs/cii-workspace/cii-workspace-propagation.js
+  - tabs/cii-workspace/cii-workspace-transfer*.js
+implementation_claims:
+  - RESTRANT pointers are 1-based 24-row block indices
+  - SIF&TEES pointers are 1-based 10-row block indices
+  - RIGID pointers are 1-based single-row record indices
+  - malformed RIGID custody cannot enter topology/M2 identity
+  - malformed restraint/SIF custody is withheld from engineering deltas
+  - SIF/TEE property evidence is excluded from M2 identity tokens
+  - hanger node presence/count is qualified from CONTROL plus dual-layout validated IHGRNODE
+  - hanger HGRDAT/TAG/GUID semantics remain intentionally unnormalized
+  - node205 hanger deletion is downstream property evidence and cannot rewrite correspondence identity
+  - benchmark weight note at 113-116 is quarantined because pointer-resolved weight is 111.2 in all three models
+validation_state: SOURCE_QUALIFIED_FOCUSED_RUNTIME_PARTIAL_FULL_BENCHMARK_NOT_RUN
+remaining_validation_gates:
+  - auxiliary pointer focused runtime suite
+  - inherited suite after authority migrations
+  - real SOURCE/TARGET1/TARGET2 benchmark qualification test
+  - full frozen-policy SOURCE->TARGET1 and TARGET2 preview qualification
+known_limits:
+  - full HGRDAT hanger attributes remain unresolved
+  - target mutation remains blocked

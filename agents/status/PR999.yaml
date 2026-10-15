@@ -1,0 +1,37 @@
+schema: AgentStatus.v1
+pr: 999
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-review-transfer-clarity
+base: main
+main_at_grounding: 7d63abe83a2fe4307ea518986683d823926d281c
+predecessors:
+  pr997: a2b8b055e858d0cc324257de1c51a21e75ca5205
+  pr998: 7d63abe83a2fe4307ea518986683d823926d281c
+state: DRAFT_IMPLEMENTATION_COMPLETE_READY_FOR_OWNER_REVIEW
+criticality: ENGINEERING_CRITICAL_UI_PRESENTATION
+execution_mode: MANUAL_CONTINUATION
+merge_authority: OWNER_ONLY
+handover_readiness: READY_FOR_REVIEW
+coordination: SAFE_SUCCESSOR_TO_MERGED_PR998
+scope: COMPARE_REVIEW_DELTA_TRANSFER_PRESENTATION_ONLY
+focused_presentation_validation: PASS_LOCAL_EXECUTION_EXACT_BRANCH_BLOBS
+module_blob: 525798bfda60c6c2ab85719d507524e7b679ac16
+test_blob: 5c95a0e18a2a90d3c16801b90ce197dc3282d6b3
+integration_source_review: PASS_SOURCE_INSPECTION
+final_ledger_basis_head: 0a728f26f536dc1d50c72de3e2b3f3681223aeb0
+final_ledger: 7_EXPECTED_7_ACTUAL_0_UNEXPLAINED
+base_drift: 0_BEHIND_MAIN
+pr_mergeability: MERGEABLE_AT_OBSERVED_HEAD
+reviews: NONE_AT_OBSERVED_HEAD
+review_threads: NONE_AT_OBSERVED_HEAD
+status_checks: NONE_AT_OBSERVED_HEAD
+pr_workflow_runs: NONE_AT_OBSERVED_HEAD
+shell_lifecycle: NOT_RUN_ENVIRONMENT
+source3_target3_browser: NOT_RUN_ENVIRONMENT
+browser_chromium: NOT_RUN_ENVIRONMENT
+full_repository_suite: NOT_RUN_ENVIRONMENT
+writer_authority_changed: false
+transfer_policy_changed: false
+engineering_delta_authority_changed: false
+apply_exclude_scope_authority: OUT_OF_SCOPE
+next_action: owner review / merge decision only; if merged, next separate PR may implement explicit APPLY/EXCLUDE transfer-scope custody

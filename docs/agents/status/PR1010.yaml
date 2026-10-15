@@ -1,0 +1,66 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1010
+mission: one-preimage Writer 1A plus Writer 1B plus Writer 1C composite transaction
+branch: agent/cii-writer-composite-1a-1b-1c
+base: main
+base_head: d63e8c59a13013c9367a3c99f3e1293e1ca76203
+criticality: ENGINEERING_CRITICAL
+agent_state: ACTIVE
+handover_readiness: READY
+merge_authority: OWNER_ONLY
+ready_for_review: false
+ready_for_review_reason: latest independent-union validator and full repository/browser qualification remain unexecuted in an exact checkout
+implemented:
+  transaction_preimage: ONE_UNTOUCHED_TARGET
+  lower_claim_generation: WRITER1B_SUPERSET_DRY_RUN_FROM_ORIGINAL_TEXT
+  writer1c_claim_generation: ORIGINAL_BYTE_CUSTODIED_TARGET
+  lower_policy_authority:
+    writer1a: CII_WRITER_1A_PREFIX_REQUIRED
+    writer1b: CII_WRITER_1B_PREFIX_REQUIRED
+    unqualified: BLOCK
+  lower_original_preimage_check: EXACT_BEFORE_FIELD_BYTES
+  family_ledger:
+    - WRITER_1A
+    - WRITER_1B
+    - WRITER_1C
+  same_family_identical_same_span: CANONICALIZE
+  cross_family_same_span: BLOCK_ALWAYS
+  partial_span_overlap: BLOCK_ALWAYS
+  final_patch: ONE_ORIGINAL_BYTE_VECTOR
+  component_validation:
+    lower: EXISTING_WRITER1B_ROUND_TRIP_VALIDATOR
+    writer1c: EXISTING_WRITER1C_ROUND_TRIP_VALIDATOR
+  final_authorization_source: INDEPENDENT_COMPONENT_UNION_RECONSTRUCTION
+  writer_report_role: TESTIMONY_MUST_MATCH_INDEPENDENT_UNION
+  final_validator: D_ACTUAL_SUBSET_INDEPENDENT_AUTHORIZED_UNION
+validation:
+  base_grounding: PASS_GIT_COMPARE
+  branch_scope: PASS_GIT_COMPARE
+  source_architecture_audit: PASS_SOURCE_INSPECTION
+  isolated_composite_logic_pre_final_refinement: PASS_ISOLATED_COMPOSITE_LOGIC_HARNESS_SUPERSEDED
+  isolated_union_validator_pre_qf006: PASS_ISOLATED_COMPOSITE_LOGIC_HARNESS_SUPERSEDED
+  composite_plan_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  mixed_writer1b_writer1c_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  three_family_writer1a_writer1b_writer1c_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  independent_composite_union_validator_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_writer_tests: NOT_RUN_ENVIRONMENT
+  full_npm_test: NOT_RUN_ENVIRONMENT
+  browser: NOT_RUN_ENVIRONMENT
+not_run_reason: direct git checkout fails because github.com DNS resolution is unavailable in the execution container
+scope_audit:
+  converter_core_files_changed: 0
+  parser_fixed_field_files_changed: 0
+  benchmark_cii_files_changed: 0
+  workflow_files_changed: 0
+  writer1a_implementation_files_changed: 0
+  writer1b_implementation_files_changed: 0
+explicit_exclusions:
+  - new_engineering_field_semantics
+  - writer2_record_or_pointer_features
+  - sif_create_delete_reindex_control_cardinality
+  - cross_family_same_span_canonicalization
+  - sequential_writer1b_output_to_writer1c
+qualification_findings:
+  qf006: FIXED_FINAL_VALIDATOR_NO_LONGER_USES_COMPOSITE_WRITER_LEDGER_AS_S_AUTH
+next_action: execute latest authority-aware branch tests in exact checkout; keep PR1010 draft until qualified; merge only with owner authorization

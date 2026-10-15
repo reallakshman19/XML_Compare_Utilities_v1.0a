@@ -1,0 +1,7 @@
+schema: AgentClaim.v1
+pr_or_wip: WIP-CII993-MULTIBASE
+claim_state: SUPERSEDED_BY_PR994
+superseded_by: PR994
+active_authority: false
+historical_note: temporary pre-PR claim retained only because connector deletion was unavailable; agents/claims/PR994.yaml is the sole active scope authority.
+merge_disposition: NOT_APPLICABLE_HISTORICAL

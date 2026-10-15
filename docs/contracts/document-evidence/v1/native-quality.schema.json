@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.xml-compare-utilities.local/document-evidence/v1/native-quality.schema.json",
+  "title": "NativeTextQuality.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "nativeQualityHash",
+    "status"
+  ],
+  "properties": {
+    "schema": {
+      "const": "NativeTextQuality.v1"
+    },
+    "nativeQualityHash": {
+      "$ref": "#/$defs/sha256"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "strong",
+        "degraded",
+        "mapping_corrupt",
+        "unknown"
+      ]
+    },
+    "toUnicodeStatus": {
+      "type": "string",
+      "enum": [
+        "present",
+        "missing",
+        "corrupt",
+        "unknown"
+      ]
+    },
+    "validUnicodeFraction": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "replacementCharacterCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "privateUseCharacterCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "glyphCharacterConsistency": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "diagnosticCodes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "assessmentProfileHash": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "strong",
+              "mapping_corrupt"
+            ]
+          }
+        }
+      },
+      "then": {
+        "anyOf": [
+          {
+            "required": [
+              "toUnicodeStatus"
+            ]
+          },
+          {
+            "required": [
+              "validUnicodeFraction"
+            ]
+          },
+          {
+            "required": [
+              "replacementCharacterCount"
+            ]
+          },
+          {
+            "required": [
+              "privateUseCharacterCount"
+            ]
+          },
+          {
+            "required": [
+              "glyphCharacterConsistency"
+            ]
+          },
+          {
+            "required": [
+              "diagnosticCodes"
+            ],
+            "properties": {
+              "diagnosticCodes": {
+                "minItems": 1
+              }
+            }
+          }
+        ],
+        "required": [
+          "assessmentProfileHash"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

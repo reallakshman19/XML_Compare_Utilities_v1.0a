@@ -1,0 +1,28 @@
+Anchor 
+BM_CII_Source->BM_CII_Target1
+
+Base Anchor
+10->20000
+
+
+App should detect
+Source 70 is Target 20070, sif & tee changes [HIGH CONFIDENCE- SINCE: SIZE,WALLTHICKNESS SAME, COOR DELTA=0]
+Source 35 is Target 20035, To Name changes [HIGH CONFIDENCE- SINCE: SIZE,WALLTHICKNESS SAME, COOR DELTA=0]
+
+Source element: 50-70 is 20050-20070, size changed from 60.3 to 114.3 [MED CONFIDENCE, since size changed]
+same with 250-270 i.e, target 20250-20270  [MED CONFIDENCE, since size changed]
+
+30 is 20130 , restraint type changed, friction changed  [HIGH CONFIDENCE- SINCE: SIZE,WALLTHICKNESS SAME, COOR DELTA=0]
+
+
+
+205 is 20205, restraint type changed, hanger deleted, location also changed [MED CONFIDENCE, since location change>25mm]
+
+113-116 is 20113-20116 weight changed [HIGH CONFIDENCE- SINCE: SIZE,WALLTHICKNESS SAME, COOR DELTA=0]
+
+
+Once comparison is robust, Then transfer logic to be written
+Method A:
+Comparison shall be based on Coordinate (+-100, configurable, weight:50)/pipe size (+-10%, configurable, weight:30)/wallthickness(+-10%, configurable, weight:30)
+Method B:
+Comparison shall be based on Gang of pipe (+-100, configurable, weight:50)/pipe size (+-10%, configurable, weight:30)/wallthickness(+-10%, configurable, weight:30) [Gang of pipe: means Topo based inclusive of atleast 

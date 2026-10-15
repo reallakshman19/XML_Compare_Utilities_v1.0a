@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sequential Draft Edit 3D Durable Package Runtime</title>
+<script type="importmap">{"imports":{"three":"https://esm.sh/three@0.160.0/build/three.module.js"}}</script>
+<link rel="stylesheet" href="../../tabs/sequential-sketcher/sequential-sketcher.css">
+<link rel="stylesheet" href="../../tabs/sequential-sketcher/continuity/sequential-continuity.css">
+<style>body{margin:0;background:#07101f}.psmap-card{margin:20px;padding:16px}[data-ssk-draft-edit-3d-host]{min-height:520px}</style>
+</head><body><div id="tiles"></div>
+<script type="module">
+import { installSequentialSketcherTile } from '../../tabs/sequential-sketcher/sequential-sketcher-tab.js';
+import { getSequentialScopedEdit3dController } from '../../tabs/sequential-sketcher/scoped-edit/sequential-scoped-edit-3d-controller.js';
+
+const branchId = '/P1/UI/GEOMETRY';
+const records = [{ type: 'BRANCH', name: branchId,
+  attributes: { NAME: branchId, HPOS: { x: 0, y: 0, z: 0 } },
+  children: [{ type: 'PIPE', name: 'P1',
+    attributes: { NAME: 'P1', APOS: { x: 0, y: 0, z: 0 }, LPOS: { x: 1000, y: 0, z: 0 } } }] }];
+const failures = [], toasts = [];
+const disposeTile = installSequentialSketcherTile(document.querySelector('#tiles'), {
+  onSequentialScopedEdit3dFailure(detail) { failures.push(detail); },
+  showToast(message, state) { toasts.push({ message, state }); },
+});
+function root() { return document.querySelector('.ssk-modal'); }
+function controller() { return getSequentialScopedEdit3dController(root()); }
+function click(selector) { const node = root().querySelector(selector); if (!node) throw new Error(`Missing ${selector}`); node.click(); return node; }
+function open() { document.querySelector('[data-ssk-open]').click(); return root(); }
+function inspect() { root().querySelector('[data-ssk-source]').value = JSON.stringify(records); click('[data-ssk-action="inspect"]'); }
+function openBranch() { const select = root().querySelector('[data-ssk-branch]'); select.value = branchId; select.dispatchEvent(new Event('change', { bubbles: true })); }
+function run() { click('[data-ssk-action="run"]'); }
+function draft3d() { click('[data-ssk-draft-edit-3d]'); }
+function tick(delay = 0) { return new Promise((resolve) => setTimeout(resolve, delay)); }
+async function activate3d() { inspect(); openBranch(); run(); draft3d(); await tick(); }
+function state() {
+  const current = controller()?.getState() || null;
+  return {
+    controller: current,
+    canvasCount: root()?.querySelectorAll('[data-ssk-draft-edit-3d-canvas] canvas').length || 0,
+    geometryBranches: current?.geometryEditBoundary?.branches || [],
+    packageSummary: root()?.querySelector('[data-ssk-workspace-package-summary]')?.textContent || '',
+    status: root()?.querySelector('[data-ssk-preview-status]')?.textContent || '',
+    failures: [...failures], toasts: [...toasts],
+  };
+}
+function close() { click('[data-ssk-action="close"]'); }
+
+globalThis.__ssk3dPackage = { branchId, records, failures, toasts, open, inspect, openBranch,
+  run, draft3d, activate3d, tick, state, root, controller, close, destroyTile: disposeTile };
+</script></body></html>

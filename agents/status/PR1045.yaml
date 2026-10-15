@@ -1,0 +1,92 @@
+pr: 1045
+issue: 1044
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-composite-w212
+base_main: b2ba46cb8008c8d59a40fe8b3260ead122e063d0
+pre_takeover_head: f894154721d95a0351ba97165b56e6e323422216
+report_basis_head: 8abae645e7aa1f528f1dc60c1fecc9e2fc8967f9
+agent_state: SOURCE_IMPLEMENTATION_COMPLIANCE_RECOVERED_EXECUTION_PENDING
+current_stage: W2_12_RESTRAINT_ONE_TARGET0_COMPOSITE_ADOPTION
+handover_readiness: READY
+execution_mode: MANUAL_OWNER_PROCEED
+takeover_authority: WRITE_ALLOWED
+recovery_state: CONTINUE
+merge_authority: OWNER_ONLY
+merge_authorized: false
+ready_for_review: false
+pr_state: DRAFT
+
+predecessor:
+  pr: 1043
+  phase: W2_11_RESTRAINT_DELETE_PHYSICAL
+  merge_sha: b2ba46cb8008c8d59a40fe8b3260ead122e063d0
+
+inherited_authority_correction:
+  control_row1_field4: NONAM_PRESERVE
+  control_row2_field4: RESTRAINT_BLOCK_COUNT_I13
+  regression_cases: R02_R09
+
+production_authority:
+  restraint_component_physical: inherited_qualified
+  restraint_composite_source_implemented: true
+  restraint_composite_runtime_qualified: false
+  product_core: false
+  generic_restraint_create: false
+
+new_source_authority:
+  - CII_WRITER_2_RESTRAINT_ONE_TARGET0_COMPOSITE
+  - INDEPENDENT_COMPLETE_POSTIMAGE_RESTRAINT_COMPOSITE_VALIDATION
+
+architecture:
+  identical_target0_for_all_components: true
+  global_original_coordinate_arbitration: true
+  one_final_splice: true
+  validator_imports_writer_module: false
+  validator_imports_writer_support_module: false
+  complete_postimage_primary_oracle: true
+
+compliance_recovery:
+  issue: NEW_JS_FILES_OVER_300_LINES
+  state: RESOLVED_SOURCE
+  writer_lines: 143
+  writer_support_lines: 227
+  validator_lines: 213
+  validator_support_lines: 203
+  named_exports_only_guard: AUTHORED
+  validator_independence_guard: AUTHORED
+  exact_blob_verified_local_syntax: PASS
+
+qualification_source:
+  positive_R01_R09: AUTHORED
+  partial_hanger_R05: AUTHORED_QUALIFIED_SYNCHRONIZER_SHAPE
+  falsifiers_R10_R22: AUTHORED
+
+qualification:
+  source_grounding: PASS
+  architecture_source_audit: PASS
+  protected_path_audit: PASS
+  exact_published_blob_syntax: PASS
+  line_limit_static: PASS_SOURCE_AND_EXACT_BLOB
+  focused_native: NOT_RUN_ENVIRONMENT
+  repository_npm: NOT_RUN_ENVIRONMENT
+  pr_workflow_runs: NONE_OBSERVED
+  browser_product: NOT_APPLICABLE_W2_12
+
+negative_assurance:
+  writer1b_changed: false
+  product_core_changed: false
+  composite_routing_changed: false
+  product_validator_changed: false
+  ui_browser_changed: false
+  restraint_create_enabled: false
+  sif_create_enabled: false
+  hanger_create_enabled: false
+  writer3_changed: false
+  workflow_package_parser_converter_changed: false
+
+changed_file_count: 11
+unexplained_path_count: 0
+master_index_mutated: false
+
+next_gate: execute R01-R22 focused suites on an exact branch checkout or exact complete sparse mirror; retain draft and NOT_RUN until observed
+next_phase_after_separate_merge_authorization: W2_13_PRODUCT_CORE_ROUTING_AND_REAL_CII_QUALIFICATION

@@ -1,0 +1,13 @@
+{
+  "profileId": "ps-mapping-fixture",
+  "levelDefinitions": [
+    {
+      "levelId": "CategorizedTableXml",
+      "levelType": "container",
+      "creationMode": "static",
+      "key": "ROOT",
+      "documentRoot": true,
+      "children": []
+    }
+  ]
+}

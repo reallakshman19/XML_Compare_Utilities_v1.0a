@@ -1,0 +1,16 @@
+family,position_or_unit,format,meaning,source_authority,create_writable,delete_relocation_authority,blocker_or_note
+CONTROL,restraint auxiliary count,row2 item4 / I13,"number of restraint auxiliary data blocks",OFFICIAL_HEXAGON_NEUTRAL_CONTROL,NO,YES,"cardinality count; not occupied-slot count"
+ELEMENT,IEL restraint pointer,item4 / I13,"pointer to restraint auxiliary field; zero means none",VENDOR_NEUTRAL_FORMAT_PLUS_MERGED_PHYSICAL_CUSTODY,NO,YES,"1-based block index in current Writer route"
+RESTRANT,block shape,24 rows,"six possible restraints x four rows each",VENDOR_NEUTRAL_FORMAT_PLUS_REAL_V11_CUSTODY,NO,YES,"edition guard required"
+RESTRANT,slot numeric row1 items1-6,2X 6G13.6,"node; type; stiffness; gap; friction coefficient; connecting node",VENDOR_NEUTRAL_FORMAT,CONDITIONAL_EXPLICIT_INPUT_ONLY,OPAQUE_RETAIN_OR_DELETE,"generic omission/default semantics incomplete"
+RESTRANT,slot numeric row2 items7-9,2X 6G13.6,"X/Y/Z direction cosines",VENDOR_NEUTRAL_FORMAT,CONDITIONAL_EXPLICIT_INPUT_ONLY,OPAQUE_RETAIN_OR_DELETE,"type-dependent/default behavior incomplete"
+RESTRANT,Support TAG,"7X I5 1X A100",support identifier/name,V11_INPUT_PLUS_VENDOR_NEUTRAL_FORMAT,YES_IF_EXPLICIT,OPAQUE_RETAIN_OR_DELETE,"blank representable with length 0"
+RESTRANT,Support GUID,"7X I5 1X A100",software-assigned restraint GUID,V11_INPUT_PLUS_VENDOR_NEUTRAL_FORMAT,NO,OPAQUE_RETAIN_OR_DELETE,RESTRAINT_GUID_SOFTWARE_ASSIGNED_CREATE_RULE_UNRESOLVED
+RESTRANT,empty slot numeric rows,2 numeric rows,"unoccupied slot representation observed as zero/template numeric rows",REAL_V11_CII_PLUS_REPOSITORY_CONVERTER,NO,OPAQUE_RETAIN,"observation/repository policy does not alone authorize new-block synthesis"
+RESTRANT,empty slot TAG,7X I5 1X A100,"blank string length 0",VENDOR_NEUTRAL_FORMAT_PLUS_REAL_V11_CUSTODY,NO,OPAQUE_RETAIN,"structural representation qualified; CREATE context still blocked by whole-block contract"
+RESTRANT,empty slot GUID,7X I5 1X A100,"blank string length 0",VENDOR_NEUTRAL_FORMAT_PLUS_REAL_V11_CUSTODY,NO,OPAQUE_RETAIN,"blank representation does not prove software GUID assignment on import"
+RESTRANT,new block index,1-based integer,"allocation position for newly synthesized block",REPOSITORY_CONVERTER_POLICY_ONLY,NO,NOT_APPLICABLE,NEW_RESTRAINT_BLOCK_ALLOCATION_POLICY_NOT_VENDOR_QUALIFIED
+RESTRANT,retained old block index,1-based integer,"identity of retained block before compaction",DIRECT_FORMAT_DERIVATION,NOT_APPLICABLE,YES,"new=p-count(deleted< p)"
+RESTRANT,deleted block index,1-based integer,"removed complete block",DIRECT_FORMAT_DERIVATION,NOT_APPLICABLE,YES,"oldToNew=0; only under separately authorized whole-block deletion"
+RESTRANT,shared pointer aliases,one or more ELEMENT IEL pointers,"multiple ELEMENT owners referring to same auxiliary block",UNRESOLVED_SEMANTIC_OWNERSHIP,NO,BLOCK_UNLESS_QUALIFIED,SHARED_POINTER_ALIAS_SEMANTICS_NOT_SOURCE_QUALIFIED
+RESTRANT,edition/layout guard,VERSION plus physical shape,"V11/2019-compatible six-slot four-row block class",V11_REAL_SOURCE_PLUS_VENDOR_FORMAT_CORROBORATION,REQUIRED,REQUIRED,"older four-restraint formats are outside current authority"

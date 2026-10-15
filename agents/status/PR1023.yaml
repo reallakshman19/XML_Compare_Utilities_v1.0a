@@ -1,0 +1,37 @@
+pr: 1023
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-trifamily-real-benchmark-qualification
+base: dcb9c4333ae86fb7d2dc15426db10f0e4cbdae46
+stage: REAL_TRIFAMILY_BENCHMARK_QUALIFICATION_AUTHORED_NOT_EXECUTED
+handover_readiness: READY
+merge_authority: OWNER_ONLY
+scope:
+  - QUALIFICATION_ONLY
+  - BM_CII_SOURCE_REAL_V11_PREIMAGE
+  - WRITER2_NODENAME_CREATE
+  - WRITER2_V11_SIF_DELETE
+  - WRITER2_HANGER_DELETE_ALL
+  - CANONICAL_BOUND_SCOPE
+  - PUBLIC_PRODUCT_APPLY
+  - DIRECT_TRIFAMILY_BYTE_PARITY
+  - INDEPENDENT_COMPLETE_POSTIMAGE_VALIDATION
+  - RECOVERY_INDEX_CORRECTION
+production_changes: 0
+stable_blockers:
+  - WRITER_2_HANGER_PARTIAL_MULTI_RECORD_TAIL_ORDER_UNQUALIFIED
+  - WRITER_2_HANGER_CREATE_PAYLOAD_SEMANTICS_NOT_QUALIFIED
+  - WRITER_2_SIF_CREATE_PAYLOAD_SEMANTICS_UNQUALIFIED_ITEMS_27_30
+validation:
+  base_grounding: PASS_GIT_BRANCH
+  benchmark_control_counts: PASS_SOURCE_INSPECTION
+  benchmark_nodename_rows: PASS_SOURCE_INSPECTION
+  benchmark_hanger_205_basis: PASS_INHERITED_SOURCE_EVIDENCE
+  qualification_source_audit: PASS_SOURCE_INSPECTION
+  exact_checkout: BLOCKED_ENVIRONMENT_GITHUB_DNS
+  focused_real_trifamily_regression: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_pr1022_product_regression: NOT_RUN_ENVIRONMENT
+  inherited_pr1021_trifamily_regression: NOT_RUN_ENVIRONMENT
+  inherited_writer2_components: NOT_RUN_ENVIRONMENT
+  full_repository: NOT_RUN_ENVIRONMENT
+  browser: NOT_RUN_ENVIRONMENT
+next_action: reconcile exact branch scope and PR state; execute focused qualification when exact checkout is available; do not widen Writer2 authority in this PR

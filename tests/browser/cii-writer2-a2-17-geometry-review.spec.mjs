@@ -1,0 +1,76 @@
+import {test,expect} from '@playwright/test';
+import {fileURLToPath} from 'node:url';
+import {readFile} from 'node:fs/promises';
+
+const path=n=>fileURLToPath(new URL('../../Benchmark/'+n,import.meta.url));
+test('A2-17 original CII BEND and PIPE 100/200mm review is observable, non-writing and exportable',async({page})=>{
+ await page.goto('/tests/browser/cii-writer2-bridge-fixture.html');
+ await page.evaluate(async()=>{
+  localStorage.clear();
+  const {installCiiWorkspaceTile}=await import('/tabs/cii-workspace/cii-workspace-tab.js');
+  const host=document.createElement('section');host.setAttribute('data-ciiw-a217','1');
+  document.body.append(host);installCiiWorkspaceTile(host);
+ });
+ await page.locator('[data-ciiw-open-writer2]').click();
+ await page.locator('[data-ciiw-source]').setInputFiles([path('S1.CII'),path('S2.CII'),path('S3.CII')]);
+ await page.locator('[data-ciiw-target]').setInputFiles(path('T.CII'));
+ await page.locator('[data-ciiw-inspect]').click();
+ const panel=page.locator('[data-ciiw-geometry-review="1"]');
+ await expect(panel).toBeVisible({timeout:120000});
+ await expect(panel).toContainText('100/200 mm review-only adjustments');
+ await expect(panel).toContainText('Nothing here changes correspondence');
+ await expect(page.locator('[data-ciiw-ms-apply]')).toHaveCount(0);
+ await panel.locator('[data-ciiw-geometry-case]').selectOption('S2_BEND_200');
+ await expect(panel.locator('[data-ciiw-geometry-field="sourceNodeId"]')).toHaveValue('630');
+ await expect(panel.locator('[data-ciiw-geometry-field="targetNodeId"]')).toHaveValue('10470');
+ await expect(panel.locator('[data-ciiw-geometry-field="sourceElementLengthAdjustmentMm"]')).toHaveValue('-200');
+ await panel.locator('[data-ciiw-geometry-preview]').click();
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toBeVisible();
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toContainText('774.55');
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toContainText('574.55');
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toContainText('REVIEW ONLY');
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toContainText('BEND');
+ const first=await panel.locator('[data-ciiw-geometry-result="1"]').textContent();
+ expect(first).toContain('0');
+ await panel.locator('[data-ciiw-geometry-preset-mm="-100"]').click();
+ await expect(panel.locator('[data-ciiw-geometry-field="dyMm"]')).toHaveValue('-100');
+ await panel.locator('[data-ciiw-geometry-preview]').click();
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toBeVisible();
+ const [download]=await Promise.all([
+  page.waitForEvent('download'),
+  panel.locator('[data-ciiw-geometry-download]').click(),
+ ]);
+ expect(download.suggestedFilename()).toBe('cii-geometry-discrepancy-review-source-bound.json');
+ const file=await download.path();
+ expect(file).toBeTruthy();
+ const parsed=JSON.parse(await readFile(file,'utf8'));
+ expect(parsed.schema).toBe('CiiGeometryDiscrepancyReview.v1');
+ expect(parsed.provenance.sourceId).toBe('S2');
+ expect(parsed.provenance.sourceOriginalSha256).toMatch(/^[0-9a-f]{64}$/);
+ expect(parsed.provenance.targetOriginalSha256).toMatch(/^[0-9a-f]{64}$/);
+ expect(parsed.originalPhysicalPair.recordedTargetMinusSourceLengthMm).toBe(-200);
+ expect(parsed.proposedAdjustment.sourceTranslationMm).toEqual([0,-100,0]);
+ expect(parsed.proposedAdjustment.hypotheticalElementLengthResidualMm).toBe(0);
+ expect(parsed.physicalIdentityCertified).toBe(false);
+ expect(parsed.engineeringReady).toBe(false);
+ expect(parsed.writerReady).toBe(false);
+ expect(parsed.correspondenceCertificates).toEqual([]);
+ expect(parsed.transferPlan).toBeNull();
+ expect(parsed.writeScope).toBeNull();
+ await panel.locator('[data-ciiw-geometry-case]').selectOption('S2_PIPE_1500');
+ await panel.locator('[data-ciiw-geometry-preview]').click();
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toContainText('6500');
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toContainText('8000');
+ await panel.locator('[data-ciiw-geometry-case]').selectOption('S2_TERMINAL');
+ await panel.locator('[data-ciiw-geometry-preview]').click();
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toContainText('40');
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toContainText('40030');
+ await expect(panel.locator('[data-ciiw-geometry-result="1"]')).toContainText('NODE DEGREE MISMATCH');
+ await panel.locator('[data-ciiw-geometry-field="sourceNodeId"]').fill('99999999');
+ await panel.locator('[data-ciiw-geometry-preview]').click();
+ await expect(panel.locator('[data-ciiw-geometry-status]')).toContainText('NODE_NOT_IN_ORIGINAL_SOURCE');
+ await expect(panel.locator('[data-ciiw-geometry-download]')).toHaveCount(0);
+ expect(await page.locator('[data-ciiw-ms-apply]').count()).toBe(0);
+ await page.locator('[data-ciiw-target]').setInputFiles([]);
+ await expect(page.locator('[data-ciiw-geometry-review="1"]')).toHaveCount(0);
+});

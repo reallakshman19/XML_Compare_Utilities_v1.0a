@@ -1,0 +1,122 @@
+// Renders a simple plan-view SVG ("key plan") showing how multi-sheet Table 1
+// geometry was stitched together: each sheet's polyline in its own color,
+// match points highlighted where sheets pivot, and the derived rotation
+// Angle labeled at each transition. Pure string building — no DOM dependency,
+// so this can be unit-tested/inspected outside the browser too.
+
+const SHEET_COLORS = ['#38bdf8', '#facc15', '#34d399', '#f472b6', '#a78bfa', '#fb923c', '#22d3ee', '#f87171'];
+const VB_W = 760;
+const VB_H = 420;
+const PADDING = 44;
+
+function esc(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+}
+
+function buildScaler(points) {
+  const xs = points.map((p) => p.globalX);
+  const ys = points.map((p) => p.globalY);
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+  const spanX = maxX - minX || 1;
+  const spanY = maxY - minY || 1;
+  const availW = VB_W - PADDING * 2;
+  const availH = VB_H - PADDING * 2;
+  const scale = Math.min(availW / spanX, availH / spanY);
+  const scaledSpanX = spanX * scale;
+  const scaledSpanY = spanY * scale;
+  const offsetX = PADDING + (availW - scaledSpanX) / 2;
+  const offsetY = PADDING + (availH - scaledSpanY) / 2;
+  return (x, y) => ({
+    sx: offsetX + (x - minX) * scale,
+    sy: VB_H - offsetY - (y - minY) * scale,
+  });
+}
+
+function formatAngle(angleDeg) {
+  return `${Number(angleDeg).toFixed(2)}°`;
+}
+
+// Compute actual bearing-change angle between the last segment of the
+// previous sheet and the first segment of the current sheet (global frame).
+function computeJunctionAngle(points, sheet, prevSheet) {
+  if (!prevSheet || prevSheet.endIndex < prevSheet.startIndex + 1) return null;
+  if (sheet.endIndex < sheet.startIndex + 1) return null;
+  const pA = points[prevSheet.endIndex - 1];
+  const pB = points[prevSheet.endIndex];
+  const pC = points[sheet.startIndex];
+  const pD = points[sheet.startIndex + 1];
+  if (!pA || !pB || !pC || !pD) return null;
+  const bearingPrev = Math.atan2(pB.globalY - pA.globalY, pB.globalX - pA.globalX) * 180 / Math.PI;
+  const bearingNext = Math.atan2(pD.globalY - pC.globalY, pD.globalX - pC.globalX) * 180 / Math.PI;
+  let delta = bearingNext - bearingPrev;
+  // Normalise to (-180, 180]
+  while (delta > 180) delta -= 360;
+  while (delta <= -180) delta += 360;
+  return delta;
+}
+
+// points: the flat chained point list (each with globalX/globalY, label).
+// sheets: groupPointsIntoSheets(points) output — [{sheetIndex, angleDeg, startIndex, endIndex, meta}].
+// Returns { svgHtml, legendHtml } — two separate strings so the caller can
+// inject them into separate DOM containers.
+export function renderKeyPlanSvg(points, sheets) {
+  if (!points.length) {
+    return {
+      svgHtml: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" style="width:100%;aspect-ratio:760/420;background:#0b1220;border-radius:8px;"></svg>',
+      legendHtml: '',
+    };
+  }
+  const toScreen = buildScaler(points);
+  const parts = [];
+
+  sheets.forEach((sheet, si) => {
+    const color = SHEET_COLORS[sheet.sheetIndex % SHEET_COLORS.length];
+    const sheetPoints = points.slice(sheet.startIndex, sheet.endIndex + 1);
+    const path = sheetPoints.map((p) => toScreen(p.globalX, p.globalY)).map((s) => `${s.sx.toFixed(1)},${s.sy.toFixed(1)}`).join(' ');
+    parts.push(`<polyline points="${path}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`);
+    sheetPoints.forEach((p, i) => {
+      const { sx, sy } = toScreen(p.globalX, p.globalY);
+      const isBoundary = i === 0 || i === sheetPoints.length - 1;
+      const radius = isBoundary ? 5 : 3;
+      parts.push(`<circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${radius}" fill="${isBoundary ? '#f87171' : color}" stroke="#0b1220" stroke-width="1" data-coord="${p.globalX.toFixed(3)}, ${p.globalY.toFixed(3)}, ${p.globalZ.toFixed(3)}"/>`);
+    });
+    // Angle annotation near the sheet's start pivot — computed from actual
+    // global bearing change so it reflects the true rotation (not the stored
+    // per-row angleDeg which may be 0 for alt-format blocks).
+    const prevSheet = si > 0 ? sheets[si - 1] : null;
+    const junctionAngle = computeJunctionAngle(points, sheet, prevSheet);
+    if (si > 0 && sheetPoints.length) {
+      const { sx, sy } = toScreen(sheetPoints[0].globalX, sheetPoints[0].globalY);
+      const label = junctionAngle != null ? `Δ ${formatAngle(junctionAngle)}` : `Δ ${formatAngle(sheet.angleDeg)}`;
+      parts.push(
+        `<text x="${(sx + 8).toFixed(1)}" y="${(sy - 8).toFixed(1)}" fill="#f87171" font-size="12" font-family="monospace">${esc(label)}</text>`,
+      );
+    }
+  });
+
+  const svgHtml = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VB_W} ${VB_H}" style="width:100%;aspect-ratio:${VB_W}/${VB_H};display:block;background:#0b1220;border-radius:8px 8px 0 0;border:1px solid rgba(148,163,184,.28);border-bottom:none;">
+<g id="p3d-pz-layer">
+${parts.join('\n')}
+</g>
+<text x="${VB_W - 8}" y="${VB_H - 8}" fill="#64748b" font-size="10" font-family="monospace" text-anchor="end">Red dots = sheet boundary / match points</text>
+</svg>`;
+
+  const legendHtml = sheets.map((sheet, si) => {
+    const color = SHEET_COLORS[sheet.sheetIndex % SHEET_COLORS.length];
+    const prevSheet = si > 0 ? sheets[si - 1] : null;
+    const junctionAngle = computeJunctionAngle(points, sheet, prevSheet);
+    const anglePart = si === 0
+      ? 'reference'
+      : `Δ angle ${junctionAngle != null ? formatAngle(junctionAngle) : formatAngle(sheet.angleDeg)}`;
+    const lengthPart = sheet.meta?.length != null ? ` · length ${sheet.meta.length}` : '';
+    return `<span style="display:inline-flex;align-items:center;gap:6px;margin-right:14px;font-size:12px;font-family:monospace;color:#e2e8f0;">
+      <span style="display:inline-block;width:12px;height:12px;background:${color};border-radius:2px;flex-shrink:0;"></span>
+      Sheet ${sheet.sheetIndex + 1} · ${esc(anglePart)}${esc(lengthPart)}
+    </span>`;
+  }).join('');
+
+  return { svgHtml, legendHtml };
+}

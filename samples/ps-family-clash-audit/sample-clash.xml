@@ -1,0 +1,36 @@
+<exchange>
+  <batchtest>
+    <clashtests>
+      <clashtest>
+        <clashresults>
+          <clashresult name="Sample Clash 1" guid="sample-clash-1" status="new" distance="-0.010">
+            <clashpoint><pos3f x="1" y="2" z="3"/></clashpoint>
+            <clashobjects>
+              <clashobject>
+                <pathlink><node>File</node><node>SAMPLE.rvm</node><node>/SAMPLE-CU-SU</node><node>/PS-90001</node><node>/PS-90001/MAIN</node><node>/PS-90001-BAR-1</node></pathlink>
+                <smarttags><smarttag><name>Item Name</name><value>/PS-90001-BAR-1</value></smarttag></smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink><node>File</node><node>SAMPLE.rvm</node><node>/SAMPLE-CU-PI</node><node>/SAMPLE-100-D90001-31441C4-PP-01</node><node>/SAMPLE-100-D90001-31441C4-PP-01/B1</node><node>/PS-90001.1</node></pathlink>
+                <smarttags><smarttag><name>Item Name</name><value>/PS-90001.1</value></smarttag></smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Sample Clash 2" guid="sample-clash-2" status="new" distance="-0.005">
+            <clashpoint><pos3f x="4" y="5" z="6"/></clashpoint>
+            <clashobjects>
+              <clashobject>
+                <pathlink><node>File</node><node>SAMPLE.rvm</node><node>/SAMPLE-CU-SU</node><node>/PS-90001</node><node>/PS-90001/MAIN</node><node>/PS-90001-BAR-1</node></pathlink>
+                <smarttags><smarttag><name>Item Name</name><value>/PS-90001-BAR-1</value></smarttag></smarttags>
+              </clashobject>
+              <clashobject>
+                <pathlink><node>File</node><node>SAMPLE.rvm</node><node>/SAMPLE-CU-PI</node><node>/SAMPLE-50-P90002-31441C4-PP-01</node><node>/SAMPLE-50-P90002-31441C4-PP-01/B1</node><node>/PS-90002.1</node></pathlink>
+                <smarttags><smarttag><name>Item Name</name><value>/PS-90002.1</value></smarttag></smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+        </clashresults>
+      </clashtest>
+    </clashtests>
+  </batchtest>
+</exchange>

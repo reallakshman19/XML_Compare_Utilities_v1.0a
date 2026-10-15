@@ -1,0 +1,4 @@
+Name of the element,p1bore,pipe,RTEXT of detailing text,SUPPORT GAP,Reference of the element,Position,ISOMETRIC NOTES
+PS-90001.1,100.00,SAMPLE-100-D90001-31441C4-PP-01,Sample guide,,=SAMPLE/1,E 1000mm S 2000mm U 3000mm,
+PS-90001.2,100.00,SAMPLE-100-D90001-31441C4-PP-01,Sample missing support,,=SAMPLE/2,E 1020mm S 2000mm U 3000mm,
+Copy-(2)-of-PS-90001.3,100.00,SAMPLE-100-D90001-31441C4-PP-01,Sample copy support,,=SAMPLE/3,E 2000mm S 2000mm U 3000mm,

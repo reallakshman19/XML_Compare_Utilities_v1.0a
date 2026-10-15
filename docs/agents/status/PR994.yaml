@@ -1,0 +1,76 @@
+schema: AgentStatus.v1
+pr: 994
+state: DRAFT_IMPLEMENTATION_COMPLETE_OD_SCALED_FOCUSED_PASS_REAL_BENCHMARK_AUTHORED
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+base_branch: main
+base_basis_sha: a2acb8b3d3c49a14a4be045112e05bd21b476e95
+branch: agent/cii-multi-base-core
+current_stage: HANDOVER_RECONCILE
+handover_readiness: READY
+coordination: SAFE
+mutation_authority: WRITE_ALLOWED_WITHIN_DECLARED_SCOPE
+merge_authority: OWNER_ONLY
+scope_authority: CII_INDEPENDENT_MULTI_BASE_METHOD_A_B_CORE
+qualified_scope:
+  - METHOD_A_LOCAL_MULTI_BASIS_DIAGNOSTICS
+  - METHOD_A_INDEPENDENT_OR_BASE_LOOPS
+  - METHOD_A_OD_SCALED_TOLERANCE
+  - METHOD_A_EXPLICIT_EVIDENCE_WEIGHT
+  - METHOD_B_PIPE_RUN_EXTRACTION
+  - METHOD_B_TWO_AXIS_HARD_CONFIDENCE_GATE
+  - METHOD_B_OD_SCALED_RUN_AND_ANGLE_TOLERANCE
+  - METHOD_B_CROSS_COMPATIBLE_3D_COMPLEXITY_WEIGHT
+  - CROSS_LOOP_IDENTITY_CONFLICT_VETO
+  - METHOD_B_ANCHOR_CONFIDENCE_GATE
+  - SOURCE3_TARGET31_REAL_BENCHMARK_REGRESSION_AUTHORED
+  - FOCUSED_SYNTHETIC_AND_INDEPENDENT_NUMERICAL_QUALIFICATION
+blocked_scope:
+  - FULL_ISSUE_993_UI_ORCHESTRATION
+  - WRITER_1A_OR_1B_CHANGES
+  - TRANSFER_POLICY_PLAN_CHANGES
+  - TRANSFER_APPLY_EXCLUDE_UI
+  - SIF_TEE_OR_NODENAME_MUTATION
+  - FIXED_FIELD_PARSER_CHANGES
+  - PROTECTED_EXTERNAL_WRITER
+  - WORKFLOW_CHANGES
+owner_policy_update:
+  tolerance: X_TIMES_SOURCE_OD
+  default_factor_x: 2.0
+  configurable: true
+  od_reference: MIN_POSITIVE_INCIDENT_SOURCE_OD
+  od_role: TOLERANCE_SCALE_ONLY_NOT_IDENTITY_EVIDENCE
+  target_od_role: NO_TOLERANCE_OR_IDENTITY_AUTHORITY
+  method_b_weighting: MORE_DISTINCT_CROSS_COMPATIBLE_3D_GEOMETRY_GETS_HIGHER_WEIGHT
+real_benchmark_basis:
+  source_file: Benchmark/CIICompare/SOURCE-3.CII
+  target_file: Benchmark/CIICompare/TARGET3-1.CII
+  source_elements: 219
+  target_elements: 223
+  observed_local_node_offsets:
+    - -13000
+    - -53630
+    - 1620
+  method_a_real_basis: 60920_60930_60940_TO_7290_7300_7310
+  method_b_real_anchor: 60930_TO_7300
+  source_od_mm: 114.3
+  default_tolerance_mm: 228.6
+  execution: NOT_RUN_ENVIRONMENT
+focused_validation:
+  javascript_syntax: PASS_LOCAL_EXACT_BLOBS_EXCEPT_LATEST_REAL_BENCHMARK_FILE_RECONSTRUCTED_SYNTAX_ONLY
+  method_a_od_scaled_geometry: PASS_IMPLEMENTATION_COUPLED
+  method_b_od_scaled_multibase: PASS_IMPLEMENTATION_COUPLED
+  method_b_anchor_weighting: PASS_IMPLEMENTATION_COUPLED
+  method_b_changed_third_run_no_extra_3d_credit: PASS_IMPLEMENTATION_COUPLED
+  independent_python_oracle: PASS_INDEPENDENT_REPRODUCTION
+  target_od_invariance: PASS_FOCUSED
+  configurable_x: PASS_FOCUSED
+  angular_equivalent_displacement: PASS_FOCUSED
+full_repository_suite: NOT_RUN_ENVIRONMENT
+coordinate_invariance_execution: NOT_RUN_ENVIRONMENT
+real_cii_benchmark: AUTHORED_NOT_RUN_ENVIRONMENT
+browser: NOT_RUN_ENVIRONMENT
+ci: REFRESH_REQUIRED_EXACT_HEAD
+known_engineering_defect: NONE_IDENTIFIED_WITHIN_CURRENT_CORE_SAMPLE_SCOPE
+highest_risk: execute SOURCE-3/TARGET3-1 real benchmark and calibrate provisional score breakpoints without weakening hard OD/two-axis/cross-compatibility/conflict gates
+exact_next_action: execute SOURCE-3/TARGET3-1 benchmark plus inherited CII suite in a complete checkout; owner review afterward; do not merge without explicit authorization

@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sequential Draft Edit command lifecycle</title>
+  <style>
+    body{margin:0;padding:24px;background:#07101f;color:#e2e8f0;font:14px system-ui,sans-serif}
+    [data-ssk-draft-edit-command-panel]{display:grid;gap:10px;max-width:760px}
+    .commands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+    label{display:grid;gap:4px}input,textarea,button{font:inherit;padding:7px}pre,output{white-space:pre-wrap}
+  </style>
+</head>
+<body>
+<section data-ssk-draft-edit-command-panel>
+  <output data-ssk-draft-edit-command-state role="status">Gateway unavailable.</output>
+  <output data-ssk-draft-edit-target role="status">No authoritative command target.</output>
+  <label>Actor ID<input data-ssk-draft-edit-actor autocomplete="off"></label>
+  <div class="commands" role="group" aria-label="Qualified supervised commands">
+    <button type="button" data-ssk-draft-edit-command="CONNECT_CANDIDATE">Connect candidate</button>
+    <button type="button" data-ssk-draft-edit-command="MANUAL_CONNECT">Manual connect</button>
+    <button type="button" data-ssk-draft-edit-command="REJECT_CANDIDATE">Reject candidate</button>
+    <button type="button" data-ssk-draft-edit-command="MARK_TERMINAL">Mark terminal</button>
+    <button type="button" data-ssk-draft-edit-command="MARK_EXTERNAL_BOUNDARY">Mark external boundary</button>
+    <button type="button" data-ssk-draft-edit-command="REVERSE_COMPONENT">Reverse component</button>
+    <button type="button" data-ssk-draft-edit-command="ADVANCE_ONE">Advance one</button>
+    <button type="button" data-ssk-draft-edit-command="RUN_UNTIL_BLOCKED">Run until blocked</button>
+    <button type="button" data-ssk-draft-edit-command="DEFER_DECISION">Defer decision</button>
+    <button type="button" data-ssk-draft-edit-command="RESUME_DECISION">Resume decision</button>
+    <button type="button" data-ssk-draft-edit-command="UNDO_LAST_TRANSACTION">Undo transaction</button>
+    <button type="button" data-ssk-draft-edit-command="REDO_LAST_TRANSACTION">Redo transaction</button>
+  </div>
+  <label>Reason<input data-ssk-draft-edit-reason autocomplete="off"></label>
+  <label>Evidence<textarea data-ssk-draft-edit-evidence></textarea></label>
+  <pre data-ssk-draft-edit-command-preview>No command is prepared.</pre>
+  <div>
+    <button type="button" data-ssk-draft-edit-command-accept disabled>Accept prepared command</button>
+    <button type="button" data-ssk-draft-edit-command-cancel disabled>Cancel prepared command</button>
+  </div>
+</section>
+<script type="module">
+import { createSequentialDraftEditCommandPanel } from '../../tabs/sequential-sketcher/scoped-edit/sequential-draft-edit-command-panel.js';
+import { projectSequentialReversalCandidates } from '../../tabs/sequential-sketcher/sequential-engineering-svg-reversal-scene.js';
+
+const BRANCH = '/SSK/3H/BROWSER';
+const ISSUED_AT = '2026-07-28T05:40:00.000Z';
+const AUTHORITY = 'SAUTH-3H-BROWSER';
+const CANDIDATE = 'CANDIDATE-3H-BROWSER';
+const FROM = `${BRANCH}/P1:LPOS`;
+const TO = `${BRANCH}/C1:APOS`;
+const COMPONENT = `${BRANCH}/P1`;
+const ENTRY_A = `${COMPONENT}:APOS`;
+const ENTRY_B = `${COMPONENT}:LPOS`;
+const pointA = Object.freeze({ x: 0, y: 0, z: 0 });
+const pointB = Object.freeze({ x: 100, y: 0, z: 0 });
+
+function frozenSession(request, extras = {}) {
+  return Object.freeze({
+    state: 'USER_DECISION_REQUIRED', rootBranchId: BRANCH,
+    currentDecisionRequest: Object.freeze(request),
+    confirmedComponentIds: Object.freeze([]), undoStack: Object.freeze([]), redoStack: Object.freeze([]),
+    ...extras,
+  });
+}
+function candidateAuthority() {
+  const candidate = Object.freeze({
+    candidateId: CANDIDATE, fromPortId: FROM, toPortId: TO,
+    targetPortId: FROM, connectedPortId: TO,
+  });
+  return {
+    session: frozenSession({
+      decisionId: 'DECISION-3H-CANDIDATE', state: 'OPEN', reason: 'AMBIGUOUS_CONNECTION',
+      candidates: Object.freeze([candidate]),
+    }),
+    indexes: {
+      ports: new Map([[FROM, Object.freeze({ portId: FROM })], [TO, Object.freeze({ portId: TO })]]),
+      components: new Map(),
+    },
+  };
+}
+function boundaryAuthority() {
+  return {
+    session: frozenSession({
+      decisionId: 'DECISION-3H-BOUNDARY', state: 'OPEN', reason: 'UNEXPLAINED_TERMINAL',
+      candidates: Object.freeze([]),
+    }),
+    indexes: { ports: new Map(), components: new Map() },
+  };
+}
+function reversalAuthority() {
+  const ports = Object.freeze([
+    Object.freeze({ portId: ENTRY_A, componentId: COMPONENT, role: 'START', sourcePosition: pointA }),
+    Object.freeze({ portId: ENTRY_B, componentId: COMPONENT, role: 'END', sourcePosition: pointB }),
+  ]);
+  const component = Object.freeze({
+    componentId: COMPONENT, sourceComponentId: COMPONENT, branchId: BRANCH,
+    canonicalType: 'PIPE', ports,
+  });
+  return {
+    session: frozenSession({
+      decisionId: 'DECISION-3H-REVERSAL', state: 'OPEN', reason: 'AMBIGUOUS_BRANCH_START',
+      candidates: Object.freeze([]), componentId: COMPONENT, startComponentId: COMPONENT,
+    }),
+    indexes: {
+      components: new Map([[COMPONENT, component]]),
+      ports: new Map(ports.map((port) => [port.portId, port])),
+      branches: new Map(),
+    },
+  };
+}
+function candidateTarget(current) {
+  return Object.freeze({
+    schema: 'SequentialDraftEditCandidateTarget.v1', authorityId: AUTHORITY,
+    readAuthorityId: 'READ-3H-CANDIDATE', branchId: BRANCH,
+    decisionId: current.session.currentDecisionRequest.decisionId,
+    candidateId: CANDIDATE, entityId: `ssk:candidate:${CANDIDATE}`,
+    targetSelectionId: 'SSK3H-CANDIDATE-TARGET',
+  });
+}
+function boundaryTarget(current) {
+  return Object.freeze({
+    schema: 'SequentialDraftEditDecisionTarget.v1', authorityId: AUTHORITY,
+    readAuthorityId: 'READ-3H-BOUNDARY', branchId: BRANCH,
+    decisionId: current.session.currentDecisionRequest.decisionId,
+    reason: current.session.currentDecisionRequest.reason,
+    decisionScope: 'CONNECTION', activePortId: null, junctionId: 'JUNCTION-3H',
+    referenceTarget: '/EXTERNAL/BOUNDARY', decisionTargetId: 'SSK3H-BOUNDARY-TARGET',
+  });
+}
+function reversalTarget(current) {
+  const candidate = projectSequentialReversalCandidates(current.session, current.indexes)[0];
+  return Object.freeze({
+    schema: 'SequentialDraftEditReversalTarget.v1', authorityId: AUTHORITY,
+    readAuthorityId: 'READ-3H-REVERSAL', branchId: BRANCH,
+    decisionId: current.session.currentDecisionRequest.decisionId,
+    candidateId: candidate.candidateId, componentId: candidate.componentId,
+    entryPortId: candidate.entryPortId, entityId: `ssk:reversal:${candidate.candidateId}`,
+    sourcePosition: candidate.sourcePosition, reversalTargetId: 'SSK3H-REVERSAL-TARGET',
+  });
+}
+
+let current = candidateAuthority();
+let currentAuthorityId = AUTHORITY;
+let prepares = 0;
+let accepts = 0;
+let publications = 0;
+let lastInput = null;
+let staleAcceptance = false;
+
+function outcome(type) {
+  return ({
+    CONNECT_CANDIDATE: 'USER_CONNECTION_COMMITTED', MANUAL_CONNECT: 'USER_MANUAL_CONNECTION_COMMITTED',
+    REJECT_CANDIDATE: 'CANDIDATE_REJECTED', MARK_TERMINAL: 'HEAD_BOUNDARY_USER_CLASSIFIED',
+    MARK_EXTERNAL_BOUNDARY: 'HEAD_BOUNDARY_USER_CLASSIFIED', REVERSE_COMPONENT: 'COMPONENT_TRAVERSAL_REVERSED',
+  })[type] || `${type}_PREPARED`;
+}
+const gateway = Object.freeze({
+  getState: () => Object.freeze({ ready: true, branchId: BRANCH, reasonCode: null }),
+  prepare(input) {
+    prepares += 1;
+    lastInput = structuredClone(input);
+    const command = input.command;
+    return Object.freeze({
+      preparedId: `SPREP-3H-${prepares}`,
+      nativeCommand: Object.freeze({ ...command }),
+      targets: Object.freeze({
+        decisionId: command.decisionId, candidateId: command.candidateId,
+        componentId: command.componentId, entryPortId: command.entryPortId,
+        fromPortId: command.fromPortId, toPortId: command.toPortId,
+      }),
+      envelope: Object.freeze({ origin: Object.freeze({ ...input.origin }) }),
+      expectedAuthority: Object.freeze({ authorityId: currentAuthorityId }),
+      candidate: Object.freeze({ outcome: outcome(command.commandType), transactionIds: Object.freeze([`TXN-3H-${prepares}`]) }),
+    });
+  },
+  accept(prepared) {
+    accepts += 1;
+    if (staleAcceptance) return Object.freeze({ accepted: false, reasonCode: 'PREPARED_COMMAND_STALE', message: 'Prepared authority is stale.' });
+    publications += 1;
+    return Object.freeze({ accepted: true, message: `${prepared.preparedId} accepted.` });
+  },
+});
+
+const panel = createSequentialDraftEditCommandPanel({
+  root: document, gateway,
+  readCurrentState: () => current,
+  readCurrentAuthorityId: () => currentAuthorityId,
+  now: () => ISSUED_AT,
+});
+panel.setActive(true);
+
+function setMode(mode) {
+  panel.invalidate('Fixture authority changed.');
+  currentAuthorityId = AUTHORITY;
+  staleAcceptance = false;
+  if (mode === 'candidate' || mode === 'manual') {
+    current = candidateAuthority();
+    panel.setCandidateTarget(candidateTarget(current));
+  } else if (mode === 'boundary') {
+    current = boundaryAuthority();
+    panel.setDecisionTarget(boundaryTarget(current));
+  } else if (mode === 'reversal') {
+    current = reversalAuthority();
+    panel.setReversalTarget(reversalTarget(current));
+  } else {
+    throw new RangeError(`Unknown fixture mode ${mode}`);
+  }
+  return snapshot();
+}
+function makeStale() {
+  currentAuthorityId = 'SAUTH-3H-STALE';
+  current = {
+    ...current,
+    session: Object.freeze({
+      ...current.session,
+      currentDecisionRequest: Object.freeze({
+        ...current.session.currentDecisionRequest,
+        decisionId: `${current.session.currentDecisionRequest.decisionId}-STALE`,
+      }),
+    }),
+  };
+  panel.refresh();
+  return snapshot();
+}
+function snapshot() {
+  return {
+    prepares, accepts, publications, lastInput,
+    panel: panel.getState(),
+    status: document.querySelector('[data-ssk-draft-edit-command-state]').textContent,
+    target: document.querySelector('[data-ssk-draft-edit-target]').textContent,
+    preview: document.querySelector('[data-ssk-draft-edit-command-preview]').textContent,
+    acceptDisabled: document.querySelector('[data-ssk-draft-edit-command-accept]').disabled,
+    cancelDisabled: document.querySelector('[data-ssk-draft-edit-command-cancel]').disabled,
+    commands: Object.fromEntries([...document.querySelectorAll('[data-ssk-draft-edit-command]')]
+      .map((button) => [button.dataset.sskDraftEditCommand, button.disabled])),
+  };
+}
+
+globalThis.__sskCommandLifecycle = Object.freeze({
+  setMode, snapshot, makeStale,
+  setStaleAcceptance(value) { staleAcceptance = value === true; return snapshot(); },
+  closePanel() { panel.setActive(false); return snapshot(); },
+  reopenPanel() { panel.setActive(true); return snapshot(); },
+  resetCounters() { prepares = 0; accepts = 0; publications = 0; lastInput = null; return snapshot(); },
+});
+setMode('candidate');
+</script>
+</body>
+</html>

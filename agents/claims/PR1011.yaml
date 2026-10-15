@@ -1,0 +1,61 @@
+schema: AgentPrClaims.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr: 1011
+claims:
+  - id: PR1011-CLAIM-001
+    statement: Writer 2 Phase-4A NODENAME allocation uses the source-qualified 53-character physical row model consisting of a two-character prefix, 26-character FROM field and 25-character TO field.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js; protected source reallaksh19/3D_Converters converters/scripts/inputxml_to_cii2019.py
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1011-CLAIM-002
+    statement: Relocation planning requires existing Writer1C-grade exact ELEMENT physical custody and records every changed NODENAME pointer as a qualified 13-byte field transition.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1011-CLAIM-003
+    statement: CREATE uses the lowest exact-custodied zero-pointer incident ELEMENT deterministically and combines FROM/TO requests selecting the same ELEMENT into one appended row.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js; tests/cii-workspace-writer2-nodename-relocation.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1011-CLAIM-004
+    statement: Divergent CREATE requests claiming the same physical endpoint block instead of applying sequential last-writer-wins behavior.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js; tests/cii-workspace-writer2-nodename-relocation-falsifiers.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1011-CLAIM-005
+    statement: DELETE removes all selected-node physical fields, removes a NODENAME row only when both fields become blank, and deterministically compacts surviving rows.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js; tests/cii-workspace-writer2-nodename-relocation.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1011-CLAIM-006
+    statement: The relocation plan explicitly maps every old NODENAME pointer to its post-layout pointer, including pointer shifts on otherwise unselected ELEMENTs; deleted rows map to zero.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js; tests/cii-workspace-writer2-nodename-relocation.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1011-CLAIM-007
+    statement: CONTROL NONAM before-count must match both physical and custody NODENAME row count, and the planned after-count is derived from the final row layout.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1011-CLAIM-008
+    statement: Shared physical name spans cannot be deleted when they have an unselected foreign node owner.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js; tests/cii-workspace-writer2-nodename-relocation-falsifiers.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1011-CLAIM-009
+    statement: Phase-4A is a planning authority only and does not physically rewrite CONTROL, ELEMENT pointers, NODENAME cardinality, or export a modified CII.
+    evidence: branch changed-file audit; agents/PR1011_workreport.md
+    status: PASS_SOURCE_SCOPE_AUDIT
+qualification_findings:
+  - id: PR1011-QF-001
+    finding: Writer 2 cannot treat node-name CREATE as an isolated row insertion because a deterministic target ELEMENT must own the new 1-based pointer.
+    disposition: LOWEST_EXACT_ZERO_POINTER_ELEMENT_SELECTION
+  - id: PR1011-QF-002
+    finding: Deleting one NODENAME row may require pointer changes on unrelated later ELEMENTs due to section compaction.
+    disposition: COMPLETE_OLD_TO_NEW_POINTER_MAP_AND_POINTERCHANGES_LEDGER
+  - id: PR1011-QF-003
+    finding: Existing blank NODENAME physical fields do not require allocation and therefore remain Writer1C existing-row territory.
+    disposition: CREATE_EXISTING_FIELD_FAILS_CLOSED_TO_WRITER1C
+limitations:
+  - repository-integrated focused tests not executed
+  - full npm regression not executed
+  - browser product flow not executed
+  - no physical Writer2 mutation/export in Phase-4A
+prohibited_claims:
+  - do not claim physical cardinality-changing CII output
+  - do not claim CONTROL or ELEMENT pointer bytes are modified
+  - do not claim SIF or hanger allocation authority
+  - do not claim topology mutation authority
+  - do not claim full repository runtime PASS

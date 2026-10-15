@@ -1,0 +1,106 @@
+pr: 1043
+issue: 1042
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-delete-physical-w211
+base_main: f298aa10eba7d2125a9c0f6818e4727b6f4ef0c3
+agent_state: REVIEW_READY_FOCUSED_EXECUTION_PASS
+current_stage: W2_11_RESTRAINT_DELETE_PHYSICAL_COMPONENT_FOCUSED_QUALIFICATION_PASS
+handover_readiness: READY
+execution_mode: AUTO_MODE
+scope_authority: ISSUE_1042_COMPONENT_PLUS_INHERITED_AUTHORITY_CORRECTION
+merge_authority: OWNER_ONLY
+merge_authorized: false
+
+rebase_audit:
+  requested: true
+  performed: false
+  reason: main_has_not_moved_rebase_would_be_noop
+  current_main: f298aa10eba7d2125a9c0f6818e4727b6f4ef0c3
+  pr_base_sha: f298aa10eba7d2125a9c0f6818e4727b6f4ef0c3
+
+inherited_issue:
+  id: ISS_W2_10_CONTROL_RESTRAINT_COUNT_ROW
+  severity: CRITICAL
+  discovered_in: PR1043_recovery
+  prior_behavior: W2_10_planner_read_CONTROL_row1_field4_NONAM_as_restraint_count
+  authoritative_behavior: CONTROL_row2_field4_is_RESTRAINT_block_count
+  correction_status: PATCHED_AND_FOCUSED_EXECUTION_PASS
+  affected_paths:
+    - tabs/cii-workspace/cii-workspace-writer2-restraint-delete-compaction-plan.js
+    - tests/cii-workspace-writer2-restraint-delete-compaction-plan.test.js
+  negative_assurance: fixture_keeps_NONAM_0_while_RESTRAINT_count_positive
+
+production_authority:
+  restraint_delete_physical_writer: true
+  independent_component_validator: true
+  corrected_w2_10_restraint_count_read: true
+  composite: false
+  product_core: false
+  generic_restraint_create: false
+
+consumed_authority:
+  - EXACT_PARSED_INDEX_ENDPOINTS_AND_PHYSICAL_RESTRAINT_POINTER_I13
+  - PROTECTED_WRITER_RESTRANT_BLOCK_INDEX_24_ROWS
+
+corrected_authority:
+  - CII_WRITER_2_RESTRAINT_BLOCK_DELETE_COMPACTION_PLAN_CONTROL_ROW2_FIELD4
+
+new_authority:
+  - CII_WRITER_2_RESTRAINT_BLOCK_DELETE_PHYSICAL_WRITE
+  - SHA256_ORIGINAL_TARGET0_BYTES
+  - SHA256_WRITER2_POSTIMAGE_BYTES
+  - CII_PHYSICAL_POSTIMAGE_REINTAKE_EQUIVALENCE
+
+qualification:
+  execution_basis_head: 7f00a80e1ab5b87994829977f04eb6fcbcbe84bd
+  runtime: Node_v22.16.0
+  execution_environment: SPARSE_MIRROR_EXACT_LOADED_GIT_BLOBS
+  exact_loaded_blob_manifest: PASS
+  exact_loaded_blob_count: 12
+  corrected_w2_10_planner_D01_D18_H01_H05: PASS_NATIVE
+  w2_11_physical_P01_P06_P19: PASS_NATIVE
+  w2_11_falsifiers_P07_P18: PASS_NATIVE
+  focused_native_execution: PASS_EXACT_BLOB_VERIFIED_SPARSE
+  complete_git_checkout_execution: NOT_RUN_ENVIRONMENT
+  complete_checkout_blocker: github.com_DNS_resolution_failure
+  repository_npm_test: NOT_RUN_ENVIRONMENT
+  pr_workflow_runs_execution_basis_head: NONE
+  browser_product: NOT_APPLICABLE_UNCHANGED_ROUTE
+
+exact_loaded_blob_manifest:
+  parser/fixed-field.js: 485daa43553681ca54f488499e57f36d2239be58
+  tabs/cii-workspace/cii-workspace-contracts.js: 6ab30d8dd088225fd89bb729bf9ffdebefe652f6
+  tabs/cii-workspace/cii-workspace-byte-sha256.js: 6435e0eaadc382a18aac6a0bd46318ab6c27c714
+  tabs/cii-workspace/cii-workspace-physical-file.js: 0c4c445fbd3d4b929b1f9288b789b244547c8867
+  tabs/cii-workspace/cii-workspace-writer2-restraint-delete-custody.js: 2176ac97eaef84f3aa9073d5eaf73d1530cf09a8
+  tabs/cii-workspace/cii-workspace-writer2-restraint-delete-compaction-plan.js: aedfb3ac78eed2294a88a64af261386f0db65085
+  tabs/cii-workspace/cii-workspace-writer2-restraint-delete-write.js: e8a92417e45c75269a859469e6f51bd577b412cb
+  tabs/cii-workspace/cii-workspace-writer2-restraint-delete-validation.js: 1833d9fecc37061eaf2f51f1676e6386e1f9ac3c
+  tests/cii-workspace-writer2-restraint-delete-fixture.js: 020cae50b42448be2c8d1d9d41952d21be26adfa
+  tests/cii-workspace-writer2-restraint-delete-compaction-plan.test.js: e27c65b68cc4e44138c4965b07c85f00893ef0e7
+  tests/cii-workspace-writer2-restraint-delete-physical.test.js: 437c68d31a518520b37dce44639ee5370a5ef059
+  tests/cii-workspace-writer2-restraint-delete-physical-falsifiers.test.js: 834df00e88b1f0d8bfed04223f676a8f285a9533
+
+negative_assurance:
+  control_nonam_mutation_authorized: false
+  writer1b_free_slot_changed: false
+  restraint_create_added: false
+  guid_generation_added: false
+  default_synthesis_added: false
+  composite_changed: false
+  product_core_changed: false
+  writer3_changed: false
+  workflows_changed: false
+  package_changed: false
+  parser_converter_changed: false
+
+expected_final_scope:
+  production_paths: 3
+  test_paths: 4
+  coordination_paths_without_master_index: 3
+  total_paths_without_master_index: 10
+  unexplained_paths: 0
+
+coordination_limitation: MASTER_INDEX_FULL_FILE_REPLACEMENT_NOT_ATTEMPTED_FROM_TRUNCATED_READ
+next_gate: OWNER_REVIEW_OR_OPTIONAL_COMPLETE_CHECKOUT_NPM_GATE; focused_component_execution_is_complete_but_full_repository_npm_remains_NOT_RUN
+next_phase_after_separate_merge_authorization: W2_12_RESTRAINT_ONE_TARGET0_COMPOSITE_ADOPTION

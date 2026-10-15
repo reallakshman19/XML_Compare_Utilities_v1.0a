@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.xml-compare-utilities.local/document-evidence/v1/evidence-bundle-manifest.schema.json",
+  "title": "EvidenceBundleManifest.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schemaMajor", "sourceHash", "machineEvidenceHash", "entries", "bundleHash"],
+  "properties": {
+    "schema": {"const": "EvidenceBundleManifest.v1"},
+    "schemaMajor": {"type": "integer", "minimum": 1},
+    "sourceHash": {"$ref": "#/$defs/sha256"},
+    "machineEvidenceHash": {"$ref": "#/$defs/sha256"},
+    "bundleHash": {"$ref": "#/$defs/sha256"},
+    "entries": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["path", "sha256", "sizeBytes"], "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"$ref": "#/$defs/sha256"}, "sizeBytes": {"type": "integer", "minimum": 0}}}}
+  },
+  "$defs": {"sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Edit Draft Large Offset Navigation Fixture</title>
+  <style>html,body,#fixture{height:100%;margin:0;background:#020617}</style>
+</head>
+<body>
+  <div id="fixture"></div>
+  <script type="module">
+    import { mountTopologyTraceValidatorWorkspace } from '../../tabs/topology-trace-validator/topology-trace-validator-tab.js';
+    import { buildComponentTopologyArtifacts } from '../../vendor/3d-converters/topology-browser-core.mjs';
+
+    const point = (x, y, z) => ({ x, y, z });
+    const base = point(438023.221, -1139222.202, 1184.15);
+    const source = [{
+      name: '/LARGE-OFFSET/B1', type: 'BRANCH',
+      attributes: { TYPE: 'BRANCH', NAME: '/LARGE-OFFSET/B1', OWNER: '/LARGE-OFFSET', HPOS: base, TPOS: point(base.x + 2000, base.y, base.z) },
+      children: [
+        { name: 'PIPE-1', type: 'PIPE', attributes: { TYPE: 'PIPE', NAME: 'PIPE-1', REF: '=PIPE/1', OWNER: '/LARGE-OFFSET/B1', APOS: base, LPOS: point(base.x + 1000, base.y, base.z), ABORE: '50mm', LBORE: '50mm', WTHK: '3mm', ITEMTEMP1: '100', ITEMPRES1: '2', MTXX: 'A106 B', DTXR: 'PIPE' } },
+        { name: 'PIPE-2', type: 'PIPE', attributes: { TYPE: 'PIPE', NAME: 'PIPE-2', REF: '=PIPE/2', OWNER: '/LARGE-OFFSET/B1', APOS: point(base.x + 1000, base.y, base.z), LPOS: point(base.x + 2000, base.y, base.z), ABORE: '50mm', LBORE: '50mm', WTHK: '3mm', ITEMTEMP1: '100', ITEMPRES1: '2', MTXX: 'A106 B', DTXR: 'PIPE' } },
+      ],
+    }];
+    const built = await buildComponentTopologyArtifacts(JSON.stringify(source), {
+      sourceName: 'large-offset-edit-fixture.json', jobName: 'Large Offset Edit Fixture',
+      toleranceMm: 0.1, supportProjectionToleranceMm: 50, enrichmentConfig: {},
+    });
+    const mounted = await mountTopologyTraceValidatorWorkspace(document.querySelector('#fixture'), {
+      source, canonical: built.canonicalTopology, ledger: built.traceLedger, inputXml: built.topologyInputXml,
+      scene: built.topologySvgScene, parsed: built.parsedInputXmlTopology, report: built.topologyParityReport,
+    });
+    window.__topologyEditHarness = mounted;
+    document.body.dataset.topologyEditFixtureReady = '1';
+  </script>
+</body>
+</html>

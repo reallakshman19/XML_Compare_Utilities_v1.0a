@@ -1,0 +1,74 @@
+pr: 1049
+issue: 1048
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-runtime-w214
+base_main: f51f8acdcdcbd108073e2a2e57753c07d9f27c42
+current_stage: W2_14_RUNTIME_QUALIFICATION_AND_RELEASE_FREEZE
+agent_state: PARTIAL_RUNTIME_QUALIFICATION_OBSERVED
+handover_readiness: READY
+criticality: ENGINEERING_CRITICAL
+production_change_authority: false
+production_code_diff_from_base: false
+merge_authority: OWNER_ONLY
+merge_authorized: true
+owner_accepts_recorded_residuals: true
+ready_for_review: true
+pr_state: OWNER_MERGE_AUTHORIZED_EVIDENCE_CHECKPOINT
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RESTRAINT_DELETE_RELEASE_FREEZE
+
+predecessor:
+  pr: 1047
+  phase: W2_13_PRODUCT_CORE_RESTRAINT_DELETE_ADOPTION
+  merge_sha: f51f8acdcdcbd108073e2a2e57753c07d9f27c42
+
+inherited_authority_correction:
+  control_row1_field4: NONAM_PRESERVE
+  control_row2_field4: RESTRAINT_BLOCK_COUNT_I13
+
+runtime_environment:
+  mode: EXACT_GIT_BLOB_SPARSE_MIRROR
+  tree_ref: f51f8acdcdcbd108073e2a2e57753c07d9f27c42
+  node: v22.16.0
+  custody_rule: EVERY_TRANSITIVELY_LOADED_REPOSITORY_FILE_GIT_BLOB_SHA_VERIFIED_BEFORE_EXECUTION
+
+validation:
+  base_grounding: PASS_REMOTE_GITHUB
+  production_diff: NONE
+  w2_11_restraint_physical_positive_p01_p06: PASS_RUNTIME_EXACT_BLOB
+  w2_11_control_custody_p19: PASS_RUNTIME_EXACT_BLOB
+  w2_11_restraint_physical_falsifiers_p07_p18: PASS_RUNTIME_EXACT_BLOB
+  w2_12_support_observation_probe: PASS_RUNTIME_EXACT_BLOB_NONQUALIFYING
+  w2_12_focused_runtime: NOT_RUN_DEPENDENCY_CLOSURE_IN_PROGRESS
+  w2_13_synthetic_runtime: NOT_RUN_ENVIRONMENT
+  w2_13_real_cii_runtime: NOT_RUN_ENVIRONMENT
+  inherited_writer2_regression: PARTIAL_PASS_W2_11_RESTRAINT_ONLY
+  repository_npm: NOT_RUN_ENVIRONMENT
+  pr_workflow_runs: NONE_OBSERVED
+  commit_statuses: NONE_OBSERVED
+  engineering_failure: NONE_OBSERVED
+
+w2_12_support_observation:
+  blob: 5b1494ba95dbfdf663bc377f8632a50d7cd2b65b
+  qualifying_gate: false
+  observed:
+    - TARGET0_SHA_CUSTODY
+    - CANONICAL_CHILD_SCOPE_PROJECTION
+    - ORIGINAL_COORDINATE_ARBITRATION
+    - ORIGINAL_SPAN_OVERLAP_FAIL_CLOSED
+
+workflow_probe:
+  temporary_new_workflow_removed: true
+  trusted_existing_workflow_restored: true
+  trusted_restored_blob_sha: ec5182b4a893b05f717746691164ec06a421a47f
+
+negative_assurance:
+  production_changed: false
+  workflow_net_change: false
+  restraint_create_enabled: false
+  sif_create_enabled: false
+  hanger_create_enabled: false
+  writer3_changed: false
+  parser_converter_changed: false
+  merge_does_not_imply_release_ready: true
+
+next_gate: after owner-authorized evidence-checkpoint merge, continue exact-blob W2.12 R01-R22, W2.13 product, remaining inherited Writer2 regression, and repository full-checkout npm gate in a successor qualification workstream

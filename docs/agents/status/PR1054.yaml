@@ -1,0 +1,74 @@
+pr: 1054
+issue: 1052
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-product-runtime-w217
+base_main: 3a681c1c587ee3c1462a962879e4f79433258105
+current_stage: W2_17_EVIDENCE_CHECKPOINT_READY_TO_MERGE
+agent_state: READ_ONLY_QUALIFICATION
+handover_readiness: READY
+criticality: ENGINEERING_CRITICAL
+production_change_authority: false
+merge_authority: OWNER_ONLY
+merge_authorized: true
+merge_authorized_at: 2026-08-25T08:24:19Z
+ready_for_review: true
+pr_state: OPEN_PREMERGE
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RESTRAINT_DELETE_RELEASE_FREEZE
+
+predecessor:
+  pr: 1053
+  phase: W2_16_RUNTIME_CHECKPOINT
+  merge_sha: 3a681c1c587ee3c1462a962879e4f79433258105
+
+coordination:
+  open_sif_create_pr: 1033
+  restraint_runtime_overlap: NONE_FOUND
+  classification: SAFE_WITH_PRESERVED_SIF_CREATE_BLOCKER
+
+runtime:
+  w2_11_restraint_physical: PASS_RUNTIME_EXACT_BLOB
+  w2_11_control_p19: PASS_RUNTIME_EXACT_BLOB
+  w2_11_falsifiers: PASS_RUNTIME_EXACT_BLOB
+  w2_12_r01_r22: PASS_RUNTIME_EXACT_BLOB
+  w2_13_synthetic_runtime: NOT_RUN_DEPENDENCY_CLOSURE_IN_PROGRESS
+  w2_13_real_cii_runtime: NOT_RUN_ENVIRONMENT
+  inherited_writer2_regression: PARTIAL_PASS_W2_11_RESTRAINT_ONLY
+  repository_npm: NOT_RUN_ENVIRONMENT
+  engineering_failure: NONE_OBSERVED
+
+execution_checkpoint:
+  prior_sparse_mirror_path: /mnt/data/w217
+  prior_exact_repository_js_files_admitted: 54
+  prior_unresolved_static_modules: 31
+  prior_current_missing_module: tabs/cii-workspace/cii-workspace-auxiliary.js
+  prior_assertion_failure_observed: false
+  current_session_sparse_mirror_retained: false
+  classification: EVIDENCE_CHECKPOINT_ONLY
+  validation_integrity: NO_STUBS_NO_MODIFIED_ENTRYPOINT_NO_PASS_PROMOTION
+
+notable_exact_blobs:
+  w2_13_synthetic_test: 9922377ddeda86fc9167d65f33c97095346e79fa
+  w2_13_real_cii_test: c341b99e2786b0034ef672b4efb03d167d9ad26c
+  real_benchmark: e41cd05603b56837cbb6e31b9d4074ef6106fe9b
+  restraint_physical_writer: e8a92417e45c75269a859469e6f51bd577b412cb
+  restraint_pointer_custody: 2176ac97eaef84f3aa9073d5eaf73d1530cf09a8
+  restraint_composite_validator: 919ac88c071db9d793c7793cbbd82cff7e193189
+
+negative_assurance:
+  control_row1_nonam_protected: true
+  control_row2_restraints_authority_preserved: true
+  production_changed: false
+  restraint_create_enabled: false
+  sif_create_enabled: false
+  hanger_create_enabled: false
+  writer3_changed: false
+  parser_converter_changed: false
+  workflow_changed: false
+
+merge_semantics:
+  owner_accepts_evidence_only_checkpoint_merge: true
+  merge_does_not_promote_release_freeze: true
+  merge_does_not_promote_runtime_pass: true
+  merge_does_not_close_issue_1052_as_qualified: true
+
+next_gate: after merge, continue qualification on a successor evidence phase from exact new main; reconstruct exact dependencies beginning with cii-workspace-auxiliary.js and run the unchanged authored W2.13 synthetic entrypoint before any PASS or FAIL classification

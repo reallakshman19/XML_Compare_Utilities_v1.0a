@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Topology Checker Auto Fix 1885 Steam Fixture</title>
+  <style>html,body,#fixture{height:100%;margin:0;background:#020617}</style>
+</head>
+<body>
+  <div id="fixture"></div>
+  <script type="module">
+    import { mountTopologyTraceValidatorWorkspace } from '../../tabs/topology-trace-validator/topology-trace-validator-tab.js';
+    import { buildComponentTopologyArtifacts } from '../../vendor/3d-converters/topology-browser-core.mjs';
+
+    const sourceUrl = '../../Benchmark/ATTRIBUTE_managed_stage_1885_Steam.json';
+    try {
+      const response = await fetch(sourceUrl, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`Benchmark fetch failed: ${response.status} ${response.statusText}`);
+      const sourceText = await response.text();
+      const source = JSON.parse(sourceText);
+      if (!Array.isArray(source) || !source.length) throw new TypeError('1885 Steam benchmark must be a non-empty bare-array staged model.');
+      const built = await buildComponentTopologyArtifacts(sourceText, {
+        sourceName: 'ATTRIBUTE_managed_stage_1885_Steam.json',
+        jobName: '1885 Steam Topology Auto Fix Qualification',
+        toleranceMm: 0.1,
+        supportProjectionToleranceMm: 50,
+        enrichmentConfig: {},
+      });
+      const mounted = await mountTopologyTraceValidatorWorkspace(document.querySelector('#fixture'), {
+        source,
+        canonical: built.canonicalTopology,
+        ledger: built.traceLedger,
+        inputXml: built.topologyInputXml,
+        scene: built.topologySvgScene,
+        parsed: built.parsedInputXmlTopology,
+        report: built.topologyParityReport,
+      });
+      window.__topologyValidatorHarness = mounted;
+      window.__topology1885Benchmark = Object.freeze({
+        sourceUrl,
+        sourceText,
+        branchCount: source.length,
+        sourceByteLength: new TextEncoder().encode(sourceText).byteLength,
+      });
+      document.body.dataset.topologyValidatorReady = '1';
+    } catch (error) {
+      document.body.dataset.topologyValidatorError = error?.stack || error?.message || String(error);
+      throw error;
+    }
+  </script>
+</body>
+</html>

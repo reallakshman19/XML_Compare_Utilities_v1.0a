@@ -1,0 +1,38 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1008
+mission: Writer 1C Phase-1 exact ELEMENT/NODENAME physical-custody hardening
+branch: agent/cii-writer-1c-hardening
+base: main
+base_head: 692be3fd536b7c62576c443f5f831984e4de66a2
+criticality: ENGINEERING_CRITICAL
+agent_state: ACTIVE
+handover_readiness: READY
+merge_authority: OWNER_ONLY
+ready_for_review: false
+ready_for_review_reason: focused and inherited runtime tests remain NOT_RUN_ENVIRONMENT
+implemented:
+  writable_binding: PARSED_ELEMENT_INDEX_EQUALS_PHYSICAL_BLOCK_INDEX_PLUS_ENDPOINT_MATCH
+  endpoint_fallback: READ_ONLY_ONLY
+  endpoint_fallback_writer_effect: BLOCKED
+  duplicate_endpoint_fallback: AMBIGUOUS_NO_WRITABLE_SPAN
+  incomplete_element_block: BLOCKED
+validation:
+  main_grounding: PASS_REMOTE_SOURCE_INSPECTION
+  branch_compare: PASS_GIT_COMPARE
+  source_diff_review: PASS_SOURCE_INSPECTION
+  focused_pr1008_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_writer1c_tests: NOT_RUN_ENVIRONMENT
+  full_npm_test: NOT_RUN_ENVIRONMENT
+  browser: NOT_RUN_ENVIRONMENT
+not_run_reason: execution container cannot resolve github.com to materialize exact branch checkout
+scope_audit:
+  production_files: 1
+  test_files: 1
+  recovery_files: 3
+  sif_writer_files_changed: 0
+  transfer_policy_files_changed: 0
+  writer1a_writer1b_files_changed: 0
+  protected_converter_files_changed: 0
+  workflow_files_changed: 0
+next_action: review PR1008; execute focused/inherited tests when exact checkout execution is available; merge only with owner authorization

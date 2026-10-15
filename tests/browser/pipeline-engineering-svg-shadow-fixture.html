@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pipeline Engineering SVG Shadow Fixture</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; }
+    .comparison { display: grid; grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.6fr); gap: 16px; }
+    .panel { border: 1px solid #999; padding: 12px; min-width: 0; }
+    .evidence-table { border-collapse: collapse; width: 100%; font-size: 12px; }
+    .evidence-table th, .evidence-table td { border: 1px solid #bbb; padding: 4px 6px; text-align: left; }
+    .evidence-scroll { max-height: 520px; overflow: auto; }
+    [data-engineering-svg-shell] { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 12px; }
+    [data-engineering-svg-shell-canvas] { min-height: 560px; }
+    [data-engineering-svg-shell-status] { grid-column: 1 / -1; }
+    [data-engineering-svg-property-key] { display: grid; gap: 4px; margin: 6px 0; }
+    svg { width: 100%; min-height: 560px; border: 1px solid #bbb; }
+    [data-engineering-svg-entity-id] { stroke: currentColor; fill: white; }
+    [data-engineering-svg-entity-id].is-selected { stroke-width: 4; }
+  </style>
+</head>
+<body>
+  <div class="comparison">
+    <section class="panel" aria-label="Authoritative Pipeline output evidence">
+      <h1>Authoritative Pipeline output evidence</h1>
+      <p id="parity" data-pipeline-shadow-parity></p>
+      <div class="evidence-scroll" id="evidence"></div>
+    </section>
+    <section class="panel" aria-label="Shared Engineering SVG shadow">
+      <h1>Shared Engineering SVG shadow</h1>
+      <div id="shadow"></div>
+    </section>
+  </div>
+  <script type="module">
+    import { parseTable1 } from '../../tabs/pipeline-3d-model/pipeline-3d-model-geometry.js';
+    import {
+      framesFromTable1,
+      parseTable2Paste,
+      parseTable3Paste,
+    } from '../../tabs/pipeline-3d-model/pipeline-3d-model-table-paste-parser.js';
+    import {
+      SAMPLE_TABLE_2_PASTE_MULTISHEET,
+      SAMPLE_TABLE_3_PASTE_MULTISHEET,
+    } from '../../tabs/pipeline-3d-model/pipeline-3d-model-table-paste-samples.js';
+    import { SAMPLE_TABLE_1_MULTISHEET } from '../../tabs/pipeline-3d-model/pipeline-3d-model-samples.js';
+    import { buildPipelineProjectOutputs } from '../../tabs/pipeline-3d-model/pipeline-3d-model-project-adapter.js';
+    import { createPipelineEngineeringSvgShadowWorkspace } from '../../tabs/pipeline-3d-model/pipeline-engineering-svg-shadow-workspace.js';
+    import { createPipelineEngineeringRevisionToken } from '../../tabs/pipeline-3d-model/pipeline-engineering-svg-view-model.js';
+
+    const frames = framesFromTable1(parseTable1(SAMPLE_TABLE_1_MULTISHEET));
+    const table2 = parseTable2Paste(SAMPLE_TABLE_2_PASTE_MULTISHEET, { frames });
+    const table3 = parseTable3Paste(SAMPLE_TABLE_3_PASTE_MULTISHEET, { frames });
+    const profileRaw = Object.freeze({
+      table2a: table2.rawText,
+      table3a: table3.table3ARaw,
+      table3b: table3.table3BRaw,
+      table3c: table3.table3CRaw,
+    });
+    const baseBranchInfo = Object.freeze({
+      branchName: 'PL-SHADOW', lineNo: 'PL-SHADOW', boreMm: '914.4', wallThickness: '12.7',
+      t1: '80', t2: '40', t3: '20', fluidDensity: '850', materialCode: '106',
+      corrosionAllowance: '3', insulationThickness: '50', insulationDensity: '120', hydroPressure: '82.5',
+    });
+    const listeners = new Set();
+    let revisionNumber = 1;
+    let designPressure = '55';
+    let initializationError = '';
+    let workspace = null;
+    let currentSnapshot = null;
+
+    function buildOwnerSnapshot() {
+      const branchInfo = Object.freeze({ ...baseBranchInfo, p1: designPressure });
+      const output = buildPipelineProjectOutputs({
+        table1Text: SAMPLE_TABLE_1_MULTISHEET,
+        table2Text: '',
+        table3Text: '',
+        profileRaw,
+        branchInfo,
+      });
+      const revision = createPipelineEngineeringRevisionToken({
+        projectRevision: `shadow-project-r${revisionNumber}`,
+        geometryRevision: 'shadow-geometry-r1',
+        processConfigRevision: `shadow-process-r${revisionNumber}`,
+      });
+      return Object.freeze({ output, branchInfo, revision });
+    }
+
+    function clear(node) {
+      while (node.firstChild) node.removeChild(node.firstChild);
+    }
+
+    function appendCell(documentRef, row, tag, value) {
+      const cell = documentRef.createElement(tag);
+      cell.textContent = String(value ?? '');
+      row.appendChild(cell);
+    }
+
+    function renderEvidence() {
+      if (!currentSnapshot || !workspace) return;
+      const parity = workspace.getParityReport();
+      document.querySelector('#parity').textContent = `${parity.totalMapped}/${parity.totalExpected} entities mapped; parity ${parity.passed ? 'passed' : 'failed'}`;
+      const host = document.querySelector('#evidence');
+      clear(host);
+      const table = document.createElement('table');
+      table.className = 'evidence-table';
+      table.setAttribute('data-pipeline-coordinate-evidence', '1');
+      const head = document.createElement('tr');
+      ['Node', 'Name', 'X (mm)', 'Y (mm)', 'Z (mm)'].forEach((value) => appendCell(document, head, 'th', value));
+      const thead = document.createElement('thead');
+      thead.appendChild(head);
+      const tbody = document.createElement('tbody');
+      currentSnapshot.output.coordinateRows.forEach((value) => {
+        const row = document.createElement('tr');
+        row.setAttribute('data-pipeline-coordinate-node', String(value.nodeNumber));
+        [value.nodeNumber, value.nodeName, value.x, value.y, value.z].forEach((cell) => appendCell(document, row, 'td', cell));
+        tbody.appendChild(row);
+      });
+      table.append(thead, tbody);
+      host.appendChild(table);
+    }
+
+    async function mount(selectedIds = []) {
+      workspace?.destroy();
+      currentSnapshot ||= buildOwnerSnapshot();
+      workspace = await createPipelineEngineeringSvgShadowWorkspace({
+        adapterId: 'pipeline-shadow-adapter',
+        sceneId: 'pipeline-shadow-scene',
+        shellId: 'pipeline-shadow-shell',
+        host: document.querySelector('#shadow'),
+        projection: 'ISO',
+        viewport: { width: 980, height: 580 },
+        padding: 28,
+        selectedIds,
+        getSnapshot: () => currentSnapshot,
+        subscribeSnapshot(listener) {
+          listeners.add(listener);
+          return () => listeners.delete(listener);
+        },
+        ariaLabel: 'Pipeline engineering read-only viewer',
+      });
+      initializationError = '';
+      renderEvidence();
+      return workspace;
+    }
+
+    function emitOwnerUpdate() {
+      revisionNumber += 1;
+      designPressure = String(Number(designPressure) + 1);
+      currentSnapshot = buildOwnerSnapshot();
+      listeners.forEach((listener) => listener({
+        snapshot: currentSnapshot,
+        reason: 'owner-process-configuration-update',
+      }));
+      renderEvidence();
+      return currentSnapshot.revision;
+    }
+
+    function geometryLedger(scene) {
+      return scene.entities.map((entity) => ({ id: entity.id, geometry: entity.geometry }))
+        .sort((left, right) => left.id.localeCompare(right.id));
+    }
+
+    async function categoryIds() {
+      const scene = await workspace.adapter.getScene();
+      return Object.fromEntries(['routeSegments', 'routeVertices', 'gradeEvents', 'depthEvents', 'markers', 'referenceEvents', 'coordinateRows']
+        .map((category) => [category, scene.entities.filter((entity) => entity.domainRef.category === category).map((entity) => entity.id)]));
+    }
+
+    async function attemptInvalidMount(kind) {
+      const host = document.createElement('div');
+      const options = {
+        host,
+        adapterId: 'invalid-adapter',
+        sceneId: 'invalid-scene',
+        shellId: 'invalid-shell',
+        getSnapshot: () => currentSnapshot,
+        subscribeSnapshot: () => () => true,
+      };
+      if (kind === 'missing-shell-id') options.shellId = '';
+      if (kind === 'missing-revision') options.getSnapshot = () => ({ output: currentSnapshot.output, branchInfo: currentSnapshot.branchInfo });
+      try {
+        const mounted = await createPipelineEngineeringSvgShadowWorkspace(options);
+        mounted.destroy();
+        return { message: '', shellCount: host.querySelectorAll('[data-engineering-svg-shell]').length };
+      } catch (error) {
+        return { message: String(error?.message || error), shellCount: host.querySelectorAll('[data-engineering-svg-shell]').length };
+      }
+    }
+
+    function destroy() {
+      if (!workspace) return false;
+      const current = workspace;
+      workspace = null;
+      return current.destroy();
+    }
+
+    currentSnapshot = buildOwnerSnapshot();
+    globalThis.__pipelineEngineeringSvgShadowFixture = {
+      get workspace() { return workspace; },
+      get snapshot() { return currentSnapshot; },
+      get initializationError() { return initializationError; },
+      categoryIds,
+      geometryLedger,
+      emitOwnerUpdate,
+      renderEvidence,
+      listenerCount: () => listeners.size,
+      mutationCount: () => 0,
+      attemptInvalidMount,
+      mount,
+      destroy,
+    };
+    try {
+      await mount();
+    } catch (error) {
+      initializationError = String(error?.message || error);
+      document.querySelector('#parity').textContent = initializationError;
+    }
+  </script>
+</body>
+</html>

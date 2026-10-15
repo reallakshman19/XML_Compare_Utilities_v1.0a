@@ -1,0 +1,60 @@
+{
+  "schema": "SupportReportOwnerColumnContract.v1",
+  "sourceWorkbook": {
+    "displayName": "SL-097 and PS-007.xlsx",
+    "sha256": "16eb75d84bf31e9fa92ef26c0e73bf2cd6c5e71e1fcd047ffa27bb9094c36d56",
+    "sheet": "ASIM",
+    "range": "A1:U12"
+  },
+  "ordinalRow": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+  "keys": [
+    "scope",
+    "civilSecondarySupport",
+    "pipe",
+    "size",
+    "pipeSchedule",
+    "pipeInsulationThickness",
+    "pipeInsulationType",
+    "pipingPrimarySupport",
+    "supportType",
+    "pipingPrimarySupportReference",
+    "eastWest",
+    "northSouth",
+    "bopElevation",
+    "stressSystemNumber",
+    "nodeNumber",
+    "totalSupportPointsOnSecondary",
+    "previousName",
+    "primarySupportDescription",
+    "primarySupportZone",
+    "primarySupportSite",
+    "remarks"
+  ],
+  "headers": [
+    "SCOPE",
+    "CIVILSECONDARYSUPPORT",
+    "PIPE\n",
+    "SIZE\n",
+    "PIPE SCHEDULE\n",
+    "PIPE INSULATION THICKNESS\n",
+    "PIPE INSULATION TYPE\n",
+    null,
+    "SUPPORT TYPE\n",
+    "PIPING PRIMARY SUPPORT REFERENCE\n",
+    "EAST/WEST",
+    "NORTH/SOUTH",
+    "BOP ELEVATION",
+    "STRESS SYS.NO\n",
+    "NODE NO\n",
+    "TOTAL SUPPORT POINTS ON SECONDARY",
+    "PREV NAME",
+    "PRIMARY SUPPORT DESCRIPTION",
+    "PRIMARY SUPPORT ZONE",
+    "PRIMARY SUPPORT SITE",
+    "REMARKS"
+  ],
+  "authority": {
+    "class": "OWNER_SUPPLIED_WORKBOOK_CONTRACT",
+    "generatedFromProductionCode": false
+  }
+}

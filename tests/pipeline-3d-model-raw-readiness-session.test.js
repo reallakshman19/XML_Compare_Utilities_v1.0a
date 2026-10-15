@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import { createPipelineRawReadinessSession } from '../tabs/pipeline-3d-model/pipeline-3d-model-raw-readiness-session.js';
+let scans = 0;
+const scan = (value) => { scans += 1; return Object.freeze({ hasContent: value.length > 0,
+  hasDataRow: value.includes('\n') }); };
+const session = createPipelineRawReadinessSession(scan);
+const raw = Object.freeze({ table2a: 'H\n1', table3a: 'H\n2', table3b: '', table3c: '' });
+const first = session.resolve(raw);
+assert.equal(scans, 4);
+assert.equal(first.active, true);
+assert.equal(first.ready, true);
+assert.deepEqual(first.suppliedTables, ['table2a', 'table3a']);
+assert.equal(Object.isFrozen(first), true);
+assert.equal(Object.isFrozen(first.tableReadiness), true);
+const equal = session.resolve(Object.freeze({ ...raw }));
+assert.equal(scans, 4);
+assert.equal(equal.tableReadiness.table2a, first.tableReadiness.table2a);
+const changed = session.resolve(Object.freeze({ ...raw, table3a: 'H' }));
+assert.equal(scans, 5);
+assert.equal(changed.ready, false);
+session.resolve(Object.freeze({ table2a: 'H\n1', table3a: 'H' }));
+assert.equal(scans, 5);
+session.reset();
+session.resolve(raw);
+assert.equal(scans, 9);
+console.log('raw readiness session: PASS');

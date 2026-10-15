@@ -1,0 +1,81 @@
+pr: 1051
+issue: 1050
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-runtime-w215
+base_main: 710db4bb0af2286fef7ca48b09256ba8cd769344
+claim_state: OWNER_AUTHORIZED_EVIDENCE_CHECKPOINT_MERGE_WITH_RUNTIME_DEBT_CARRIED
+ready_for_review: true
+merge_authority: OWNER_ONLY
+merge_authorized: true
+merge_authorized_at_utc: 2026-08-24T18:04:59Z
+merge_authorization_text: "merge, proceed next"
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RESTRAINT_DELETE_RELEASE_FREEZE
+
+claims:
+  - id: INHERITED_W2_11_RESTRAINT_RUNTIME
+    state: PASS_RUNTIME_EXACT_BLOB
+    required: true
+    predecessor_pr: 1049
+  - id: INHERITED_W2_12_SUPPORT_OBSERVATION
+    state: PASS_RUNTIME_EXACT_BLOB_NONQUALIFYING
+    required: false
+    predecessor_pr: 1049
+  - id: W2_12_WRITER_SIDE_EXACT_BLOB_CLOSURE
+    state: COMPLETE_IMPORTS_UNDER_NODE_22_16_0
+    required: true
+    engineering_assertion_failure: NONE_OBSERVED
+  - id: W2_12_VALIDATOR_SIDE_EXACT_BLOB_CLOSURE
+    state: IN_PROGRESS
+    required: true
+    partial_hanger_validator_authority_blob: 309770a62e5c2a9caa317383ae70c89c5ff02679
+    engineering_assertion_failure: NONE_OBSERVED
+  - id: W2_12_FOCUSED_RUNTIME_R01_R22
+    state: NOT_RUN_DEPENDENCY_CLOSURE_IN_PROGRESS
+    required: true
+  - id: W2_13_SYNTHETIC_PRODUCT_RUNTIME
+    state: NOT_RUN
+    required: true
+  - id: W2_13_REAL_CII_PRODUCT_RUNTIME
+    state: NOT_RUN
+    required: true
+  - id: WRITER2_INHERITED_REGRESSION_RUNTIME
+    state: PARTIAL_PASS_W2_11_RESTRAINT_ONLY
+    required: true
+  - id: REPOSITORY_NPM_GATE
+    state: NOT_RUN_ENVIRONMENT
+    required: true
+  - id: RESTRAINT_BLOCK_CREATE
+    state: BLOCKED_RUNTIME_CONFIRMED_IN_PREDECESSOR
+    authority: NONE
+  - id: ENGINEERING_FAILURE
+    state: NONE_OBSERVED
+  - id: OWNER_CHECKPOINT_MERGE_ACCEPTANCE
+    state: AUTHORIZED
+    effect: MERGE_EVIDENCE_ONLY_NO_QUALIFICATION_PROMOTION
+    does_not_convert_not_run_to_pass: true
+    does_not_authorize_release_freeze: true
+
+runtime_custody:
+  mode: EXACT_GIT_BLOB_SPARSE_MIRROR_WHERE_NEEDED
+  verification: every_transitively_loaded_repository_file_must_hash_to_BASE_MAIN_blob
+  predecessor_to_base_code_change: NONE_ONLY_AGENT_EVIDENCE_FILES
+
+environment_constraints:
+  local_github_dns: UNAVAILABLE
+  github_repository_archive_download: UNAVAILABLE
+  github_workflow_dispatch: UNAVAILABLE
+  linked_netlify_project: NONE
+
+negative_assurance:
+  control_row1_nonam_protected: true
+  control_row2_restraints_authority_preserved: true
+  authority_widening: false
+  production_diff: NONE
+  test_diff: NONE
+  workflow_diff: NONE
+  merge_implies_w2_12_pass: false
+  merge_implies_release_freeze_ready: false
+
+successor_rule: W2.13 must be a separate PR from exact post-merge main and must carry W2.12 R01-R22 as NOT_RUN_DEPENDENCY_CLOSURE_IN_PROGRESS until actual authored entrypoint execution proves otherwise
+qualification_rule: module-load dependency closure is NOT test PASS or FAIL; only authored entrypoint assertions qualify W2.12/W2.13 gates
+next_claim_gate: merge PR1051 with expected-head protection; re-ground post-merge main; open W2.13 successor issue/branch/PR

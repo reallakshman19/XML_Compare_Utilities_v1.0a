@@ -1,0 +1,34 @@
+schema: AgentClaim.v1
+pr_or_wip: PR996
+claim_state: ACTIVE
+branch: agent/cii-base-anchor-method-fusion
+base_basis_sha: d28e33c1b4fd4facf559c218a36367149e270777
+authority_domains:
+  - CII_BASE_ANCHOR_METHOD_DISCOVERY
+  - CII_METHOD_A_B_SUGGESTION_FUSION
+claim_modes:
+  - EXCLUSIVE
+files:
+  exact:
+    - agents/MASTER_INDEX.md
+    - agents/PR996_workreport.md
+    - agents/claims/PR996.yaml
+    - agents/status/PR996.yaml
+    - tabs/cii-workspace/cii-workspace-anchor-method-a.js
+    - tabs/cii-workspace/cii-workspace-anchor-suggestions.js
+    - tests/cii-workspace-base-anchor-method-fusion.test.js
+    - tests/cii-workspace-benchmark-base-anchor.test.js
+forbidden_existing_file_edits:
+  - tabs/cii-workspace/cii-workspace-geometry.js
+  - tabs/cii-workspace/cii-workspace-pipe-runs.js
+  - tabs/cii-workspace/cii-workspace-multi-base-anchor.js
+  - tabs/cii-workspace/cii-workspace-correspondence-arbitration.js
+  - tabs/cii-workspace/cii-workspace-multi-base-correspondence.js
+  - tabs/cii-workspace/cii-workspace-target-writer.js
+  - tabs/cii-workspace/cii-workspace-target-writer-1b.js
+  - tabs/cii-workspace/cii-workspace-transfer-policy.js
+  - tabs/cii-workspace/cii-workspace-transfer-plan.js
+  - parser/fixed-field.js
+  - converters/**
+  - .github/workflows/**
+merge_disposition: OWNER_ONLY_NO_MERGE_AUTHORITY

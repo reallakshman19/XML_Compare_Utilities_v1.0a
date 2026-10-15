@@ -1,0 +1,82 @@
+schema_version: relay-v2.5-qualification-request
+id: QUALREQ-CII-W2-NB-R1-V25-0001
+status: READY_FOR_INDEPENDENT_CANDIDATE
+route:
+  route_key: SERIAL:EP-CII-W2-NB-R1-V25-0001
+  ep_id: EP-CII-W2-NB-R1-V25-0001
+  ep_path: agents/relay/execution-packages/EP-CII-W2-NB-R1-V25-0001.yaml
+  roadmap_revision: RM-0002
+  work_package: WP-ARCH-001
+question_set:
+  id: QSET-CII-W2-NB-R1-V25-0001
+  path: agents/relay/certifications/qualification/QSET-CII-W2-NB-R1-V25-0001.yaml
+  ep_contract_digest: sha256:0152815e8adc4aa4e834c92aec7998bb8f29aef45e339331a8a19bc0c38b1f1d
+preparer:
+  agent_instance_id: chatgpt:gpt-5.6-sol:v25-preparer-2026-09-17
+  excluded_from_candidate_role: true
+  excluded_from_independent_evaluator_role: true
+required_candidate_properties:
+  conversation_context_used: false
+  distinct_from_preparer: true
+  repository_only_reconstruction: true
+required_outputs:
+  discovery_receipt:
+    namespace: DISC-
+    directory: agents/relay/certifications/discovery
+    required_dsteps: [DSTEP-01, DSTEP-02, DSTEP-03, DSTEP-04]
+  qualification_receipt:
+    namespace: QUAL-
+    directory: agents/relay/certifications/qualification
+    questions: [Q1, Q2, Q3, Q4, Q5]
+    all_questions_must_pass: true
+    independent_evaluator_required: true
+  takeover_certification:
+    namespace: TC-
+    directory: agents/relay/certifications/takeover
+    required_result: PASS
+source_entrypoints:
+  - agents/relay/REPO_STATE.yaml
+  - agents/relay/roadmap/OVERALL_ROADMAP.yaml
+  - agents/relay/execution-packages/EP-CII-W2-NB-R1-V25-0001.yaml
+  - agents/relay/certifications/qualification/QSET-CII-W2-NB-R1-V25-0001.yaml
+  - tabs/cii-workspace/cii-workspace-propagation.js
+  - tabs/cii-workspace/cii-workspace-core.js
+  - tabs/cii-workspace/cii-workspace-writer2-routing.js
+  - tabs/cii-workspace/cii-workspace-multisource-preview.js
+  - tabs/cii-workspace/cii-workspace-writer1c-nodename.js
+  - tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js
+  - tabs/cii-workspace/cii-workspace-writer-version-bridge.js
+  - tests/cii-workspace-multisource-retained-auto-anchor-benchmark.test.js
+  - tests/cii-workspace-multisource-pb0003-benchmark.test.js
+supporting_non_certifying_basis:
+  - agents/relay/certifications/discovery/PREPARER-BASIS-CII-W2-NB-R1-V25-0001.md
+certification_expectations:
+  q1:
+    must_identify_first_loss_before_multisource: true
+    must_not_claim_multisource_selector_as_first_loss: true
+  q2:
+    must_explain_destructive_writer2_contraction: true
+    must_preserve_writer1c_replace_authority: true
+  q3:
+    extra_target_branch_expected: READY
+    unmatched_source_expected: FAIL_CLOSED
+    unresolved_symmetric_assignment_expected: FAIL_CLOSED
+  q4:
+    production_splice_helpers_allowed_in_oracle: false
+    production_relocation_helpers_allowed_in_oracle: false
+    production_projector_allowed_in_oracle: false
+    require_raw_byte_identity_outside_independent_closure: true
+    require_line_ending_identity: true
+  q5:
+    writer2_overwrite_authority_may_be_broadened: false
+    expected_first_product_slice: preserve_pre_writer2_nodename_intent_for_mixed_orchestration
+write_gate:
+  current_material_authority: READ_ONLY
+  product_writes_permitted_before_tc_pass: false
+  next_after_tc_pass: complete WP-ARCH-001 evidence/quality/checkpoint and create the computed successor EP; do not bypass roadmap frontier
+stale_if:
+  - EP contract changes
+  - QSET changes
+  - named production modules change
+  - main drift overlaps CII propagation, transfer-plan, writer routing, fixed-format authority, or version bridge
+  - owner intent for issue 1224 changes

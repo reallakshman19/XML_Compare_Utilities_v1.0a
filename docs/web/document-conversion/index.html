@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Document Search & Markdown</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">XML Compare Utilities</p>
+      <h1>Document Search &amp; Markdown</h1>
+      <p class="subhead">Search a controlled PDF, choose the pages you need, then convert only that range to Markdown.</p>
+    </div>
+    <div class="service-status" aria-live="polite">
+      <span id="health-dot" class="status-dot"></span>
+      <span id="health-text">Checking service…</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="panel source-panel" aria-labelledby="source-heading">
+      <div class="panel-heading">
+        <div>
+          <p class="step">Step 1</p>
+          <h2 id="source-heading">Search the PDF</h2>
+        </div>
+      </div>
+
+      <label class="field">
+        <span>Controlled source path</span>
+        <input id="source-path" type="text" value="/Common/EI - AVIFF Guidelines 2nd Edition.pdf" spellcheck="false">
+      </label>
+
+      <label class="field">
+        <span>PDF password <small>(optional)</small></span>
+        <input id="pdf-password" type="password" autocomplete="off">
+      </label>
+
+      <label class="field">
+        <span>Find text</span>
+        <div class="search-row">
+          <input id="query" type="search" value="T2.3" autocomplete="off">
+          <button id="search-button" class="button primary" type="button">Search</button>
+        </div>
+      </label>
+
+      <details class="options" open>
+        <summary>Search options</summary>
+        <div class="options-grid">
+          <label class="check"><input id="case-sensitive" type="checkbox"> Case-sensitive</label>
+          <label class="check"><input id="whole-word" type="checkbox"> Whole word</label>
+          <label class="field compact">
+            <span>OCR search</span>
+            <select id="search-ocr">
+              <option value="auto" selected>Auto</option>
+              <option value="always">Always</option>
+              <option value="never">Never</option>
+            </select>
+          </label>
+          <label class="field compact">
+            <span>OCR language</span>
+            <input id="search-language" type="text" value="eng" spellcheck="false">
+          </label>
+          <label class="field compact">
+            <span>Min OCR confidence</span>
+            <input id="search-confidence" type="number" min="0" max="1" step="0.05" value="0.70">
+          </label>
+        </div>
+      </details>
+
+      <div id="search-status" class="notice muted" role="status">Search returns every trusted match. It never chooses conversion pages for you.</div>
+      <div id="index-summary" class="index-summary" hidden></div>
+    </section>
+
+    <section class="panel results-panel" aria-labelledby="results-heading">
+      <div class="panel-heading split">
+        <div>
+          <p class="step">Step 2</p>
+          <h2 id="results-heading">Choose pages</h2>
+        </div>
+        <button id="clear-selection" class="button ghost small" type="button">Clear</button>
+      </div>
+
+      <div id="page-chips" class="page-chips" aria-label="Pages with matches">
+        <p class="empty">Search a PDF to see matching pages.</p>
+      </div>
+
+      <div class="range-editor" aria-labelledby="range-heading">
+        <div>
+          <h3 id="range-heading">Conversion range</h3>
+          <p id="range-help" class="help">Select one or more result pages, or type a range.</p>
+        </div>
+        <div class="range-inputs">
+          <label class="field compact"><span>Start</span><input id="page-start" type="number" min="1" inputmode="numeric"></label>
+          <span class="range-separator" aria-hidden="true">→</span>
+          <label class="field compact"><span>End</span><input id="page-end" type="number" min="1" inputmode="numeric"></label>
+        </div>
+      </div>
+
+      <div id="search-results" class="search-results">
+        <p class="empty">Matches will appear here with original PDF page numbers, extraction source, and coordinates.</p>
+      </div>
+    </section>
+
+    <section class="panel output-panel" aria-labelledby="output-heading">
+      <div class="panel-heading">
+        <div>
+          <p class="step">Step 3</p>
+          <h2 id="output-heading">Convert to Markdown</h2>
+        </div>
+      </div>
+
+      <details class="options">
+        <summary>Conversion options</summary>
+        <div class="options-grid">
+          <label class="field compact"><span>Tables</span>
+            <select id="table-mode">
+              <option value="auto" selected>Auto</option>
+              <option value="markdown">Markdown</option>
+              <option value="html">HTML</option>
+              <option value="records">Records</option>
+            </select>
+          </label>
+          <label class="field compact"><span>OCR</span>
+            <select id="convert-ocr">
+              <option value="auto" selected>Auto</option>
+              <option value="always">Always</option>
+              <option value="never">Never</option>
+            </select>
+          </label>
+          <label class="field compact"><span>Engineering regions</span>
+            <select id="engineering-regions">
+              <option value="auto" selected>Auto</option>
+              <option value="always">Always</option>
+              <option value="never">Never</option>
+            </select>
+          </label>
+          <label class="field compact"><span>Headers</span>
+            <select id="headers">
+              <option value="metadata" selected>Metadata</option>
+              <option value="keep">Keep</option>
+              <option value="drop">Drop</option>
+            </select>
+          </label>
+          <label class="field compact"><span>Footers</span>
+            <select id="footers">
+              <option value="metadata" selected>Metadata</option>
+              <option value="keep">Keep</option>
+              <option value="drop">Drop</option>
+            </select>
+          </label>
+        </div>
+      </details>
+
+      <button id="convert-button" class="button primary wide" type="button">Convert selected range</button>
+      <div id="convert-status" class="notice muted" role="status">No conversion run yet.</div>
+
+      <div class="output-toolbar">
+        <div class="tabs" role="tablist" aria-label="Conversion output">
+          <button id="markdown-tab" class="tab active" type="button" role="tab" aria-selected="true">Markdown</button>
+          <button id="evidence-tab" class="tab" type="button" role="tab" aria-selected="false">Evidence</button>
+        </div>
+        <div class="actions">
+          <button id="copy-markdown" class="button ghost small" type="button" disabled>Copy</button>
+          <button id="download-markdown" class="button ghost small" type="button" disabled>Download .md</button>
+          <button id="download-evidence" class="button ghost small" type="button" disabled>Evidence .json</button>
+        </div>
+      </div>
+
+      <textarea id="markdown-output" class="output-code" readonly spellcheck="false" aria-label="Markdown output"></textarea>
+      <pre id="evidence-output" class="output-code evidence" hidden aria-label="Evidence JSON"></pre>
+    </section>
+  </main>
+
+  <footer>
+    Search indexes may contain extracted document text and persist in the server's configured local cache. Start with <code>--no-persistent-search-index</code> for memory-only operation.
+  </footer>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/docx-semantic-content.schema.json",
+  "title":"DocxSemanticContent.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","normalizationProfile","parts","semanticContentHash"],
+  "properties":{
+    "schema":{"const":"DocxSemanticContent.v1"},
+    "normalizationProfile":{"const":"docx-semantic-v1"},
+    "semanticContentHash":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},
+    "parts":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["path","sha256","sizeBytes"],"properties":{"path":{"type":"string","minLength":1},"sha256":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},"sizeBytes":{"type":"integer","minimum":0}}}}
+  }
+}

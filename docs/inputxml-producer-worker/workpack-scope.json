@@ -1,0 +1,11 @@
+{
+  "schema": "InputXmlProducerWorkerScope.v1",
+  "operation": "producer.categorizeInputXml",
+  "serviceOnly": false,
+  "transportExtension": true,
+  "producerRuntimeSwitch": false,
+  "ui": false,
+  "http": false,
+  "ciiConversion": false,
+  "inputXmlMutation": false
+}

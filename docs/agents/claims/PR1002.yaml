@@ -1,0 +1,24 @@
+schema: AgentClaim.v1
+pr: 1002
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer-1c-roadmap
+owner: chatgpt
+state: ACTIVE
+criticality: ENGINEERING_CRITICAL_WRITER_AUTHORITY
+mission: define Writer 1C authority, anti-drift qualification, and future Writer 2/3 roadmap
+claimed_paths:
+  - docs/CIIcompareconceptnote.md
+  - agents/PR1002_workreport.md
+  - agents/status/PR1002.yaml
+  - agents/claims/PR1002.yaml
+  - agents/MASTER_INDEX.md
+protected_out_of_scope:
+  - tabs/cii-workspace/cii-workspace-target-writer.js
+  - tabs/cii-workspace/cii-workspace-target-writer-1b.js
+  - tabs/cii-workspace/cii-workspace-transfer-policy.js
+  - tabs/cii-workspace/cii-workspace-core.js
+  - parser/**
+  - converters/scripts/inputxml_to_cii2019.py
+  - .github/workflows/**
+merge_authority: OWNER_ONLY
+notes: documentation-only PR; Writer 1C implementation belongs in a separate issue and implementation PR

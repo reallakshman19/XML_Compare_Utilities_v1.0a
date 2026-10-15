@@ -1,0 +1,13 @@
+{
+  "profileId": "invalid-tag-fixture",
+  "levelDefinitions": [
+    {
+      "levelId": "Root",
+      "xmlTag": "1 Bad Tag",
+      "levelType": "container",
+      "creationMode": "static",
+      "key": "ROOT",
+      "documentRoot": true
+    }
+  ]
+}

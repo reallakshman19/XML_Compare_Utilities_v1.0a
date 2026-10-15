@@ -1,0 +1,60 @@
+schema: AgentClaim.v1
+pr_or_wip: PR983
+claim_state: ACTIVE_IMPLEMENTATION_COMPLETE_VALIDATION_PARTIAL
+files:
+  exact:
+    - tabs/cii-workspace/cii-workspace-intake.js
+    - Benchmark/CIICompare/CII_COMPARE_EXPECTED.json
+    - tests/helpers/cii-compare-benchmark-oracle.js
+    - tests/cii-workspace-capabilities.test.js
+    - tests/cii-workspace-benchmark-oracle.test.js
+    - agents/MASTER_INDEX.md
+    - agents/PR983_workreport.md
+    - agents/status/PR983.yaml
+    - agents/claims/PR983.yaml
+  prefixes:
+    - tabs/cii-workspace/cii-workspace-capabilities
+
+authority_domains:
+  - CII_WORKSPACE_INTAKE_CAPABILITY_STATE
+  - CII_COMPARE_BENCHMARK_ORACLE_TEST_AUTHORITY
+claim_modes:
+  - EXCLUSIVE
+owner_authorization:
+  source: active_chat
+  scope: BENCHMARK_ORACLE_PREFLIGHT_AND_NORMALIZED_CAPABILITY_STATES
+shared_read_authorities:
+  - parser/caesar-parser.js
+  - parser/sections/restraints.js
+  - parser/sections/elements.js
+  - Benchmark/CIICompare/
+forbidden_existing_file_edits:
+  - parser/**
+  - converters/**
+  - tabs/revision-compare/**
+  - tabs/model-converters/**
+  - tabs/cii-workspace/cii-workspace-candidates.js
+  - tabs/cii-workspace/cii-workspace-topology*.js
+  - tabs/cii-workspace/cii-workspace-transfer*.js
+implementation_claims:
+  - capability state distinguishes PARSED, EMPTY, NOT_PARSED, UNSUPPORTED and PARSE_ERROR
+  - semantic numeric counts are emitted only for PARSED or EMPTY authorities; other families return null
+  - nodes are an explicit parsed capability rather than only a summary scalar
+  - raw section presence is evidence only and never semantic authority
+  - restraint authority is PARTIAL and does not invent meanings for unqualified CAESAR restraint codes or gap/friction columns
+  - process authority is PARTIAL and exposes unique parsed P1/T1/T2 values and ranges, not load-case counts
+  - line-number, hanger, SIF/tee and general weight counts remain null until semantic parsers are qualified
+  - benchmark oracle remains test-only and may not become production node-offset logic
+  - target numbering offsets are explicitly non-authoritative hints
+  - ambiguous historical benchmark expectations are quarantined, not assertions
+validation_state: SOURCE_QUALIFIED_RUNTIME_PARTIAL
+validated_implementation_head: 65fede36f5adb016fe12194ccc6d2ca2ae509d44
+remaining_validation_gates:
+  - execute tests/cii-workspace-capabilities.test.js on the exact current implementation in a complete checkout/runner
+  - execute tests/cii-workspace-benchmark-oracle.test.js against SOURCE/TARGET1/TARGET2 in a complete checkout/runner
+  - after PR982 merge, retarget PR983 and re-ground the diff against main
+known_limits:
+  - restraint semantic classification outside qualified codes remains partial
+  - P1/T1/T2 is not a complete process/load-case model
+  - future UI must preserve NOT_PARSED/null semantics and must not display false zero
+  - PR983 remains stacked on PR982 until dependency merge

@@ -1,0 +1,97 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1006
+mission: Writer 1C Phase 2A SIF/TEE field-semantic qualification before mutation
+workstream: CII_WRITER_1C_SIF_QUALIFICATION
+branch: agent/cii-writer-1c-sif-qualification
+base: main
+base_head: cd09968c2213507cdf74221b637c3caddd2c1ae1
+issue: 1005
+work_intent: QUALIFY_ONLY
+criticality: ENGINEERING_CRITICAL
+agent_state: ACTIVE
+handover_readiness: READY
+report_path: agents/PR1006_workreport.md
+appendix_a_status: CURRENT
+grounding_epoch: GE-014_V11_NEUTRAL_DIRECT_AUTHORITY
+execution_mode: AUTO
+current_stage: PHASE2A_CANONICAL_V11_SELECTED_FIELDS_QUALIFIED_PRODUCTION_WRITER_NOT_IMPLEMENTED
+qualification_verdict: READY_FOR_CANONICAL_V11_SELECTED_SIF_FIELDS
+merge_authority: OWNER_ONLY
+ready_for_review: true
+ready_for_review_reason: vendor-authored CAESAR II 2019 Version11 User's Guide mirror directly defines the V11 neutral SIF&TEES format and item positions at page1187; selected ii/io positions are now edition-qualified; production Writer remains disabled and remaining NOT_RUN/Phase2B gates are explicit
+semantic_summary:
+  canonical_v11:
+    neutral_version: 11.0
+    tee_slots: 2
+    rows_per_tee_slot: 5
+    items_per_tee_slot: 30
+    total_fixed_positions: 60
+    directly_named_positions: 52
+    unresolved_positions: 8
+    selected_phase2b_positions: 4
+    selected_fields: [IN_PLANE_SIF_ii, OUT_PLANE_SIF_io]
+    selected_positions: [r0f2, r0f3, r5f2, r5f3]
+    currently_product_enabled_positions: 0
+  version12_corroboration:
+    selected_item_positions_same: true
+    selected_items: [3, 4]
+selected_positions:
+  - {tee_slot: 1, neutral_item: 3, row: 0, field: 2, columns: '[28,41)', meaning: IN_PLANE_SIF_ii}
+  - {tee_slot: 1, neutral_item: 4, row: 0, field: 3, columns: '[41,54)', meaning: OUT_PLANE_SIF_io}
+  - {tee_slot: 2, neutral_item: 3, row: 5, field: 2, columns: '[28,41)', meaning: IN_PLANE_SIF_ii}
+  - {tee_slot: 2, neutral_item: 4, row: 5, field: 3, columns: '[41,54)', meaning: OUT_PLANE_SIF_io}
+initial_phase2b_domain:
+  target_preimage: FINITE_GE_1_0
+  proposed_value: FINITE_GE_1_0
+  type_context: UNCHANGED
+  piping_code_context: UNCHANGED_AND_AUTHORITATIVELY_CUSTODIED
+  pointer: EXISTING_NONZERO_UNCHANGED
+  block_shape: EXACT_10_ROW_UNCHANGED
+  zero_transition: BLOCKED
+  blank_transition: BLOCKED
+  sentinel_9999_99_transition: BLOCKED
+external_authority:
+  version11_neutral:
+    status: PASS_VENDOR_AUTHORED_MIRROR
+    document: CAESAR_II_USERS_GUIDE_VERSION_2019_11_0
+    date: APRIL_2019
+    locator: External Interfaces / CAESAR II Neutral File / Auxiliary Element Data / page 1187
+    facts: FORTRAN_2X_6G13_6; TWO_TEES_X_30_ITEMS; FIVE_ROWS_PER_TEE; TEN_ROWS_TOTAL; ITEM3_II; ITEM4_IO; ITEMS1_TO26_NAMED
+    source_host: PDFCOFFEE_MIRROR
+  version12_neutral:
+    status: PASS_CORROBORATION
+    source: HEXAGON_CAESAR_II_USERS_GUIDE_VERSION12
+    facts: SAME_SELECTED_ITEM3_ITEM4_MAPPING; TWO_TEES_X_30_ITEMS; TEN_ROWS_TOTAL
+  edition_drift:
+    status: PASS_GUARD
+    facts: VERSION14_15_FOURTEEN_ROW_SHAPE; ITEM15_ITEM16_ORDER_DIFFERS_FROM_V11_V12
+product_authority:
+  transfer_policy_relaxed: false
+  sif_writer_code_added: false
+  sif_writer_policy_token_added: false
+  raw_payload_copy_authorized: false
+  current_blocker_preserved: SIF_TEE_FIELD_SEMANTICS_UNQUALIFIED
+  phase2b_production_allowed: false
+  phase2b_reason: separate implementation PR must add runtime code-context custody, positive transaction fixture, byte-span custody, shared-pointer arbitration, independent S_auth and adversarial negative assurance
+unresolved_authority:
+  - V11 neutral items 27..30
+  - zero/blank/sentinel transitions for first writer slice
+  - runtime piping-code context custody
+  - positive explicit-SIF production transaction benchmark
+validation:
+  current_main_grounding: {status: PASS, head: cd09968c2213507cdf74221b637c3caddd2c1ae1}
+  canonical_target_header: {status: PASS_REMOTE_SOURCE_INSPECTION, value: 11.0000}
+  v11_neutral_map: {status: PASS_VENDOR_AUTHORED_MIRROR, page: 1187}
+  v12_selected_map_corroboration: {status: PASS}
+  edition_drift_falsifier: {status: PASS}
+  exact_repository_file_census_execution: {status: NOT_RUN}
+  production_sif_writer: {status: NOT_IMPLEMENTED}
+scope_audit:
+  changed_files_expected: 8
+  production_writer_files_changed: 0
+  transfer_policy_files_changed: 0
+  protected_converter_files_changed: 0
+  workflow_files_changed: 0
+exact_next_action: owner review/disposition of PR1006; after disposition create separate Phase2B Writer1C SIF PR limited to explicit-to-explicit ii/io existing-block mutation with runtime code-context custody and independent byte authority
+last_updated: 2026-08-20T19:30:00+04:00

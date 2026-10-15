@@ -1,0 +1,39 @@
+pr: 1013
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-product-routing
+base: main@81ac1c91d45eb1357896e41acf8f5bd1a866f497
+criticality: ENGINEERING_CRITICAL
+state: IMPLEMENTED_DRAFT_AWAITING_REPOSITORY_AND_BROWSER_QUALIFICATION
+handover_readiness: READY
+takeover_authority: WRITE_ALLOWED
+merge_authority: OWNER_ONLY
+ready_for_review: false
+scope:
+  - writerVersion=2 explicit routing
+  - NODENAME CREATE/DELETE plan contraction only
+  - Phase-4A relocation readiness after explicit scope binding
+  - Phase-4B byte apply
+  - re-intake and independent full-postimage validation
+  - binary-authoritative modified-CII export
+preserved_defaults:
+  - Writer 1B remains production default
+  - Writer 1C overwrite and V11 SIF authority unchanged
+excluded:
+  - SIF/TEE block create/delete
+  - hanger cardinality / HGRDAT / MISCEL_1 relocation
+  - generic auxiliary-section allocation
+  - node/element/connectivity mutation
+  - Writer 3
+validation:
+  base_grounding: PASS
+  branch_scope: PASS_GIT_COMPARE
+  exact_writer2_routing_harness: PASS_ISOLATED_EXACT_WRITER2_ROUTING
+  writer2_product_routing_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_writer1_regressions: NOT_RUN_ENVIRONMENT
+  full_npm: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_RUN_ENVIRONMENT
+  real_cii_end_to_end: NOT_RUN_ENVIRONMENT
+notes:
+  - exact routing blob executed at isolated qualification: 0748657f49956acaf01f5d0c9c0a205474f9a7bd
+  - complete repository checkout remains blocked by github.com DNS in the execution container
+  - no unexecuted test may be represented as PASS

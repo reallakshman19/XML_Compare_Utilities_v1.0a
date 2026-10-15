@@ -1,0 +1,47 @@
+{
+  "schema": "InputXmlProducerWorkerBackupManifest.v1",
+  "baseCommit": "17b78713dd5762d49407108af2ec0440f91bb85e",
+  "policy": "Existing-file recovery uses immutable Git blob SHAs captured before editing.",
+  "files": [
+    {
+      "path": "xml-compare/categorized-inputxml-worker/worker-contracts.js",
+      "blobSha": "ac7462e88bea6a252648383b358844513b25d5e3"
+    },
+    {
+      "path": "xml-compare/categorized-inputxml-worker/worker-dispatcher.js",
+      "blobSha": "605091546b4d56a4f7fa2a0a8244df52b72bff3e"
+    },
+    {
+      "path": "xml-compare/categorized-inputxml-worker/worker-client.js",
+      "blobSha": "8e2756b5cfcb5bdfbd59a68f8603cf50019d094c"
+    },
+    {
+      "path": "xml-compare/categorized-inputxml-worker/index.js",
+      "blobSha": "7d2d8eb4e97abfd243f27861444de9c120b7f8a2"
+    },
+    {
+      "path": "tests/categorized-inputxml-worker-protocol.test.js",
+      "blobSha": "4dc8051e6324a3aa5d839668c60a15c2121b6343"
+    },
+    {
+      "path": "tests/categorized-inputxml-worker-integration.test.js",
+      "blobSha": "78b6eb83b7e405629d9c2cf1b631f679bb1f5126"
+    },
+    {
+      "path": "scripts/categorized-inputxml-worker-structure-check.mjs",
+      "blobSha": "a4e4d45298da4ec84aa6bd21d5ae7ce2952c4c51"
+    },
+    {
+      "path": ".github/workflows/categorized-inputxml-worker-transport.yml",
+      "blobSha": "87f8510333fb740d4530390b5b55e7381b5a9d35"
+    },
+    {
+      "path": "docs/categorized-inputxml-worker/protocol-v1.md",
+      "blobSha": "adcda75498578f3788ec7792183c921a4f269afb"
+    },
+    {
+      "path": "docs/categorized-inputxml-worker/README.md",
+      "blobSha": "7864f788cd8b8251588091b968f89eb8ede7628d"
+    }
+  ]
+}

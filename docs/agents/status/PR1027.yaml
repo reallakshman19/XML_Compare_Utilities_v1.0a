@@ -1,0 +1,141 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1027
+mission: >-
+  Implement Issue #1026 physical Writer-2 partial H>1 HANGER compaction and an
+  independent complete-postimage validator.
+workstream: CII_WRITER2_HANGER_PARTIAL_PHYSICAL
+branch: agent/cii-writer2-hanger-partial-physical
+main_head_last_checked: ae1de402db129e32cd6d7811a4e4707d64512bd4
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+agent_state: REVIEW_READY_WITH_EXPLICIT_EVIDENCE_LIMITATIONS
+pr_recovery_state: HEALTHY
+handover_readiness: READY
+report_path: agents/PR1027_workreport.md
+appendix_a_status: CURRENT
+grounding_epoch: GE-1027-002
+current_stage: POSTIMAGE_REPRESENTATION_CUSTODY_HARDENED_REVIEW_READY
+blocker: NONE_FOR_COMPONENT_REVIEW
+real_source_evidence_limitation: NO_REAL_REPOSITORY_H_GT_1_CII_PREIMAGE
+remaining_environment_limitation: CURRENT_HEAD_NATIVE_EXECUTION_NOT_AVAILABLE
+highest_risk: >-
+  TARGET0 and postimage bytes are cryptographically bound, and the postimage
+  byteString/Uint8Array/text/physical-file metadata are now required to represent
+  the same final bytes. Exact current-head runtime execution remains unavailable
+  and no real repository H>1 CII preimage exists.
+dependencies:
+  - type: HARD_DEPENDENCY_SATISFIED
+    pr: 1025
+    accepted_head: a7990ba977a4d68a1ca08a38bdf5c6d68a0491d6
+    merge_sha: ae1de402db129e32cd6d7811a4e4707d64512bd4
+coordination_state: SAFE_FOR_REVIEW
+merge_authority: OWNER_ONLY
+merge_authorized: false
+changed_files:
+  actual: 17
+  intended: 17
+  unexplained: 0
+batch_postimage_representation_custody:
+  finding: >-
+    The prior validator proved final byteString equality and postimage SHA-256, but
+    did not independently prove that Writer bytes/text or caller-supplied physicalFile
+    text/lines/line-ending/encoding metadata represented those same final bytes.
+  authority: CII_PHYSICAL_POSTIMAGE_REINTAKE_EQUIVALENCE
+  writer_fix_commit: 79f8fec0df92572dba66a5a4fdba40fe24935198
+  validator_fix_commit: 2c2d4ecd0ea7cc4f91438572c7d0ea59a5ec6eca
+  falsifier_extension_commit: 7b622609ec8da738c41ebe2d6e7b02305bc4e13d
+  integrated_falsifier_commit: ddf98d2b79ee98822eb0ce7b3e537d2468dc5fc5
+  rules:
+    - Writer MUST derive exposed text from canonical createCiiPhysicalFile(final bytes)
+    - Writer MUST testify postimageRepresentationCustody
+    - validator MUST reconstruct canonical physicalFile from after.originalByteString bytes
+    - physicalFile schema/byteAuthority/writer eligibility/textEncoding/byteLength MUST match canonical re-intake
+    - physicalFile text/lines/lineEndings MUST match canonical re-intake
+    - after byteAuthority/textEncodingAuthority/textLength MUST match when supplied
+    - Writer bytes MUST be Uint8Array and byte-identical to canonical postimage bytes
+    - Writer text MUST equal canonical postimage text
+    - Writer postimageRepresentationCustody MUST match independently rebuilt custody
+  falsifiers:
+    f51: WRITER_BYTE_ARRAY_CONTENT_MISMATCH
+    f52: WRITER_BYTE_ARRAY_TYPE_MISMATCH
+    f53: WRITER_TEXT_MISMATCH
+    f54: POSTIMAGE_PHYSICAL_TEXT_MISMATCH
+    f55: POSTIMAGE_PHYSICAL_LINES_MISMATCH
+    f56: POSTIMAGE_PHYSICAL_LINE_ENDINGS_MISMATCH
+    f57: POSTIMAGE_PHYSICAL_METADATA_MISMATCH
+    f58: POSTIMAGE_DOCUMENT_REPRESENTATION_METADATA_MISMATCH
+  writer_source_observation: PASS_SOURCE_INSPECTION
+  validator_source_observation: PASS_SOURCE_INSPECTION_INDEPENDENT_REINTAKE
+  f51_f58_test_source_observation: PASS_SOURCE_INSPECTION_TEST_AUTHORED
+  current_head_runtime_observation: NOT_RUN_ENVIRONMENT
+batch_postimage_cryptographic_custody:
+  postimage_hash_authority: SHA256_WRITER2_POSTIMAGE_BYTES
+  writer_fix_commit: b93835388b5f27c2044ecd20c91084c7a5f1b38c
+  validator_fix_commit: c2cd7bd114d09027feb3a413a7ec244751ba56e2
+  falsifiers: F46_F50
+  runtime_observation: NOT_RUN_ENVIRONMENT
+batch_target0_cryptographic_custody:
+  authority: SHA256_ORIGINAL_TARGET0_BYTES
+  sha_primitive_path: tabs/cii-workspace/cii-workspace-byte-sha256.js
+  writer_fix_commit: 39e6770a70f284c0f36400425f19789e430fb9fa
+  validator_fix_commit: 4d34f7699f46fd1025c3cba52ae16335dff87448
+  falsifiers: F40_F45
+  runtime_observation: NOT_RUN_ENVIRONMENT
+batch_canonical_scope_container_custody:
+  writer_fix_commit: 4a9f2f7daf6b7c50f776a4b8ad569df76ada1106
+  validator_fix_commit: c6fb4d2c1b8d415581eb14d876f4d84f7a70708b
+  falsifiers: F31_F39
+  runtime_observation: NOT_RUN_ENVIRONMENT
+batch_real_source_census:
+  ledger: docs/cii-writer2-hanger-real-source-census.csv
+  inventoried_cii_assets: 9
+  h0_assets: 7
+  h1_assets: 2
+  h_gt_1_assets: 0
+  real_h_gt_1_source: NOT_AVAILABLE
+  real_h_gt_1_partial_delete_roundtrip: NOT_RUN_NO_REAL_SOURCE
+packed_source_shape:
+  authority: SYNCHRONIZER_PACK_I_ACTIVE_FIELDS_ONLY
+  source_rule: EXACT_2X_PLUS_ACTIVE_I13_FIELDS_NO_TRAILING_BYTES
+  post_rule: EXACT_2X_PLUS_RETAINED_ACTIVE_I13_FIELDS_NO_UNUSED_PADDING
+runtime_adoption:
+  existing_product_or_composite_path_changed: false
+  package_json_changed: false
+  workflow_changed: false
+  protected_parser_or_converter_changed: false
+  intake_changed: false
+  physical_file_changed: false
+validation:
+  pr1025_merge: PASS_REMOTE_EXECUTION
+  production_intake_sha_basis: PASS_SOURCE_INSPECTION
+  sha256_primitive_standard_vectors_exact_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  f40_f45_target0_hash_falsifiers: PASS_SOURCE_INSPECTION_TEST_AUTHORED_NOT_RUN
+  f46_f50_postimage_hash_falsifiers: PASS_SOURCE_INSPECTION_TEST_AUTHORED_NOT_RUN
+  f51_f58_postimage_representation_falsifiers: PASS_SOURCE_INSPECTION_TEST_AUTHORED_NOT_RUN
+  historical_frozen_postimage_oracles: PASS_RECONSTRUCTED_DEPENDENCY_CLOSURE
+  historical_mandatory_packing_matrix: PASS_RECONSTRUCTED_DEPENDENCY_CLOSURE
+  historical_deleted_record_testimony: PASS_FAIL_CLOSED_RECONSTRUCTED_AT_TIME
+  f31_f39_scope_container_suite: PASS_SOURCE_INSPECTION_TEST_AUTHORED_NOT_RUN
+  packed_source_shape_emitter_authority: PASS_SOURCE_INSPECTION
+  repository_real_source_census: PASS_SOURCE_INSPECTION
+  real_repository_h_gt_1_source: NOT_AVAILABLE
+  real_h_gt_1_partial_delete_roundtrip: NOT_RUN_NO_REAL_SOURCE
+  focused_tests_native_exact_checkout_current_head: NOT_RUN_ENVIRONMENT
+  real_bm_cii_source_full_file_exact_intake: NOT_RUN_ENVIRONMENT
+  broader_writer2_integration: NOT_RUN_ENVIRONMENT
+  full_repository_npm_test: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_APPLICABLE_UNCHANGED_ROUTE
+execution_limitation: >-
+  The execution container cannot provide a native exact repository checkout for
+  current-head Node tests. Source inspection does not constitute exact committed-module
+  runtime PASS.
+review_readiness_basis: >-
+  Preimage/postimage hashes and postimage representations are now byte-derived at
+  the component boundary; prior scope/container, packed-row and record-binding gates
+  remain intact; unavailable execution and missing real H>1 evidence remain explicit.
+exact_next_action: >-
+  Owner engineering review. Do not merge without fresh owner authorization. On the
+  first native checkout, run SHA/F40-F58 first, then all focused PR1027 tests and
+  broader regression. If a real H>1 source appears, qualify it before advancing the census.
+last_updated: 2026-08-23T16:22:00+05:30

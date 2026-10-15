@@ -1,0 +1,34 @@
+schema: engineering-pr-claims/v1
+repository: reallaksh19/XML_Compare_Utilities
+pr: 1021
+base: a16a3f2ee05abb5adf6ae5801620dd0fd1bdb1f2
+claims:
+  - id: CMP-1021-001
+    statement: NODENAME, V11 SIF DELETE and HANGER DELETE-ALL component writers are all invoked from the same untouched TARGET preimage
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: CMP-1021-002
+    statement: tri-family physical claims are expressed in original TARGET byte coordinates and any overlap blocks before patching
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: CMP-1021-003
+    statement: CONTROL.NOHGRS field3 and CONTROL.NONAM field4 are adjacent disjoint 13-byte spans and may coexist in one transaction
+    evidence: PASS_SOURCE_INSPECTION
+  - id: CMP-1021-004
+    statement: independent validator rebuilds all three plans and the complete expected variable-length postimage without trusting the tri-family writer mutation ledger
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: CMP-1021-005
+    statement: HANGER delete-all postimage uses original RRMAT/VFLEX prefix plus four original execution rows and does not require HGRDAT/TAG-GUID tail ordering
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: CMP-1021-006
+    statement: mixed NODENAME growth + SIF shrink + HANGER MISCEL_1 shrink regression and falsifiers are authored
+    evidence: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: CMP-1021-007
+    statement: product/core routing is unchanged in PR1021
+    evidence: PASS_CHANGED_FILE_SCOPE_RECONCILIATION_7_OF_7
+prohibited_claims:
+  - tri-family product routing is qualified
+  - partial H>1 hanger deletion is qualified
+  - HANGER CREATE is qualified
+  - SIF CREATE is qualified
+  - focused JS regression passed
+  - full repository tests passed
+  - browser/product flow passed

@@ -1,0 +1,40 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR982
+mission: CII fixed-field parser qualification for canonical CAESAR II neutral ELEMENT rows
+workstream: cii-compare-phase1-parser
+branch: agent/cii-fixed-field-parser
+validated_implementation_head: 311a35851a78d135d00e52d7bd2642f51beb6260
+main_base: ceb0c0193a4be68b28a913b74bdc453ccf79d336
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+agent_state: IMPLEMENTATION_COMPLETE_VALIDATION_PARTIAL
+pr_recovery_state: HANDOVER_READY_DRAFT_UNMERGED
+handover_readiness: READY
+report_path: agents/PR982_workreport.md
+appendix_a_status: NOT_REQUIRED_SAME_AGENT_CONTINUATION
+scope_authority: LOCKED_TO_PHASE1_FIXED_FIELD_PARSER
+validation_state: FOCUSED_SOURCE_INSPECTION_AND_INDEPENDENT_REPRODUCTION
+validation_summary: >-
+  Canonical six-field fixed-width decoder is implemented and integrated into ELEMENT parsing.
+  Exact SOURCE 255->260 row independently reproduces expected geometry and OD. Regression source
+  covers SOURCE/TARGET1/TARGET2, but repository execution is NOT_RUN in this environment.
+acceptance_matrix:
+  canonical_widths_15_13x5: PASS_SOURCE_INSPECTION
+  adjacent_negative_field_decode: PASS_INDEPENDENT_REPRODUCTION
+  source_255_260_expected_values: PASS_INDEPENDENT_REPRODUCTION
+  target1_regression_source: IMPLEMENTED_NOT_RUN
+  target2_regression_source: IMPLEMENTED_NOT_RUN
+  fortran_d_exponent_support: IMPLEMENTED_SOURCE_INSPECTION
+  protected_writer_unchanged: PASS_DIFF_BOUNDARY
+  correspondence_logic_unchanged: PASS_DIFF_BOUNDARY
+  transfer_mutation_unchanged: PASS_DIFF_BOUNDARY
+  github_actions_status: NOT_PRESENT
+known_limits:
+  - full repository parser regression is not observed
+  - legacy non-canonical numeric rows retain whitespace fallback
+exact_next_action: >-
+  Keep PR982 draft/unmerged. Create a stacked follow-on from the latest PR982 branch head for
+  benchmark-oracle preflight and normalized engineering-data capability states; do not merge
+  without explicit owner authorization.
+last_updated: 2026-08-18T17:14:00+04:00

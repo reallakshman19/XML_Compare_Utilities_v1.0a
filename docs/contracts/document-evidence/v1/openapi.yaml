@@ -1,0 +1,106 @@
+openapi: 3.1.0
+info:
+  title: XML Compare Utilities Document Evidence Contract
+  version: 1.4.1
+  description: >-
+    Provider-neutral document-evidence contract and governed table extraction routes.
+paths:
+  /v2/tables/discover:
+    post:
+      summary: Discover advisory PDF table candidates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [sourcePath]
+              properties:
+                sourcePath: {type: string, minLength: 1}
+      responses:
+        '200':
+          description: Advisory candidate pages/regions with immutable SourceIdentity.v1; no governed extraction authority.
+          content:
+            application/json:
+              schema: {$ref: ./table-discovery.schema.json}
+  /v2/tables/extract:
+    post:
+      summary: Extract governed evidence from explicitly selected PDF pages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [sourcePath, sourceHash, pages]
+              properties:
+                sourcePath: {type: string, minLength: 1}
+                sourceHash: {type: string, minLength: 1}
+                pages:
+                  type: array
+                  minItems: 1
+                  uniqueItems: true
+                  items: {type: integer, minimum: 1}
+                options:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    ocr:
+                      type: string
+                      enum: [never, always]
+                      default: never
+                      description: `always` runs exactly one bounded existing OCR pass per explicitly selected page.
+                    ocrLanguage: {type: string, minLength: 1, default: eng}
+      responses:
+        '200':
+          description: Source-bound table observations, per-pass cells, extraction-only decisions and the effective bounded extraction options.
+          content:
+            application/json:
+              schema: {$ref: ./table-extraction.schema.json}
+components:
+  schemas:
+    SourceIdentity: {$ref: ./source.schema.json}
+    Surface: {$ref: ./surface.schema.json}
+    SurfaceTransform: {$ref: ./transform.schema.json}
+    Geometry: {$ref: ./geometry.schema.json}
+    GeometryEvidence: {$ref: ./geometry-evidence.schema.json}
+    ProviderProfile: {$ref: ./provider-profile.schema.json}
+    RenderProfile: {$ref: ./render-profile.schema.json}
+    ResolvedFontManifest: {$ref: ./resolved-font-manifest.schema.json}
+    NativeTextQuality: {$ref: ./native-quality.schema.json}
+    Observation: {$ref: ./observation.schema.json}
+    Diagnostic: {$ref: ./diagnostic.schema.json}
+    EvidenceDecision: {$ref: ./decision.schema.json}
+    DocxPageAuthority: {$ref: ./docx-page-authority.schema.json}
+    DocxSemanticContent: {$ref: ./docx-semantic-content.schema.json}
+    DocxSemanticRef: {$ref: ./docx-semantic-ref.schema.json}
+    DocxSemanticVisualMap: {$ref: ./docx-semantic-visual-map.schema.json}
+    TablePass: {$ref: ./table-pass.schema.json}
+    TableDiscovery: {$ref: ./table-discovery.schema.json}
+    TableExtraction: {$ref: ./table-extraction.schema.json}
+    Overlay: {$ref: ./overlay.schema.json}
+    MachineEvidenceEnvelope: {$ref: ./machine-evidence-envelope.schema.json}
+    EvidenceBundleManifest: {$ref: ./evidence-bundle-manifest.schema.json}
+    EvidenceStoragePolicy: {$ref: ./storage-policy.schema.json}
+    OcrResourcePolicy: {$ref: ./ocr-resource-policy.schema.json}
+    CorrectionEvent: {$ref: ./correction-event.schema.json}
+    EffectiveEvidenceView: {$ref: ./effective-evidence-view.schema.json}
+x-contract-status: runtime-partial
+x-authority-boundary: extraction-only
+x-table-ocr-policy:
+  modes: [never, always]
+  attemptsPerSelectedPage: 1
+  maxPagePixels: 24000000
+  maxDimensionPixels: 12000
+  maxJobOutputBytes: 134217728
+  maxAttemptSeconds: 30
+x-generic-ocr-policy:
+  modes: [single, auto, enhanced]
+  maxProfiles: {single: 1, auto: 2, enhanced: 4}
+  maxProviderInvocationsPerJob: 512
+  lowConfidenceExpandsSearch: false
+x-persistent-evidence-retrieval:
+  routesDeclared: false
+  prerequisite: content-addressed EvidenceStoragePolicy.v1 with TTL, non-job access scope, eviction policy, and retained-byte limit

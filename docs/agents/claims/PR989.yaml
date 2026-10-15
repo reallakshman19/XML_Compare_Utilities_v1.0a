@@ -1,0 +1,42 @@
+schema: AgentClaim.v1
+pr_or_wip: PR989
+claim_state: ACTIVE_HANDOVER_READY
+files:
+  exact:
+    - tabs/cii-workspace/cii-workspace-anchor-suggestions.js
+    - tabs/cii-workspace/cii-workspace-contracts.js
+    - tabs/cii-workspace/cii-workspace-core.js
+    - tabs/cii-workspace/cii-workspace-shell.js
+    - tabs/cii-workspace/cii-workspace.css
+    - tests/cii-workspace-base-anchor-suggestions.test.js
+    - tests/cii-workspace-benchmark-base-anchor.test.js
+    - tests/cii-workspace-anchor-approval-ui.test.js
+    - agents/PR989_workreport.md
+    - agents/status/PR989.yaml
+    - agents/claims/PR989.yaml
+    - agents/MASTER_INDEX.md
+authority_domains:
+  - CII_BASE_ANCHOR_SUGGESTION_EVIDENCE
+  - CII_CORRESPONDENCE_APPROVAL_UI
+  - CII_DELTA_APPROVAL_PROJECTION
+  - CII_TRANSFER_APPROVAL_PRESENTATION
+claim_modes:
+  - EXCLUSIVE
+forbidden_existing_file_edits:
+  - parser/**
+  - converters/**
+  - tabs/cii-workspace/cii-workspace-match-methods.js
+  - tabs/cii-workspace/cii-workspace-evidence.js
+  - tabs/cii-workspace/cii-workspace-candidates.js
+  - tabs/cii-workspace/cii-workspace-propagation.js
+  - tabs/cii-workspace/cii-workspace-engineering-delta.js
+  - tabs/cii-workspace/cii-workspace-transfer-policy.js
+  - any target CII writer/mutator
+implementation_claims:
+  - base-anchor pairing is dimension-free end-to-end and does not use numbering offsets, OD, or wall
+  - paired suggestions are evidence only until engineer acceptance and Compare locks the pair
+  - bulk HIGH/MEDIUM acceptance requires identityBound and never sweeps REVIEW/UNRESOLVED
+  - Engineering Delta Approval is a projection of correspondence Decision, not a second authority
+  - Transfer Preview remains governed by existing REVIEWED/LOCKED review-ledger authority
+  - target mutation remains BLOCKED_NOT_IMPLEMENTED
+validation_state: SYNTHETIC_PAIRING_PASS_REAL_BENCHMARK_NOT_RUN

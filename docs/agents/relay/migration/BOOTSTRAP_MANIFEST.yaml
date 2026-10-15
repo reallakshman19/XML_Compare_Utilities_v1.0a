@@ -1,0 +1,22 @@
+schema_version: relay-v2.5
+roadmap:
+  id: ROADMAP-XMLCU-V25-1224
+  revision: RM-0001
+  title: CII Writer2 NodeName byte-preserving revision delivery
+objectives:
+  - id: OBJ-CII-W2-NB-R1-1224
+    title: Complete CII Writer2 full NodeName byte-preserving revision
+    state: ACTIVE
+    definition: PARTIALLY_DEFINED
+    phases:
+      - id: PH-V25-MIGRATION
+        title: V2.5 migration and authority reconstruction
+        state: PLANNED
+        definition: OWNER_REVIEW_REQUIRED
+        work_packages:
+          - id: WP-V25-MIGRATION-001
+            title: Inventory and reconcile legacy V2 evidence for issue 1224
+            state: PLANNED
+            definition: OWNER_REVIEW_REQUIRED
+            execution_status: WAITING
+            depends_on: []

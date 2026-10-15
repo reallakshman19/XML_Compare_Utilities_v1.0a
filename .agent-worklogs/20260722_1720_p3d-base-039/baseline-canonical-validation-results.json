@@ -1,0 +1,18 @@
+{
+  "schema": "P3DBase039CanonicalValidationProof.v1",
+  "governingBaselineSha": "74156da67ed0304ae0011d490dab9b7188ccfec5",
+  "externalRepository": "reallaksh19/3D_Converters",
+  "externalPinnedContractSha": "ba8b4e43698e1bed8e30f25832659603b40e86b2",
+  "externalCurrentMainInspectedSha": "2a0aca7de1a7f5572865a049ff13e9aac075e830",
+  "canonicalXsd": "contracts/inputxml/v1/inputxml-canonical-v1.xsd",
+  "extensionXsd": "contracts/inputxml/v1/inputxml-extension-v1.xsd",
+  "schematron": "contracts/inputxml/v1/inputxml-semantic-rules-v1.sch",
+  "xsdValid": true,
+  "schematronValid": true,
+  "repeatSerializationByteIdentical": true,
+  "fromNameSerialized": true,
+  "toNameSerialized": true,
+  "forbiddenOutputValues": [],
+  "executionScope": "local reconstructed authorized slice",
+  "repositoryExactHeadWorkflow": "NOT_SCHEDULED"
+}

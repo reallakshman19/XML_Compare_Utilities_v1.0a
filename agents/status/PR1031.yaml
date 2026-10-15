@@ -1,0 +1,57 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR1031
+branch: agent/cii-writer2-hanger-partial-product
+base_main: 9f2f11ccf3b2f62cecaf75677a3dcbff39c85f6b
+issue: 1030
+state: REVIEW_READY_WITH_EXPLICIT_EVIDENCE_LIMITATIONS
+stage: PRODUCT_ADOPTION_SOURCE_COMPLETE_REVIEW_READY
+handover_readiness: READY
+merge_authority: OWNER_ONLY
+merge_authorized: false
+scope:
+  production:
+    - tabs/cii-workspace/cii-workspace-writer2-composite-routing.js
+    - tabs/cii-workspace/cii-workspace-writer2-product-validation.js
+    - tabs/cii-workspace/cii-workspace-core.js
+  tests:
+    - tests/cii-workspace-writer2-composite-product-routing.test.js
+    - tests/cii-workspace-writer2-hanger-partial-product.test.js
+    - tests/cii-workspace-writer2-hanger-partial-product-trifamily.test.js
+  coordination:
+    - agents/MASTER_INDEX.md
+    - agents/PR1031_workreport.md
+    - agents/status/PR1031.yaml
+    - agents/claims/PR1031.yaml
+constraints:
+  writer1b_default_preserved: true
+  writer2_explicit_only: true
+  low_level_writer_unchanged: true
+  hanger_create_blocked: true
+  sif_create_blocked: true
+  writer3_untouched: true
+  parser_converter_changes: false
+  workflow_changes: false
+  package_changes: false
+product_authority:
+  readiness_classes:
+    - DELETE_ALL
+    - PARTIAL_H_GT_1
+  partial_requires_qualified_positional_record_binding: true
+  validator_dispatch_fail_closed: true
+  stable_family_mutation_counts_shape_preserved: true
+evidence:
+  pr1029_composite_authority: MERGED
+  readiness_source: PASS_SOURCE_INSPECTION
+  product_validator_dispatch_source: PASS_SOURCE_INSPECTION
+  core_diff_containment: PASS_SOURCE_INSPECTION
+  partial_only_product_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  trifamily_partial_product_test: AUTHORED_NOT_RUN_ENVIRONMENT
+  delete_all_product_regression: UPDATED_NOT_RUN_ENVIRONMENT
+  repository_npm_test: NOT_RUN_ENVIRONMENT
+  browser_product_apply: NOT_RUN_ENVIRONMENT
+  real_repository_h_gt_1_source: NOT_AVAILABLE
+  real_h_gt_1_product_roundtrip: NOT_RUN_NO_REAL_SOURCE
+changed_path_target: 10
+unexplained_path_target: 0
+next_action: owner engineering review; execute focused and repository tests on first native checkout; merge only on fresh owner authorization

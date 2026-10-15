@@ -1,0 +1,31 @@
+{
+  "schema": "XmlCompareLinewiseProducerAdoptionBackupManifest.v1",
+  "baseCommit": "4b2290670b0bf5886630d18af9d359ee1b45a4c9",
+  "policy": "Existing-file recovery uses immutable Git blob SHAs captured before editing.",
+  "files": [
+    {
+      "path": "xml-compare/XmlCompareLinewiseWorkflowActions.js",
+      "blobSha": "25e9e095d66ab90f9f9fadb0304f2f3bf90d9630"
+    },
+    {
+      "path": "xml-compare/XmlCompareLinewiseWorkflowState.js",
+      "blobSha": "5db3a9fb05516905c4c68506a51fe4006fe19a94"
+    },
+    {
+      "path": "xml-compare/XmlCompareLinewiseWorkflowView.js",
+      "blobSha": "2abcf559b61d66356592fe4c93b0ea9138b1025f"
+    },
+    {
+      "path": "xml-compare/XmlCompareTabView.js",
+      "blobSha": "042995a0fd1486ce387425f44ceec8dd9bf602d6"
+    },
+    {
+      "path": "tabs/xml-compare-tab.js",
+      "blobSha": "bfb137cc85f33a7f1bd570d03c39a72c21fb4b3c"
+    },
+    {
+      "path": "tests/xml-compare-linewise-workflow-native.test.js",
+      "blobSha": "58efa525254ffb196314c5f0257c92b29e766d69"
+    }
+  ]
+}

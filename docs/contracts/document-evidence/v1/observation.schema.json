@@ -1,0 +1,33 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/observation.schema.json",
+  "title":"Observation.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","observationId","observationHash","kind","sourceHash","surfaceId","surfaceHash","provider","providerVersion","rawText","normalizedText","documentGeometry"],
+  "dependentRequired":{"providerGeometry":["providerSurfaceId","providerSurfaceHash"]},
+  "properties":{
+    "schema":{"const":"Observation.v1"},
+    "observationId":{"type":"string","minLength":1},
+    "observationHash":{"type":"string","minLength":1},
+    "kind":{"type":"string","enum":["native-text","ocr"]},
+    "sourceHash":{"type":"string","minLength":1},
+    "surfaceId":{"type":"string","minLength":1},
+    "surfaceHash":{"type":"string","minLength":1},
+    "provider":{"type":"string","minLength":1},
+    "providerVersion":{"type":"string","minLength":1},
+    "providerProfileHash":{"type":"string","minLength":1},
+    "inputRasterHash":{"type":"string","minLength":1},
+    "rawText":{"type":"string"},
+    "normalizedText":{"type":"string"},
+    "providerConfidenceRaw":{"type":["number","null"]},
+    "providerGeometry":{"$ref":"geometry.schema.json"},
+    "providerSurfaceId":{"type":"string","minLength":1},
+    "providerSurfaceHash":{"type":"string","minLength":1},
+    "documentGeometry":{"$ref":"geometry.schema.json"},
+    "preprocessingTransformHashes":{"type":"array","items":{"type":"string","minLength":1}},
+    "nativeQuality":{"$ref":"native-quality.schema.json"},
+    "rawProviderEvidenceHash":{"type":"string","minLength":1},
+    "extensions":{"type":"object"}
+  }
+}

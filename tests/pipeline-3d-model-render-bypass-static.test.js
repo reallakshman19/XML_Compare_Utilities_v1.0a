@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+const runtime = readFileSync(new URL('../tabs/pipeline-3d-model/pipeline-3d-model-profile-propagation-runtime.js', import.meta.url), 'utf8');
+assert.match(runtime, /PIPELINE_COMPLETED_OUTPUT_REUSED/);
+assert.match(runtime, /createPipelineRenderedSurfaceSession/);
+assert.match(runtime, /state\.disposition !== PIPELINE_COMPLETED_OUTPUT_REUSED/);
+assert.match(runtime, /renderedSurfaceSession\.matches\(dialog, output\)/);
+assert.match(runtime, /if \(required\) renderOutputs\(dialog, output, instance\);\s*renderKeyPlan\(dialog, output, instance\);/);
+assert.match(runtime, /if \(required\) \{\s*setWarnings[\s\S]*renderedSurfaceSession\.capture/);
+assert.ok((runtime.match(/renderedSurfaceSession\.reset\(\)/g) || []).length >= 4);
+assert.doesNotMatch(runtime, /if \(required\) renderKeyPlan/);
+console.log('render bypass runtime integration: PASS');

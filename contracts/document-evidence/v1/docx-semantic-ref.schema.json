@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.xml-compare-utilities.local/document-evidence/v1/docx-semantic-ref.schema.json",
+  "title": "DocxSemanticRef.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "partUri", "nodeKind"],
+  "properties": {
+    "schema": {"const": "DocxSemanticRef.v1"},
+    "partUri": {"type": "string", "pattern": "^/"},
+    "nodeKind": {"type": "string", "enum": ["document", "paragraph", "run", "hyperlink", "image", "table", "row", "cell", "field", "revision", "other"]},
+    "paragraphId": {"type": "string", "minLength": 1},
+    "runId": {"type": "string", "minLength": 1},
+    "relationshipId": {"type": "string", "minLength": 1},
+    "revisionId": {"type": "string", "minLength": 1},
+    "revisionType": {"type": "string", "enum": ["insert", "delete", "move-from", "move-to", "format", "other"]},
+    "textStart": {"type": "integer", "minimum": 0},
+    "textEnd": {"type": "integer", "minimum": 0},
+    "imageHash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "extensions": {"type": "object"}
+  }
+}

@@ -1,0 +1,281 @@
+schema_version: relay-v2.5
+identity:
+  ep_id: EP-CII-W2-NB-R1-V25-0001
+  branch: revision/cii-writer2-nodename-byte-r1-1224-v25-migration
+  base_ref: 0036145e6d014494b103e78e7f9077099e59888e
+  execution_state: ACTIVE
+  previous_checkpoint: NONE
+  previous_join: null
+  previous_replan: null
+replan_inheritance: null
+git_basis:
+  expected_branch: revision/cii-writer2-nodename-byte-r1-1224-v25-migration
+  material_ref: 0036145e6d014494b103e78e7f9077099e59888e
+  base_branch: main
+  base_observed_ref: 3ee90ca25368f69d42f44cbe967d5bbc81972f77
+  drift_policy: RECHECK_BEFORE_WRITE
+  drift_receipt: null
+roadmap_source:
+  roadmap_id: ROADMAP-XMLCU-V25-1224
+  roadmap_revision: RM-0002
+  objective: OBJ-CII-W2-NB-R1-1224
+  phase: PH-ARCHITECTURE
+  work_package: WP-ARCH-001
+  generated_from_frontier: true
+outcome:
+  user_visible:
+    - No product output changes in this EP; it establishes the safe architecture contract that gates issue 1224 implementation.
+  engineering:
+    - Source-subgraph correspondence is complete injective SOURCE mapping into a TARGET subset; target-only branches are not blockers.
+    - Same-cardinality NodeName REPLACE remains Writer1C authority; Writer2 remains CREATE/DELETE relocation authority.
+context_capsule:
+  product_goal: Transfer selected exact raw NodeNames from S1/S2/S3 into T while preserving fixed-format bytes outside authorized mutation closure.
+  roadmap_position: OBJ-CII-W2-NB-R1-1224 / PH-ARCHITECTURE / WP-ARCH-001
+  why_this_work_exists: Current code rejects valid source-subgraph topology and erases Writer1C REPLACE intent before multisource arbitration.
+  current_architecture: createCiiWorkspacePreview creates rawTransferPlan then contracts Writer2; multisource preview consumes only contracted transferPlan.
+  prior_owner_decisions:
+    - Issue 1224 is governing product intent.
+    - engineering-pr-delivery-v2.5 is pinned to Common commit feae969b860b83ee3df230fef1a162d4a4e7968e.
+    - Legacy V2 endpoints are migration evidence only.
+  current_implementation_state: Production fix is unapplied; retained GitHub Actions attempts failed before runner assignment with zero steps.
+  known_problems:
+    - Propagation requires equal frontier cardinality and later blocks unmatched target edges.
+    - Writer2 routing rewrites nonblank-to-different-nonblank NodeName to BLOCKED before multisource composition.
+  deliberate_non_goals:
+    - Do not broaden Writer2 overwrite authority.
+    - Do not modify the frozen V11/V14 converter in this work package.
+    - Do not treat TEXPECTED as a whole-file upper-bound golden.
+  terminology:
+    REPLACE: existing nonblank NodeName to different nonblank NodeName with unchanged cardinality
+    STRUCTURAL: NodeName CREATE or DELETE requiring physical relocation/count-pointer updates
+repository_discovery:
+  - id: DSTEP-01
+    action: VERIFY
+    target: agents/relay/REPO_STATE.yaml
+    question: Does repository state still route exactly to this EP on RM-0002?
+    expected_outputs: [active EP id and path, roadmap revision, current work package, material authority]
+    receipt_required: true
+    on_failure: Reconcile repository custody before product writes.
+  - id: DSTEP-02
+    action: VERIFY_GIT
+    target: live checkout
+    question: Does branch/material/base state still satisfy git_basis?
+    expected_outputs: [checked-out branch, HEAD, material-ref ancestry, base drift classification]
+    receipt_required: true
+    on_failure: Withhold WRITE and reconcile route/drift.
+  - id: DSTEP-03
+    action: TRACE
+    target: tabs/cii-workspace/cii-workspace-core.js and tabs/cii-workspace/cii-workspace-writer2-routing.js
+    question: Where is NodeName REPLACE first transformed from raw intent into Writer2 BLOCKED?
+    expected_outputs: [raw plan producer, contract boundary, blocker, downstream consumer]
+    receipt_required: true
+    on_failure: Do not qualify mixed orchestration.
+  - id: DSTEP-04
+    action: TRACE
+    target: tabs/cii-workspace/cii-workspace-propagation.js
+    question: Which conditions incorrectly require target frontier equality/full claim rather than source-subgraph injection?
+    expected_outputs: [frontier cardinality condition, source-leaf behavior, unmatched-target blocker, injectivity mechanism]
+    receipt_required: true
+    on_failure: Do not qualify propagation change.
+inputs:
+  - id: INPUT-01
+    name: Issue 1224 product authority
+    description: Full NodeName transfer and byte-preservation requirements.
+    authority: Owner issue 1224
+    source: github:reallaksh19/XML_Compare_Utilities#1224
+    resolution_method: Read the open issue and retained chain root.
+    type: requirements
+    units: NA
+    editable: false
+    applicability: CURRENT_EP_REQUIRED
+    resolution: READY
+    consumers: [STEP-01, STEP-02]
+    validation: [Issue 1224 remains open and unsuperseded.]
+    stale_if: [Owner intent changes or issue 1224 is superseded.]
+  - id: INPUT-02
+    name: Current production call graph
+    description: Exact propagation and Writer2 contraction paths.
+    authority: Current branch source
+    source: revision/cii-writer2-nodename-byte-r1-1224-v25-migration@0036145e6d014494b103e78e7f9077099e59888e
+    resolution_method: Read named modules from the declared material ref.
+    type: source-code
+    units: NA
+    editable: false
+    applicability: CURRENT_EP_REQUIRED
+    resolution: READY
+    consumers: [STEP-01]
+    validation:
+      - core creates rawTransferPlan before transferPlan contract.
+      - multisource preview aggregates preview.transferPlan.
+      - Writer2 blocks nonblank-to-different-nonblank NodeName.
+    stale_if: [Any named production module changes before qualification.]
+  - id: INPUT-03
+    name: Fixed-format writer authority
+    description: Writer1C exact-span replacement and Writer2 structural relocation boundaries.
+    authority: Current production primitives plus issue 1224
+    source: tabs/cii-workspace/cii-workspace-writer1c-nodename.js; tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js; parser/fixed-field.js
+    resolution_method: Trace span/preimage checks and fixed-width pointer/count encoding.
+    type: fixed-format-contract
+    units: bytes/columns
+    editable: false
+    applicability: CURRENT_EP_REQUIRED
+    resolution: READY
+    consumers: [STEP-02]
+    validation:
+      - Writer1C replacement is exact-span and preimage checked.
+      - Writer2 structural relocation is CREATE/DELETE only.
+    stale_if: [Low-level writer authority changes before qualification.]
+benchmarks:
+  - id: BENCH-01
+    name: Current-code first-loss reconstruction
+    purpose: Independently verify where REPLACE disappears.
+    source: Repository source at declared material ref
+    oracle_class: LOGIC_RECONSTRUCTION
+    payload: Trace rawTransferPlan through Writer2 contract to multisource combinedTransferPlan.
+    expected: Raw Writer1C COPY can become Writer2 BLOCKED before multisource aggregation.
+    tolerance: null
+    independence: Qualification reconstructs repository source rather than trusting legacy candidate notes.
+    applicability: CURRENT_EP_REQUIRED
+    resolution: READY
+    verifies: [AC-01, TEST-01]
+    stale_if: [core, Writer2 routing, or multisource preview changes.]
+  - id: BENCH-02
+    name: Source-subgraph injection falsifier
+    purpose: Verify extra target-only branch positive and missing-source-edge negative.
+    source: Repository topology primitives and focused propagation tests
+    oracle_class: LOGIC_RECONSTRUCTION
+    payload: Require complete injective SOURCE assignment into TARGET subset; allow unmatched target remainder.
+    expected: Extra target branch passes; missing target support for a source edge fails; injectivity remains enforced.
+    tolerance: null
+    independence: Graph-theoretic expected contract is independent of current frontier equality code.
+    applicability: CURRENT_EP_REQUIRED
+    resolution: READY
+    verifies: [AC-02, TEST-02]
+    stale_if: [Propagation semantics or issue requirements change.]
+scope:
+  allowed:
+    - path: agents/relay/**
+      reason: V2.5 discovery, qualification, checkpoint and successor custody for this architecture WP.
+  allowed_reads:
+    - {path: tabs/cii-workspace/cii-workspace-propagation.js, reason: Trace source-subgraph boundary.}
+    - {path: tabs/cii-workspace/cii-workspace-core.js, reason: Trace raw versus contracted plan.}
+    - {path: tabs/cii-workspace/cii-workspace-multisource-preview.js, reason: Trace aggregation/conflicts.}
+    - {path: tabs/cii-workspace/cii-workspace-writer2-routing.js, reason: Trace overwrite blocker.}
+    - {path: tabs/cii-workspace/cii-workspace-writer1c-nodename.js, reason: Verify Writer1C authority.}
+    - {path: tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js, reason: Verify Writer2 structural authority.}
+    - {path: tests/**, reason: Read focused and retained benchmark contracts.}
+  protected:
+    - {invariant: Writer2 never gains same-cardinality nonblank NodeName overwrite authority, reason: Writer1C owns existing-row exact-span replacement.}
+    - {invariant: Original target bytes remain unchanged outside authorized fixed spans/physical units, reason: Issue 1224 byte-preservation requirement.}
+    - {invariant: Target-only topology may remain unmatched when every source edge is injectively mapped, reason: SOURCE may be a subgraph of larger TARGET.}
+  prohibited:
+    - {domain: Production-code mutation in this EP, reason: Product mutation belongs to WP-IMPL-001 after oracle qualification.}
+    - {domain: Frozen V11/V14 converter implementation, reason: Outside this WP unless separately falsified.}
+    - {domain: Benchmark-specific product branching, reason: Anti-gaming/generalization requirement.}
+  owner_reserved:
+    - {decision: Change Writer1C/Writer2 authority split, reason: Material engineering-authority change requires owner-intent mutation.}
+    - {decision: Merge to main, reason: Owner-only delivery decision.}
+anti_drift:
+  do_not:
+    - {id: ADR-01, restriction: Do not modify production modules while this EP is active, reason: Architecture qualification precedes implementation.}
+    - {id: ADR-02, restriction: Do not classify a pre-runner failure as a product benchmark pass or fail, reason: NOT_RUN infrastructure evidence is not execution evidence.}
+    - {id: ADR-03, restriction: Do not recover REPLACE by broadening Writer2 routing, reason: Preserve writer authority separation.}
+  stale_if:
+    - {id: STALE-01, condition: Any named production path changes before qualification issuance, effect: STALE, rationale: Qualification would not bind the current call graph.}
+    - {id: STALE-02, condition: Main drift overlaps CII propagation/transfer-plan/writer boundaries, effect: STALE, rationale: Architecture may no longer match merge basis.}
+implementation_plan:
+  - id: STEP-01
+    objective: Produce repository-native evidence for source-subgraph and REPLACE first-loss boundaries.
+    targets: [agents/relay/certifications/discovery/**, agents/relay/certifications/qualification/**]
+    reads: [tabs/cii-workspace/cii-workspace-propagation.js, tabs/cii-workspace/cii-workspace-core.js, tabs/cii-workspace/cii-workspace-multisource-preview.js, tabs/cii-workspace/cii-workspace-writer2-routing.js]
+    writes: [agents/relay/certifications/discovery/**, agents/relay/certifications/qualification/**]
+    inputs: [INPUT-01, INPUT-02]
+    acceptance: [AC-01, AC-02]
+    tests: [TEST-01, TEST-02]
+    expected_state: Independent repository-only evidence identifies both first-wrong boundaries without product mutation.
+    stop_conditions: [Stop if source no longer matches the material ref or owner intent changes.]
+  - id: STEP-02
+    objective: Freeze mixed-writer transaction and fixed-format protection contract for successor work.
+    targets: [agents/relay/checkpoints/**, agents/relay/execution-packages/**]
+    reads: [tabs/cii-workspace/cii-workspace-writer1c-nodename.js, tabs/cii-workspace/cii-workspace-writer2-nodename-relocation.js, tabs/cii-workspace/cii-workspace-writer-version-bridge.js]
+    writes: [agents/relay/checkpoints/**, agents/relay/execution-packages/**]
+    inputs: [INPUT-01, INPUT-03]
+    acceptance: [AC-03]
+    tests: [TEST-03]
+    expected_state: Successor contract requires TARGET0 -> Writer1C -> re-intake -> rebind/revalidate -> Writer2 -> independent byte oracle.
+    stop_conditions: [Stop if low-level span/preimage authority is falsified.]
+next_work:
+  phase_transition: true
+  steps:
+    - order: 1
+      action: An independent candidate publishes DISC, QUAL Q1-Q5, and TC evidence bound to this EP.
+      targets: [agents/relay/certifications/discovery, agents/relay/certifications/qualification, agents/relay/certifications/takeover]
+      inputs: [INPUT-01, INPUT-02, INPUT-03]
+      tests: [TEST-01, TEST-02, TEST-03]
+      benchmarks: [BENCH-01, BENCH-02]
+      acceptance: [AC-01, AC-02, AC-03]
+      expected_result: TAKEOVER_CERTIFIED becomes derivable without conversation context.
+      stop_if: [Any Q1-Q5 answer is not independently evaluated PASS, Discovery cannot be reproduced from repository state, Git/material basis is stale.]
+qualification_boundary:
+  required: true
+  trigger: PHASE_CHANGED
+  from_phase: PH-V25-MIGRATION
+  to_phase: PH-ARCHITECTURE
+  changed_dimensions: [PRODUCTION_PATH, ENGINEERING_AUTHORITY, PROTECTED_INVARIANT, VERIFICATION_ORACLE]
+  basis:
+    - Active work moved from governance migration to CII production-path architecture.
+    - Current evidence locates REPLACE loss earlier than the legacy candidate package, at Writer2 contraction before multisource aggregation.
+  question_set: agents/relay/certifications/qualification/QSET-CII-W2-NB-R1-V25-0001.yaml
+quality:
+  applicable:
+    - {blueprint: software-design, reason: Architecture/state ownership changes are under qualification, review_focus: [raw versus contracted transfer ownership, writer authority separation]}
+    - {blueprint: testing, reason: Architecture must be falsifiable before implementation, review_focus: [negative branch cases, first-loss trace, oracle independence]}
+    - {blueprint: engineering-numerics, reason: Fixed-column bytes/counts/pointers are engineering invariants, review_focus: [fixed spans, I13 fields, cardinality effects]}
+    - {blueprint: code-review, reason: First safe slice requires independent source-path review, review_focus: [first wrong boundary, unsafe broadening, V14 boundary]}
+  not_applicable:
+    - {blueprint: coding, reason: This EP prohibits production-code mutation.}
+    - {blueprint: ui-ux, reason: No UI behavior changes in this EP.}
+    - {blueprint: accessibility, reason: No accessibility surface changes in this EP.}
+    - {blueprint: performance, reason: No performance change is implemented in this EP.}
+    - {blueprint: migration, reason: V2.5 bootstrap migration is predecessor work, not this EP.}
+    - {blueprint: github-delivery, reason: No PR/merge projection is executed in this EP.}
+  review_contract:
+    required: true
+    required_before_checkpoint: true
+    receipt_namespace: QRV-
+    required_outputs: [procedure_results, findings, owner_report, successor_handover]
+  findings_policy: Quality findings remain quality state unless they map to an existing hard-stop category.
+  ordinary_findings_are_hard_stops: false
+acceptance:
+  - {id: AC-01, description: Repository-only trace proves earliest REPLACE loss is Writer2 contraction before multisource aggregation and preserves Writer1C replacement authority, weight: 40, verification: [TEST-01, BENCH-01]}
+  - {id: AC-02, description: Architecture accepts complete injective SOURCE-to-subset-TARGET propagation while retaining missing-source-edge and ambiguity fail-closed behavior, weight: 30, verification: [TEST-02, BENCH-02]}
+  - {id: AC-03, description: Successor contract separates Writer1C REPLACE from Writer2 CREATE/DELETE and requires re-intake/rebind plus independent byte verification, weight: 30, verification: [TEST-03]}
+validation:
+  - {id: TEST-01, class: MUST_PASS, method: Repository-only call-graph reconstruction from core through Writer2 routing to multisource preview, proves: [AC-01]}
+  - {id: TEST-02, class: MUST_PASS, method: Propagation predicate reconstruction with extra-target positive and missing-source-edge/ambiguity negatives, proves: [AC-02]}
+  - {id: TEST-03, class: MUST_PASS, method: Independent review of Writer1C exact-span and Writer2 structural authority plus mixed transaction/oracle contract, proves: [AC-03]}
+failure_and_stop_conditions:
+  hard_stop_categories: [OWNER_DECISION_REQUIRED, ESSENTIAL_INPUT_MISSING, AUTHORITY_VIOLATION, PROTECTED_INVARIANT_FAILURE, WRITE_COLLISION, SUPERSEDED_EP, ROADMAP_CONFLICT, REPOSITORY_STATE_CONFLICT, UNSAFE_ENGINEERING_RESULT]
+report_contract:
+  sections: [Executive state, Overall / phase / EP progress, Work completed, Files changed, Acceptance matrix, Tests and evidence, Quality findings, Known limitations, Owner decisions required, GitHub issue changes, Roadmap changes, Exact next actions, Successor EP, Qualification Q1-Q5 when applicable]
+  payloads:
+    - {id: RPT-01, section: Executive state, sources: [REPO_STATE], required_fields: [reconciled_value]}
+    - {id: RPT-02, section: Overall / phase / EP progress, sources: [PROGRESS], required_fields: [reconciled_value]}
+    - {id: RPT-03, section: Work completed, sources: [EP], required_fields: [reconciled_value]}
+    - {id: RPT-04, section: Files changed, sources: [CP], required_fields: [reconciled_value]}
+    - {id: RPT-05, section: Acceptance matrix, sources: [EP, PROGRESS], required_fields: [reconciled_value]}
+    - {id: RPT-06, section: Tests and evidence, sources: [EP], required_fields: [reconciled_value]}
+    - {id: RPT-07, section: Quality findings, sources: [QRV], required_fields: [reconciled_value]}
+    - {id: RPT-08, section: Known limitations, sources: [REPO_STATE], required_fields: [reconciled_value]}
+    - {id: RPT-09, section: Owner decisions required, sources: [REPO_STATE], required_fields: [reconciled_value]}
+    - {id: RPT-10, section: GitHub issue changes, sources: [ISSUE_GRAPH], required_fields: [reconciled_value]}
+    - {id: RPT-11, section: Roadmap changes, sources: [OVERALL_ROADMAP], required_fields: [reconciled_value]}
+    - {id: RPT-12, section: Exact next actions, sources: [EP], required_fields: [reconciled_value]}
+    - {id: RPT-13, section: Successor EP, sources: [EP], required_fields: [reconciled_value]}
+    - {id: RPT-14, section: Qualification Q1-Q5 when applicable, sources: [QSET], required_fields: [reconciled_value]}
+checkpoint_contract:
+  required: true
+successor_relay:
+  required: true
+  duties: [reconcile WP-ARCH-001, create architecture checkpoint, update progress, compute WP-ORACLE-001 frontier, create successor EP, validate successor EP, run cold-start check, update REPO_STATE]
+  required_outputs: [checkpoint, progress_reconciliation, issue_projection_disposition, next_frontier, successor_ep_or_terminal_disposition]

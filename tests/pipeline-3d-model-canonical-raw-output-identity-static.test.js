@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+const output = readFileSync(new URL('../tabs/pipeline-3d-model/pipeline-3d-model-completed-output-session.js', import.meta.url), 'utf8');
+const readiness = readFileSync(new URL('../tabs/pipeline-3d-model/pipeline-3d-model-raw-readiness-session.js', import.meta.url), 'utf8');
+assert.match(output, /isPipelineCanonicalRawProfile\(input\.profileRaw\)/);
+assert.match(output, /\[profileIdentity\]/);
+assert.match(readiness, /CANONICAL_RAW_PROFILES/);
+assert.match(readiness, /canonicalRaw = canonicalRawProfile\(raw\)/);
+assert.match(readiness, /sameRecords\(records, nextRecords\)/);
+console.log('canonical raw output identity static: PASS');

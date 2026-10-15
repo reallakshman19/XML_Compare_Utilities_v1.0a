@@ -1,0 +1,33 @@
+pr: 1024
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-hanger-partial-delete-authority
+base: d9b680d61d14f320a75e4546fd07370eb5d39d17
+state: DRAFT_ACTIVE
+handover_readiness: READY
+current_stage: CLASSIFIER_AND_FALSIFIERS_AUTHORED_NOT_EXECUTED
+mission: qualify H>1 HANGER HGRDAT/TAG/GUID physical tail ordering without enabling mutation
+scope:
+  - PHYSICAL_HGRDAT_TAG_GUID_TAIL_CLASSIFIER
+  - INTERLEAVED_ORDER_QUALIFICATION
+  - GROUPED_ORDER_QUALIFICATION
+  - SINGLE_RECORD_EQUIVALENCE
+  - RECORD_ROW_OWNERSHIP
+  - ORDER_PRESERVING_RETENTION_TESTIMONY
+blocked:
+  - PARTIAL_HGT1_HANGER_PLANNER_READY
+  - PARTIAL_HGT1_HANGER_PHYSICAL_WRITE
+  - HANGER_CREATE
+  - SIF_CREATE
+  - WRITER3_TOPOLOGY
+validation:
+  pr1023_merge_base_grounding: PASS
+  dual_emitter_source_conflict: PASS_SOURCE_INSPECTION
+  interleaved_source_order: PASS_SOURCE_INSPECTION
+  grouped_source_order: PASS_SOURCE_INSPECTION
+  classifier_source_audit: PASS_SOURCE_INSPECTION
+  qf_1024_001_grouped_retention_fix: PASS_SOURCE_INSPECTION
+  focused_node_regression: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_hanger_regression: NOT_RUN_ENVIRONMENT
+  full_repository: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_RUN_ENVIRONMENT
+merge_authority: OWNER_ONLY

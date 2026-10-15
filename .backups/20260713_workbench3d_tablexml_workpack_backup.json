@@ -1,0 +1,24 @@
+{
+  "schema": "immutable-blob-backup-manifest/v1",
+  "createdAt": "2026-07-13",
+  "baselineCommit": "c4f69a7bb13de12589f0675b78ab7e3b95511ab0",
+  "workPack": "workbench3d-table-to-nodeset-xml",
+  "files": [
+    {
+      "path": "workbench3d/ui/table-to-xml-tab.js",
+      "blobSha": "fa5fd73ab6d0ae4f743808d94e33b1285dc334f5"
+    },
+    {
+      "path": "workbench3d/tablexml/nodeset-builder.js",
+      "blobSha": "a21e4a9c5a2a047d2991d206f68fc53d46315e99"
+    },
+    {
+      "path": "package.json",
+      "blobSha": "5efbf8eca63927b05553f094bfea19ffe29b48a9"
+    },
+    {
+      "path": "tests/workbench3d-tablexml.test.js",
+      "blobSha": "443db87a9d8c65a16cc7ef67756cdaeaa73d7759"
+    }
+  ]
+}

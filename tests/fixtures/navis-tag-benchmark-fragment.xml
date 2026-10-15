@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Benchmark fragment derived from reallaksh19/3D_Converters/Benchmarks/Navis XML/Benchmark Tag xml file.xml @ d1dff4187b1f236c55f97847392d76cf39ecfe62 -->
+<exchange units="m" filename="BUD-BUD1-09272023.nwd">
+  <viewpoints>
+    <view name="Tag View 1" guid="d3ab9983-21c4-4662-93bd-5909e23be90f">
+      <comments><comment id="1" status="new"><user>muc5407</user><body>Model monofl ball valve (typ)</body><createddate><date year="2023" month="10" day="2" hour="7" minute="11" second="52"/></createddate></comment></comments>
+      <redlines><rltag thickness="3" pattern="65535" id="1" commentid="1"><pos3d><pos3f x="151.7639234984" y="125.0518443733" z="101.6344626546"/></pos3d><bounds><box3f><min><pos3f x="151.6825054921" y="124.9424999990" z="101.6144448839"/></min><max><pos3f x="151.7975054942" y="125.0575000010" z="101.6694448874"/></max></box3f></bounds></rltag></redlines>
+    </view>
+    <view name="Tag View 2" guid="1997d087-dc85-4787-bc0b-3a2d15af63e7">
+      <comments><comment id="2" status="new"><user>muc5407</user><body>Update 3/4&quot; size monofl ball valve as per comment (typ)</body><createddate><date year="2023" month="10" day="2" hour="7" minute="13" second="11"/></createddate></comment></comments>
+      <redlines><rltag thickness="3" pattern="65535" id="2" commentid="2"><pos3d><pos3f x="151.0408497760" y="115.0525000021" z="101.8516982529"/></pos3d><bounds><box3f><min><pos3f x="150.8872743994" y="114.9474999979" z="101.6218014956"/></min><max><pos3f x="151.2153562158" y="115.0525000021" z="102.1342028379"/></max></box3f></bounds></rltag></redlines>
+    </view>
+    <view name="Bounds Fallback" guid="bounds-view">
+      <comments><comment id="1" status="active"><user>qa</user><body>Bounds only tag</body></comment></comments>
+      <redlines><rltag id="9" commentid="1"><bounds><box3f><min><pos3f x="1.000" y="2.000" z="3.000"/></min><max><pos3f x="1.200" y="2.400" z="3.600"/></max></box3f></bounds></rltag></redlines>
+    </view>
+  </viewpoints>
+</exchange>

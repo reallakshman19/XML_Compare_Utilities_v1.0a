@@ -1,0 +1,55 @@
+schema: AgentClaim.v1
+pr_or_wip: PR986
+claim_state: IMPLEMENTATION_COMPLETE_HANDOVER_READY
+files:
+  exact:
+    - tabs/cii-workspace/cii-workspace-core.js
+    - tabs/cii-workspace/cii-workspace-shell.js
+    - tabs/cii-workspace/cii-workspace.css
+    - tabs/cii-workspace/cii-workspace-contracts.js
+    - tabs/cii-workspace/cii-workspace-export.js
+    - agents/PR986_workreport.md
+    - agents/status/PR986.yaml
+    - agents/claims/PR986.yaml
+  prefixes:
+    - tabs/cii-workspace/cii-workspace-engineering-delta
+    - tabs/cii-workspace/cii-workspace-compare-review
+    - tests/cii-workspace-engineering-delta
+    - tests/cii-workspace-compare-review
+authority_domains:
+  - CII_ENGINEERING_DELTA_PROJECTION
+  - CII_COMPARE_REVIEW_VIEW_MODEL
+  - CII_COMPARE_REVIEW_UI
+  - CII_COMPARE_REVIEW_EXPORT
+claim_modes:
+  - EXCLUSIVE
+shared_read_authorities:
+  - tabs/cii-workspace/cii-workspace-candidates.js
+  - tabs/cii-workspace/cii-workspace-evidence.js
+  - tabs/cii-workspace/cii-workspace-propagation.js
+  - tabs/cii-workspace/cii-workspace-review.js
+  - tabs/cii-workspace/cii-workspace-capabilities.js
+forbidden_existing_file_edits:
+  - parser/**
+  - converters/**
+  - tabs/cii-workspace/cii-workspace-candidates.js
+  - tabs/cii-workspace/cii-workspace-evidence.js
+  - tabs/cii-workspace/cii-workspace-match-methods.js
+  - tabs/cii-workspace/cii-workspace-propagation.js
+  - tabs/cii-workspace/cii-workspace-transfer*.js
+implementation_claims:
+  - engineering deltas are downstream of correspondence and cannot alter identity
+  - identity confidence and engineering change status remain separate
+  - candidate-set ambiguity projects to REVIEW even when the individual winner is HIGH
+  - unsupported/unparsed property families are surfaced explicitly
+  - restraint gap/friction semantics are not invented from raw rows
+  - Compare Review CSV preserves confidence separately from workflow status
+validation_state: FOCUSED_EXACT_BLOB_VERIFIED_PASS_FULL_INTEGRATION_NOT_RUN
+validated_implementation_head: 10f999c26368c08224e6efda0bc52e5bec96f39f
+remaining_validation_gates:
+  - existing shell lifecycle at PR986 current head
+  - full SOURCE/TARGET1/TARGET2 intake through Compare Review
+  - browser/Chromium visual validation
+known_limits:
+  - target mutation intentionally remains blocked
+  - engineering node-location delta currently reports parsed native-coordinate evidence; registered delta qualification remains separate

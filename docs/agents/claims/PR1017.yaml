@@ -1,0 +1,34 @@
+pr: 1017
+claims:
+  - id: AUTH-1017-001
+    statement: Writer2 product preview requalifies only existing NODE_NAME create/delete and SIF_TEE record-presence DELETE deltas; the generic transfer policy remains unchanged and conservative.
+    evidence: tabs/cii-workspace/cii-workspace-writer2-composite-routing.js plus tabs/cii-workspace/cii-workspace-engineering-delta.js plus tabs/cii-workspace/cii-workspace-transfer-policy.js
+    status: IMPLEMENTED_SOURCE_GROUNDED
+  - id: AUTH-1017-002
+    statement: Writer2 continues to consume base engineering deltas only and does not inherit Writer1B process/restraint augmentation or Writer1C selected-SIF-field augmentation.
+    evidence: tabs/cii-workspace/cii-workspace-core.js
+    status: IMPLEMENTED
+  - id: ROUTE-1017-001
+    statement: Product Writer2 apply uses applyCiiWriter2Composite and validateCiiWriter2CompositeRoundTrip; direct NODENAME Phase-4B product calls are absent from core.
+    evidence: tabs/cii-workspace/cii-workspace-core.js
+    status: IMPLEMENTED
+  - id: SCOPE-1017-001
+    statement: After explicit PR1001 APPLY/EXCLUDE binding, Writer2 readiness evaluates the composite using the current TARGET topology graph.
+    evidence: tabs/cii-workspace/cii-workspace-transfer-scope.js
+    status: IMPLEMENTED
+  - id: BOUND-1017-001
+    statement: SIF CREATE remains blocked by unresolved V11 items 27-30 and cannot be admitted by Writer2 product routing.
+    evidence: WRITER_2_SIF_CREATE_PAYLOAD_SEMANTICS_UNQUALIFIED_ITEMS_27_30
+    status: ENFORCED
+  - id: DEFAULT-1017-001
+    statement: Writer1B remains the production default when no writerVersion is supplied and the product tile does not silently select Writer2.
+    evidence: tabs/cii-workspace/cii-workspace-core.js plus tabs/cii-workspace/cii-workspace-tab.js
+    status: PRESERVED
+  - id: REG-1017-001
+    statement: Authored regression covers mixed NODENAME plus SIF DELETE routing, unbound scope, forced SIF CREATE, unsupported PROCESS APPLY, binary Writer2 export guards, and absence of sequential direct-NODENAME core routing.
+    evidence: tests/cii-workspace-writer2-composite-product-routing.test.js
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: REG-1017-002
+    statement: Inherited standalone Writer2 NODENAME qualification regression is retained while stale product-level NODENAME-only assertions are updated for the accepted PR1016 composite architecture.
+    evidence: tests/cii-workspace-writer2-product-routing.test.js
+    status: AUTHORED_NOT_RUN_ENVIRONMENT

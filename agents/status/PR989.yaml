@@ -1,0 +1,31 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR989
+mission: explicit CII base-anchor and approval flow
+workstream: cii-anchor-approval-flow
+branch: agent/cii-anchor-approval-flow
+base_branch: main
+base_basis_sha: dc1371afcd44c12de86b2dad6eddf00f1f0b3c55
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+agent_state: VALIDATING
+pr_recovery_state: IMPLEMENTATION_COMPLETE_VALIDATION_PARTIAL_DRAFT
+handover_readiness: READY
+report_path: agents/PR989_workreport.md
+scope_authority: BASE_ANCHOR_PAIRING_AND_REVIEW_APPROVAL_UI
+validation_state: SYNTHETIC_PAIRING_PASS_REAL_BENCHMARK_NOT_RUN
+acceptance_matrix:
+  paired_base_anchor_contract: IMPLEMENTED
+  dimension_free_candidate_pool: PASS_RECONSTRUCTED
+  engineer_accept_required: IMPLEMENTED
+  bulk_accept_high: IMPLEMENTED
+  bulk_accept_medium: IMPLEMENTED
+  review_unresolved_bulk_block: IMPLEMENTED
+  delta_approval_projection: IMPLEMENTED
+  transfer_review_gate: EXISTING_AUTHORITY_EXPOSED
+  transfer_mutation_banner: BLOCKED
+  target_mutation: BLOCKED_NOT_IMPLEMENTED
+  benchmark_70_target1: NOT_RUN
+  benchmark_70_target2: NOT_RUN
+  shell_lifecycle: NOT_RUN
+exact_next_action: execute PR989 focused + real benchmark + inherited shell lifecycle tests in a complete checkout; do not retune topology pairing from benchmark node IDs

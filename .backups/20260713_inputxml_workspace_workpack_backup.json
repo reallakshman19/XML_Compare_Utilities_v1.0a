@@ -1,0 +1,20 @@
+{
+  "schema": "source-backup-manifest/v1",
+  "workPack": "InputXML Workspace orchestration diagnostics",
+  "baselineCommit": "f7efffc7a26d63f72e8b33f9dd07608adf37015d",
+  "recovery": "Restore an edited path from the immutable Git blob SHA recorded below.",
+  "files": [
+    {
+      "path": "tabs/inputxml-workspace/inputxml-workspace-tab.js",
+      "blobSha": "888152884e5104367fbb47dc168977cca506411f"
+    },
+    {
+      "path": "tabs/model-converters/xml-cii-topology-5c-panel.js",
+      "blobSha": "e42f1c9fa8332712fb5b2a983163dddc2eaab244"
+    },
+    {
+      "path": "tests/inputxml-workspace-static.test.js",
+      "blobSha": "430e37d942f887adde01c012bed023fda83141e9"
+    }
+  ]
+}

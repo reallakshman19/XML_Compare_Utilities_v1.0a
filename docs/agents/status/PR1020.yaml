@@ -1,0 +1,29 @@
+schema: engineering-pr-status/v1
+repository: reallaksh19/XML_Compare_Utilities
+pr: 1020
+branch: agent/cii-writer2-hanger-delete-all-physical
+base: 663423670dd6f0b198b02d97d66148d35edb1024
+state: DRAFT_ACTIVE
+handover_readiness: READY
+takeover_authority: WRITE_ALLOWED
+merge_authority: OWNER_ONLY
+mission: physically apply qualified Writer2 HANGER delete-all and independently validate the complete postimage
+scope:
+  delete_all_physical_writer: IMPLEMENTED
+  independent_postimage_validator: IMPLEMENTED
+  partial_multi_record_delete: BLOCKED_TAIL_ORDER_UNQUALIFIED
+  create: BLOCKED_PAYLOAD_SEMANTICS_NOT_QUALIFIED
+  product_routing: NOT_CHANGED
+  composite_adoption: NOT_IMPLEMENTED
+  writer3_topology: NOT_CHANGED
+validation:
+  base_grounding: PASS
+  writer_source_inspection: PASS
+  validator_source_inspection: PASS
+  exact_checkout: BLOCKED_ENVIRONMENT_DNS
+  focused_js_regression: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_hanger_regression: NOT_RUN_ENVIRONMENT
+  writer2_regressions: NOT_RUN_ENVIRONMENT
+  full_repository: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_RUN_ENVIRONMENT
+next_phase: adopt HANGER_DELETE_ALL into one-original-preimage Writer2 composite before product routing

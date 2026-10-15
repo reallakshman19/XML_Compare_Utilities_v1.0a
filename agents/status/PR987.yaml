@@ -1,0 +1,42 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR987
+mission: CII auxiliary custody and benchmark qualification
+workstream: cii-aux-custody-benchmark
+branch: agent/cii-aux-custody-benchmark
+stacked_base_pr: PR986
+stacked_base_head: 2e84648cb0dfd71ef304be744ea7e2dcb3f3e35f
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+execution_mode: AUTO
+auto_state: RUNNING
+phase_progression: AUTO
+merge_authority: OWNER_GRANTED_IF_ALL_APPROVED_PHASES_COMPLETE_AND_QUALIFIED
+agent_state: IMPLEMENTATION_COMPLETE_VALIDATION_PARTIAL
+pr_recovery_state: STACKED_DRAFT_HANDOVER_READY
+handover_readiness: READY
+report_path: agents/PR987_workreport.md
+scope_authority: LOCKED_TO_AUX_CUSTODY_AND_BENCHMARK
+validation_state: SOURCE_QUALIFIED_FOCUSED_RUNTIME_PARTIAL_FULL_BENCHMARK_NOT_RUN
+acceptance_matrix:
+  element_aux_pointer_custody: IMPLEMENTED_POINTER_UNITS_CORRECTED
+  restraint_gap_friction_semantics: SOURCE_QUALIFIED
+  rigid_weight_pointer_custody: SOURCE_QUALIFIED_FAIL_CLOSED
+  sif_tee_raw_pointer_custody: SOURCE_QUALIFIED_10_ROW_BLOCK_INDEX
+  sif_tee_excluded_from_m2_identity: IMPLEMENTED
+  hanger_node_presence: SOURCE_QUALIFIED_DUAL_LAYOUT_VALIDATED
+  hanger_205_deletion: ORACLE_QUALIFIED_DOWNSTREAM_ONLY
+  compare_review_aux_deltas: IMPLEMENTED
+  native_registered_geometry_basis: IMPLEMENTED
+  target1_property_benchmark_assertions: COMMITTED_NOT_RUN
+  target2_property_benchmark_assertions: COMMITTED_NOT_RUN
+  contradicted_weight_expectation: QUARANTINED_SOURCE_QUALIFIED
+  transfer_mutation_unchanged: BLOCKED
+focused_validation:
+  hanger_layout_custody: PASS_SHA_VERIFIED_LOCAL_NODE
+  hanger_deletion_delta: PASS_SHA_VERIFIED_LOCAL_NODE
+  auxiliary_block_index_runtime: NOT_RUN
+  real_three_file_benchmark: NOT_RUN
+  frozen_policy_full_preview: NOT_RUN
+exact_next_action: create stacked Phase8 transfer-preview qualification PR; keep write/mutation blocked; continue AUTO until all approved phases and validation gates are complete
+last_updated: 2026-08-18T22:55:00+04:00

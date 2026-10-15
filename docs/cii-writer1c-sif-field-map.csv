@@ -1,0 +1,61 @@
+section,tee_slot,block_relative_row,field_index,neutral_item,column_start,column_end_exclusive,width,engineering_meaning,v11_position_authority,v12_position_authority,writable,writer_domain,source_ids,open_issue
+SIF&TEES,1,0,0,1,0,15,15,Node,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,0,1,2,15,28,13,Type,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,0,2,3,28,41,13,In-Plane SIF (ii),DIRECT,DIRECT,YES,explicit TARGET >=1.0 -> proposed >=1.0; Type/code unchanged,SRC-SIF-013;SRC-SIF-008,positive Phase2B fixture and runtime code-context custody required
+SIF&TEES,1,0,3,4,41,54,13,Out-Plane SIF (io),DIRECT,DIRECT,YES,explicit TARGET >=1.0 -> proposed >=1.0; Type/code unchanged,SRC-SIF-013;SRC-SIF-008,positive Phase2B fixture and runtime code-context custody required
+SIF&TEES,1,0,4,5,54,67,13,Weld d,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,0,5,6,67,80,13,Fillet,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,1,0,7,0,15,15,Pad Thk,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,1,1,8,15,28,13,Ftg Ro,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,1,2,9,28,41,13,Crotch R,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,1,3,10,41,54,13,Weld ID,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,1,4,11,54,67,13,B1,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,1,5,12,67,80,13,B2,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,2,0,13,0,15,15,In-Plane Index (Ii),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,2,1,14,15,28,13,Out-Plane Index (Io),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,2,2,15,28,41,13,Torsion SIF (it),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,2,3,16,41,54,13,Axial SIF (ia),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,2,4,17,54,67,13,Pressure SIF (ip),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,2,5,18,67,80,13,Pressure Index (Ip),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,3,0,19,0,15,15,Code-specific item 19,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,3,1,20,15,28,13,Code-specific item 20,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,3,2,21,28,41,13,Code-specific item 21,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,3,3,22,41,54,13,Code-specific item 22,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,3,4,23,54,67,13,Code-related Note option 23,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,3,5,24,67,80,13,Code-related Note option 24,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,4,0,25,0,15,15,Axial Index (Ia),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,4,1,26,15,28,13,Torsion Index (It),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,1,4,2,27,28,41,13,UNRESOLVED item 27,UNRESOLVED,UNRESOLVED,NO,NO_WRITER_AUTHORITY,GAP-SIF-001,V11/V12 meaning unresolved
+SIF&TEES,1,4,3,28,41,54,13,UNRESOLVED item 28,UNRESOLVED,UNRESOLVED,NO,NO_WRITER_AUTHORITY,GAP-SIF-001,V11/V12 meaning unresolved
+SIF&TEES,1,4,4,29,54,67,13,UNRESOLVED item 29,UNRESOLVED,UNRESOLVED,NO,NO_WRITER_AUTHORITY,GAP-SIF-001,V11/V12 meaning unresolved
+SIF&TEES,1,4,5,30,67,80,13,UNRESOLVED item 30,UNRESOLVED,UNRESOLVED,NO,NO_WRITER_AUTHORITY,GAP-SIF-001,V11/V12 meaning unresolved
+SIF&TEES,2,5,0,1,0,15,15,Node,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,5,1,2,15,28,13,Type,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,5,2,3,28,41,13,In-Plane SIF (ii),DIRECT,DIRECT,YES,explicit TARGET >=1.0 -> proposed >=1.0; Type/code unchanged,SRC-SIF-013;SRC-SIF-008,positive Phase2B fixture and runtime code-context custody required
+SIF&TEES,2,5,3,4,41,54,13,Out-Plane SIF (io),DIRECT,DIRECT,YES,explicit TARGET >=1.0 -> proposed >=1.0; Type/code unchanged,SRC-SIF-013;SRC-SIF-008,positive Phase2B fixture and runtime code-context custody required
+SIF&TEES,2,5,4,5,54,67,13,Weld d,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,5,5,6,67,80,13,Fillet,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,6,0,7,0,15,15,Pad Thk,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,6,1,8,15,28,13,Ftg Ro,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,6,2,9,28,41,13,Crotch R,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,6,3,10,41,54,13,Weld ID,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,6,4,11,54,67,13,B1,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,6,5,12,67,80,13,B2,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,7,0,13,0,15,15,In-Plane Index (Ii),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,7,1,14,15,28,13,Out-Plane Index (Io),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,7,2,15,28,41,13,Torsion SIF (it),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,7,3,16,41,54,13,Axial SIF (ia),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,7,4,17,54,67,13,Pressure SIF (ip),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,7,5,18,67,80,13,Pressure Index (Ip),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,8,0,19,0,15,15,Code-specific item 19,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,8,1,20,15,28,13,Code-specific item 20,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,8,2,21,28,41,13,Code-specific item 21,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,8,3,22,41,54,13,Code-specific item 22,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,8,4,23,54,67,13,Code-related Note option 23,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,8,5,24,67,80,13,Code-related Note option 24,DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,9,0,25,0,15,15,Axial Index (Ia),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,9,1,26,15,28,13,Torsion Index (It),DIRECT,DIRECT,NO,NO_WRITER_AUTHORITY,SRC-SIF-013;SRC-SIF-008,not in selected initial Writer1C slice
+SIF&TEES,2,9,2,27,28,41,13,UNRESOLVED item 27,UNRESOLVED,UNRESOLVED,NO,NO_WRITER_AUTHORITY,GAP-SIF-001,V11/V12 meaning unresolved
+SIF&TEES,2,9,3,28,41,54,13,UNRESOLVED item 28,UNRESOLVED,UNRESOLVED,NO,NO_WRITER_AUTHORITY,GAP-SIF-001,V11/V12 meaning unresolved
+SIF&TEES,2,9,4,29,54,67,13,UNRESOLVED item 29,UNRESOLVED,UNRESOLVED,NO,NO_WRITER_AUTHORITY,GAP-SIF-001,V11/V12 meaning unresolved
+SIF&TEES,2,9,5,30,67,80,13,UNRESOLVED item 30,UNRESOLVED,UNRESOLVED,NO,NO_WRITER_AUTHORITY,GAP-SIF-001,V11/V12 meaning unresolved

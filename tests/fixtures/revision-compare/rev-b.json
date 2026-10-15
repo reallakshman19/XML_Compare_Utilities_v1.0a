@@ -1,0 +1,11 @@
+{
+  "schema":"inputxml-managed-stage/v1",
+  "unit":"mm",
+  "verticalAxis":"Z",
+  "coordinateFrame":"PLANT",
+  "branches":[
+    {"name":"/COMMON-100","attributes":{"OWNER_SITE":"SITE-1","OWNER":"AREA-A"},"children":[{"type":"PIPE","position":[0,0,0]},{"type":"VALV"},{"type":"FLAN"}]},
+    {"name":"/COMMON-200","attributes":{"OWNER_SITE":"SITE-1","OWNER":"AREA-A"},"children":[{"type":"PIPE"}]},
+    {"name":"/ADDED-400","attributes":{"OWNER_SITE":"SITE-2","OWNER":"AREA-C"},"children":[{"type":"SUPPORT"},{"type":"PIPE"}]}
+  ]
+}

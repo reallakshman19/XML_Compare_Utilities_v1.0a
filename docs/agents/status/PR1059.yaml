@@ -1,0 +1,83 @@
+pr: 1059
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-w2a-runtime-closure
+base_main: 9685a2f41ec2b5a5c170762816702fefe90e18a7
+current_stage: W2_A_EXACT_PUBLIC_RUNTIME_PLUS_CII_BENCHMARK_PHASE_1
+work_intent: IMPLEMENT_INVESTIGATE_VALIDATE
+criticality: ENGINEERING_CRITICAL
+mutation_authority: WRITE_ALLOWED_BY_OWNER_2026_08_27_FOR_I13_FIX_AND_CII_BENCHMARK_ROADMAP_IMPLEMENTATION
+production_change_authority: PRIOR_V14_I13_GATE_ONLY; BENCHMARK_ORACLE_MANIFEST_TESTS_ALLOWED; ADDITIONAL_WRITER_PRODUCTION_ONLY_IF_EXACT_RUNTIME_EXPOSES_DEFECT
+merge_authority: OWNER_ONLY
+merge_authorized: false
+pr_state: DRAFT
+handover_readiness: READY
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RELEASE_FREEZE
+
+inherited:
+  w2_34_focused_bridge_export: PASS
+  w2_c0_exact_14_file_graph: PASS_RUNTIME_EXACT_14_FILE_BLOB_GRAPH_NODE_ESM_MODE
+
+runtime:
+  w2_a: NOT_RUN_GRAPH_RECONSTRUCTION_IN_PROGRESS
+  w2_a_test_blob: 9922377ddeda86fc9167d65f33c97095346e79fa
+  public_entrypoint: applyCiiWorkspaceTargetWriter2
+  historical_pr1054_exact_files_admitted: 54
+  historical_pr1054_unresolved_static_modules: 31
+  historical_pr1054_last_missing_module: tabs/cii-workspace/cii-workspace-auxiliary.js
+  historical_assertion_failure: false
+  current_sparse_mirror_retained: false
+  w2_b: NOT_RUN
+  browser_gates: NOT_RUN
+
+hardening:
+  source_cross_check: reallaksh19/3D_Converters@e5dbfcd2d86a5705a60df87b932d839fbc78301e
+  issue: CII_V14_WRITER2_I13_NUMERICALLY_INTEGRAL_BUT_LEXICALLY_REAL_ACCEPTED
+  affected_module: tabs/cii-workspace/cii-workspace-v14-writer2-fixed-field-authority.js
+  preimage_blob: fc97ddd7fd5645e46c70a722c7f96f17dc7ae188
+  postimage_blob: 5f1473f692c172de5aa0712a70bc72d917a6934d
+  focused_runtime: PASS_RUNTIME_EXACT_3_FILE_BLOB_SUBGRAPH
+  implementation_state: IMPLEMENTED_QUALIFIED_FOCUSED
+
+benchmark:
+  roadmap: ciibenchmarkroadmap.md
+  source: Benchmark/CIICompare/BM_CII_SOURCE.CII
+  source_git_blob: e41cd05603b56837cbb6e31b9d4074ef6106fe9b
+  manifest: Benchmark/CIICompare/Writer2/CII_WRITER2_BENCHMARKS.json
+  independent_oracle: Benchmark/CIICompare/Writer2/cii-writer2-benchmark-oracle.js
+  phase1_test: tests/cii-workspace-writer2-benchmark-restraint-delete.test.js
+  phase1_case: BM-W2-04
+  phase1_role: PRIMARY_W2_B_RETAINED_REAL_V11
+  frozen_candidate:
+    pointer: 1
+    slot: 1
+    node: 190
+    owner: 180_TO_190
+  expected_transition:
+    restraint_blocks: 7_TO_6
+    restraint_rows: 168_TO_144
+    deleted_pointer: 1_TO_0
+    retained_pointer_rule: P_GT_1_DECREMENT_BY_1
+    control_nonam: 4_UNCHANGED
+    topology: UNCHANGED
+  oracle_writer_dependency: NONE
+  source_api_contract_check: PASS_SOURCE_INSPECTION
+  authored_test_state: AUTHORED
+  runtime_state: NOT_RUN_EXACT_GRAPH_NOT_MATERIALIZED
+  w2_b_promoted: false
+
+negative_assurance:
+  stubs_used: false
+  import_rewrites_used: false
+  partial_core_used: false
+  lossy_bridge_used: false
+  production_changed: true
+  production_changed_paths:
+    - tabs/cii-workspace/cii-workspace-v14-writer2-fixed-field-authority.js
+  benchmark_changes_are_production_writer_changes: false
+  benchmark_oracle_imports_writer2: false
+  dynamic_benchmark_candidate_fallback: false
+  not_run_promoted_to_pass: false
+  w2_a_scope_replaced_by_benchmark: false
+  w2_b_promoted_before_w2_a: false
+
+exact_next_action: MATERIALIZE_AND_RUN_BM_W2_04_EXACT_GRAPH; REQUIRE_EXACT_ORACLE_EQUALITY; KEEP_W2_B_NOT_RUN_UNTIL_W2_A_PASS_AND_BENCHMARK_RUNTIME_PASS

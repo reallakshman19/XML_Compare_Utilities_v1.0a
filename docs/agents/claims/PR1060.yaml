@@ -1,0 +1,79 @@
+pr: 1060
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-bmw204-runtime-closure
+base_main: 29766c0432665e5f4b1340e59f9a16e7d4ef3999
+claim_state: BM_W2_04_GRAPH_RECONSTRUCTION_PLUS_RESTRAINT_I13_FOCUSED_PASS
+merge_authority: OWNER_ONLY
+merge_authorized: false
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RELEASE_FREEZE
+
+claims:
+  - id: W2_C0_BROAD_PRODUCT_ROUTING_RUNTIME
+    state: PASS_RUNTIME_EXACT_14_FILE_BLOB_GRAPH_NODE_ESM_MODE
+    inherited_from_pr: 1059
+    required: true
+
+  - id: W2_V14_I13_LEXICAL_FIXED_FIELD_AUTHORITY
+    state: PASS_RUNTIME_EXACT_3_FILE_BLOB_SUBGRAPH
+    inherited_from_pr: 1059
+    required: true
+
+  - id: W2_RESTRAINT_POINTER_LEXICAL_I13_CUSTODY
+    state: PASS_RUNTIME_EXACT_5_FILE_BLOB_GRAPH
+    required: true
+    production_path: tabs/cii-workspace/cii-workspace-writer2-restraint-delete-custody.js
+    production_preimage_blob: 2176ac97eaef84f3aa9073d5eaf73d1530cf09a8
+    production_postimage_blob: 7053230546eaba4588b98a35ae5fc3819da83c14
+    regression_path: tests/cii-workspace-writer2-restraint-pointer-i13-custody.test.js
+    regression_blob: 2c5940d17b13807455c4468a0b6d31fdc36f860f
+    exact_graph:
+      parser/fixed-field.js: 485daa43553681ca54f488499e57f36d2239be58
+      tabs/cii-workspace/cii-workspace-contracts.js: 6ab30d8dd088225fd89bb729bf9ffdebefe652f6
+      tabs/cii-workspace/cii-workspace-physical-file.js: 0c4c445fbd3d4b929b1f9288b789b244547c8867
+      tabs/cii-workspace/cii-workspace-writer2-restraint-delete-custody.js: 7053230546eaba4588b98a35ae5fc3819da83c14
+      tests/cii-workspace-writer2-restraint-pointer-i13-custody.test.js: 2c5940d17b13807455c4468a0b6d31fdc36f860f
+    preimage_falsifier:
+      state: FAIL_AS_EXPECTED
+      token: '1.000000'
+      actual: QUALIFIED
+      expected: BLOCKED
+    postimage_runtime: PASS
+    invariant: LEXICAL_I13_REQUIRED_BEFORE_NONNEGATIVE_INTEGER_POINTER_SEMANTICS
+    does_not_promote_bm_w2_04: true
+    does_not_promote_w2_b: true
+
+  - id: BM_W2_04_RETAINED_REAL_V11_RESTRAINT_DELETE
+    state: NOT_RUN_EXACT_GRAPH_RECONSTRUCTION_IN_PROGRESS
+    required: true
+    role: PRIMARY_W2_B_RETAINED_REAL_V11
+    test: tests/cii-workspace-writer2-benchmark-restraint-delete.test.js
+    test_blob: 54c08bf0b2baf8138a703350d9e2600387693008
+    independent_oracle: Benchmark/CIICompare/Writer2/cii-writer2-benchmark-oracle.js
+    oracle_blob: b36e38c8df327069f07ea20ad50c91f03ffdcd6a
+    exact_graph_required: true
+    stubs_allowed: false
+    import_rewrites_allowed: false
+    partial_core_allowed: false
+    pass_claimed: false
+    authored_failure_observed: false
+
+  - id: W2_A_SYNTHETIC_PUBLIC_PRODUCT_RUNTIME
+    state: NOT_RUN
+    inherited_from_pr: 1059
+    required: true
+
+  - id: W2_B_RETAINED_REAL_V11_PUBLIC_PRODUCT_RUNTIME
+    state: NOT_RUN
+    required: true
+    precondition_w2_a_pass: true
+    precondition_bm_w2_04_pass: true
+
+validation_integrity:
+  production_changed_in_pr1060: true
+  production_changed_paths:
+    - tabs/cii-workspace/cii-workspace-writer2-restraint-delete-custody.js
+  benchmark_changed_in_pr1060: false
+  focused_test_added: true
+  not_run_promoted_to_pass: false
+  graph_transport_limitation_treated_as_fail: false
+  graph_transport_limitation_treated_as_pass: false

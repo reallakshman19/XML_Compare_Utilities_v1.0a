@@ -1,0 +1,118 @@
+{
+  "schema": "Sequential1885NcRegressionBaseline.v1",
+  "source": {
+    "repository": "reallaksh19/3D_Converters",
+    "commit": "d5fda9c95fda9bba9b6b05171628ba16778a7667",
+    "fixture": "Benchmarks/1885_NC/1885_NC.json"
+  },
+  "fixtureRecordCount": 278,
+  "indexedBranchCount": 278,
+  "indexedComponentCount": 2909,
+  "evidenceAudit": {
+    "sourceRouteComponentCount": 2939,
+    "activeRouteComponentCount": 2909,
+    "shadowCarrierCount": 30
+  },
+  "branchStateCounts": {
+    "ROUTE_COMPLETE": 90,
+    "USER_DECISION_REQUIRED": 188
+  },
+  "blockedReasonCounts": {
+    "AMBIGUOUS_BRANCH_START": 6,
+    "CONTINUITY_NOT_PROVEN": 1,
+    "MULTIPLE_BOUNDARY_REFERENCE_PORTS": 5,
+    "MULTIPLE_EXACT_CANDIDATES": 20,
+    "REFERENCE_TARGET_MISSING": 15,
+    "REFERENCE_TARGET_PORT_UNRESOLVED": 3,
+    "UNEXPLAINED_TERMINAL": 138
+  },
+  "componentTypeCounts": {
+    "ELBOW": 351,
+    "FLANGE": 571,
+    "GASKET": 599,
+    "INSTRUMENT": 77,
+    "OLET": 58,
+    "PIPE": 850,
+    "REDUCER": 52,
+    "TEE": 148,
+    "VALVE": 203
+  },
+  "referenceStatusCounts": {
+    "MISSING:MISSING": 25,
+    "RESOLVED:BRANCH": 390,
+    "RESOLVED:JUNCTION_COMPONENT": 203
+  },
+  "featureCounts": {
+    "teeBranches": 51,
+    "reducerBranches": 45,
+    "oletBranches": 43,
+    "zeroLengthBranches": 62,
+    "explicitClosureBranches": 0,
+    "unexplainedTerminalBranches": 138,
+    "unresolvedReferenceBranches": 23,
+    "shadowCarrierBranches": 28,
+    "routeCompleteBranches": 90,
+    "blockedBranches": 188,
+    "failedBranches": 0
+  },
+  "supportProjectionCounts": {
+    "acceptedConstructionCount": 90,
+    "resolvedSupportFamilyCount": 425,
+    "unresolvedSupportFamilyCount": 0,
+    "supportProjectionErrorCount": 0
+  },
+  "sourceBoundaryCounts": {
+    "classificationCount": 18,
+    "rootCount": 18,
+    "acceptedRootCount": 8,
+    "blockedAfterBoundaryCount": 10,
+    "boundaryRoleCounts": {
+      "HEAD": 6,
+      "TAIL": 12
+    },
+    "dialectCounts": {
+      "AVEVA_CONTROLLED_CONNECTION_REFERENCE": 3,
+      "AVEVA_CONTROLLED_NOZZLE_REFERENCE": 14,
+      "AVEVA_DIRECTIONAL_EQUIPMENT_PORT": 1
+    }
+  },
+  "sScope": {
+    "lineKeys": [
+      "S8810101",
+      "S8810103",
+      "S8810111",
+      "S8810112",
+      "S8811951"
+    ],
+    "branchCount": 21,
+    "branchStateCounts": {
+      "ROUTE_COMPLETE": 1,
+      "USER_DECISION_REQUIRED": 20
+    },
+    "blockedReasonCounts": {
+      "AMBIGUOUS_BRANCH_START": 3,
+      "MULTIPLE_BOUNDARY_REFERENCE_PORTS": 2,
+      "REFERENCE_TARGET_MISSING": 6,
+      "REFERENCE_TARGET_PORT_UNRESOLVED": 3,
+      "UNEXPLAINED_TERMINAL": 6
+    },
+    "featureCounts": {
+      "teeBranches": 5,
+      "reducerBranches": 3,
+      "oletBranches": 4,
+      "zeroLengthBranches": 11,
+      "explicitClosureBranches": 0,
+      "unexplainedTerminalBranches": 6,
+      "unresolvedReferenceBranches": 3,
+      "shadowCarrierBranches": 1,
+      "routeCompleteBranches": 1,
+      "blockedBranches": 20,
+      "failedBranches": 0
+    }
+  },
+  "validation": {
+    "runtimeErrorCount": 0,
+    "automaticRepairCount": 0,
+    "sourceCoordinatesMutated": false
+  }
+}

@@ -1,0 +1,38 @@
+schema: EngineeringPRClaims.v1
+pr: 1022
+claims:
+  - id: AUTH-1022-001
+    claim: Writer 2 product readiness admits HANGER only through the qualified HANGER delete planner and only when the resulting plan proves complete delete-all with countAfter zero.
+    evidence:
+      - tabs/cii-workspace/cii-workspace-writer2-composite-routing.js
+      - tabs/cii-workspace/cii-workspace-writer2-hanger-delete.js
+  - id: AUTH-1022-002
+    claim: Writer 2 product apply uses the tri-family one-original-preimage composite rather than sequential family mutation.
+    evidence:
+      - tabs/cii-workspace/cii-workspace-core.js
+      - tabs/cii-workspace/cii-workspace-writer2-composite-hanger.js
+  - id: AUTH-1022-003
+    claim: Writer 2 product validation uses the independent tri-family complete-postimage validator after modified-byte re-intake.
+    evidence:
+      - tabs/cii-workspace/cii-workspace-core.js
+      - tabs/cii-workspace/cii-workspace-writer2-composite-hanger-validation.js
+  - id: QF-1022-001
+    claim: Readiness now rejects malformed duplicate or blank parent-scope operation testimony instead of allowing READY to degrade into an apply-time scope exception.
+    evidence:
+      - tabs/cii-workspace/cii-workspace-writer2-composite-routing.js
+      - tests/cii-workspace-writer2-composite-product-routing.test.js
+  - id: QF-1022-002
+    claim: Source review found and corrected stale authored test property names for NODENAME and SIF post-intake evidence before merge qualification.
+    evidence:
+      - tests/cii-workspace-writer2-composite-product-routing.test.js
+  - id: BOUNDARY-1022-001
+    claim: Writer 1B remains the product default and Writer 2 remains explicit only.
+    evidence:
+      - tabs/cii-workspace/cii-workspace-core.js
+  - id: BOUNDARY-1022-002
+    claim: SIF CREATE, HANGER CREATE, H>1 partial HANGER deletion, unrelated Writer-2 APPLY families, and Writer3 topology remain blocked.
+    evidence:
+      - tabs/cii-workspace/cii-workspace-writer2-composite-routing.js
+  - id: VALIDATION-1022-001
+    claim: The focused product regression is authored but not executed in the current environment; no test PASS is claimed from absence of CI.
+    status: AUTHORED_NOT_RUN_ENVIRONMENT

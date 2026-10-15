@@ -1,0 +1,69 @@
+schema: AgentClaim.v1
+pr_or_wip: PR1004
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer-1c
+claim_state: CLOSING
+claim_modes:
+  - EXCLUSIVE
+  - COORDINATED
+files:
+  exact:
+    - tabs/cii-workspace/cii-workspace-intake.js
+    - tabs/cii-workspace/cii-workspace-nodename.js
+    - tabs/cii-workspace/cii-workspace-transfer-policy.js
+    - tabs/cii-workspace/cii-workspace-core.js
+    - tabs/cii-workspace/cii-workspace-transfer-scope.js
+    - tabs/cii-workspace/cii-workspace-target-writer-1c.js
+    - tabs/cii-workspace/cii-workspace-writer1c-nodename.js
+    - tabs/cii-workspace/cii-workspace-writer1c-validation.js
+    - tabs/cii-workspace/cii-workspace-physical-file.js
+    - tabs/cii-workspace/cii-workspace-shell.js
+    - tabs/cii-workspace/cii-workspace-transfer-scope-ui.js
+    - tabs/cii-workspace/cii-workspace-tab.js
+  prefixes:
+    - tests/qualification/cii-workspace-writer1c-
+    - tests/cii-workspace-writer1c-
+authority_domains:
+  - CII_ORIGINAL_BYTE_CUSTODY
+  - CII_NODENAME_PHYSICAL_SPAN_CUSTODY
+  - CII_WRITER_1C_EXISTING_AUXILIARY_MUTATION
+  - CII_BYTE_NEGATIVE_ASSURANCE
+  - CII_WRITER_VERSION_ROUTING
+  - CII_SCOPED_WRITER_APPLY_PRESENTATION
+  - CII_EXPLICIT_HOST_WRITER_SELECTION
+coordinated_with:
+  - PR1002_DOCUMENTATION_CONTRACT_MERGED
+coordination_notes:
+  - PR1002 squash-merged to main as 77fecdcaf5cfffaa673b71aa208622641d79816c
+  - PR1004 retargeted to main and squash-history reconciled without force rewrite
+  - PR1004 diff restored to exactly 20 files before merge
+  - owner explicitly authorized merge after fresh local Writer1C validation
+protected_out_of_scope:
+  - converters/scripts/inputxml_to_cii2019.py
+  - converters/scripts/cii2019_section_rules.py
+  - parser/caesar-parser.js
+  - tabs/cii-workspace/cii-workspace-target-writer.js
+  - tabs/cii-workspace/cii-workspace-target-writer-1b.js
+  - .github/workflows/**
+  - SIF_TEE_MUTATION
+  - HANGER_MUTATION
+  - WRITER_2_CARDINALITY
+  - WRITER_3_TOPOLOGY
+report_basis_head: 78c2cdb0840e7300e744761eacaad32ed9219c46
+qualification_checkpoint: GE011_OWNER_VALIDATION_EXCEPTION_ACCEPTED_READY_FOR_MERGE
+qualification_evidence:
+  exact_target1_blob: 1a1cb9ac27e9c347cfcd3e4a8766ebad0e4b7853
+  exact_target1_core_roundtrip: PASS
+  exact_target1_changed_bytes: 8
+  exact_target1_unexpected_semantic_deltas: 0
+  unauthorized_byte_falsifier: PASS
+  stale_target_hash_falsifier: PASS
+  chromium_scoped_writer1c: PASS
+  fresh_local_byte_custody: PASS
+  fresh_local_planner_patcher_validator: PASS
+  independent_python_oracle: PASS
+  full_repository_suite: NOT_RUN_OWNER_ACCEPTED_VALIDATION_EXCEPTION
+changed_file_ledger: 20_EXPECTED_20_ACTUAL_0_UNEXPLAINED
+ready_for_review: true
+ready_for_merge: true
+merge_authority: OWNER_AUTHORIZED

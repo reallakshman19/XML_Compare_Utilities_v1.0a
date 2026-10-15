@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sequential Engineering SVG Preview and Draft Edit 3D</title>
+<link rel="stylesheet" href="../../tabs/sequential-sketcher/sequential-sketcher.css">
+<link rel="stylesheet" href="../../tabs/sequential-sketcher/continuity/sequential-continuity.css">
+<style>
+body{margin:0;background:#07101f}.psmap-card{margin:20px;padding:16px}[data-engineering-svg-shell]{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:8px}[data-engineering-svg-shell-canvas]{min-height:420px}svg[data-engineering-svg-root]{width:100%;height:100%;min-height:420px}.ssk-toolbar [data-ssk-preview-status]{font-size:10px;max-width:320px;color:#94a3b8}[data-ssk-draft-edit-3d-host]{min-height:420px}
+</style></head><body><div id="tiles"></div>
+<script type="module">
+import { installSequentialSketcherTile, mountSequentialSketcherWorkspace } from '../../tabs/sequential-sketcher/sequential-sketcher-tab.js';
+import { getSequentialEngineeringSvgPreviewController, mountSequentialEngineeringSvgPreviewController } from '../../tabs/sequential-sketcher/sequential-engineering-svg-preview-controller.js?v=20260721-ssk-esvg-preview-1';
+import { getSequentialScopedEdit3dController } from '../../tabs/sequential-sketcher/scoped-edit/sequential-scoped-edit-3d-controller.js?v=20260727-ssk-ts-1b-3d-2';
+import { blockedSequentialFixture, repairedSequentialFixture } from '../helpers/sequential-engineering-svg-fixture.js';
+
+const records = [...blockedSequentialFixture().records, ...repairedSequentialFixture().records];
+const branches = records.map((row) => row.name).sort();
+let failureStage = '';
+let threeDFailureStage = '';
+let lastClosedController = null;
+let lastClosed3dController = null;
+const failures = [];
+const threeDFailures = [];
+const shadowDiagnostics = [];
+const fakeViewers = [];
+
+function fakeSnapshot(state) {
+  const target = state.models?.target ?? null;
+  const firstObjectId = target?.segments?.[0]?.objectId ?? target?.markers?.[0]?.objectId ?? '';
+  return Object.freeze({
+    contract: 'SequentialFakeViewerState.v1', disposed: state.disposed,
+    verticalAxis: state.verticalAxis, mode: state.mode,
+    targetContract: target?.contract ?? '', targetRevisionId: target?.revisionId ?? '',
+    targetSegmentCount: target?.segments?.length ?? 0, targetMarkerCount: target?.markers?.length ?? 0,
+    firstObjectId, selectedObjectId: state.selectedObjectId, relatedIds: [...state.relatedIds],
+    fitCount: state.fitCount, views: [...state.views],
+  });
+}
+
+async function createFakeViewer(container, callbacks = {}) {
+  const state = {
+    container, callbacks, disposed: false, verticalAxis: '', mode: '', models: null,
+    selectedObjectId: null, relatedIds: [], fitCount: 0, views: [],
+  };
+  const viewer = Object.freeze({
+    setVerticalAxis(value) { state.verticalAxis = value; },
+    setModels(value) { state.models = value; },
+    setMode(value) { state.mode = value; },
+    setSelection(objectId, relatedIds = []) { state.selectedObjectId = objectId; state.relatedIds = [...relatedIds]; },
+    fitAll() { state.fitCount += 1; },
+    setStandardView(value) { state.views.push(value); },
+    getStateSnapshot() { return fakeSnapshot(state); },
+    emitPick(objectId) { callbacks.onPick?.(objectId ? { objectId } : null); },
+    emitRuntimeError(message = 'Injected viewer runtime failure') { callbacks.onRuntimeError?.(new Error(message)); },
+    emitNavigationError(message = 'Injected navigation failure') { callbacks.onNavigationError?.(new Error(message)); },
+    dispose() { state.disposed = true; },
+  });
+  fakeViewers.push(viewer);
+  return viewer;
+}
+
+const disposeTile = installSequentialSketcherTile(document.querySelector('#tiles'), {
+  sequentialEngineeringSvgPreviewFailureFactory(stage) {
+    return stage === failureStage ? new Error(`Injected ${stage} failure`) : null;
+  },
+  sequentialScopedEdit3dFailureFactory(stage) {
+    return stage === threeDFailureStage ? new Error(`Injected ${stage} failure`) : null;
+  },
+  createSequentialScopedEdit3dViewer: createFakeViewer,
+  onSequentialEngineeringSvgPreviewFailure(detail) { failures.push(detail); },
+  onSequentialScopedEdit3dFailure(detail) { threeDFailures.push(detail); },
+  onSequentialScopedEditShadowDiagnostic(detail) { shadowDiagnostics.push(detail); },
+  showToast() {},
+});
+function root() { return document.querySelector('.ssk-modal'); }
+function controller() { return getSequentialEngineeringSvgPreviewController(root()); }
+function draftController() { return getSequentialScopedEdit3dController(root()); }
+function currentViewer() { return fakeViewers.at(-1) ?? null; }
+function click(selector) { const node = root().querySelector(selector); if (!node) throw new Error(`Missing ${selector}`); node.click(); return node; }
+function open() { document.querySelector('[data-ssk-open]').click(); return root(); }
+function inspect() { root().querySelector('[data-ssk-source]').value = JSON.stringify(records); click('[data-ssk-action="inspect"]'); }
+function openBranch(id = branches[0]) { const select = root().querySelector('[data-ssk-branch]'); select.value = id; select.dispatchEvent(new Event('change', { bubbles: true })); }
+function advance() { click('[data-ssk-action="advance"]'); }
+function run() { click('[data-ssk-action="run"]'); }
+function renderer(value) { click(`[data-ssk-renderer="${value}"]`); }
+function projection(value) { click(`[data-ssk-view="${value}"]`); }
+function draft3d() { click('[data-ssk-draft-edit-3d]'); }
+function tick() { return new Promise((resolve) => setTimeout(resolve, 0)); }
+async function activatePreview(id = branches[0], withAdvance = true) { inspect(); openBranch(id); if (withAdvance) advance(); renderer('ENGINEERING_SVG_PREVIEW'); await tick(); await tick(); }
+async function activate3d(id = branches[0], withAdvance = true) { inspect(); openBranch(id); if (withAdvance) advance(); draft3d(); await tick(); await tick(); }
+async function reloadSource() {
+  const input = root().querySelector('[data-ssk-file="source"]');
+  const transfer = new DataTransfer();
+  transfer.items.add(new File([JSON.stringify(records)], 'source.json', { type: 'application/json' }));
+  input.files = transfer.files; input.dispatchEvent(new Event('change', { bubbles: true })); await tick(); await tick();
+}
+function state() {
+  const current = controller();
+  return {
+    controller: current?.getState() || null,
+    sharedRoots: root()?.querySelectorAll('[data-engineering-svg-shell]').length || 0,
+    engineeringRoots: root()?.querySelectorAll('[data-engineering-svg-root]').length || 0,
+    constructionHidden: Boolean(root()?.querySelector('[data-ssk-construction-surface]')?.hidden),
+    constructionInert: root()?.querySelector('[data-ssk-construction-surface]')?.hasAttribute('inert') || false,
+    previewHidden: Boolean(root()?.querySelector('[data-ssk-engineering-svg-preview-host]')?.hidden),
+    previewDisabled: Boolean(root()?.querySelector('[data-ssk-renderer="ENGINEERING_SVG_PREVIEW"]')?.disabled),
+    inspectorVisible: Boolean(root()?.querySelector('[data-ssk-inspector]')),
+    status: root()?.querySelector('[data-ssk-preview-status]')?.textContent || '',
+    activeBranch: root()?.querySelector('[data-ssk-active-branch]')?.textContent || '',
+    selectedCandidate: root()?.querySelector('.ssk-candidate-card.is-selected')?.dataset?.sskCandidateCard || '',
+  };
+}
+function draftState() {
+  const current = draftController();
+  return {
+    controller: current?.getState() || null,
+    buttonDisabled: Boolean(root()?.querySelector('[data-ssk-draft-edit-3d]')?.disabled),
+    buttonPressed: root()?.querySelector('[data-ssk-draft-edit-3d]')?.getAttribute('aria-pressed') || 'false',
+    hostHidden: Boolean(root()?.querySelector('[data-ssk-draft-edit-3d-host]')?.hidden),
+    constructionHidden: Boolean(root()?.querySelector('[data-ssk-construction-surface]')?.hidden),
+    constructionInert: root()?.querySelector('[data-ssk-construction-surface]')?.hasAttribute('inert') || false,
+    previewHidden: Boolean(root()?.querySelector('[data-ssk-engineering-svg-preview-host]')?.hidden),
+    status: root()?.querySelector('[data-ssk-preview-status]')?.textContent || '',
+    stepLabel: root()?.querySelector('[data-ssk-step-label]')?.textContent || '',
+    activeBranch: root()?.querySelector('[data-ssk-active-branch]')?.textContent || '',
+    viewer: currentViewer()?.getStateSnapshot() || null,
+    viewerCount: fakeViewers.length,
+    failureCount: threeDFailures.length,
+    diagnosticCount: shadowDiagnostics.length,
+  };
+}
+async function subscriptionFailure() {
+  const host = document.createElement('div'); document.body.appendChild(host);
+  const workspace = mountSequentialSketcherWorkspace(host, { showToast() {} });
+  host.querySelector('[data-ssk-source]').value = JSON.stringify(records);
+  host.querySelector('[data-ssk-action="inspect"]').click();
+  const select = host.querySelector('[data-ssk-branch]'); select.value = branches[0]; select.dispatchEvent(new Event('change', { bubbles: true }));
+  const failed = mountSequentialEngineeringSvgPreviewController(host, { workspace, failureFactory: (stage) => stage === 'owner-subscription' ? new Error('Injected owner-subscription failure') : null });
+  const result = { state: failed.getState(), roots: host.querySelectorAll('[data-engineering-svg-shell]').length, constructionHidden: host.querySelector('[data-ssk-construction-surface]').hidden };
+  failed.destroy(); workspace.destroy(); host.remove(); return result;
+}
+function pick3d(objectId) { currentViewer()?.emitPick(objectId); }
+function runtimeFailure3d(message) { currentViewer()?.emitRuntimeError(message); }
+function navigationFailure3d(message) { currentViewer()?.emitNavigationError(message); }
+function close() { lastClosedController = controller(); lastClosed3dController = draftController(); click('[data-ssk-action="close"]'); }
+function destroyTile() { disposeTile(); }
+
+globalThis.__sskPreview = {
+  records, branches, failures, threeDFailures, shadowDiagnostics,
+  open, inspect, openBranch, advance, run, renderer, projection, draft3d, tick,
+  activatePreview, activate3d, reloadSource, state, draftState, controller, draftController,
+  root, close, destroyTile, subscriptionFailure, pick3d, runtimeFailure3d, navigationFailure3d,
+  currentViewer, oldController: () => lastClosedController, old3dController: () => lastClosed3dController,
+  setFailure: (stage) => { failureStage = stage || ''; },
+  set3dFailure: (stage) => { threeDFailureStage = stage || ''; },
+};
+</script></body></html>

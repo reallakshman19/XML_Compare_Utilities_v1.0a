@@ -1,0 +1,27 @@
+schema_version: relay-v2.5
+graph_revision: IG-0004
+nodes:
+  - id: ISSUE-1224
+    state: COMPLETE
+    github_state: CLOSED
+    github:
+      issue_number: 1224
+      url: https://github.com/reallaksh19/XML_Compare_Utilities/issues/1224
+      latest_projection_comment_id: 5720299025
+    roadmap_node: WP-DELIVERY-001
+  - id: PR-1228
+    state: MERGED
+    github_state: CLOSED
+    mergeable: true
+    merge_authority: OWNER_ONLY
+    merge_sha: 45f2a3ed7bbb186030e141a8313ccc04ddc997cb
+    github:
+      pr_number: 1228
+      url: https://github.com/reallaksh19/XML_Compare_Utilities/pull/1228
+    roadmap_node: WP-DELIVERY-001
+relationships:
+  - {from: ISSUE-1224, to: PR-1228, type: IMPLEMENTED_BY}
+  - {from: PR-1228, to: WP-DELIVERY-001, type: COMPLETED_BY_OWNER_MERGE}
+notes:
+  - PR 1228 merged after owner progression with the retained execution limitation explicitly disclosed.
+  - Retained Node tests remain NOT_RUN_ENVIRONMENT because Actions never assigned a runner; merge does not convert that evidence into PASS.

@@ -1,0 +1,45 @@
+pr: 1013
+claims:
+  - id: W2R-001
+    claim: Writer 2 is explicitly supported as writerVersion=2 while Writer 1B remains the default.
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: W2R-002
+    claim: Writer 2 Phase-1 uses base engineering deltas only and does not activate Writer-1B/restraint/SIF augmentation.
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: W2R-003
+    claim: Blank TARGET to named SOURCE routes to NODENAME CREATE under CII_WRITER_2_NODENAME_RELOCATION.
+    status: PASS_ISOLATED_EXACT_WRITER2_ROUTING
+  - id: W2R-004
+    claim: Named TARGET to blank SOURCE routes to NODENAME DELETE and replaces only the old generic explicit-delete-policy blocker.
+    status: PASS_ISOLATED_EXACT_WRITER2_ROUTING
+  - id: W2R-005
+    claim: Nonblank-to-different-nonblank NODENAME overwrite is blocked as Writer 1C territory.
+    status: PASS_ISOLATED_EXACT_WRITER2_ROUTING
+  - id: W2R-006
+    claim: Non-NODENAME mutable operations are blocked for Writer 2 Phase-1.
+    status: PASS_ISOLATED_EXACT_WRITER2_ROUTING
+  - id: W2R-007
+    claim: KEEP/protected-only previews cannot satisfy Writer-2 availability.
+    status: PASS_ISOLATED_EXACT_WRITER2_ROUTING
+  - id: W2R-008
+    claim: Explicit APPLY/EXCLUDE scope binding recalculates Writer-2 readiness through the merged Phase-4A planner.
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: W2R-009
+    claim: Writer-2 core apply uses the merged Phase-4B writer and independent round-trip validator.
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: W2R-010
+    claim: Writer-2 product download uses authoritative bytes instead of re-encoded text.
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: W2R-011
+    claim: Repository-integrated Writer-2 product routing passes.
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: W2R-012
+    claim: Full inherited Writer-1 regressions pass on PR1013.
+    status: NOT_RUN_ENVIRONMENT
+prohibited_claims:
+  - Writer 2 supports SIF/TEE block allocation.
+  - Writer 2 supports hanger allocation or HGRDAT construction.
+  - Writer 2 supports generic auxiliary-section cardinality.
+  - Writer 2 supports node/element/connectivity mutation.
+  - Writer 2 is the product default.
+  - Full repository or browser validation has passed.

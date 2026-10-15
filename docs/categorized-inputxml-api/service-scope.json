@@ -1,0 +1,22 @@
+{
+  "schema": "CategorizedInputXmlApiServiceScope.v1",
+  "serviceOnly": true,
+  "included": [
+    "capabilities",
+    "validation",
+    "inspection",
+    "deterministic serialization",
+    "strict source-evidence InputXML export",
+    "diagnostics"
+  ],
+  "excluded": [
+    "UI",
+    "HTTP",
+    "worker",
+    "storage",
+    "InputXML mutation",
+    "normalized reconciliation",
+    "CII conversion",
+    "runtime switch"
+  ]
+}

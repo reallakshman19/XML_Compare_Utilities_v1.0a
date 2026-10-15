@@ -1,0 +1,118 @@
+pr: 1061
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-bmw204-runtime-closure-2
+base_main: 9c6b49b7846906c5274cf57e6537ed4e7a6a6f8c
+current_stage: AUTO_SOURCE_CUSTODY_COMPLETE_EXACT_RUNTIME_ENVIRONMENT_BLOCKED
+work_intent: INVESTIGATE_VALIDATE_IMPLEMENT_ONLY_ON_REPRODUCED_DEFECT
+criticality: ENGINEERING_CRITICAL
+execution_mode: AUTO
+auto_state: BLOCKED
+scope_authority: LOCKED_TO_APPROVED_MISSION
+phase_progression: AUTO
+hard_stop: EXACT_PRIVATE_CHECKOUT_AND_BROWSER_RUNTIME_UNAVAILABLE
+merge_authority: OWNER_ONLY
+merge_authorized: false
+pr_state: DRAFT
+handover_readiness: READY
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RELEASE_FREEZE
+
+inherited:
+  w2_34_focused_bridge_export: PASS
+  w2_c0_exact_public_route: PASS
+  v14_i13_lexical_gate: PASS
+  restraint_pointer_i13: PASS_RUNTIME_EXACT_5_FILE_BLOB_GRAPH
+  w2_41_native_preflight: PASS_SOURCE_AUTHORITY_ONLY_NOT_RUNTIME
+
+runtime:
+  bm_w2_04: NOT_RUN_EXACT_EXECUTABLE_GRAPH_NOT_MATERIALIZED
+  bm_w2_04_pass_claimed: false
+  bm_w2_04_authored_assertion_failure_observed: false
+  w2_a: NOT_RUN_EXACT_EXECUTABLE_GRAPH_NOT_MATERIALIZED
+  w2_b: NOT_RUN_REQUIRES_W2_A_AND_BM_W2_04_RUNTIME_PASS
+  w2_35_generated_v14: NOT_RUN_EXACT_BROWSER_WORKER_PYODIDE_RUNTIME_UNAVAILABLE
+  w2_35a_issue_1042_generated_v14: NOT_RUN_EXACT_BROWSER_WORKER_PYODIDE_RUNTIME_UNAVAILABLE
+  w2_40_native_v14: NOT_RUN_EXACT_BROWSER_WORKER_PYODIDE_RUNTIME_UNAVAILABLE
+
+source_graph:
+  public_core_static_source_graph: CLOSED
+  core_blob: cee2858a63992648edf5e61b8f63b3837a937f9e
+  intake_blob: 3939ff6866191bca0ccf6d27264ecd1f2549ddd5
+  topology_adapter_blob: 57b8d2d6e8335887b962e09085cc93ece2e36d68
+
+  bm_w2_04:
+    state: CLOSED_CURRENT_HEAD
+    source_blob: e41cd05603b56837cbb6e31b9d4074ef6106fe9b
+    test_blob: 54c08bf0b2baf8138a703350d9e2600387693008
+    independent_oracle_blob: b36e38c8df327069f07ea20ad50c91f03ffdcd6a
+
+  w2_a:
+    state: CLOSED_CURRENT_HEAD
+    authored_test_blob: 9922377ddeda86fc9167d65f33c97095346e79fa
+    synthetic_fixture_blob: b725d56be579e7a2d7c40995ca2e13af7e702cbc
+    restraint_compaction_plan_blob: aedfb3ac78eed2294a88a64af261386f0db65085
+    restraint_pointer_custody_blob: 7053230546eaba4588b98a35ae5fc3819da83c14
+    additional_frontier: TERMINATES_IN_ALREADY_CLOSED_CORE_FIXED_FIELD_PHYSICAL_FILE_MODULES
+
+  w2_b:
+    state: CLOSED_CURRENT_HEAD
+    qualification_identity: RETAINED_REAL_V11_BM_W2_04_AFTER_W2_A_PASS
+    separate_authored_executable: false
+
+  v14_bridge:
+    writer_version_bridge_blob: 8038993f0a97719c0c316f31c2d6c30ea0386ec4
+    transfer_scope_blob: eab079f074d37aecbe6cf6b82731e987dc71b36b
+    converter_adapter_blob: 01ee6b457b123eb32f084ad45f8ff72cb909a1b9
+    worker_blob: 0c28eef6251e780b230dda1ce71e6da05f21abcc
+    change_projection_blob: 0a16b1383da6ef58abf55c53a91711a0a1f21c17
+    fixed_field_authority_blob: 5f1473f692c172de5aa0712a70bc72d917a6934d
+    browser_fixture_blob: 28c66a7fd6175c7cc50294cbe79e138dbde090f8
+    playwright_config_blob: 0de2666dd8e05a1cd989976ce28fce281d1a92cb
+    frozen_converter_blobs_match_inherited_crosscheck: true
+
+  w2_35:
+    state: CLOSED_CURRENT_HEAD
+    authored_spec_blob: be2bffb6ca001a84f1a6795970ac4e4c7f3b75b3
+  w2_35a:
+    state: CLOSED_CURRENT_HEAD
+    authored_spec_blob: 4a717c2e5f432037634f09b6e71bfe474dd06f66
+  w2_40:
+    state: CLOSED_CURRENT_HEAD
+    authored_spec_blob: ec99f9abcff5ab2df70b4f4635bbdeb7413a4bb1
+    native_upstream_commit: ca8d391ac5f829f53bebb3c37adf0547c34a67b4
+    native_archive_blob: 8409e1c429665e34a83c2a464665ebf5d5f1b0a1
+    native_member: SYS-0001-v14.CII
+    native_member_sha256: d2d4316309d9b1aa34b55ad72f89193fd0e437930db203fecd9ede00e69b2faf
+
+materialization:
+  base_main_exact: true
+  exact_private_repo_graph_materialized: false
+  native_git_dns_available: false
+  connector_exact_source_blob_reads_available: true
+  connector_repository_archive_to_runtime_available: false
+  authenticated_codeload_to_runtime_available: false
+  browser_private_checkout_available: false
+  prohibited_substitutes_used: false
+
+coordination:
+  master_index_checked: true
+  live_open_prs_checked: true
+  pr1039_restraint_cardinality: MERGED
+  pr1033_sif_create: OPEN_DRAFT_QUALIFICATION_DATA_ONLY
+  collision_classification: SAFE_FOR_RUNTIME_AND_SOURCE_CUSTODY_ONLY
+
+negative_assurance:
+  stubs_used: false
+  import_rewrites_used: false
+  partial_core_used: false
+  reconstructed_pass_used: false
+  github_actions_used_for_qualification: false
+  benchmark_changed: false
+  production_changed: false
+  test_changed: false
+  writer_authority_widened: false
+  not_run_promoted_to_pass: false
+
+exact_next_action: >-
+  IN_A_COMPLETE_EXACT_CHECKOUT RUN UNCHANGED W2_A NODE TEST; THEN BM_W2_04 NODE TEST;
+  ONLY IF BOTH PASS CLASSIFY W2_B RETAINED_REAL V11; THEN RUN PLAYWRIGHT.CII-WRITER2.CONFIG.MJS
+  FOR W2_35/W2_35A/W2_40 WITH REAL WORKER/PYODIDE; STOP AT FIRST AUTHORED PRODUCT FALSIFIER.

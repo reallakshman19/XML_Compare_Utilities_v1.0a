@@ -1,0 +1,20 @@
+{
+  "profileId": "universal-fixture",
+  "levelDefinitions": [
+    {
+      "levelId": "Root",
+      "levelType": "container",
+      "creationMode": "static",
+      "key": "ROOT",
+      "documentRoot": true,
+      "children": [
+        {
+          "levelId": "Item",
+          "levelType": "occurrence",
+          "creationMode": "one-per-row",
+          "keyResolver": { "op": "trim", "column": "ID" }
+        }
+      ]
+    }
+  ]
+}

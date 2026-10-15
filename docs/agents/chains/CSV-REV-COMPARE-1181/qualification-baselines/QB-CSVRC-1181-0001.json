@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "baselineId": "QB-CSVRC-1181-0001",
+  "source": "github:reallaksh19/XML_Compare_Utilities#1181",
+  "sourceAuthority": "OWNER",
+  "activeQuestionSetId": "QS-CSVRC-1181-0001",
+  "questions": [
+    {
+      "baselineQuestion": "Q1",
+      "coveredBy": ["Q1"],
+      "requiredLiterals": ["parseTableSource", "columnIds", "support-revision-csv-xml/v1"],
+      "requiredConcepts": ["categorized XML", "provenance", "duplicate headings"],
+      "requiredObligations": ["trace", "prove"]
+    },
+    {
+      "baselineQuestion": "Q2",
+      "coveredBy": ["Q2"],
+      "requiredLiterals": ["=1006649755/3641", "=1006649755/4596", "SL-212"],
+      "requiredConcepts": ["persistent component identity", "member renumbering", "component set change"],
+      "requiredObligations": ["reconstruct", "isolate", "falsify"]
+    },
+    {
+      "baselineQuestion": "Q3",
+      "coveredBy": ["Q3"],
+      "requiredLiterals": ["1 -> N", "N -> 1", "N -> M"],
+      "requiredConcepts": ["common-support graph", "coordinate-frame normalization", "ambiguous lineage"],
+      "requiredObligations": ["prove", "identify"]
+    },
+    {
+      "baselineQuestion": "Q4",
+      "coveredBy": ["Q4"],
+      "requiredLiterals": ["PS02039", "LOAD_BECAME_NUMERIC", "LOAD_SIGNATURE_CHANGED"],
+      "requiredConcepts": ["independent oracle", "load vector ordinal", "negative control"],
+      "requiredObligations": ["derive", "compare", "falsify"]
+    },
+    {
+      "baselineQuestion": "Q5",
+      "coveredBy": ["Q5"],
+      "requiredLiterals": ["many-per-row", "SUPPORT_REV_REMARKS_V1"],
+      "requiredConcepts": ["minimal patch", "no direct CSV matcher", "remarks are outputs"],
+      "requiredObligations": ["define", "protect", "no-patch"]
+    }
+  ]
+}

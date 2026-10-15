@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>XML Compare Utilities</title>
+<link rel="icon" href="./assets/app-icon.svg">
+<link rel="stylesheet" href="./styles/base.css?v=20260704-css-restore-4">
+<link rel="stylesheet" href="./styles/tabs.css?v=20260704-css-restore-4">
+<link rel="stylesheet" href="./styles/app-shell-header-fix.css?v=20260704-css-restore-4">
+<link rel="stylesheet" href="./styles/app-build-stamp.css?v=20260708-m23-transfer-tile-layout">
+<link rel="stylesheet" href="./tabs/xml-compare-tab.css?v=20260704-transfer-review-1">
+<link rel="stylesheet" href="./tabs/xml-compare-load-feedback.css?v=20260704-css-restore-4">
+<link rel="stylesheet" href="./tabs/xml-compare-load-diagnostics.css?v=20260704-css-restore-4">
+<link rel="stylesheet" href="./tabs/xml-compare-canvas-rebuild.css?v=20260704-css-restore-4">
+<link rel="stylesheet" href="./tabs/xml-compare-line-node-map.css?v=20260704-css-restore-4">
+<link rel="stylesheet" href="./tabs/xml-compare-transfer-output-ui.css?v=20260707-m18-dashboard-css">
+<link rel="stylesheet" href="./tabs/xml-compare-transfer-noise-reduction.css?v=20260708-m23-transfer-tile-layout">
+<link rel="stylesheet" href="./tabs/xml-compare-table-categorized-layout-fix.css?v=20260707-m77-stable-scroll">
+<link rel="stylesheet" href="./tabs/xml-compare-table-categorized-recipe-builder-ux.css?v=20260708-ttcx-recipe-ux">
+</head>
+<body>
+<div id="app-loading-overlay" class="app-loading-overlay is-visible" aria-hidden="false">
+  <div class="app-loading-card">
+    <div class="app-loading-spinner"></div>
+    <div>
+      <strong>XML Compare Utilities</strong>
+      <p>Loading workspace...</p>
+    </div>
+  </div>
+</div>
+<div id="app-toast" class="app-toast" hidden></div>
+<script type="module" src="./main-rhbg-fitguard.js?v=20260708-m23-transfer-tile-layout"></script>
+<script type="module" src="./tabs/xml-compare-table-categorized-iso-sample-loader.js?v=20260709-iso-sample-loader"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+name: CII Writer2 R1 Benchmark
+
+on:
+  push:
+    branches:
+      - revision/cii-writer2-nodename-byte-r1-1224
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Run retained structural baseline
+        run: node tests/cii-workspace-multisource-retained-auto-anchor-benchmark.test.js
+
+      - name: Run PB-0003 lower-bound NodeName benchmark
+        run: node tests/cii-workspace-multisource-pb0003-benchmark.test.js

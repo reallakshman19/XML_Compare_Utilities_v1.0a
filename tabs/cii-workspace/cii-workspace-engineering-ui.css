@@ -1,0 +1,38 @@
+.ciiw-backdrop[data-ciiw-layout] .ciiw-anchor-suggestions {
+  display: none;
+}
+
+.ciiw-backdrop[data-ciiw-layout] .ciiw-landmark-grid {
+  margin-top: .75rem;
+}
+
+.ciiw-base-set {
+  border: 1px solid #afb8c1;
+  border-left: 4px solid #0969da;
+  border-radius: 10px;
+  padding: .75rem .9rem;
+  margin: .75rem 0 1rem;
+  background: #f6f8fa;
+}
+.ciiw-base-set header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.ciiw-base-set header > div { display: grid; gap: .15rem; }
+.ciiw-base-set header span { color: #57606a; font-size: .8rem; }
+.ciiw-base-set ol { margin: .65rem 0; padding-left: 1.4rem; }
+.ciiw-base-set li { display: grid; grid-template-columns: 2rem minmax(0,1fr); gap: .4rem; padding: .2rem 0; }
+.ciiw-base-set p { margin: .4rem 0 0; color: #57606a; }
+.ciiw-anchor-card[data-selected="true"] {
+  outline: 3px solid #1a7f37;
+  outline-offset: 2px;
+  background: #f0fff4;
+}
+.ciiw-anchor-card[data-selected="true"] footer button {
+  border-color: #1a7f37;
+  color: #1a7f37;
+  font-weight: 700;
+}

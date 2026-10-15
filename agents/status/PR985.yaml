@@ -1,0 +1,40 @@
+schema: AgentPrStatus.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr_or_wip: PR985
+mission: CII anchor-seeded network propagation
+workstream: cii-anchor-propagation
+branch: agent/cii-anchor-propagation
+stacked_base_pr: PR984
+stacked_base_head: dd165a4a04b51b15d06322d7f577c88a33641b6c
+main_base: ceb0c0193a4be68b28a913b74bdc453ccf79d336
+validated_implementation_head: 6e35a8997d6c2c4dcdc914b634d111277092f633
+work_intent: IMPLEMENT
+criticality: ENGINEERING_CRITICAL
+agent_state: IMPLEMENTATION_COMPLETE_VALIDATION_PARTIAL
+pr_recovery_state: STACKED_DRAFT_HANDOVER_READY
+handover_readiness: READY
+report_path: agents/PR985_workreport.md
+appendix_a_status: NOT_REQUIRED_SAME_AGENT_CONTINUATION
+scope_authority: LOCKED_TO_ONE_ANCHOR_PROPAGATION
+validation_state: FOCUSED_RECONSTRUCTED_PASS_FULL_CHECKOUT_NOT_RUN
+acceptance_matrix:
+  anchor_seed: PASS_RECONSTRUCTED_FOCUSED
+  multi_hop_propagation: PASS_RECONSTRUCTED_FOCUSED
+  one_to_one_frontier_assignment: PASS_RECONSTRUCTED_FOCUSED
+  medium_supported_propagation: PASS_205_TARGET1_TARGET2_FOCUSED
+  ambiguity_stop: PASS_RECONSTRUCTED_FOCUSED
+  edge_custody: PASS_SOURCE_AND_FOCUSED
+  node_custody_before_commit: PASS_SOURCE_AND_FOCUSED
+  unresolved_fail_closed: PASS_RECONSTRUCTED_FOCUSED
+  target1_250_dimension_change: PASS_RECONSTRUCTED_FOCUSED
+  target2_250_redistribution: PASS_RECONSTRUCTED_FOCUSED
+  no_node_offset_identity: PASS_BY_TEST_CONSTRUCTION
+  multi_anchor_authority_unchanged: SOURCE_DIFF_GUARD
+  transfer_unchanged: SOURCE_DIFF_GUARD
+  literal_repository_tests_current_head: NOT_RUN_COMPLETE_CHECKOUT_UNAVAILABLE
+known_limits:
+  - equal unmatched frontier cardinality is required in the one-anchor path; insertion/subdivision remains fail-closed here
+  - stacked on PR984/PR983/PR982
+  - direct container checkout remains environment-blocked by GitHub DNS resolution
+exact_next_action: reconcile PR985 diff/review state; then next phase is Tab 2/engineering-delta integration, not target mutation
+last_updated: 2026-08-18T18:29:00+04:00

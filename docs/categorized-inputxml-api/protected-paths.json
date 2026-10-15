@@ -1,0 +1,21 @@
+{
+  "schema": "CategorizedInputXmlApiProtectedPaths.v1",
+  "baseCommit": "055d064a41196ca29203c51daa9314d30f7cd0f2",
+  "policy": "service-only additions; existing runtime modules remain unchanged",
+  "protectedPaths": [
+    "xml-compare/CategorizedInputXmlConverter.js",
+    "xml-compare/XmlCompareCategorizedXmlTree.js",
+    "xml-compare/XmlCompareTransferPatchEngine.js",
+    "xml-compare/XmlCompareLinewiseWorkspaceModel.js",
+    "xml-compare/XmlCompareLinewiseWorkflowActions.js",
+    "xml-compare/XmlCompareTabView.js",
+    "tabs/xml-compare-tab.js",
+    "tabs/inputxml-workspace/**",
+    "converters/**"
+  ],
+  "allowedSharedDependencies": [
+    "xml-compare/CategorizedInputXmlConverter.js",
+    "xml-compare/XmlCompareCategorizedXmlTree.js"
+  ],
+  "newServiceRoot": "xml-compare/categorized-inputxml-api/"
+}

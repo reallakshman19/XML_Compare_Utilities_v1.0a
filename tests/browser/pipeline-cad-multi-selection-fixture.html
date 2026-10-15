@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PCAD-004R Multi-Selection Fixture</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#020617;color:#e2e8f0;font-family:system-ui,sans-serif}.pipeline-3d-model-dialog{min-height:100vh;padding:12px}.raw{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}textarea{width:100%;height:110px;background:#07111f;color:#cbd5e1;border:1px solid #334155;font:10px monospace}.p3d-x-modal{display:flex;flex-direction:column;margin-top:10px;height:760px;padding:10px;background:#07111f;border:1px solid #334155}.p3d-x-tabs{display:flex;gap:6px}.p3d-x-content{display:none;min-height:0;flex:1}.p3d-x-content[data-active="true"]{display:block}[data-p3d-split="table2x-preview"],[data-p3d-split="table3x-preview"]{width:100%;height:100%;min-width:0;min-height:620px}.outputs{display:none}
+</style>
+</head>
+<body>
+<main class="pipeline-3d-model-dialog" data-browser-fixture="pipeline-multi-selection">
+<section class="raw">
+<textarea data-p3d-split="table2a-raw"></textarea><textarea data-p3d-split="table3a-raw"></textarea>
+<textarea data-p3d-split="table3b-raw"></textarea><textarea data-p3d-split="table3c-raw"></textarea>
+</section>
+<section class="p3d-x-modal" data-p3d-split="x-modal">
+<div class="p3d-x-tabs"><button type="button" class="p3d-x-tab" data-x-tab="table2x" data-active="true">Table 2X</button><button type="button" class="p3d-x-tab" data-x-tab="table3x" data-active="false">Table 3X</button></div>
+<div class="p3d-x-content" data-x-content="table2x" data-active="true"><div data-p3d-split="table2x-preview"></div></div>
+<div class="p3d-x-content" data-x-content="table3x" data-active="false"><div data-p3d-split="table3x-preview"></div></div>
+</section>
+<section class="outputs"><table data-p3d="table2x-output"><tbody></tbody></table><table data-p3d="table3x-output"><tbody></tbody></table></section>
+</main>
+<script type="module">
+import { parseTable1 } from '../../tabs/pipeline-3d-model/pipeline-3d-model-geometry.js';
+import { buildAuthoritativePipelineOutputs } from '../../tabs/pipeline-3d-model/pipeline-3d-model-profile-propagation.js';
+import { framesFromTable1, parseTable2Paste, parseTable3Paste } from '../../tabs/pipeline-3d-model/pipeline-3d-model-table-paste-parser.js';
+import { SAMPLE_TABLE_2_PASTE_MULTISHEET, SAMPLE_TABLE_3_PASTE_MULTISHEET } from '../../tabs/pipeline-3d-model/pipeline-3d-model-table-paste-samples.js';
+import { SAMPLE_TABLE_1_MULTISHEET } from '../../tabs/pipeline-3d-model/pipeline-3d-model-samples.js';
+import { mountPipelineCadWorkspace } from '../../tabs/pipeline-3d-model/pipeline-3d-model-cad-workspace.js';
+
+const dialog=document.querySelector('.pipeline-3d-model-dialog');
+const frames=framesFromTable1(parseTable1(SAMPLE_TABLE_1_MULTISHEET));
+const table2=parseTable2Paste(SAMPLE_TABLE_2_PASTE_MULTISHEET,{frames});
+const table3=parseTable3Paste(SAMPLE_TABLE_3_PASTE_MULTISHEET,{frames});
+const initialRaw={table2a:table2.rawText,table3a:table3.table3ARaw,table3b:table3.table3BRaw,table3c:table3.table3CRaw};
+for(const [name,value] of Object.entries(initialRaw))dialog.querySelector(`[data-p3d-split="${name}-raw"]`).value=value;
+localStorage.setItem('pipeline3dCadCanvas','1');
+localStorage.setItem('pipeline3dCadPreviewModeV1',JSON.stringify({mode:'side-by-side'}));
+localStorage.removeItem('pipeline3dCadSnapV1');
+let workspace=mountPipelineCadWorkspace(dialog,{force:true});
+const frame=()=>new Promise((resolve)=>requestAnimationFrame(resolve));
+async function settle(){workspace?.resize();await frame();await frame();workspace?.resize();await frame();}
+await settle();
+function raw(name){return dialog.querySelector(`[data-p3d-split="${name}-raw"]`)?.value||'';}
+function authority(){
+ const output=buildAuthoritativePipelineOutputs({
+  table1Text:SAMPLE_TABLE_1_MULTISHEET,table2Text:'',table3Text:'',
+  profileRaw:{table2a:raw('table2a'),table3a:raw('table3a'),table3b:raw('table3b'),table3c:raw('table3c')},
+  branchInfo:{branchName:'PCAD-004R',lineNo:'PCAD-004R'},
+ });
+ return {
+  coordinateRows:JSON.stringify(output.coordinateRows),inputXmlCoordinateRows:JSON.stringify(output.inputXmlCoordinateRows),
+  xmlText:output.xmlText,bends:JSON.stringify(output.elasticBends.candidates.map((item)=>({
+   previousNode:item.previousNode,cornerNode:item.cornerNode,nextNode:item.nextNode,radiusMm:item.radiusMm,
+   incomingElementIndex:item.incomingElementIndex,status:item.status,curvatureNodes:item.curvatureNodes,
+  }))),blocking:output.elasticBends.hasBlockingErrors,
+ };
+}
+function nodes(name){const graph=workspace.graphs[name];return name==='table2x'?graph.currentNodes():[...graph.depthNodes(),...graph.markerNodes()];}
+function findNode(name,query={}){const graph=workspace.graphs[name];const node=nodes(name).find((item)=>{
+ if(query.id&&item.id!==query.id)return false;if(query.type&&item.type!==query.type)return false;
+ if(query.text&&item.text!==query.text)return false;return true;
+});if(!node)throw new Error(`Node not found ${name} ${JSON.stringify(query)}`);return{...node,screen:graph.worldToScreen(node)};}
+function items(name,type=null,count=null){const list=nodes(name).filter((item)=>!type||item.type===type);return count==null?list:list.slice(0,count);}
+function select(name,queries,primaryId=null){const list=(Array.isArray(queries)?queries:[queries]).map((query)=>findNode(name,query));return workspace.graphs[name].setSelection(list,{primaryId:primaryId||list.at(-1)?.id,source:'fixture'});}
+function toggle(name,query,modifier='ctrl'){const graph=workspace.graphs[name];const node=findNode(name,query);const event=modifier==='shift'?{shiftKey:true}:modifier==='meta'?{metaKey:true}:{ctrlKey:true};return graph.selectHit({type:node.type||'elevation-node',node},event);}
+function click(name,query){const graph=workspace.graphs[name];const node=findNode(name,query);return graph.selectHit({type:node.type||'elevation-node',node},{});}
+function box(name,start,end,modifier=null){const graph=workspace.graphs[name];const event=modifier==='ctrl'?{ctrlKey:true}:modifier==='shift'?{shiftKey:true}:{};graph.beginSelectionBox(start,event);graph.updateSelectionBox(end);return graph.finishSelectionBox();}
+async function drag(name,query,delta={}){const graph=workspace.graphs[name];const node=findNode(name,query);const target={x:node.x+(Number(delta.x)||0),y:node.y+(Number(delta.y)||0)};graph.setTool('select');graph.onPrimaryPointerDown({},node.screen,node);graph.onPrimaryPointerMove({},graph.worldToScreen(target),target);graph.onPrimaryPointerUp({},graph.worldToScreen(target),target);await settle();}
+async function preview(name,query,delta={}){const graph=workspace.graphs[name];const node=findNode(name,query);const target={x:node.x+(Number(delta.x)||0),y:node.y+(Number(delta.y)||0)};graph.setTool('select');graph.onPrimaryPointerDown({},node.screen,node);graph.onPrimaryPointerMove({},graph.worldToScreen(target),target);await settle();return target;}
+async function press(name,key,options={}){const graph=workspace.graphs[name];graph.canvas.focus();graph.canvas.dispatchEvent(new KeyboardEvent('keydown',{key,bubbles:true,cancelable:true,...options}));await settle();}
+async function setMode(mode){const modal=dialog.querySelector('[data-p3d-split="x-modal"]');modal.dataset.p3dCadPreviewMode=mode;modal.dispatchEvent(new CustomEvent('pipelineCadPreviewModeChanged',{detail:{mode}}));await settle();}
+function state(){const {controller,graphs}=workspace;return{
+ revision:controller.model?.revision||0,raw:{table2a:raw('table2a'),table3a:raw('table3a'),table3b:raw('table3b'),table3c:raw('table3c')},
+ table2Rows:controller.model?.table2Rows?.map((row)=>({...row}))||[],depthRows:controller.model?.table3DepthRows?.map((row)=>({...row}))||[],markerRows:controller.model?.table3MarkerRows?.map((row)=>({...row}))||[],
+ history:{undo:controller.history?.undoStack?.length||0,redo:controller.history?.redoStack?.length||0},
+ selection:{table2x:graphs.table2x.getSelectionDetail(),table3x:graphs.table3x.getSelectionDetail()},
+ enabled:{table2x:graphs.table2x.pipelineCadSelectionState.enabled,table3x:graphs.table3x.pipelineCadSelectionState.enabled},
+ overrides:{table2:[...graphs.table2x.visualOverrides.entries()],depth:[...graphs.table3x.depthOverrides.entries()],marker:[...graphs.table3x.markerOverrides.entries()]},
+ precision:{table2x:!document.querySelector('[data-p3d-cad-precision="table2x"]')?.hidden,table3x:!document.querySelector('[data-p3d-cad-precision="table3x"]')?.hidden},
+ mountId:workspace.mountId,rejections:[...(window.__pcadRejections||[])],resolutions:[...(window.__pcadResolutions||[])],authority:authority(),
+ };}
+window.__pcadRejections=[];window.__pcadResolutions=[];
+function bindEvidence(){workspace.controller.addEventListener('batchMoveRejected',(event)=>window.__pcadRejections.push(event.detail));workspace.controller.addEventListener('batchSelectionResolved',(event)=>window.__pcadResolutions.push(event.detail));for(const graph of Object.values(workspace.graphs))graph.addEventListener('batchMoveRejected',(event)=>window.__pcadRejections.push(event.detail));}
+bindEvidence();
+window.__pcadMulti={get workspace(){return workspace;},state,authority,findNode,items,select,toggle,click,box,drag,preview,press,setMode,settle,
+ cancel(name){workspace.graphs[name].dispatchGraphEvent('interactionCancelled',{reason:'fixture-cancel'});},
+ destroy(){const current=workspace;workspace=null;return current?.destroy()||false;},
+ async remount(){workspace=mountPipelineCadWorkspace(dialog,{force:true});bindEvidence();await settle();return Boolean(workspace);}};
+document.body.dataset.pcadMultiReady='1';
+</script>
+</body>
+</html>

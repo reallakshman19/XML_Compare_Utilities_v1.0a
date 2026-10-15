@@ -1,0 +1,121 @@
+pr: 1062
+repository: reallaksh19/XML_Compare_Utilities
+base_main: d1f7d773ec89459f55d3fca9bcf0c93f2308b1e1
+
+claims:
+  - id: BM_W2_01_NODENAME_PUBLIC
+    state: AUTHORED_RUNTIME_NOT_RUN
+    source_blob: e41cd05603b56837cbb6e31b9d4074ef6106fe9b
+    oracle_blob: ab770906e30fa4a0db156e083517af1d7793eb5c
+    public_test_blob: 7ba33984f290550f6f40eb91369ce9ceab1b74af
+
+  - id: NODENAME_POINTER_LEXICAL_I13_SOURCE_CONTRACT
+    state: PASS_PREIMAGE_FAIL_POSTIMAGE_PASS
+    test_blob: c80bca35e3b62f216eaab5bf8a48faaa21a276d7
+    preimage_writer_blob: 9e520ceaedc16b0bd36b70396bca3bfc9fd5996f
+    postimage_writer_blob: eb6bff1cdd4dc1f50e101a4f2f2dc717c74bdd5c
+
+  - id: NODENAME_POINTER_LEXICAL_I13_FOCUSED_RUNTIME
+    state: PASS_RUNTIME_EXACT_5_FILE_BLOB_GRAPH
+    test_blob: 65896fd41e16efcd25dea97ad5a8848cbc87d03c
+    observed_pointer_transition: '0->5'
+    observed_pointer_token: '5'
+    public_runtime_implication: NONE
+
+  - id: BM_W2_02_SIF_PUBLIC
+    state: AUTHORED_RUNTIME_NOT_RUN
+
+  - id: SIF_DELETE_FOCUSED_RUNTIME
+    state: PASS_RUNTIME_EXACT_8_FILE_BLOB_GRAPH
+    test_blob: 65d70d2cab42ce19ac6648d9c6929dae56404990
+    graph:
+      fixed_field: 485daa43553681ca54f488499e57f36d2239be58
+      physical_file: 0c4c445fbd3d4b929b1f9288b789b244547c8867
+      contracts: 6ab30d8dd088225fd89bb729bf9ffdebefe652f6
+      sif_custody: 915ceb0a199091f00823e89d6c73c6007da62f9d
+      sif_delete_plan: 7213a92de3223c4ce9b82e80fa872a55fd992ee3
+      sif_writer: 550e37e64ab0550adde1b372d50a4b35da96d5b2
+      sif_validator: 13a0d5ebc43f7dd3b012f4c828cd4ae2ec67e011
+      test: 65d70d2cab42ce19ac6648d9c6929dae56404990
+    observed:
+      middle_delete_mapping: '1:1,2:0,3:2'
+      delete_all: PASS
+      lexical_i13: PASS
+      exact_postimage: PASS
+      unrelated_byte_falsifier: PASS
+      forged_testimony_falsifier: PASS
+    public_runtime_implication: NONE
+
+  - id: BM_W2_03_HANGER_PUBLIC
+    state: AUTHORED_RUNTIME_NOT_RUN
+    oracle_blob: 16cbba8d5ac7dec1dc4e8cce1c5f0b6a9c728b3f
+    public_test_blob: 93703ac66fec9b663165d95a20afbc654b6e26f4
+
+  - id: HANGER_DELETE_ALL_FOCUSED_RUNTIME
+    state: PASS_RUNTIME_EXACT_9_FILE_BLOB_GRAPH
+    test_blob: 2e45b358640e9028c66b11b108b6b8d44d2dd2d1
+    graph:
+      fixed_field: 485daa43553681ca54f488499e57f36d2239be58
+      contracts: 6ab30d8dd088225fd89bb729bf9ffdebefe652f6
+      hanger_evidence: 71e5bca8cb3429878785244b5508e104add2fc57
+      physical_file: 0c4c445fbd3d4b929b1f9288b789b244547c8867
+      record_binding: 7d860be728f1eddfb374391bae9b3ae49cac808c
+      tail_order: eda94b208239f324b45c9c70f57537c31a501e56
+      delete_plan: d104fe291c0bda1b41c29604a98671dae8a23a9a
+      writer: 5993c4e534438629a683b018f15dd013c37a20b2
+      test: 2e45b358640e9028c66b11b108b6b8d44d2dd2d1
+    observed:
+      count: '1->0'
+      canonical_layout: PASS
+      record_binding_present: true
+      tail_order_present: true
+      post_hanger_custody_zero: PASS
+    public_runtime_implication: NONE
+
+  - id: BM_W2_04_RESTRAINT_PUBLIC
+    state: AUTHORED_RUNTIME_NOT_RUN
+
+  - id: RESTRAINT_POINTER_I13_INHERITED
+    state: PASS_RUNTIME_EXACT_5_FILE_BLOB_GRAPH
+    pointer_custody_blob: 7053230546eaba4588b98a35ae5fc3819da83c14
+
+  - id: RESTRAINT_COMPACTION_FOCUSED_RUNTIME
+    state: PASS_RUNTIME_EXACT_7_FILE_BLOB_GRAPH
+    test_blob: b7e76470cf416e595c556467b3207b4fe8d5d0ba
+    graph:
+      fixed_field: 485daa43553681ca54f488499e57f36d2239be58
+      physical_file: 0c4c445fbd3d4b929b1f9288b789b244547c8867
+      contracts: 6ab30d8dd088225fd89bb729bf9ffdebefe652f6
+      byte_sha256: 6435e0eaadc382a18aac6a0bd46318ab6c27c714
+      pointer_custody: 7053230546eaba4588b98a35ae5fc3819da83c14
+      compaction_plan: aedfb3ac78eed2294a88a64af261386f0db65085
+      test: b7e76470cf416e595c556467b3207b4fe8d5d0ba
+    observed:
+      pointer_mapping: '1:1,2:0,3:2'
+      control_count: '3->2'
+      deleted_row_range: '24:48'
+      lexical_i13_custody: PASS
+    public_runtime_implication: NONE
+
+  - id: PHASE_3_COMPOSITES
+    state: BLOCKED
+    reason: STANDALONE_PUBLIC_RUNTIME_PASS_REQUIRED
+
+  - id: WRITER2_RUNTIME_LADDER
+    state: NOT_READY
+    w2_a: NOT_RUN
+    w2_b: NOT_RUN
+    w2_35: NOT_RUN
+    w2_35a: NOT_RUN
+    w2_40: NOT_RUN
+    release_freeze: NOT_READY
+
+negative_claims:
+  benchmark_source_modified: false
+  workflow_modified: false
+  parser_modified: false
+  converter_modified: false
+  focused_pass_promoted_to_public_pass: false
+  composites_authored_before_public_standalone_runtime: false
+  runtime_pass_fabricated: false
+  not_run_promoted_to_pass: false

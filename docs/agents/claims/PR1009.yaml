@@ -1,0 +1,84 @@
+schema: AgentPrClaims.v1
+repository: reallaksh19/XML_Compare_Utilities
+pr: 1009
+claims:
+  - id: PR1009-CLAIM-001
+    statement: Writer1C SIF Phase-2B writable custody is limited to canonical neutral Version 11 with exact parsed ELEMENT index to physical 15-row block index plus matching FROM/TO endpoints.
+    evidence: tabs/cii-workspace/cii-workspace-writer1c-sif-custody.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1009-CLAIM-002
+    statement: Qualified production SIF mutation is limited to existing 10-row SIF blocks and item3 ii / item4 io fields; block creation, pointer allocation and raw payload copy remain excluded.
+    evidence: tabs/cii-workspace/cii-workspace-writer1c-sif-custody.js; tabs/cii-workspace/cii-workspace-writer1c-sif.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1009-CLAIM-003
+    statement: Blank or non-numeric SIF state is not treated as numeric zero, and the production mutation slice requires explicit finite current/proposed values >= 1.0.
+    evidence: tabs/cii-workspace/cii-workspace-writer1c-sif-deltas.js; tabs/cii-workspace/cii-workspace-writer1c-sif.js; tests/cii-workspace-writer1c-sif-phase2b.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1009-CLAIM-004
+    statement: Production SIF mutation requires finite equal SOURCE/TARGET tee Type and agreement with the actual TARGET slot Type.
+    evidence: tabs/cii-workspace/cii-workspace-writer1c-sif-deltas.js; tabs/cii-workspace/cii-workspace-writer1c-sif.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1009-CLAIM-005
+    statement: Piping-code equality is not inferred from an unqualified neutral-file field; mutation requires an explicit engineer-attested same-active-piping-code context.
+    evidence: tabs/cii-workspace/cii-workspace-transfer-policy.js; tabs/cii-workspace/cii-workspace-writer1c-sif.js; tabs/cii-workspace/cii-workspace-tab.js; tabs/cii-workspace/cii-workspace-transfer-scope-ui.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1009-CLAIM-006
+    statement: Shared physical SIF spans block unapproved alias effects, canonicalize identical all-owner postimages and block divergent postimages.
+    evidence: tabs/cii-workspace/cii-workspace-writer1c-sif.js; tests/cii-workspace-writer1c-sif-phase2b.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1009-CLAIM-007
+    statement: Writer1C NODENAME and SIF mutations are patched against one original TARGET byte preimage with overlap protection rather than sequential writer output chaining.
+    evidence: tabs/cii-workspace/cii-workspace-target-writer-1c.js
+    status: IMPLEMENTED_SOURCE_INSPECTED
+  - id: PR1009-CLAIM-008
+    statement: Writer1C round-trip validation independently derives authorized NODENAME/SIF spans and rejects unrelated byte changes outside that set.
+    evidence: tabs/cii-workspace/cii-workspace-writer1c-validation.js; tests/cii-workspace-writer1c-sif-phase2b.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1009-CLAIM-009
+    statement: A parsed-element-index displacement with otherwise matching endpoints cannot qualify writable SIF physical custody.
+    evidence: tests/cii-workspace-writer1c-sif-phase2b.test.js
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+  - id: PR1009-CLAIM-010
+    statement: Browser Writer1C flow carries explicit SIF code context and rechecks current context at apply time to prevent stale authorization reuse.
+    evidence: tabs/cii-workspace/cii-workspace-tab.js; tabs/cii-workspace/cii-workspace-transfer-scope-ui.js; tests/cii-workspace-writer1c-sif-context-ui.test.js
+    status: IMPLEMENTED_SOURCE_INSPECTED_TEST_AUTHORED_NOT_RUN
+  - id: PR1009-CLAIM-011
+    statement: The low-level SIF mutation planner independently validates the piping-code authority token and normalized SOURCE/TARGET code equality; a forged QUALIFIED status alone cannot authorize mutation.
+    evidence: tabs/cii-workspace/cii-workspace-writer1c-sif.js; tests/cii-workspace-writer1c-sif-context-planner.test.js
+    status: PASS_ISOLATED_EXACT_PLANNER_HARNESS_AND_SOURCE_INSPECTION
+  - id: PR1009-CLAIM-012
+    statement: All four Version-11 mutable positions have dedicated exact-span coverage: slot1 item3 ii, slot1 item4 io, slot2 item3 ii and slot2 item4 io.
+    evidence: tests/cii-workspace-writer1c-sif-four-position-plan.test.js
+    status: PASS_ISOLATED_EXACT_PLANNER_HARNESS
+  - id: PR1009-CLAIM-013
+    statement: Git-blob-matched production fixed-field, physical-file and SIF-custody modules qualify synthetic Version-11 item3/item4 spans and reject Version drift and parsed-index displacement.
+    evidence: isolated qualification harness using fixed-field blob 485daa43553681ca54f488499e57f36d2239be58, physical-file blob 0c4c445fbd3d4b929b1f9288b789b244547c8867 and SIF-custody blob 915ceb0a199091f00823e89d6c73c6007da62f9d
+    status: PASS_ISOLATED_EXACT_MODULE_HARNESS
+  - id: PR1009-CLAIM-014
+    statement: An isolated SIF-only stack using Git-blob-matched production planner, custody, validator, physical-file, fixed-field and contracts modules round-trips all four authorized Version-11 SIF positions and the validator rejects one unrelated ELEMENT pointer-byte tamper as UNAUTHORIZED_BYTE_CHANGE.
+    evidence: planner blob 980e5c6df1d16a66ddd32ee83da9f2eae583108a; custody blob 915ceb0a199091f00823e89d6c73c6007da62f9d; validator blob 7d389a7e52e0c0b6b7592f282fa639535915ced9; physical-file blob 0c4c445fbd3d4b929b1f9288b789b244547c8867; fixed-field blob 485daa43553681ca54f488499e57f36d2239be58; contracts blob 6ab30d8dd088225fd89bb729bf9ffdebefe652f6
+    status: PASS_ISOLATED_PRODUCTION_MODULE_HARNESS
+qualification_findings:
+  - id: PR1009-QF-001
+    finding: Low-level planner previously trusted sifContext.status=QUALIFIED without independently checking the authority token and equal non-empty code values.
+    disposition: FIXED_IN_PR
+  - id: PR1009-QF-002
+    finding: Initial positive mutation regression covered only slot1 item3 ii while the production claim covers four Version-11 positions.
+    disposition: COVERAGE_CLOSED_WITH_FOUR_POSITION_TEST
+limitations:
+  - exact checkout failed because github.com DNS resolution is unavailable in the execution container
+  - isolated harness results do not substitute for execution from a complete exact repository checkout
+  - focused Phase-2B repository regression not executed in a complete checkout
+  - canonical TARGET1 repository custody regression not executed in a complete checkout
+  - SIF context UI regression not executed in a browser/runtime checkout
+  - inherited Writer1C regressions not executed
+  - full npm test not executed
+  - browser product flow not executed
+prohibited_claims:
+  - do not describe isolated harness PASS as full repository or CI PASS
+  - do not claim Version 12, Version 14 or Version 15 SIF mutation authority
+  - do not claim blank/default/zero/9999.99 transition semantics
+  - do not claim SIF record creation/deletion or pointer allocation authority
+  - do not claim tee Type mutation authority
+  - do not claim general Writer1A plus Writer1B plus Writer1C composite transaction authority
+  - do not claim the neutral file itself authoritatively supplies the active piping-code context

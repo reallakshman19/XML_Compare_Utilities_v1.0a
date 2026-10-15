@@ -1,0 +1,30 @@
+schema: engineering-pr-status/v1
+repository: reallaksh19/XML_Compare_Utilities
+pr: 1019
+branch: agent/cii-writer2-hanger-delete-authority
+base: 887eedc028f64e3831b28fb755fdbe9ed904682f
+state: DRAFT_ACTIVE_HARDENED
+handover_readiness: READY
+takeover_authority: WRITE_ALLOWED
+merge_authority: OWNER_ONLY
+mission: qualify fail-closed existing HANGER deletion before physical mutation
+scope:
+  delete_planner: IMPLEMENTED_IHGRNODE_FIRST_DELETE_ALL_OR_H1_ONLY
+  partial_h_gt_1_delete: BLOCKED_TAIL_ORDER_UNQUALIFIED
+  create: BLOCKED_PAYLOAD_SEMANTICS_NOT_QUALIFIED
+  physical_rewrite: NOT_IMPLEMENTED
+  independent_postimage_validator: NOT_IMPLEMENTED
+  product_routing: NOT_CHANGED
+  alternate_layout_mutation: BLOCKED
+findings:
+  QF-1019-001: REPOSITORY_EMITTERS_DISAGREE_HGRDAT_TAG_GUID_ORDER_FOR_H_GT_1
+validation:
+  source_inspection: PASS
+  source_conflict_detection: PASS
+  independent_arithmetic: PASS
+  focused_js_regression: AUTHORED_NOT_RUN_ENVIRONMENT
+  inherited_hanger_regression: NOT_RUN_ENVIRONMENT
+  writer2_regressions: NOT_RUN_ENVIRONMENT
+  full_repository: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_RUN_ENVIRONMENT
+next_phase: physical HANGER delete-all rewrite plus independent full-postimage validation; partial H>1 compaction remains blocked

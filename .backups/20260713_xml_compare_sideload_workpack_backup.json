@@ -1,0 +1,24 @@
+{
+  "schema": "source-backup-manifest/v1",
+  "workPack": "XML Compare sideload diagnostics",
+  "baselineCommit": "801958f86db309b1286019cc6a8cd0fa69ef6f83",
+  "recovery": "Restore a path from the immutable Git blob SHA recorded below.",
+  "files": [
+    {
+      "path": "xml-compare/XmlCompareSideloadEnricher.js",
+      "blobSha": "23b8c1a3e0fb5e54b3f38f9987a8527b28794604"
+    },
+    {
+      "path": "xml-compare/XmlCompareSideloadPopup.js",
+      "blobSha": "d2557f715cde49b0af0cf15f11b477f037c810c5"
+    },
+    {
+      "path": "xml-compare/XmlCompareLinewiseWorkflowView.js",
+      "blobSha": "53471103e27ecf09b86f6838b4f46e10fb3f6297"
+    },
+    {
+      "path": "tests/inputxml-workspace-accdb-sideload.test.js",
+      "blobSha": "2be979fc604834f43f521fa889b33db347dc4fc5"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/overlay.schema.json",
+  "title":"Overlay.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","overlayId","kind","sourceHash","surfaceId","surfaceHash","surfaceTransformHash","geometry","evidenceRefs"],
+  "properties":{
+    "schema":{"const":"Overlay.v1"},
+    "overlayId":{"type":"string","minLength":1},
+    "kind":{"type":"string","enum":["ocr-observation","ocr-rejection","pdf-difference","docx-semantic-difference","docx-layout-difference","reviewer-correction","geometry","reconstructed-curve","diagnostic"]},
+    "sourceHash":{"type":"string","minLength":1},
+    "surfaceId":{"type":"string","minLength":1},
+    "surfaceHash":{"type":"string","minLength":1},
+    "surfaceTransformHash":{"type":"string","minLength":1},
+    "geometry":{"$ref":"geometry.schema.json"},
+    "evidenceRefs":{"type":"array","items":{"type":"string","minLength":1}},
+    "payload":{"type":"object"},
+    "styleHint":{"type":"object"},
+    "producer":{"type":"string","minLength":1},
+    "producerVersion":{"type":"string","minLength":1}
+  }
+}

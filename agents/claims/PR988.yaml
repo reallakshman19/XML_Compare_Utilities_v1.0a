@@ -1,0 +1,68 @@
+schema: AgentClaim.v1
+pr_or_wip: PR988
+claim_state: HANDOVER_READY_BLOCKED_ON_VALIDATION
+execution_mode: AUTO
+auto_state: BLOCKED
+merge_authority: OWNER_GRANTED_IF_ALL_APPROVED_PHASES_COMPLETE_AND_QUALIFIED
+files:
+  exact:
+    - agents/MASTER_INDEX.md
+    - tabs/cii-workspace/cii-workspace-transfer-policy.js
+    - tabs/cii-workspace/cii-workspace-transfer-plan.js
+    - tabs/cii-workspace/cii-workspace-core.js
+    - tabs/cii-workspace/cii-workspace-shell.js
+    - tests/cii-workspace-transfer-preview-policy.test.js
+    - tests/cii-workspace-transfer-preview-ui.test.js
+    - tests/cii-workspace-benchmark-transfer-preview.test.js
+    - agents/PR988_workreport.md
+    - agents/status/PR988.yaml
+    - agents/claims/PR988.yaml
+authority_domains:
+  - CII_TRANSFER_PREVIEW_POLICY
+  - CII_TRANSFER_OPERATION_CLASSIFICATION
+  - CII_TRANSFER_PROPERTY_CUSTODY
+  - CII_TRANSFER_TAB3_PRESENTATION
+  - CII_AGENT_COORDINATION_INDEX
+claim_modes:
+  - EXCLUSIVE
+shared_read_authorities:
+  - tabs/cii-workspace/cii-workspace-engineering-delta.js
+  - tabs/cii-workspace/cii-workspace-review.js
+  - tabs/cii-workspace/cii-workspace-compare-review.js
+  - tabs/cii-workspace/cii-workspace-hanger.js
+  - tabs/cii-workspace/cii-workspace-auxiliary.js
+  - Benchmark/CIICompare/CII_COMPARE_EXPECTED.json
+  - Benchmark/CIICompare/BM_CII_SOURCE.CII
+  - Benchmark/CIICompare/BM_CII_TARGET1.CII
+  - Benchmark/CIICompare/BM_CII_TARGET2.CII
+  - tests/cii-workspace-transfer-preview.test.js
+  - tests/cii-workspace-transfer-review.test.js
+forbidden_existing_file_edits:
+  - converters/**
+  - parser/**
+  - tabs/cii-workspace/cii-workspace-match-methods.js
+  - tabs/cii-workspace/cii-workspace-evidence.js
+  - tabs/cii-workspace/cii-workspace-candidates.js
+  - tabs/cii-workspace/cii-workspace-propagation.js
+  - any target CII writer/mutator
+implementation_claims:
+  - production Transfer Preview consumes the qualified engineering-delta set rather than reinterpreting raw CII property records
+  - intended action and execution status are separate authorities
+  - hanger 205 is CREATE/BLOCKED because node presence is qualified but creation payload is not
+  - SIF raw revision is COPY/BLOCKED because pointer custody is qualified but record rewrite is not
+  - geometry, node numbering, topology, OD and wall are protected by default
+  - partial process revision retains intended COPY action but remains BLOCKED
+  - reviewed/locked correspondence is required; rejected and stale review authority fail closed
+  - target mutation remains BLOCKED_NOT_IMPLEMENTED
+validation_state: FOCUSED_EXACT_PASS_REAL_BENCHMARK_NOT_RUN
+remaining_validation_gates:
+  - tests/cii-workspace-transfer-preview-ui.test.js runtime
+  - tests/cii-workspace-benchmark-transfer-preview.test.js
+  - upstream tests/cii-workspace-benchmark-qualification.test.js
+  - upstream tests/cii-workspace-benchmark-end-to-end.test.js
+  - inherited CII Workspace regression/UI lifecycle as applicable
+known_limits:
+  - hanger create payload HGRDAT/TAG/GUID not qualified
+  - SIF/Tee raw record writer not qualified
+  - process transfer partial authority only
+  - no target writer or modified target CII export

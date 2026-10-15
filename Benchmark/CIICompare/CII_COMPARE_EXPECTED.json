@@ -1,0 +1,208 @@
+{
+  "schema": "cii-compare-benchmark/v1",
+  "direction": "SOURCE_TO_TARGET",
+  "source": "BM_CII_SOURCE.CII",
+  "targets": {
+    "target1": {
+      "file": "BM_CII_TARGET1.CII",
+      "role": "QUALIFICATION"
+    },
+    "target2": {
+      "file": "BM_CII_TARGET2.CII",
+      "role": "BLIND_GENERALISATION"
+    }
+  },
+  "numberingHints": {
+    "target1": {
+      "offset": 20000,
+      "authority": "NON_AUTHORITATIVE_HINT"
+    },
+    "target2": {
+      "offset": 10000,
+      "authority": "NON_AUTHORITATIVE_HINT"
+    }
+  },
+  "nodeMappings": [
+    {
+      "id": "BASE-10",
+      "sourceNode": "10",
+      "target1Node": "20010",
+      "target2Node": "10010",
+      "purpose": "base-anchor-reference"
+    },
+    {
+      "id": "NODE-35",
+      "sourceNode": "35",
+      "target1Node": "20035",
+      "target2Node": "10035",
+      "purpose": "identity-with-node-name-change"
+    },
+    {
+      "id": "NODE-70",
+      "sourceNode": "70",
+      "target1Node": "20070",
+      "target2Node": "10070",
+      "purpose": "identity-with-pointer-bound-sif-tee-raw-change"
+    },
+    {
+      "id": "NODE-113",
+      "sourceNode": "113",
+      "target1Node": "20113",
+      "target2Node": "10113",
+      "purpose": "rigid-pointer-custody-span-start"
+    },
+    {
+      "id": "NODE-116",
+      "sourceNode": "116",
+      "target1Node": "20116",
+      "target2Node": "10116",
+      "purpose": "rigid-pointer-custody-span-end"
+    },
+    {
+      "id": "NODE-130",
+      "sourceNode": "130",
+      "target1Node": "20130",
+      "target2Node": "10130",
+      "purpose": "restraint-code-and-friction-change"
+    },
+    {
+      "id": "NODE-205",
+      "sourceNode": "205",
+      "target1Node": "20205",
+      "target2Node": "10205",
+      "purpose": "moved-intermediate-node-with-hanger-deletion"
+    }
+  ],
+  "gangMappings": [
+    {
+      "id": "GANG-200-205-210",
+      "sourceNodes": ["200", "205", "210"],
+      "target1Nodes": ["20200", "20205", "20210"],
+      "target2Nodes": ["10200", "10205", "10210"],
+      "purpose": "same-network-span-with-internal-node-relocation"
+    },
+    {
+      "id": "GANG-250-255-260-270",
+      "sourceNodes": ["250", "255", "260", "270"],
+      "target1Nodes": ["20250", "20255", "20260", "20270"],
+      "target2Nodes": ["10250", "10255", "10260", "10270"],
+      "purpose": "size-wall-change-and-target2-internal-length-redistribution"
+    }
+  ],
+  "propertyExpectations": [
+    {
+      "id": "RESTRAINT-130-TARGET1",
+      "family": "RESTRAINT",
+      "sourceNode": "130",
+      "targetNode": "20130",
+      "target": "target1",
+      "expected": {
+        "sourceTypeCodes": [15],
+        "targetTypeCodes": [9],
+        "sourceFrictionValues": [0.0],
+        "targetFrictionValues": [0.3]
+      },
+      "authority": "PROTECTED_WRITER_FIXED_FIELDS_PLUS_BENCHMARK_RECORD"
+    },
+    {
+      "id": "RESTRAINT-130-TARGET2",
+      "family": "RESTRAINT",
+      "sourceNode": "130",
+      "targetNode": "10130",
+      "target": "target2",
+      "expected": {
+        "sourceTypeCodes": [15],
+        "targetTypeCodes": [9],
+        "sourceFrictionValues": [0.0],
+        "targetFrictionValues": [0.0]
+      },
+      "authority": "PROTECTED_WRITER_FIXED_FIELDS_PLUS_BENCHMARK_RECORD"
+    },
+    {
+      "id": "SIF-TEE-70-TARGET1",
+      "family": "SIF_TEE_RAW",
+      "sourceNode": "70",
+      "targetNode": "20070",
+      "target": "target1",
+      "expected": {
+        "sourceRawCode": 3,
+        "targetRawCode": 5
+      },
+      "authority": "ELEMENT_POINTER_BOUND_RAW_RECORD_FIELD_2_SEMANTICS_UNRESOLVED"
+    },
+    {
+      "id": "SIF-TEE-70-TARGET2",
+      "family": "SIF_TEE_RAW",
+      "sourceNode": "70",
+      "targetNode": "10070",
+      "target": "target2",
+      "expected": {
+        "sourceRawCode": 3,
+        "targetRawCode": 5
+      },
+      "authority": "ELEMENT_POINTER_BOUND_RAW_RECORD_FIELD_2_SEMANTICS_UNRESOLVED"
+    },
+    {
+      "id": "HANGER-205-TARGET1",
+      "family": "HANGER_NODE_PRESENCE",
+      "sourceNode": "205",
+      "targetNode": "20205",
+      "target": "target1",
+      "expected": {
+        "sourcePresent": true,
+        "targetPresent": false,
+        "sourceRecordCountAtNode": 1,
+        "targetRecordCountAtNode": 0
+      },
+      "authority": "CONTROL_NOHGRS_PLUS_DUAL_LAYOUT_VALIDATED_IHGRNODE"
+    },
+    {
+      "id": "HANGER-205-TARGET2",
+      "family": "HANGER_NODE_PRESENCE",
+      "sourceNode": "205",
+      "targetNode": "10205",
+      "target": "target2",
+      "expected": {
+        "sourcePresent": true,
+        "targetPresent": false,
+        "sourceRecordCountAtNode": 1,
+        "targetRecordCountAtNode": 0
+      },
+      "authority": "CONTROL_NOHGRS_PLUS_DUAL_LAYOUT_VALIDATED_IHGRNODE"
+    }
+  ],
+  "quarantinedExpectations": [
+    {
+      "id": "NOTE-BASE-10-20000",
+      "status": "QUARANTINED",
+      "text": "Base Anchor: 10->20000",
+      "reason": "20000 is not encoded as a target node expectation; the intended concept is a non-authoritative numbering offset while the actual target node is 20010."
+    },
+    {
+      "id": "NOTE-30-20130",
+      "status": "QUARANTINED",
+      "text": "30 is 20130",
+      "reason": "Source/target geometry and restraint evidence support 130->20130; do not tune against 30->20130."
+    },
+    {
+      "id": "NOTE-50-70",
+      "status": "QUARANTINED",
+      "text": "50-70 -> 20050-20070",
+      "reason": "The current benchmark does not provide a validated literal source node 50 / target node 20050 expectation."
+    },
+    {
+      "id": "NOTE-113-116-WEIGHT",
+      "status": "QUARANTINED",
+      "text": "113-116 -> 20113-20116 weight changed",
+      "reason": "The SOURCE element points to RIGID record 9 and TARGET1/TARGET2 point to record 11, but pointer-resolved first-field rigid weight is 111.200 in each model. A pointer-index change is not itself a weight change, so this expectation is not an engineering assertion until a different authoritative weight field is identified."
+    }
+  ],
+  "oracleRules": {
+    "deriveTargetsFromOffset": false,
+    "requireSourceNodeExists": true,
+    "requireTargetNodeExists": true,
+    "requireGangConsecutiveEdges": true,
+    "requireUniqueNodeMappingTargetCustody": true,
+    "quarantinedExpectationsAreAssertions": false
+  }
+}

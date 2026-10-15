@@ -1,0 +1,69 @@
+{
+  "schema": "navis-tag-isonote-benchmark-expectations/v1",
+  "profileId": "asim1836-managed-stage-2/v1",
+  "sources": {
+    "supportTableSha256": "7055083a37215d7f098352e20564d19c8360f9398037fa55fdedae3ce5857c5f",
+    "navisXmlSha256": "44db24e8908c0fc6089b8d6ddf843de65aa238de00c5da152c5f37d5eacca3c6",
+    "stagedZipSha256": "b0dc26ace4a718087cbc5d107c963a471c95f20a51d56d8559a9415d98be9353"
+  },
+  "sourceCounts": {
+    "tableRows": 163,
+    "stagedJsonFiles": 1,
+    "parsedStagedDocuments": 1,
+    "stagedParseFailures": 0
+  },
+  "hierarchy": {
+    "nodeCount": 34224,
+    "objectCount": 33747,
+    "arrayCount": 477,
+    "discoveredPathCount": 331,
+    "identityFactNodeCount": 1272,
+    "positionFactNodeCount": 6684
+  },
+  "stagedIndex": {
+    "indexedNodeCount": 1272,
+    "exactIdentityCount": 1250,
+    "supportRootCount": 267,
+    "positionedEntryCount": 1272,
+    "referenceEntryCount": 1272,
+    "branchResolvedEntryCount": 1272,
+    "pipeResolvedEntryCount": 1272,
+    "zoneResolvedEntryCount": 0,
+    "odEntryCount": 0,
+    "boreEntryCount": 1272
+  },
+  "identityTrace": {
+    "rowCount": 163,
+    "resolvedCount": 163,
+    "exactResolvedCount": 162,
+    "rootResolvedCount": 1,
+    "referenceResolvedCount": 162,
+    "ambiguousCount": 0,
+    "unresolvedCount": 0
+  },
+  "navis": {
+    "viewCount": 5,
+    "tagCount": 5,
+    "validTagCount": 5,
+    "boundsFallbackCount": 0,
+    "unresolvedCommentCount": 0,
+    "unresolvedPositionCount": 0,
+    "units": "m"
+  },
+  "coordinateFrame": {
+    "status": "DISJOINT_COORDINATE_EXTENTS",
+    "compatible": false,
+    "minimumHorizontalDistanceMmAtLeast": 300000,
+    "minimum3dDistanceMmAtLeast": 300000
+  },
+  "resolution": {
+    "tableRowCount": 163,
+    "identityResolvedCount": 163,
+    "navisTagCount": 5,
+    "resolvedCount": 0,
+    "ambiguousCount": 0,
+    "unresolvedCount": 163,
+    "nearestRejectedCount": 163,
+    "candidateLedgerCount": 163
+  }
+}

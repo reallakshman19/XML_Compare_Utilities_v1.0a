@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>RC-001 Browser Proof</title><style>body{margin:0;background:#020817;color:#fff;font-family:system-ui}#open{margin:20px;padding:10px}</style><link rel="stylesheet" href="../../tabs/revision-compare/revision-compare.css"><link rel="stylesheet" href="../../tabs/revision-compare/revision-compare-layout.css"><link rel="stylesheet" href="../../tabs/revision-compare/revision-compare-review-containment.css"></head><body>
+<button id="open" type="button">Open Revision Compare</button><div id="host"></div>
+<script type="module">
+import { mountRevisionCompareWorkspace } from '../../tabs/revision-compare/revision-compare-workspace.js';
+const host=document.querySelector('#host');let handle=null;
+function close(){handle?.destroy();handle=null;host.innerHTML='';}
+document.querySelector('#open').addEventListener('click',()=>{if(handle)return;handle=mountRevisionCompareWorkspace(host,{close,...(window.rcMountOptions||{})});window.rcHandle=handle;});
+window.rcClose=close;
+</script></body></html>

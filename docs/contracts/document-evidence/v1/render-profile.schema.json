@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/render-profile.schema.json",
+  "title":"RenderProfile.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","renderProfileId","renderProfileHash","documentKind","renderer","rendererVersion","determinism"],
+  "properties":{
+    "schema":{"const":"RenderProfile.v1"},"renderProfileId":{"type":"string","minLength":1},"renderProfileHash":{"$ref":"#/$defs/sha256"},
+    "documentKind":{"type":"string","enum":["pdf","docx","other"]},"renderer":{"type":"string","minLength":1},"rendererVersion":{"type":"string","minLength":1},"rendererBinaryHash":{"$ref":"#/$defs/sha256"},
+    "environment":{"type":"object","additionalProperties":false,"properties":{"osFamily":{"type":"string","minLength":1},"architecture":{"type":"string","minLength":1},"environmentHash":{"$ref":"#/$defs/sha256"},"containerImageHash":{"$ref":"#/$defs/sha256"},"vmImageHash":{"$ref":"#/$defs/sha256"}}},
+    "fontManifestHash":{"$ref":"#/$defs/sha256"},"resolvedFontFallbackHash":{"$ref":"#/$defs/sha256"},"layoutEngine":{"type":"string","minLength":1},"layoutEngineVersion":{"type":"string","minLength":1},"locale":{"type":"string","minLength":1},
+    "languagePackHashes":{"type":"array","items":{"$ref":"#/$defs/sha256"}},"hyphenationDictionaryHashes":{"type":"array","items":{"$ref":"#/$defs/sha256"}},"hyphenation":{"type":"string","enum":["enabled","disabled","renderer-default"]},"measurementUnit":{"type":"string","minLength":1},
+    "trackedRevisionDisplay":{"type":"string","enum":["final","original","markup","renderer-default"]},"commentDisplay":{"type":"string","enum":["visible","hidden","renderer-default"]},"hiddenTextDisplay":{"type":"string","enum":["visible","hidden","renderer-default"]},"fieldUpdatePolicy":{"type":"string","enum":["update","preserve","renderer-default"]},"externalResourcePolicy":{"type":"string","enum":["blocked","cached-only","allowed","renderer-default"]},"compatibilityMode":{"type":"string","minLength":1},"printerMetricsPolicy":{"type":"string","enum":["explicit","renderer-default","not-applicable"]},"printerMetricsHash":{"$ref":"#/$defs/sha256"},"dpiX":{"type":"number","exclusiveMinimum":0},"dpiY":{"type":"number","exclusiveMinimum":0},"options":{"type":"object"},"determinism":{"$ref":"#/$defs/determinism"}
+  },
+  "allOf":[{"if":{"properties":{"documentKind":{"const":"docx"}}},"then":{"required":["rendererBinaryHash","environment","fontManifestHash","layoutEngine","layoutEngineVersion","locale","languagePackHashes","hyphenationDictionaryHashes","measurementUnit","trackedRevisionDisplay","commentDisplay","hiddenTextDisplay","fieldUpdatePolicy","externalResourcePolicy","compatibilityMode","printerMetricsPolicy","dpiX","dpiY"],"properties":{"environment":{"required":["osFamily","architecture","environmentHash"]}}}}],
+  "$defs":{"sha256":{"type":"string","pattern":"^sha256:[0-9a-f]{64}$"},"claim":{"type":"string","enum":["guaranteed","profile-bound","not-claimed","not-applicable"]},"determinism":{"type":"object","additionalProperties":false,"required":["semantic","artifact","bitwiseRaster"],"properties":{"semantic":{"$ref":"#/$defs/claim"},"artifact":{"$ref":"#/$defs/claim"},"bitwiseRaster":{"$ref":"#/$defs/claim"}}}}
+}

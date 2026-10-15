@@ -1,0 +1,57 @@
+pr: 1041
+issue: 1040
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-delete-compaction-w210
+base_main: a1c64e618475f55655c7650326b214e6c0918574
+agent_state: REVIEW_READY_WITH_EXPLICIT_EVIDENCE_LIMITATIONS
+current_stage: W2_10_RESTRAINT_DELETE_COMPACTION_PLANNER_COMPLETE_RECONCILED
+handover_readiness: READY
+scope_authority: ISSUE_1040_DELETE_COMPACTION_ONLY
+merge_authority: OWNER_ONLY
+merge_authorized: true
+merge_authorization_basis: explicit_owner_instruction_2026_08_23
+
+production_authority:
+  planner: true
+  physical_writer: false
+  composite: false
+  product_core: false
+  generic_restraint_create: false
+
+qualified_authorities:
+  - CII_WRITER_2_RESTRAINT_BLOCK_DELETE_COMPACTION_PLAN
+  - EXACT_PARSED_INDEX_ENDPOINTS_AND_PHYSICAL_RESTRAINT_POINTER_I13
+  - SHA256_ORIGINAL_TARGET0_BYTES
+  - USER_EXPLICIT_OPERATION_SCOPE
+
+preserved_boundaries:
+  writer1b_existing_free_slot_create_clear: true
+  restraint_block_create_allocation: BLOCKED
+  restraint_guid_generation: BLOCKED
+  restraint_default_synthesis: BLOCKED
+  writer3_topology: UNCHANGED
+
+qualification:
+  D01_D18: AUTHORED
+  H01_H05: AUTHORED
+  exact_current_head_native_execution: NOT_RUN_ENVIRONMENT
+  repository_npm_test: NOT_RUN_ENVIRONMENT
+  browser_product: NOT_APPLICABLE_UNCHANGED_ROUTE
+  pre_h04_h05_local_exact_fetched_dependencies: PASS_AT_TIME
+
+reconciliation:
+  changed_paths_actual: 6
+  changed_paths_intended: 6
+  changed_paths_unexplained: 0
+  production_paths: 2
+  focused_test_paths: 1
+  coordination_paths: 3
+  ahead_before_final_coordination: 10
+  behind: 0
+  merge_base: a1c64e618475f55655c7650326b214e6c0918574
+  review_threads: 0
+  submitted_reviews: 0
+  status_contexts: 0
+  pr_workflow_runs: 0
+
+next_phase: W2_11_RESTRAINT_BLOCK_DELETE_PHYSICAL_WRITER

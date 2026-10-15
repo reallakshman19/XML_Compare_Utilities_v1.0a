@@ -1,0 +1,25 @@
+pr: 1014
+claims:
+  - id: SIF2-DEL-001
+    status: PASS_SOURCE_INSPECTION
+    statement: V11 SIF auxiliary structure is two tee slots x 30 values = 10 rows total.
+  - id: SIF2-DEL-002
+    status: PASS_SOURCE_INSPECTION
+    statement: V11 items 27 through 30 remain unresolved in each tee slot; CREATE remains blocked.
+  - id: SIF2-DEL-003
+    status: IMPLEMENTED
+    statement: Existing-block DELETE planner derives shared-owner arbitration, complete old-to-new pointer map, shifted ELEMENT pointer claims and CONTROL after-count.
+  - id: SIF2-DEL-004
+    status: PASS_INDEPENDENT_SIF_DELETE_RELOCATION_ORACLE
+    statement: Deleting block 2 from 1,2,3 produces 1->1, 2->0, 3->2; shared-owner partial selection blocks.
+  - id: SIF2-DEL-005
+    status: AUTHORED_NOT_RUN_ENVIRONMENT
+    statement: Focused repository JS regression covers delete routing, create blocker, compaction, aliases, pointer custody and edition gate.
+limitations:
+  - physical SIF section mutation is not implemented in PR1014
+  - product/core Writer2 SIF routing is not implemented in PR1014
+  - complete repository checkout is unavailable in the current execution environment
+prohibited_claims:
+  - do not claim SIF block CREATE is qualified
+  - do not claim raw 10-row SOURCE payload copy is authorized
+  - do not claim repository tests passed when they were not executed

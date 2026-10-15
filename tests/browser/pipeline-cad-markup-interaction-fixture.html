@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PCAD-005B Markup Interaction Fixture</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,sans-serif}*{box-sizing:border-box}body{margin:0;min-width:1180px;background:#020617;color:#e2e8f0}.pipeline-3d-model-dialog{display:grid;gap:12px;padding:12px;position:relative}.raw-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.raw-panel{padding:8px;border:1px solid #334155;border-radius:8px;background:#0f172a}.raw-panel label{display:block;font-size:11px;font-weight:700}textarea{width:100%;min-height:100px;background:#020617;color:#cbd5e1;font:10px monospace}.preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.preview-card{height:430px;overflow:hidden;border:1px solid #334155;border-radius:10px;background:#0b1220}[data-p3d-split$="preview"]{width:100%;height:100%}.output-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.output-card{padding:8px;border:1px solid #334155;background:#0f172a}#status{position:fixed;left:8px;bottom:8px;z-index:30}
+</style>
+</head>
+<body>
+<main class="pipeline-3d-model-dialog">
+<section class="raw-grid">
+<div class="raw-panel"><label>Table 2A</label><textarea data-p3d-split="table2a-raw">H(coor)	V(coor)	[H vs V] Length	Station Text	Elevation Text
+500	—	—	0+000.0	100.00
+510	—	—	0+010.0	104.00
+520	—	—	0+020.0	102.00</textarea></div>
+<div class="raw-panel"><label>Table 3A</label><textarea data-p3d-split="table3a-raw">From H(coor)	To H(coor)	Text Position X	HLength Text
+500	510	505	10.0
+510	520	515	10.0</textarea></div>
+<div class="raw-panel"><label>Table 3B</label><textarea data-p3d-split="table3b-raw">From H(coor)	To H(coor)	Text Position X	Z Text
+500	510	505	1.0M
+510	520	515	2.0M</textarea></div>
+<div class="raw-panel"><label>Table 3C</label><textarea data-p3d-split="table3c-raw">Text Position X	Marker Text
+507	PM-001
+515	PM-002</textarea></div>
+</section>
+<section class="preview-grid"><div class="preview-card" data-p3d-split="table2x-preview"></div><div class="preview-card" data-p3d-split="table3x-preview"></div></section>
+<section class="output-grid"><div class="output-card" data-p3d="table2x-output"><table><tbody><tr><td>0+010.0</td><td>104.00</td></tr></tbody></table></div><div class="output-card" data-p3d="table3x-output"><table><tbody><tr><td>PM-001</td></tr><tr><td>PM-002</td></tr></tbody></table></div></section>
+</main>
+<output id="status">loading</output>
+<script type="module">
+import { mountPipelineCadWorkspace } from '../../tabs/pipeline-3d-model/pipeline-3d-model-cad-workspace.js';
+import { buildPipelineCadSnapPrimitives } from '../../tabs/pipeline-3d-model/pipeline-3d-model-cad-object-snap-adapters.js';
+
+const dialog=document.querySelector('.pipeline-3d-model-dialog');
+let workspace=null;let markupEvents=0;let unsubscribeMarkup=null;
+function mount(initialMarkupDocument){workspace=mountPipelineCadWorkspace(dialog,{force:true,initialMarkupDocument});unsubscribeMarkup=workspace.markup.subscribe(()=>{markupEvents+=1});workspace.resize()}
+mount();
+const frame=()=>new Promise(resolve=>requestAnimationFrame(resolve));await frame();workspace.resize();await frame();
+function raw(){return Object.fromEntries(['table2a','table3a','table3b','table3c'].map(name=>[name,dialog.querySelector(`[data-p3d-split="${name}-raw"]`).value]))}
+function engineering(){return {revision:workspace.controller.model.revision,raw:raw(),undo:workspace.controller.history.undoStack.length,redo:workspace.controller.history.redoStack.length,bounds:Object.fromEntries(Object.entries(workspace.graphs).map(([name,graph])=>[name,{...graph.bounds}])),snapCounts:Object.fromEntries(Object.entries(workspace.graphs).map(([name,graph])=>{const p=buildPipelineCadSnapPrimitives(name,graph);return[name,{points:p.points.length,segments:p.segments.length}]}))}}
+const baseline=JSON.stringify(engineering());
+function nodes(name){const graph=workspace.graphs[name];return name==='table2x'?graph.currentNodes():[...graph.depthNodes(),...graph.markerNodes()]}
+function clientForWorld(name,world){const graph=workspace.graphs[name];const screen=graph.worldToScreen(world);const rect=graph.canvas.getBoundingClientRect();return{x:rect.left+screen.x*(rect.width/graph.width),y:rect.top+screen.y*(rect.height/graph.height),screen,world}}
+function node(name,query={}){const found=nodes(name).find(item=>(!query.id||item.id===query.id)&&(!query.type||item.type===query.type)&&(!query.text||item.text===query.text));if(!found)throw new Error(`node not found ${name} ${JSON.stringify(query)}`);return{...found,client:clientForWorld(name,found)}}
+function markupPoint(id){const projection=workspace.graphs.table2x.markupProjection.dimensions.find(x=>x.id===id)||workspace.graphs.table3x.markupProjection.dimensions.find(x=>x.id===id)||workspace.graphs.table2x.markupProjection.annotations.find(x=>x.id===id)||workspace.graphs.table3x.markupProjection.annotations.find(x=>x.id===id);if(!projection)throw new Error(`markup not found ${id}`);const world=projection.kind==='DIMENSION'?{x:(projection.geometry.start.x+projection.geometry.end.x)/2,y:(projection.geometry.start.y+projection.geometry.end.y)/2}:projection.point;return{...clientForWorld(projection.graph,world),graph:projection.graph,kind:projection.kind}}
+function snapshot(){let interaction=null;let interactionError=null;try{interaction=workspace.markupInteraction.getState()}catch(error){interactionError=error.message}return{document:JSON.parse(workspace.markup.export()),evidence:workspace.markup.getEvidence(),interaction,interactionError,markupEvents,canUndo:workspace.markup.canUndo,canRedo:workspace.markup.canRedo,engineering:engineering(),engineeringUnchanged:JSON.stringify(engineering())===baseline,engineeringSelection:{table2x:workspace.graphs.table2x.getSelectionDetail(),table3x:workspace.graphs.table3x.getSelectionDetail()},layers:document.querySelectorAll('[data-markup-interaction-graph]').length,panels:document.querySelectorAll('[data-p3d-cad-markup-panel]').length}}
+function enableSnap(name){const graph=workspace.graphs[name];graph.setSnapSettings({...graph.getSnapSettings(),objectEnabled:true,objectAperture:16});return graph.getSnapSettings()}
+function setRaw(name,value){const input=dialog.querySelector(`[data-p3d-split="${name}-raw"]`);input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));return snapshot()}
+function destroyRemount(){const old=workspace.markupInteraction;const documentValue=JSON.parse(workspace.markup.export());unsubscribeMarkup();workspace.destroy();let oldError=null;try{old.getState()}catch(error){oldError=error.message}mount(documentValue);return{oldError,state:snapshot()}}
+window.pcadMarkupInteractionHarness={get workspace(){return workspace},snapshot,node,clientForWorld,markupPoint,enableSnap,setRaw,destroyRemount,baseline:JSON.parse(baseline)};
+document.body.dataset.pcad005bReady='1';document.querySelector('#status').textContent='ready';
+</script>
+</body>
+</html>

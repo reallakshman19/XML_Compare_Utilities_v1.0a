@@ -1,0 +1,24 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://contracts.xml-compare-utilities.local/document-evidence/v1/machine-evidence-envelope.schema.json",
+  "title":"MachineEvidenceEnvelope.v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema","machineEvidenceHash","source","surfaces","transforms","observations","decisions","geometryEvidence","diagnostics","operation","selection","canonicalOptions"],
+  "properties":{
+    "schema":{"const":"MachineEvidenceEnvelope.v1"},
+    "machineEvidenceHash":{"type":"string","minLength":1},
+    "source":{"$ref":"source.schema.json"},
+    "surfaces":{"type":"array","items":{"$ref":"surface.schema.json"}},
+    "transforms":{"type":"array","items":{"$ref":"transform.schema.json"}},
+    "observations":{"type":"array","items":{"$ref":"observation.schema.json"}},
+    "decisions":{"type":"array","items":{"$ref":"decision.schema.json"}},
+    "geometryEvidence":{"type":"array","items":{"$ref":"geometry-evidence.schema.json"}},
+    "diagnostics":{"type":"array","items":{"$ref":"diagnostic.schema.json"}},
+    "providerProfiles":{"type":"array","items":{"$ref":"provider-profile.schema.json"}},
+    "renderProfiles":{"type":"array","items":{"$ref":"render-profile.schema.json"}},
+    "operation":{"type":"string","minLength":1},
+    "selection":{"type":"object"},
+    "canonicalOptions":{"type":"object"}
+  }
+}

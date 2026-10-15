@@ -1,0 +1,48 @@
+schema: AgentClaim.v1
+pr_or_wip: PR985
+claim_state: IMPLEMENTATION_COMPLETE_HANDOVER_READY
+files:
+  exact:
+    - tabs/cii-workspace/cii-workspace-core.js
+    - tabs/cii-workspace/cii-workspace-propagation.js
+    - tests/cii-workspace-propagation.test.js
+    - agents/PR985_workreport.md
+    - agents/status/PR985.yaml
+    - agents/claims/PR985.yaml
+authority_domains:
+  - CII_ONE_ANCHOR_PROPAGATION
+  - CII_FRONTIER_ASSIGNMENT
+  - CII_PROPAGATION_CUSTODY
+claim_modes:
+  - EXCLUSIVE
+shared_read_authorities:
+  - tabs/cii-workspace/cii-workspace-candidates.js
+  - tabs/cii-workspace/cii-workspace-evidence.js
+  - tabs/cii-workspace/cii-workspace-match-methods.js
+  - tabs/cii-workspace/cii-workspace-topology-adapter.js
+forbidden_existing_file_edits:
+  - parser/**
+  - converters/**
+  - tabs/cii-workspace/cii-workspace-candidates.js
+  - tabs/cii-workspace/cii-workspace-evidence.js
+  - tabs/cii-workspace/cii-workspace-match-methods.js
+  - tabs/cii-workspace/cii-workspace-topology.js
+  - tabs/cii-workspace/cii-workspace-transfer*.js
+  - tabs/revision-compare/**
+  - tabs/model-converters/**
+implementation_claims:
+  - production one-anchor preview expands beyond the incident edge set
+  - each frontier uses bounded one-to-one assignment
+  - every accepted source edge/node has unique target custody
+  - ambiguous frontier/candidate evidence does not propagate
+  - MEDIUM supported identity may propagate but remains workflow REVIEW
+  - incomplete propagation yields correspondence UNRESOLVED and therefore remains fail-closed for transfer
+  - existing multi-anchor unique-path authority is unchanged
+validation_state: FOCUSED_RECONSTRUCTED_PASS_FULL_CHECKOUT_NOT_RUN
+validated_implementation_head: 6e35a8997d6c2c4dcdc914b634d111277092f633
+remaining_validation_gates:
+  - literal current-head repository test command in a complete authenticated checkout
+  - full real-file SOURCE/TARGET1/TARGET2 intake+preview command when checkout/runtime is available
+known_limits:
+  - one-anchor propagation currently requires equal unmatched frontier cardinality; topology insertion/subdivision remains fail-closed in this path
+  - full UI remains later phase

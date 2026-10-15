@@ -1,0 +1,12 @@
+{
+  "profileId": "invalid-mode-fixture",
+  "levelDefinitions": [
+    {
+      "levelId": "Root",
+      "levelType": "container",
+      "creationMode": "unsupported",
+      "key": "ROOT",
+      "documentRoot": true
+    }
+  ]
+}

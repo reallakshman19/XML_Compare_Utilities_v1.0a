@@ -1,0 +1,37 @@
+schema: AgentClaim.v1
+pr_or_wip: PR997
+claim_state: ACTIVE
+branch: agent/cii-fullscreen-anchor-evidence-ui
+base_basis_sha: df19d1834459f486fddd77eaec4297767ef83c6b
+authority_domains:
+  - CII_FULLSCREEN_WORKSPACE_PRESENTATION
+  - CII_BASE_ANCHOR_METHOD_EVIDENCE_PRESENTATION
+claim_modes:
+  - EXCLUSIVE
+files:
+  exact:
+    - agents/MASTER_INDEX.md
+    - agents/PR997_workreport.md
+    - agents/status/PR997.yaml
+    - agents/claims/PR997.yaml
+    - tabs/cii-workspace/cii-workspace-engineering-ui.js
+    - tabs/cii-workspace/cii-workspace-engineering-ui.css
+    - tabs/cii-workspace/cii-workspace-tab.js
+    - tabs/cii-workspace/cii-workspace.css
+    - tests/cii-workspace-engineering-ui.test.js
+forbidden_existing_file_edits:
+  - tabs/cii-workspace/cii-workspace-geometry.js
+  - tabs/cii-workspace/cii-workspace-anchor-method-a.js
+  - tabs/cii-workspace/cii-workspace-anchor-suggestions.js
+  - tabs/cii-workspace/cii-workspace-pipe-runs.js
+  - tabs/cii-workspace/cii-workspace-multi-base-anchor.js
+  - tabs/cii-workspace/cii-workspace-correspondence-arbitration.js
+  - tabs/cii-workspace/cii-workspace-multi-base-correspondence.js
+  - tabs/cii-workspace/cii-workspace-transfer-policy.js
+  - tabs/cii-workspace/cii-workspace-transfer-plan.js
+  - tabs/cii-workspace/cii-workspace-target-writer.js
+  - tabs/cii-workspace/cii-workspace-target-writer-1b.js
+  - parser/fixed-field.js
+  - converters/**
+  - .github/workflows/**
+merge_disposition: OWNER_ONLY_NO_MERGE_AUTHORITY

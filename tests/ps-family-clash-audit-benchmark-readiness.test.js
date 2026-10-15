@@ -1,0 +1,43 @@
+import './ps-family-implementation-compliance.test.js';
+import './ps-family-sample-fixtures.test.js';
+import './ps-family-sample-buttons.test.js';
+import './ps-family-report-filter-search.test.js';
+import './ps-family-active-report-export.test.js';
+import './ps-family-row-details.test.js';
+import './ps-family-hierarchy-tab.test.js';
+import './ps-family-tabbed-workspace-ui.test.js';
+import './ps-family-psclash-report.test.js';
+import './ps-family-readiness.test.js';
+import './support-report-builder.test.js';
+import './support-report-field-projection.test.mjs';
+import './support-report-field-projection-rca.test.mjs';
+import './support-report-build-gate.test.js';
+import './support-report-location-benchmarks.test.mjs';
+import './support-report-json-trace.test.mjs';
+import './support-report-json-trace-ui.test.mjs';
+import './support-report-pos-trace-remediation.test.mjs';
+import './support-report-parity-ledger.test.mjs';
+import './support-report-xlsx-roundtrip.test.mjs';
+import './support-report-ui-export-state.test.mjs';
+import './support-report-large-xml-intake.test.mjs';
+import './startup-module-syntax.test.js';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+
+const benchmarkDoc = readFileSync('docs/ps-family-clash-audit-benchmark.md', 'utf8');
+const operatorDoc = readFileSync('docs/ps-family-clash-audit.md', 'utf8');
+
+assert.match(benchmarkDoc, /Parser correctness \| Met/);
+assert.match(benchmarkDoc, /PS-11147 audit correctness \| Met/);
+assert.match(benchmarkDoc, /POSFamily correctness \| Met/);
+assert.match(benchmarkDoc, /POS tolerance boundary \| Met/);
+assert.match(benchmarkDoc, /Export availability \| Met/);
+assert.match(benchmarkDoc, /Configurable source side \/ source family \/ tolerance \| Met/);
+assert.match(benchmarkDoc, /Browser UI smoke \| Met/);
+assert.match(benchmarkDoc, /Snapshot stability \| Met/);
+assert.match(benchmarkDoc, /Medium\/large performance \| Met/);
+assert.match(benchmarkDoc, /Accessibility \/ keyboard navigation \| Met/);
+assert.match(benchmarkDoc, /no open planned gate/);
+assert.match(operatorDoc, /Official sample fixture reproducibility/);
+
+console.log('ps-family-clash-audit-benchmark-readiness tests passed');

@@ -1,0 +1,117 @@
+pr: 1061
+repository: reallaksh19/XML_Compare_Utilities
+base_main: 9c6b49b7846906c5274cf57e6537ed4e7a6a6f8c
+execution_mode: AUTO
+auto_state: BLOCKED
+hard_stop: EXACT_PRIVATE_CHECKOUT_AND_BROWSER_RUNTIME_UNAVAILABLE
+
+claims:
+  - id: W2_34_FOCUSED_BRIDGE_EXPORT
+    state: PASS
+    authority: INHERITED
+
+  - id: W2_C0_EXACT_PUBLIC_ROUTE
+    state: PASS
+    authority: INHERITED
+
+  - id: W2_RESTRAINT_POINTER_LEXICAL_I13_CUSTODY
+    state: PASS_RUNTIME_EXACT_5_FILE_BLOB_GRAPH
+    authority: INHERITED_FROM_PR1060
+    production_blob: 7053230546eaba4588b98a35ae5fc3819da83c14
+
+  - id: BM_W2_04_PUBLIC_CORE_STATIC_SOURCE_GRAPH
+    state: CLOSED_SOURCE_BLOB_CUSTODY
+    authority: CURRENT_PR_GITHUB_BLOB_TRAVERSAL
+    runtime_implication: NONE
+    core_blob: cee2858a63992648edf5e61b8f63b3837a937f9e
+
+  - id: BM_W2_04_RETAINED_REAL_SOURCE_GRAPH
+    state: CLOSED_SOURCE_BLOB_CUSTODY_CURRENT_HEAD
+    source_blob: e41cd05603b56837cbb6e31b9d4074ef6106fe9b
+    authored_test_blob: 54c08bf0b2baf8138a703350d9e2600387693008
+    independent_oracle_blob: b36e38c8df327069f07ea20ad50c91f03ffdcd6a
+    runtime_implication: NONE
+
+  - id: BM_W2_04_EXACT_PUBLIC_RUNTIME
+    state: NOT_RUN
+    reason: COMPLETE_EXACT_PRIVATE_REPOSITORY_ESM_TREE_NOT_AVAILABLE_IN_EXECUTION_FILESYSTEM
+    authored_runtime_pass_claimed: false
+    authored_assertion_failure_observed: false
+
+  - id: W2_A_SYNTHETIC_PUBLIC_SOURCE_GRAPH
+    state: CLOSED_SOURCE_BLOB_CUSTODY_CURRENT_HEAD
+    authored_test_blob: 9922377ddeda86fc9167d65f33c97095346e79fa
+    fixture_blob: b725d56be579e7a2d7c40995ca2e13af7e702cbc
+    restraint_compaction_plan_blob: aedfb3ac78eed2294a88a64af261386f0db65085
+    restraint_pointer_custody_blob: 7053230546eaba4588b98a35ae5fc3819da83c14
+    runtime_implication: NONE
+
+  - id: W2_A_EXACT_PUBLIC_RUNTIME
+    state: NOT_RUN
+    reason: COMPLETE_EXACT_PRIVATE_REPOSITORY_ESM_TREE_NOT_AVAILABLE_IN_EXECUTION_FILESYSTEM
+
+  - id: W2_B_RETAINED_REAL_V11_SOURCE_GRAPH
+    state: CLOSED_SOURCE_BLOB_CUSTODY_CURRENT_HEAD
+    qualification_identity: BM_W2_04_AFTER_W2_A_RUNTIME_PASS
+    separate_authored_executable: false
+    runtime_implication: NONE
+
+  - id: W2_B_RETAINED_REAL_V11
+    state: NOT_RUN
+    reason: REQUIRES_W2_A_RUNTIME_PASS_AND_BM_W2_04_RUNTIME_PASS
+
+  - id: W2_35_GENERATED_V14_SOURCE_GRAPH
+    state: CLOSED_SOURCE_BLOB_CUSTODY_CURRENT_HEAD
+    authored_spec_blob: be2bffb6ca001a84f1a6795970ac4e4c7f3b75b3
+    bridge_blob: 8038993f0a97719c0c316f31c2d6c30ea0386ec4
+    converter_adapter_blob: 01ee6b457b123eb32f084ad45f8ff72cb909a1b9
+    worker_blob: 0c28eef6251e780b230dda1ce71e6da05f21abcc
+    runtime_implication: NONE
+
+  - id: W2_35_GENERATED_V14
+    state: NOT_RUN
+    reason: EXACT_CHROMIUM_PRIVATE_CHECKOUT_WORKER_PYODIDE_RUNTIME_NOT_AVAILABLE
+
+  - id: W2_35A_ISSUE_1042_GENERATED_V14_SOURCE_GRAPH
+    state: CLOSED_SOURCE_BLOB_CUSTODY_CURRENT_HEAD
+    authored_spec_blob: 4a717c2e5f432037634f09b6e71bfe474dd06f66
+    fixed_field_authority_blob: 5f1473f692c172de5aa0712a70bc72d917a6934d
+    runtime_implication: NONE
+
+  - id: W2_35A_ISSUE_1042_GENERATED_V14
+    state: NOT_RUN
+    reason: EXACT_CHROMIUM_PRIVATE_CHECKOUT_WORKER_PYODIDE_RUNTIME_NOT_AVAILABLE
+
+  - id: W2_40_NATIVE_V14_SOURCE_GRAPH
+    state: CLOSED_SOURCE_BLOB_CUSTODY_CURRENT_HEAD
+    authored_spec_blob: ec99f9abcff5ab2df70b4f4635bbdeb7413a4bb1
+    upstream_commit: ca8d391ac5f829f53bebb3c37adf0547c34a67b4
+    archive_blob: 8409e1c429665e34a83c2a464665ebf5d5f1b0a1
+    native_member: SYS-0001-v14.CII
+    native_member_sha256: d2d4316309d9b1aa34b55ad72f89193fd0e437930db203fecd9ede00e69b2faf
+    runtime_implication: NONE
+
+  - id: W2_40_NATIVE_V14
+    state: NOT_RUN
+    reason: EXACT_CHROMIUM_PRIVATE_CHECKOUT_WORKER_PYODIDE_RUNTIME_NOT_AVAILABLE
+
+  - id: W2_41_NATIVE_PREFLIGHT
+    state: PASS_SOURCE_AUTHORITY_ONLY_NOT_RUNTIME
+    authority: INHERITED_AND_CURRENT_SOURCE_RECONCILIATION
+
+  - id: W2_H_RELEASE_FREEZE
+    state: NOT_READY
+    reason: W2_A_W2_B_W2_35_W2_35A_W2_40_RUNTIME_GATES_INCOMPLETE
+
+negative_claims:
+  benchmark_modified: false
+  production_modified: false
+  test_modified: false
+  writer_authority_widened: false
+  reconstructed_pass_used: false
+  stubs_used: false
+  import_rewrites_used: false
+  partial_core_used: false
+  github_actions_used_for_qualification: false
+  source_graph_closure_promoted_to_runtime_pass: false
+  not_run_promoted_to_pass: false

@@ -1,0 +1,75 @@
+pr: 1045
+issue: 1044
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-composite-w212
+base_main: b2ba46cb8008c8d59a40fe8b3260ead122e063d0
+pre_takeover_head: f894154721d95a0351ba97165b56e6e323422216
+claim_state: SOURCE_IMPLEMENTED_COMPLIANCE_RECOVERED_RUNTIME_NOT_RUN
+ready_for_review: false
+merge_authority: OWNER_ONLY
+merge_authorized: false
+
+claims:
+  - id: RESTRAINT_ONE_TARGET0_COMPOSITE
+    state: IMPLEMENTED_SOURCE_NOT_RUNTIME_QUALIFIED
+    authority: CII_WRITER_2_RESTRAINT_ONE_TARGET0_COMPOSITE
+  - id: RESTRAINT_COMPOSITE_INDEPENDENT_POSTIMAGE_VALIDATOR
+    state: IMPLEMENTED_SOURCE_NOT_RUNTIME_QUALIFIED
+    authority: INDEPENDENT_COMPLETE_POSTIMAGE_RESTRAINT_COMPOSITE_VALIDATION
+  - id: RESTRAINT_COMPONENT_PHYSICAL_WRITE
+    state: INHERITED_FROM_MERGED_PR1043
+    authority: CII_WRITER_2_RESTRAINT_BLOCK_DELETE_PHYSICAL_WRITE
+  - id: RESTRAINT_PARTIAL_HANGER_COMPOSITION
+    state: QUALIFICATION_SOURCE_AUTHORED_RUNTIME_NOT_RUN
+    authority: EXISTING_WRITER_2_HANGER_PARTIAL_DELETE_PLUS_RESTRAINT_TARGET0_COMPOSITION
+  - id: RESTRAINT_BLOCK_CREATE
+    state: BLOCKED_UNCHANGED
+    authority: NONE
+  - id: PRODUCT_CORE_ADOPTION
+    state: NOT_IMPLEMENTED_W2_13_ONLY
+    authority: NONE
+
+inherited_control_authority:
+  nonam:
+    location: CONTROL_ROW1_FIELD4_I13
+    disposition: PRESERVE_UNDER_RESTRAINT_DELETE
+  restraint_count:
+    location: CONTROL_ROW2_FIELD4_I13
+    disposition: QUALIFIED_MUTATION_UNDER_RESTRAINT_DELETE
+
+compliance_claim:
+  state: RESOLVED_SOURCE
+  new_js_under_300_lines: true
+  writer_lines: 143
+  writer_support_lines: 227
+  validator_lines: 213
+  validator_support_lines: 203
+  exact_published_blob_syntax: PASS
+
+validator_independence:
+  imports_w2_12_writer_module: false
+  imports_w2_12_writer_support_module: false
+  reuses_writer_payload_helpers: false
+  primary_oracle: EXACT_COMPLETE_FINAL_BYTES
+  writer_testimony_secondary_only: true
+
+protected_paths:
+  - tabs/cii-workspace/cii-workspace-core.js
+  - tabs/cii-workspace/cii-workspace-writer2-composite-routing.js
+  - tabs/cii-workspace/cii-workspace-writer2-product-validation.js
+
+protected_path_diff_count: 0
+changed_file_count: 11
+unexplained_path_count: 0
+
+validation_truth:
+  source_architecture_audit: PASS
+  exact_published_blob_syntax: PASS
+  static_line_limit_and_independence: PASS_SOURCE_AND_EXACT_BLOB
+  R01_R22_source: AUTHORED
+  focused_native: NOT_RUN_ENVIRONMENT
+  repository_npm: NOT_RUN_ENVIRONMENT
+  pr_workflow_runs: NONE_OBSERVED
+  product_browser: NOT_APPLICABLE_W2_12
+
+next_claim_gate: exact runtime execution of focused W2.12 suites; do not mark ready_for_review before observed execution or explicit owner acceptance of the limitation

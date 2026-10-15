@@ -1,0 +1,20 @@
+{
+  "schema": "CategorizedInputXmlWorkerProtectedPaths.v1",
+  "baseCommit": "8d6d9cb2d955818c5c320b1b10a48f1b3d8eee40",
+  "policy": "transport-only additions; services and existing runtimes remain unchanged",
+  "protectedPaths": [
+    "xml-compare/categorized-inputxml-api/**",
+    "xml-compare/inputxml-changeset-api/**",
+    "xml-compare/CategorizedInputXmlConverter.js",
+    "xml-compare/XmlCompareCategorizedXmlTree.js",
+    "xml-compare/XmlCompareTabView.js",
+    "xml-compare/XmlCompareLinewiseWorkflowActions.js",
+    "tabs/**",
+    "converters/**"
+  ],
+  "allowedReadOnlyDependencies": [
+    "xml-compare/categorized-inputxml-api/**",
+    "xml-compare/inputxml-changeset-api/**"
+  ],
+  "newTransportRoot": "xml-compare/categorized-inputxml-worker/"
+}

@@ -1,0 +1,22 @@
+/* Visible build marker for cache/deploy verification. */
+body .app-build-stamp {
+  margin-top: 2px;
+  max-width: 210px;
+  color: #fbbf24;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .035em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 980px) {
+  body .app-build-stamp {
+    display: block;
+    max-width: 132px;
+    font-size: 7px;
+    letter-spacing: 0;
+  }
+}

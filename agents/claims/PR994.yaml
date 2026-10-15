@@ -1,0 +1,61 @@
+schema: AgentClaim.v1
+pr_or_wip: PR994
+claim_state: IMPLEMENTATION_COMPLETE_HANDOVER_READY
+files:
+  exact:
+    - agents/MASTER_INDEX.md
+    - agents/PR994_workreport.md
+    - agents/status/PR994.yaml
+    - agents/claims/PR994.yaml
+    - tabs/cii-workspace/cii-workspace-contracts.js
+    - tabs/cii-workspace/cii-workspace-geometry.js
+    - tabs/cii-workspace/cii-workspace-pipe-runs.js
+    - tabs/cii-workspace/cii-workspace-multi-base-anchor.js
+    - tabs/cii-workspace/cii-workspace-anchor-suggestions.js
+    - tabs/cii-workspace/cii-workspace-core.js
+    - tests/cii-workspace-geometry-authority.test.js
+    - tests/cii-workspace-base-anchor-suggestions.test.js
+    - tests/cii-workspace-multi-base-authority.test.js
+    - tests/cii-workspace-coordinate-invariance.test.js
+    - tests/cii-workspace-benchmark-base-anchor.test.js
+    - tests/qualification/cii-workspace-multi-base-oracle.py
+authority_domains:
+  - CII_METHOD_A_MULTI_BASIS_LOCAL_REGISTRATION
+  - CII_METHOD_A_INDEPENDENT_OR_BASE_LOOPS
+  - CII_METHOD_A_SOURCE_OD_SCALED_TOLERANCE
+  - CII_METHOD_A_EVIDENCE_WEIGHT
+  - CII_METHOD_B_TWO_AXIS_PIPE_RUN_EVIDENCE
+  - CII_METHOD_B_SOURCE_OD_SCALED_GEOMETRIC_TOLERANCE
+  - CII_METHOD_B_CROSS_COMPATIBLE_3D_COMPLEXITY_WEIGHT
+  - CII_BASE_ANCHOR_METHOD_QUALIFICATION
+  - CII_CROSS_LOOP_IDENTITY_CONFLICT_VETO
+  - CII_SOURCE3_TARGET31_BENCHMARK_EXPECTATION
+claim_modes:
+  - EXCLUSIVE
+forbidden_existing_file_edits:
+  - tabs/cii-workspace/cii-workspace-target-writer.js
+  - tabs/cii-workspace/cii-workspace-target-writer-1b.js
+  - tabs/cii-workspace/cii-workspace-transfer-policy.js
+  - tabs/cii-workspace/cii-workspace-transfer-plan.js
+  - parser/fixed-field.js
+  - converters/**
+  - .github/workflows/**
+implementation_claims:
+  - independent Method A and Method B base loops combine as OR with explicit identity conflict veto
+  - separate local Method A bases may retain different rigid transforms
+  - alternate admissible triplets inside one local Method A base must agree materially or that local base fails closed
+  - OD tolerance factor x is configurable with default x=2.0
+  - Method A anchor residual acceptance uses r/(x*SOURCE_OD) and requires every local anchor normalized residual <=1
+  - Method B run-length and angular-equivalent displacement acceptance use x times minimum positive incident SOURCE OD
+  - TARGET OD never changes Method A or Method B tolerance
+  - OD is tolerance-scale evidence only and never earns identity score or candidate preference
+  - Method B HIGH/MEDIUM requires at least two independent undirected pipe runs on both SOURCE and TARGET
+  - Method B extra planar/full-3D weight is earned only by additional cross-revision compatible mapped runs, not by unrelated raw extra axes
+  - changed third run may leave a qualified two-axis basis READY but receives only two-axis complexity credit
+  - opposite collinear rays merge to one run
+  - WT process values and node-number offsets remain excluded from Method B identity
+  - SOURCE-3/TARGET3-1 contains at least three observed valid local node-number offsets and therefore forbids one-global-offset identity authority
+  - SOURCE-3/TARGET3-1 real acceptance regression is authored around Method A 60920/60930/60940 to 7290/7300/7310 and Method B 60930 to 7300
+  - first-success and majority-vote identity arbitration are forbidden
+validation_state: FOCUSED_JS_PASS_INDEPENDENT_PYTHON_ORACLE_PASS_THIRD_RUN_NEGATIVE_PASS_SOURCE3_TARGET31_AUTHORED_NOT_RUN_ENVIRONMENT_COORDINATE_FULL_REPO_BROWSER_NOT_RUN_ENVIRONMENT
+merge_disposition: OWNER_ONLY_NO_MERGE_AUTHORITY

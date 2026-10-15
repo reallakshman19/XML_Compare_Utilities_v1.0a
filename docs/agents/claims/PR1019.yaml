@@ -1,0 +1,40 @@
+schema: engineering-pr-claims/v1
+repository: reallaksh19/XML_Compare_Utilities
+pr: 1019
+base: 887eedc028f64e3831b28fb755fdbe9ed904682f
+claims:
+  - id: HGR-1019-001
+    statement: CII 2019 hanger row-count arithmetic is 2 + 5*H + 5*ceil(H/6) for H>0, independent of the unresolved HGRDAT/TAG-GUID ordering
+    evidence: PASS_SOURCE_INSPECTION
+  - id: QF-1019-001
+    statement: cii2019_hanger_miscel_control.py and cii2019_miscel_hardener.py disagree on H>1 HGRDAT/TAG-GUID row ordering after IHGRNODE
+    evidence: PASS_SOURCE_INSPECTION
+    disposition: PARTIAL_H_GT_1_DELETE_BLOCKED
+  - id: HGR-1019-002
+    statement: buildCiiHangerEvidence proves IHGRNODE position and nodes but does not distinguish the conflicting H>1 tail orders
+    evidence: PASS_SOURCE_INSPECTION
+  - id: HGR-1019-003
+    statement: Writer2 HANGER DELETE planner is limited to IHGRNODE-first layout and authorizes only H=1 deletion or delete-all when H>1
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: HGR-1019-004
+    statement: partial H>1 deletion is blocked by WRITER_2_HANGER_PARTIAL_MULTI_RECORD_TAIL_ORDER_UNQUALIFIED
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: HGR-1019-005
+    statement: HANGER CREATE remains blocked because complete construction/default semantics are not qualified
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+  - id: HGR-1019-006
+    statement: BM_CII_SOURCE has 40 elements, 0 nozzles, one hanger at node 205 and projects 23 to 11 MISCEL_1 rows when deleting it
+    evidence: PASS_SOURCE_INSPECTION_AND_INDEPENDENT_ARITHMETIC
+  - id: HGR-1019-007
+    statement: packed hanger integer arrays require canonical 2X prefix plus exact 13-byte integer fields before later physical mutation
+    evidence: IMPLEMENTED_SOURCE_INSPECTION
+prohibited_claims:
+  - partial multi-record HANGER compaction is qualified
+  - one canonical H>1 HGRDAT/TAG-GUID ordering has been established
+  - HANGER CREATE is qualified
+  - physical HANGER DELETE rewrite is qualified
+  - INPUTXML_CURRENT_HGRDAT_FIRST is mutation-qualified
+  - ambiguous dual-layout hanger mutation is qualified
+  - repository JS tests passed
+  - full repository tests passed
+  - browser/product Writer2 hanger flow passed

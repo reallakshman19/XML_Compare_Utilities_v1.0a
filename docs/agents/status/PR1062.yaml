@@ -1,0 +1,106 @@
+pr: 1062
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-benchmark-next
+base_main: d1f7d773ec89459f55d3fca9bcf0c93f2308b1e1
+current_stage: FOUR_STANDALONE_FOCUSED_EXACT_RUNTIME_CLOSED_PUBLIC_RUNTIME_BLOCKED
+work_intent: IMPLEMENT_VALIDATE
+criticality: ENGINEERING_CRITICAL
+execution_mode: AUTO
+auto_state: BLOCKED
+scope_authority: LOCKED_TO_APPROVED_BENCHMARK_ROADMAP
+hard_stop: EXACT_PRIVATE_PUBLIC_RUNTIME_REQUIRED_BEFORE_COMPOSITES
+merge_authority: OWNER_ONLY
+merge_authorized: false
+pr_state: DRAFT
+handover_readiness: READY
+release_freeze_verdict: NOT_READY
+
+benchmark_source:
+  path: Benchmark/CIICompare/BM_CII_SOURCE.CII
+  git_blob: e41cd05603b56837cbb6e31b9d4074ef6106fe9b
+  version: 11
+
+bm_w2_01:
+  state: AUTHORED_PUBLIC_RUNTIME_NOT_RUN
+  candidate_node: '10'
+  pointer_before: 0
+  expected_pointer_after: 5
+  oracle_blob: ab770906e30fa4a0db156e083517af1d7793eb5c
+  public_test_blob: 7ba33984f290550f6f40eb91369ce9ceab1b74af
+  focused_runtime: PASS_RUNTIME_EXACT_5_FILE_BLOB_GRAPH
+  focused_test_blob: 65896fd41e16efcd25dea97ad5a8848cbc87d03c
+  writer_blob: eb6bff1cdd4dc1f50e101a4f2f2dc717c74bdd5c
+  source_contract_test_blob: c80bca35e3b62f216eaab5bf8a48faaa21a276d7
+  public_runtime: NOT_RUN_EXACT_PRIVATE_CHECKOUT_UNAVAILABLE
+
+bm_w2_02:
+  state: AUTHORED_PUBLIC_RUNTIME_NOT_RUN
+  focused_runtime: PASS_RUNTIME_EXACT_8_FILE_BLOB_GRAPH
+  focused_existing_test: tests/cii-workspace-writer2-sif-delete-physical.test.js
+  focused_test_blob: 65d70d2cab42ce19ac6648d9c6929dae56404990
+  observations:
+    middle_delete_mapping: '1:1,2:0,3:2'
+    delete_all_block_count_after: 0
+    lexical_i13: PASS
+    exact_postimage: PASS
+    anti_testimony: PASS
+  public_runtime: NOT_RUN_EXACT_PRIVATE_CHECKOUT_UNAVAILABLE
+
+bm_w2_03:
+  state: AUTHORED_PUBLIC_RUNTIME_NOT_RUN
+  candidate_node: '205'
+  oracle_blob: 16cbba8d5ac7dec1dc4e8cce1c5f0b6a9c728b3f
+  public_test_blob: 93703ac66fec9b663165d95a20afbc654b6e26f4
+  focused_runtime: PASS_RUNTIME_EXACT_9_FILE_BLOB_GRAPH
+  focused_test_blob: 2e45b358640e9028c66b11b108b6b8d44d2dd2d1
+  observations:
+    count_before: 1
+    count_after: 0
+    canonical_layout: CAESAR_SYNCHRONIZER_IHGRNODE_FIRST
+    real_record_binding_module: 7d860be728f1eddfb374391bae9b3ae49cac808c
+    real_tail_order_module: eda94b208239f324b45c9c70f57537c31a501e56
+  public_runtime: NOT_RUN_EXACT_PRIVATE_CHECKOUT_UNAVAILABLE
+
+bm_w2_04:
+  state: AUTHORED_PUBLIC_RUNTIME_NOT_RUN
+  inherited_pointer_i13: PASS_RUNTIME_EXACT_5_FILE_BLOB_GRAPH
+  focused_compaction_runtime: PASS_RUNTIME_EXACT_7_FILE_BLOB_GRAPH
+  focused_compaction_test_blob: b7e76470cf416e595c556467b3207b4fe8d5d0ba
+  compaction_plan_blob: aedfb3ac78eed2294a88a64af261386f0db65085
+  pointer_custody_blob: 7053230546eaba4588b98a35ae5fc3819da83c14
+  observations:
+    mapping: '1:1,2:0,3:2'
+    control_count: '3->2'
+    deleted_range: '24:48'
+    lexical_i13_custody: PASS
+  public_runtime: NOT_RUN_EXACT_PRIVATE_CHECKOUT_UNAVAILABLE
+
+phase3_composites:
+  bm_w2_05: BLOCKED_ON_BM_W2_01_02_03_PUBLIC_RUNTIME_PASS
+  bm_w2_06: BLOCKED_ON_BM_W2_01_02_03_04_PUBLIC_RUNTIME_PASS
+
+runtime_ladder:
+  w2_a: NOT_RUN
+  w2_b: NOT_RUN
+  w2_35: NOT_RUN
+  w2_35a: NOT_RUN
+  w2_40: NOT_RUN
+  release_freeze: NOT_READY
+
+environment:
+  exact_private_checkout_materialized: false
+  native_git_dns_available: false
+  connector_source_blob_access: true
+  connector_runtime_checkout_transport: false
+
+negative_assurance:
+  benchmark_source_changed: false
+  workflow_changed: false
+  parser_changed: false
+  converter_changed: false
+  composites_authored_before_public_standalone_runtime: false
+  focused_pass_promoted_to_public_pass: false
+  runtime_pass_fabricated: false
+  not_run_promoted_to_pass: false
+
+exact_next_action: MATERIALIZE_COMPLETE_EXACT_PRIVATE_CHECKOUT; RUN_W2_A_AND_BM_W2_01_02_03_04_PUBLIC_TESTS_UNCHANGED; ONLY_THEN_AUTHOR_BM_W2_05_06

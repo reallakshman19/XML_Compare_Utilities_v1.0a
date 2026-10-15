@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+const runtime = readFileSync(new URL('../tabs/pipeline-3d-model/pipeline-3d-model-profile-propagation-runtime.js', import.meta.url), 'utf8');
+assert.match(runtime, /loadPipelineEngineeringConfigurationDraft/);
+assert.match(runtime, /configurationDraft:\s*loadPipelineEngineeringConfigurationDraft\(\)/);
+assert.match(runtime, /createPipelineCompletedOutputSession/);
+assert.match(runtime, /outputSession:\s*createPipelineCompletedOutputSession\(buildPipelineProjectOutputs\)/);
+assert.match(runtime, /output = instance\.outputSession\.resolve\(input\)/);
+assert.ok((runtime.match(/instance\.outputSession\.reset\(\)/g) || []).length >= 4);
+assert.doesNotMatch(runtime, /output = buildPipelineProjectOutputs\(input\)/);
+console.log('completed output runtime integration: PASS');

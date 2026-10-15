@@ -1,0 +1,83 @@
+schema_version: relay-v2.5
+roadmap:
+  id: ROADMAP-XMLCU-V25-1224
+  revision: RM-0004
+  title: CII Writer2 NodeName byte-preserving revision delivery
+objectives:
+  - id: OBJ-CII-W2-NB-R1-1224
+    title: Complete CII Writer2 full NodeName byte-preserving revision
+    state: COMPLETE
+    definition: DETAILED
+    weight: 100
+    phases:
+      - id: PH-V25-MIGRATION
+        title: V2.5 migration and authority reconstruction
+        state: COMPLETE
+        definition: DETAILED
+        weight: 10
+        work_packages:
+          - id: WP-V25-MIGRATION-001
+            title: Inventory and reconcile legacy V2 evidence for issue 1224
+            state: COMPLETE
+            definition: DETAILED
+            execution_status: TERMINAL
+            weight: 100
+            depends_on: []
+      - id: PH-ARCHITECTURE
+        title: Architecture and independent oracle construction
+        state: COMPLETE
+        definition: DETAILED
+        weight: 35
+        work_packages:
+          - id: WP-ARCH-001
+            title: Establish source-subgraph propagation and mixed NodeName orchestration boundaries
+            state: COMPLETE
+            definition: DETAILED
+            execution_status: TERMINAL
+            weight: 55
+            depends_on: [WP-V25-MIGRATION-001]
+          - id: WP-ORACLE-001
+            title: Establish independent retained raw-byte mutation-closure oracle
+            state: COMPLETE
+            definition: DETAILED
+            execution_status: TERMINAL
+            weight: 45
+            depends_on: [WP-ARCH-001]
+      - id: PH-IMPLEMENTATION
+        title: Material implementation and retained qualification
+        state: COMPLETE
+        definition: DETAILED
+        weight: 45
+        work_packages:
+          - id: WP-IMPL-001
+            title: Implement production repair and focused regressions
+            state: COMPLETE
+            definition: DETAILED
+            execution_status: TERMINAL
+            weight: 60
+            depends_on: [WP-ORACLE-001]
+          - id: WP-RET-001
+            title: Execute retained mixed end-to-end benchmark and independent postimage validation
+            state: COMPLETE
+            definition: DETAILED
+            execution_status: TERMINAL
+            weight: 40
+            depends_on: [WP-IMPL-001]
+      - id: PH-DELIVERY
+        title: Review, PR, and owner merge decision
+        state: COMPLETE
+        definition: DETAILED
+        weight: 10
+        work_packages:
+          - id: WP-DELIVERY-001
+            title: Review evidence, deliver PR 1228, and record owner merge decision
+            state: COMPLETE
+            definition: DETAILED
+            execution_status: TERMINAL
+            weight: 100
+            depends_on: [WP-RET-001]
+notes:
+  - RM-0004 is terminal owner-delivery reconciliation after PR 1228 merged at 45f2a3ed7bbb186030e141a8313ccc04ddc997cb.
+  - WP-RET-001 is terminal by owner acceptance of the disclosed environment exception, not by an executable retained benchmark PASS; retained Node evidence remains NOT_RUN_ENVIRONMENT.
+  - Independent preimplementation DISC/QUAL/TC required by EP-CII-W2-NB-R1-V25-0001 remains unsatisfied and is preserved as a governance quality finding.
+  - Technical progress remains below 100 percent in PROGRESS because retained execution is not credited as passed even though the delivery lifecycle is terminal.

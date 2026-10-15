@@ -1,0 +1,13 @@
+.ttv-canvas-navigation{position:absolute;top:12px;left:12px;z-index:12;display:flex;gap:4px;padding:5px;border:1px solid #334155;border-radius:8px;background:rgba(7,16,31,.92);box-shadow:0 8px 22px rgba(0,0,0,.35)}
+.ttv-canvas-navigation button{min-width:38px;border:1px solid #334155;border-radius:5px;padding:6px 8px;background:#172033;color:#cbd5e1;cursor:pointer;font:600 11px system-ui,sans-serif}
+.ttv-canvas-navigation button:hover{border-color:#22d3ee;color:#ecfeff}.ttv-canvas-navigation button.is-active{border-color:#22d3ee;background:#164e63;color:#cffafe}
+.ttv-axis-compass{position:absolute;top:12px;right:12px;z-index:11;width:112px;height:92px;border:1px solid #334155;border-radius:10px;background:rgba(7,16,31,.9);box-shadow:0 8px 22px rgba(0,0,0,.35);pointer-events:none}
+.ttv-axis-compass circle{fill:#e2e8f0;stroke:#0f172a;stroke-width:1.5}.ttv-axis-compass line{stroke-width:4;stroke-linecap:round}.ttv-axis-compass text{font:700 12px ui-monospace,monospace;paint-order:stroke;stroke:#07101f;stroke-width:3px}
+.ttv-axis-compass [data-ttv-axis=x] line{stroke:#ef4444}.ttv-axis-compass [data-ttv-axis=x] text{fill:#fca5a5}
+.ttv-axis-compass [data-ttv-axis=y] line{stroke:#22c55e}.ttv-axis-compass [data-ttv-axis=y] text{fill:#86efac}
+.ttv-axis-compass [data-ttv-axis=z] line{stroke:#3b82f6}.ttv-axis-compass [data-ttv-axis=z] text{fill:#93c5fd}
+.ttv-axis-compass [hidden]{display:none}
+@media(max-width:900px){.ttv-axis-compass{width:92px;height:76px}.ttv-canvas-navigation{top:8px;left:8px}.ttv-axis-compass{top:8px;right:8px}}
+/* Symbol overlays own pointer selection where source symbols overlap canonical strokes. */
+.ttv-svg:has(.ttv-component-symbol) .ttv-canonical-edge :is(.ttv-hit-path,.ttv-visible-path){pointer-events:none}
+.ttv-component-symbol{pointer-events:all}

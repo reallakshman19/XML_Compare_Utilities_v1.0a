@@ -1,0 +1,29 @@
+schema: AgentClaim.v1
+pr_or_wip: PR998
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-multi-base-ui-fix
+claim_state: ACTIVE
+criticality: ENGINEERING_CRITICAL_UI_AUTHORITY_SEAM
+execution_mode: AUTO
+merge_authority: OWNER_ONLY
+stacked_on: PR997
+authority:
+  - tabs/cii-workspace/cii-workspace-base-loop-selection.js
+  - tabs/cii-workspace/cii-workspace-engineering-ui.js multi-base selection state only
+  - tabs/cii-workspace/cii-workspace-engineering-ui.css multi-base selection presentation only
+  - tabs/cii-workspace/cii-workspace-shell.js selected baseLoops input seam and external invalidation only
+  - docs/CIIcompareconceptnote.md current architecture refresh
+  - focused tests for the above
+protected_exclusions:
+  - Method A geometry mathematics / thresholds / weighting
+  - Method B run extraction / thresholds / weighting
+  - automatic Base Anchor discovery/fusion
+  - multi-base authority arbitration
+  - correspondence generation semantics
+  - engineering-delta calculation semantics
+  - transfer policy / Writer 1A / Writer 1B
+  - fixed-field parser
+  - protected external converter
+  - GitHub workflows
+coordination: SAFE_STACKED_SUCCESSOR_TO_PR997
+merge_disposition: OWNER_ONLY

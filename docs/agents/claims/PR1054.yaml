@@ -1,0 +1,78 @@
+pr: 1054
+issue: 1052
+repository: reallaksh19/XML_Compare_Utilities
+branch: agent/cii-writer2-restraint-product-runtime-w217
+base_main: 3a681c1c587ee3c1462a962879e4f79433258105
+claim_state: W2_17_EVIDENCE_CHECKPOINT_NOT_RELEASE_READY
+ready_for_review: true
+merge_authority: OWNER_ONLY
+merge_authorized: true
+merge_authorized_at: 2026-08-25T08:24:19Z
+release_freeze_verdict: NOT_READY_FOR_WRITER2_RESTRAINT_DELETE_RELEASE_FREEZE
+
+claims:
+  - id: W2_11_RESTRAINT_RUNTIME
+    state: PASS_RUNTIME_EXACT_BLOB
+    required: true
+  - id: W2_12_R01_R22_RUNTIME
+    state: PASS_RUNTIME_EXACT_BLOB
+    required: true
+  - id: W2_13_PRODUCT_CORE_IMPLEMENTATION
+    state: ALREADY_MERGED_PR1047
+    merge_sha: f51f8acdcdcbd108073e2a2e57753c07d9f27c42
+    required: true
+  - id: W2_13_SYNTHETIC_PRODUCT_RUNTIME
+    state: NOT_RUN_DEPENDENCY_CLOSURE_IN_PROGRESS
+    required: true
+    exact_entrypoint_blob: 9922377ddeda86fc9167d65f33c97095346e79fa
+    prior_sparse_mirror_exact_js_file_count: 54
+    prior_unresolved_static_module_count: 31
+    prior_current_missing_module: tabs/cii-workspace/cii-workspace-auxiliary.js
+    assertion_failure_observed: false
+  - id: W2_13_REAL_CII_PRODUCT_RUNTIME
+    state: NOT_RUN_ENVIRONMENT
+    required: true
+    exact_entrypoint_blob: c341b99e2786b0034ef672b4efb03d167d9ad26c
+    benchmark_blob: e41cd05603b56837cbb6e31b9d4074ef6106fe9b
+  - id: WRITER2_INHERITED_REGRESSION_RUNTIME
+    state: PARTIAL_PASS_W2_11_RESTRAINT_ONLY
+    required: true
+  - id: REPOSITORY_NPM_GATE
+    state: NOT_RUN_ENVIRONMENT
+    required: true
+  - id: RESTRAINT_PHYSICAL_WRITER_EXACT_CUSTODY
+    state: PASS_SOURCE_EXACT_BLOB
+    blob: e8a92417e45c75269a859469e6f51bd577b412cb
+  - id: RESTRAINT_POINTER_CUSTODY_EXACT
+    state: PASS_SOURCE_EXACT_BLOB
+    blob: 2176ac97eaef84f3aa9073d5eaf73d1530cf09a8
+  - id: RESTRAINT_COMPOSITE_VALIDATOR_EXACT
+    state: PASS_SOURCE_EXACT_BLOB
+    blob: 919ac88c071db9d793c7793cbbd82cff7e193189
+  - id: RESTRAINT_CREATE
+    state: BLOCKED_RUNTIME_CONFIRMED_W2_12_R10
+    authority: NONE
+  - id: SIF_CREATE
+    state: BLOCKED_RUNTIME_CONFIRMED_W2_12_R11
+    authority: NONE
+  - id: HANGER_CREATE
+    state: BLOCKED_RUNTIME_CONFIRMED_W2_12_R12
+    authority: NONE
+  - id: ENGINEERING_FAILURE
+    state: NONE_OBSERVED
+
+validation_integrity:
+  modified_authored_entrypoint_used: false
+  dependency_stubs_used: false
+  unrelated_workflow_path_trigger_used: false
+  source_inspection_promoted_to_runtime_pass: false
+  module_load_stop_promoted_to_product_fail: false
+
+merge_semantics:
+  evidence_only_checkpoint: true
+  runtime_pass_promotion: false
+  release_freeze_promotion: false
+  issue_1052_qualification_complete: false
+
+qualification_rule: authored entrypoint assertions on exact blobs are required for runtime PASS; dependency closure remains NOT_RUN and not FAIL
+next_claim_gate: successor phase must reconstruct exact dependencies from new main, starting at cii-workspace-auxiliary.js, then execute W2.13 synthetic, retained-real-CII, inherited regressions, and repository npm on an exact runnable checkout

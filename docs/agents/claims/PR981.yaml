@@ -1,0 +1,77 @@
+schema: AgentClaim.v1
+pr_or_wip: PR981
+claim_state: ACTIVE_APPROVED_INTEGRATION_EXTENDED_VALIDATION_WITH_ENVIRONMENT_LIMITS
+files:
+  exact:
+    - converters/scripts/cii2019_section_rules.py
+    - tabs/psnm-utility-tab.js
+    - tests/test_inputxml_to_cii2019_diameter_policy.py
+  prefixes:
+    - tabs/cii-workspace/
+    - tests/cii-workspace-
+    - agents/PR981
+    - agents/status/PR981
+    - agents/claims/PR981
+authority_domains:
+  - CII_WORKSPACE_INTAKE_INSPECTION
+  - CII_WORKSPACE_LANDMARK_EVIDENCE
+  - CII_WORKSPACE_CORRESPONDENCE
+  - CII_WORKSPACE_REVIEW_AUTHORITY
+  - CII_WORKSPACE_TRANSFER_PREVIEW
+  - CII_WORKSPACE_AUDIT_EXPORT
+  - CII_WORKSPACE_PLACEHOLDER_GATE
+  - CII2019_GENERATED_OD_COMPATIBILITY
+  - UTILITIES_CII_WORKSPACE_REGISTRATION
+claim_modes:
+  - EXCLUSIVE
+owner_authorization:
+  issue_comment_id: 5308388872
+  scope: AUTH_001A_AND_AUTH_002
+owner_validation_direction:
+  timestamp: 2026-08-16T21:07:00+04:00
+  github_actions_status: WAIVED
+  direction: skip github actions, proceed others
+shared_read_authorities:
+  - parser/caesar-parser.js
+  - parser/sections/elements.js
+  - converters/scripts/inputxml_to_cii2019.py
+  - tabs/model-converters/xml-cii-inputxml-path-aligner.js
+  - tabs/revision-compare/revision-compare-matching.js
+  - tabs/revision-compare/revision-transfer-plan.js
+observe_only_references:
+  - converters/xml-cii2019-core/output-normalizer.js
+  - reallaksh19/3D_Converters
+forbidden_existing_file_edits:
+  - parser/**
+  - tabs/revision-compare/**
+  - tabs/model-converters/**
+  - xml-compare/**
+  - converters/** EXCEPT converters/scripts/cii2019_section_rules.py
+  - tabs/** EXCEPT tabs/psnm-utility-tab.js and new tabs/cii-workspace/**
+implementation_claims:
+  - bounded candidate evidence with winner gap and target custody is present
+  - production alignElementPaths authority is consumed read-only
+  - multi-hop neighbourhood and path-sequence/rigid-length evidence are implemented
+  - review decisions are bound to source/target content and correspondence identity
+  - engineer LOCK authority is distinct from computed confidence
+  - NODE, ELEMENT_PATH, and explicit RIGID COMPONENT custody are separated
+  - one-anchor correspondence is supported but review-gated
+  - NODENAME raw-block mapping is identity-bound to avoid parsed-ordinal drift
+  - reroute and false-subdivision path gates fail closed
+  - generated CII2019 element OD below the neutral-parser threshold fails in existing pre-write section validation
+  - Utilities contains exactly one authoritative CII Workspace installer descriptor
+validation_state: GE011_EXTENDED_LOCAL_VALIDATION_ACTIONS_WAIVED
+validated_implementation_head: f5bfd5aeb4dc5cefef1583be12b94531dfa469f5
+validation_note: >-
+  22 CII Workspace tests PASS. Diameter policy 5/5 and existing section-rule intents 6/6
+  PASS in reconstructed current slices. Exact Utilities runtime DOM lifecycle PASS.
+  Focused Revision matcher/custody remains PASS plus 5000-row property-evidence stress PASS.
+  T11 path authority remains focused PASS. Literal full XML/Revision/Python commands are
+  PARTIAL because the complete private checkout is unavailable. Real-browser validation is
+  ENVIRONMENT_BLOCKED because Chromium hangs before rendering even trivial local HTML.
+  GitHub Actions/status are WAIVED_BY_OWNER.
+remaining_validation_gates:
+  - optional owner decision whether literal full checkout XML/Revision/Python commands are required before merge
+  - optional owner decision whether real-browser coexistence must be repeated in a functioning browser environment
+known_limit:
+  - broader interior rigid-component ownership remains fail-closed outside the unique-terminal record slice

@@ -1,0 +1,8 @@
+{
+  "profileId": "universal-fixture",
+  "documentRootNodeIds": ["n1"],
+  "nodes": [
+    { "id": "n1", "levelId": "Root", "key": "ROOT", "fields": { "documentRoot": true } }
+  ],
+  "edges": []
+}

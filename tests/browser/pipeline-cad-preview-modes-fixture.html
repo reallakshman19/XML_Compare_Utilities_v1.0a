@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pipeline CAD Preview Modes Fixture</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:#020617;color:#e2e8f0;font-family:system-ui,sans-serif}
+    .pipeline-3d-model-dialog{min-height:100vh;padding:16px;background:linear-gradient(135deg,#020617,#0f172a)}
+    .workspace{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+    textarea{width:100%;height:110px;border:1px solid #334155;border-radius:6px;background:#07111f;color:#cbd5e1;padding:6px;font:10px/1.35 ui-monospace,monospace}
+    .actions{display:flex;gap:8px;margin:12px 0}
+    button{border:1px solid #475569;border-radius:5px;background:#1e293b;color:#e2e8f0;padding:7px 11px;cursor:pointer}
+    .p3d-x-modal{position:fixed;inset:36px auto auto 50%;transform:translateX(-50%);width:min(1180px,calc(100vw - 48px));height:min(820px,calc(100vh - 72px));z-index:100;display:none;flex-direction:column;padding:14px;background:#07111f;border:1px solid #334155;border-radius:12px;box-shadow:0 24px 70px rgba(0,0,0,.55);overflow:hidden}
+    .p3d-x-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:8px 10px;border-bottom:1px solid #334155}
+    .p3d-x-modal-head>div{display:flex;align-items:center;gap:12px}
+    .p3d-x-modal-head h3{margin:0;font-size:18px;color:#e0f2fe}
+    .p3d-x-tabs{display:flex;gap:8px;margin-bottom:10px}
+    .p3d-x-tab{padding:6px 14px}
+    .p3d-x-tab[data-active="true"]{background:#38bdf8;color:#082f49;border-color:#7dd3fc;font-weight:700}
+    .p3d-x-content{display:none;min-height:0;overflow:hidden}
+    .p3d-x-content[data-active="true"]{display:block}
+    [data-p3d-split="table2x-preview"],[data-p3d-split="table3x-preview"]{width:100%;height:100%;min-height:340px;background:#0b1220}
+    .legacy{display:grid;place-items:center;width:100%;height:100%;color:#94a3b8;font:700 16px ui-monospace,monospace}
+    .outputs{display:none}
+  </style>
+</head>
+<body>
+  <main class="pipeline-3d-model-dialog">
+    <section class="workspace" aria-label="Raw profile data">
+      <textarea data-p3d-split="table2a-raw">H(coor)	V(coor)	[H vs V] Length	Station Text	Elevation Text
+659.791	—	—	0+000.0	231.32
+668.540	-715.825 → -650.258	65.567	0+006.7	230.95
+680.803	-715.825 → -650.258	65.567	0+019.0	230.82
+693.658	-715.825 → -650.258	65.567	0+031.9	230.82
+704.382	-715.825 → -650.258	65.567	0+042.6	231.38
+715.911	-715.825 → -650.258	65.567	0+054.1	231.79
+728.077	-715.825 → -650.258	65.567	0+066.3	232.28
+739.546	-715.825 → -650.258	65.567	0+077.8	231.92</textarea>
+      <textarea data-p3d-split="table3a-raw">From H(coor)	To H(coor)	Text Position X	HLength Text
+661.791	682.337	671.704	20.5
+682.337	716.683	700.435	34.3
+716.683	732.683	723.927	16.0</textarea>
+      <textarea data-p3d-split="table3b-raw">From H(coor)	To H(coor)	Text Position X	Z Text
+—	—	665.621	A/G
+682.337	732.683	708.374	1.5M</textarea>
+      <textarea data-p3d-split="table3c-raw">Text Position X	Marker Text
+688.135	PM-001</textarea>
+    </section>
+    <div class="actions">
+      <button type="button" data-p3d-split="btn-preview-x">Preview Table 2X &amp; 3X</button>
+      <button type="button" id="underlying-action">Underlying workspace action</button>
+    </div>
+
+    <section class="p3d-x-modal" data-p3d-split="x-modal">
+      <div class="p3d-x-modal-head">
+        <div>
+          <h3>Table 2X &amp; 3X Previews</h3>
+          <button type="button" data-p3d-split="x-reload">Reload Graph</button>
+        </div>
+        <button type="button" data-p3d-split="x-close" aria-label="Close Preview">Close</button>
+      </div>
+      <div class="p3d-x-tabs">
+        <button type="button" class="p3d-x-tab" data-x-tab="table2x" data-active="true">Table 2X</button>
+        <button type="button" class="p3d-x-tab" data-x-tab="table3x" data-active="false">Table 3X</button>
+      </div>
+      <div class="p3d-x-content" data-x-content="table2x" data-active="true">
+        <div data-p3d-split="table2x-preview"><div class="legacy">TABLE 2X LEGACY</div></div>
+      </div>
+      <div class="p3d-x-content" data-x-content="table3x" data-active="false">
+        <div data-p3d-split="table3x-preview"><div class="legacy">TABLE 3X LEGACY</div></div>
+      </div>
+    </section>
+
+    <section class="outputs">
+      <table data-p3d="table2x-output"><tbody><tr><td>0+019.0</td><td>230.82</td></tr></tbody></table>
+      <table data-p3d="table3x-output"><tbody><tr><td>682.337</td><td>732.683</td><td>708.374</td><td>1.5M</td></tr></tbody></table>
+    </section>
+  </main>
+
+  <script type="module">
+    localStorage.setItem('pipeline3dCadRenderer','canvas');
+    await import('../../tabs/pipeline-3d-model/pipeline-3d-model-config.js');
+    const workspaceModule=await import('../../tabs/pipeline-3d-model/pipeline-3d-model-cad-workspace.js?v=20260713-cad-workspace-1');
+    const dialog=document.querySelector('.pipeline-3d-model-dialog');
+    const frame=()=>new Promise((resolve)=>requestAnimationFrame(resolve));
+    const settle=async()=>{await frame();await frame();await frame();};
+    let workspace=workspaceModule.mountPipelineCadWorkspace(dialog,{force:true});
+    await settle();
+    const expose=()=>{window.__pipelineCadPreviewModesWorkspace=workspace;};
+    expose();
+    document.querySelector('[data-p3d-split="x-close"]').addEventListener('click',()=>{
+      document.querySelector('[data-p3d-split="x-modal"]').style.display='none';
+    });
+    window.__pipelineCadPreviewModesDestroy=()=>{
+      if(!workspace)return false;
+      const current=workspace;
+      workspace=null;
+      expose();
+      current.destroy();
+      return true;
+    };
+    window.__pipelineCadPreviewModesRemount=async()=>{
+      workspace=workspaceModule.mountPipelineCadWorkspace(dialog,{force:true});
+      expose();
+      await settle();
+      return Boolean(workspace);
+    };
+    window.__pipelineCadPreviewModesState=()=>{
+      const modal=document.querySelector('[data-p3d-split="x-modal"]');
+      const overlay=document.querySelector('[data-p3d-cad-overlay-canvas]');
+      return {
+        mode:modal?.dataset.p3dCadPreviewMode||'',
+        tabs:[...document.querySelectorAll('.p3d-x-tab[data-x-tab]')].map((tab)=>({mode:tab.dataset.xTab,active:tab.dataset.active,text:tab.textContent.trim()})),
+        storage:JSON.parse(localStorage.getItem('pipeline3dCadPreviewModeV1')||'null'),
+        overlay:overlay?{
+          origin:overlay.dataset.p3dCadOverlayOrigin,
+          elevationPoints:overlay.dataset.p3dCadOverlayElevationPoints,
+          projectedZPoints:overlay.dataset.p3dCadOverlayProjectedZPoints,
+          markers:overlay.dataset.p3dCadOverlayMarkers,
+          reviewOnly:overlay.dataset.p3dCadOverlayReviewOnly,
+          formula:overlay.dataset.p3dCadOverlayFormula,
+          width:overlay.getBoundingClientRect().width,
+          height:overlay.getBoundingClientRect().height,
+        }:null,
+      };
+    };
+    document.body.dataset.pipelineCadPreviewModesReady='1';
+  </script>
+</body>
+</html>
